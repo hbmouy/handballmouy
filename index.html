@@ -78,4 +78,518 @@ nav {
 .nav-links a {
   color: var(--muted);
   text-decoration: none;
-  font-
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green-bright); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 3rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(34,139,34,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 80% 80%, rgba(10,15,8,0.9) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.5s ease both;
+  filter: drop-shadow(0 0 24px rgba(34,139,34,0.4));
+}
+
+.hero-title-img {
+  max-width: min(700px, 90vw);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.5s 0.1s ease both;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.6));
+}
+
+.hero-saison {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  color: var(--green-light);
+  margin-bottom: 1rem;
+  animation: fadeUp 0.5s 0.15s ease both;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  animation: fadeUp 0.5s 0.2s ease both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.5s 0.25s ease both;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--green-mid);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.2rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--green-light); transform: translateY(-2px); }
+
+.btn-outline {
+  display: inline-block;
+  border: 1px solid rgba(34,139,34,0.5);
+  color: var(--green-bright);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.2rem;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-outline:hover { background: rgba(34,139,34,0.1); border-color: var(--green-bright); }
+
+/* STRIPE */
+.stripe {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--green-mid), var(--green-bright), var(--green-mid), transparent);
+}
+
+/* ABOUT */
+.about {
+  background: var(--dark2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 6rem 3rem;
+}
+
+.section-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green-light);
+  margin-bottom: 0.8rem;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.about p {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.stat-card {
+  border: 1px solid rgba(34,139,34,0.25);
+  padding: 1.4rem;
+  background: rgba(34,139,34,0.04);
+  transition: border-color 0.2s, background 0.2s;
+}
+.stat-card:hover {
+  border-color: rgba(34,139,34,0.5);
+  background: rgba(34,139,34,0.08);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  color: var(--green-bright);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+/* REJOINDRE */
+.rejoindre {
+  padding: 6rem 3rem;
+  text-align: center;
+}
+
+.rejoindre-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.rejoindre p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+}
+
+.avantages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  text-align: left;
+}
+
+.avantage {
+  border-left: 2px solid var(--green-mid);
+  padding-left: 1.2rem;
+}
+
+.avantage-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--green-bright);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+}
+
+.avantage p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* FORMULAIRE */
+.form-section {
+  background: var(--dark2);
+  padding: 6rem 3rem;
+}
+
+.form-inner {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.form-inner > p {
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+  margin-bottom: 1.1rem;
+}
+
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group.full { grid-column: 1 / -1; }
+
+label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+input, select, textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(34,139,34,0.25);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+}
+input::placeholder, textarea::placeholder { color: var(--muted); }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--green-mid);
+  background: rgba(34,139,34,0.06);
+}
+select option { background: var(--dark); }
+textarea { resize: vertical; min-height: 90px; }
+
+.form-submit { margin-top: 1.5rem; text-align: right; }
+
+.btn-submit {
+  background: var(--green-mid);
+  color: #fff;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.5rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-submit:hover { background: var(--green-light); transform: translateY(-2px); }
+
+.success-msg {
+  display: none;
+  background: rgba(34,139,34,0.12);
+  border: 1px solid rgba(34,139,34,0.35);
+  color: var(--green-bright);
+  padding: 1rem 1.5rem;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+
+/* CONTACT BAR */
+.contact-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2.5rem 3rem;
+  border-top: 1px solid rgba(34,139,34,0.15);
+}
+
+.contact-bar p { color: var(--muted); font-size: 0.88rem; }
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--green-bright);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+.social-link:hover { color: #fff; }
+
+.fb-icon {
+  width: 22px; height: 22px;
+  background: var(--green-mid);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+
+footer {
+  text-align: center;
+  padding: 1.2rem 3rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 5rem 1.5rem 3rem; }
+  .about { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 1.5rem; }
+  .rejoindre, .form-section { padding: 4rem 1.5rem; }
+  .avantages { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .contact-bar { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#accueil" class="nav-logo">
+    <img src="images/logo.png" alt="Logo Handball Mouy">
+    <span class="nav-logo-text">Handball Mouy</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Le club</a></li>
+    <li><a href="#rejoindre">Nous rejoindre</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="accueil">
+  <img src="images/logo.png" alt="Logo Handball Mouy" class="hero-logo">
+
+  <p class="hero-saison">Saison 2026 — 2027</p>
+  <p class="hero-sub">Un nouveau club se crée à Mouy. Rejoins-nous pour bâtir quelque chose ensemble.</p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn-primary">Je veux rejoindre</a>
+    <a href="#about" class="btn-outline">En savoir plus</a>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<section class="about" id="about">
+  <div>
+    <p class="section-label">Le projet</p>
+    <h2>Un club né d'une passion</h2>
+    <p>Le Handball Club Mouy est un club en cours de création, porté par des passionnés de handball qui souhaitent offrir une structure sportive de qualité aux habitants de Mouy et ses environs.</p>
+    <p>Nous accueillons des joueurs adultes, qu'ils soient débutants ou expérimentés. L'objectif : construire une équipe soudée, progresser ensemble et s'inscrire dans les championnats régionaux dès que possible.</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">2026</div>
+      <div class="stat-label">Année de création</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">Adultes</div>
+      <div class="stat-label">Catégorie visée</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">Mouy</div>
+      <div class="stat-label">Oise, Hauts-de-France</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">Ouvert</div>
+      <div class="stat-label">Tous niveaux</div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<section class="rejoindre" id="rejoindre">
+  <div class="rejoindre-inner">
+    <p class="section-label">Pourquoi nous rejoindre</p>
+    <h2>Fais partie de l'aventure</h2>
+    <p>Que tu aies joué au handball toute ta vie ou que tu veuilles découvrir ce sport, le Handball Club Mouy est fait pour toi. C'est le moment idéal pour rejoindre un projet dès ses débuts.</p>
+    <div class="avantages">
+      <div class="avantage">
+        <div class="avantage-title">Esprit fondateur</div>
+        <p>Tu participes à la construction du club depuis le début.</p>
+      </div>
+      <div class="avantage">
+        <div class="avantage-title">Tous niveaux</div>
+        <p>Débutant ou expérimenté, tout le monde est le bienvenu.</p>
+      </div>
+      <div class="avantage">
+        <div class="avantage-title">Proche de chez toi</div>
+        <p>Un club local, ancré dans la ville de Mouy et ses environs.</p>
+      </div>
+    </div>
+    <a href="#contact" class="btn-primary">Exprimer mon intérêt</a>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<section class="form-section" id="contact">
+  <div class="form-inner">
+    <p class="section-label">Contact</p>
+    <h2>Je suis intéressé(e)</h2>
+    <p>Remplis ce formulaire et nous te recontacterons dès que les entraînements seront organisés.</p>
+    <form id="interest-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" placeholder="Jean" required>
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" placeholder="Dupont" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="jean@exemple.fr" required>
+        </div>
+        <div class="form-group">
+          <label for="tel">Téléphone</label>
+          <input type="tel" id="tel" placeholder="06 00 00 00 00">
+        </div>
+        <div class="form-group">
+          <label for="niveau">Niveau</label>
+          <select id="niveau">
+            <option value="">— Sélectionner —</option>
+            <option>Débutant(e)</option>
+            <option>Amateur(e)</option>
+            <option>Expérimenté(e)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ville">Ville</label>
+          <input type="text" id="ville" placeholder="Mouy">
+        </div>
+        <div class="form-group full">
+          <label for="message">Message (optionnel)</label>
+          <textarea id="message" placeholder="Questions, disponibilités..."></textarea>
+        </div>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn-submit">Envoyer ma demande</button>
+      </div>
+      <div class="success-msg" id="success-msg">
+        Merci ! Nous avons bien reçu ta demande et te recontacterons très prochainement.
+      </div>
+    </form>
+  </div>
+</section>
+
+<div class="contact-bar">
+  <p>Handball Club Mouy — Oise, Hauts-de-France</p>
+  <a href="https://www.facebook.com/profile.php?id=61572143188788" target="_blank" class="social-link">
+    <div class="fb-icon">f</div>
+    Suivre sur Facebook
+  </a>
+</div>
+
+<footer>&copy; 2026 Handball Club Mouy — Tous droits réservés</footer>
+
+<script>
+document.getElementById('interest-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.style.opacity = '0.4';
+  this.style.pointerEvents = 'none';
+  document.getElementById('success-msg').style.display = 'block';
+  this.reset();
+  setTimeout(() => {
+    this.style.opacity = '1';
+    this.style.pointerEvents = 'auto';
+    document.getElementById('success-msg').style.display = 'none';
+  }, 6000);
+});
+</script>
+
+</body>
+</html>
