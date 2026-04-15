@@ -118,13 +118,6 @@ nav {
   filter: drop-shadow(0 0 24px rgba(34,139,34,0.4));
 }
 
-.hero-title-img {
-  max-width: min(700px, 90vw);
-  margin-bottom: 1.5rem;
-  animation: fadeUp 0.5s 0.1s ease both;
-  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.6));
-}
-
 .hero-saison {
   font-family: var(--font-display);
   font-size: 1.1rem;
@@ -450,7 +443,6 @@ footer {
 
 <section class="hero" id="accueil">
   <img src="images/logo.png" alt="Logo Handball Mouy" class="hero-logo">
-
   <p class="hero-saison">Saison 2026 — 2027</p>
   <p class="hero-sub">Un nouveau club se crée à Mouy. Rejoins-nous pour bâtir quelque chose ensemble.</p>
   <div class="hero-cta">
@@ -520,44 +512,45 @@ footer {
     <p class="section-label">Contact</p>
     <h2>Je suis intéressé(e)</h2>
     <p>Remplis ce formulaire et nous te recontacterons dès que les entraînements seront organisés.</p>
-    <form id="interest-form">
+    
+    <form action="https://formspree.io/f/xqewepzw" method="POST" id="interest-form">
       <div class="form-grid">
         <div class="form-group">
           <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" placeholder="Jean" required>
+          <input type="text" name="prenom" id="prenom" placeholder="Jean" required>
         </div>
         <div class="form-group">
           <label for="nom">Nom</label>
-          <input type="text" id="nom" placeholder="Dupont" required>
+          <input type="text" name="nom" id="nom" placeholder="Dupont" required>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="jean@exemple.fr" required>
+          <input type="email" name="email" id="email" placeholder="jean@exemple.fr" required>
         </div>
         <div class="form-group">
           <label for="tel">Téléphone</label>
-          <input type="tel" id="tel" placeholder="06 00 00 00 00">
+          <input type="tel" name="telephone" id="tel" placeholder="06 00 00 00 00">
         </div>
         <div class="form-group">
           <label for="niveau">Niveau</label>
-          <select id="niveau">
+          <select name="niveau" id="niveau">
             <option value="">— Sélectionner —</option>
-            <option>Débutant(e)</option>
-            <option>Amateur(e)</option>
-            <option>Expérimenté(e)</option>
+            <option value="Debutant">Débutant(e)</option>
+            <option value="Amateur">Amateur(e)</option>
+            <option value="Experimente">Expérimenté(e)</option>
           </select>
         </div>
         <div class="form-group">
           <label for="ville">Ville</label>
-          <input type="text" id="ville" placeholder="Mouy">
+          <input type="text" name="ville" id="ville" placeholder="Mouy">
         </div>
         <div class="form-group full">
           <label for="message">Message (optionnel)</label>
-          <textarea id="message" placeholder="Questions, disponibilités..."></textarea>
+          <textarea name="message" id="message" placeholder="Questions, disponibilités..."></textarea>
         </div>
       </div>
       <div class="form-submit">
-        <button type="submit" class="btn-submit">Envoyer ma demande</button>
+        <button type="submit" class="btn-submit" id="btn-submit">Envoyer ma demande</button>
       </div>
       <div class="success-msg" id="success-msg">
         Merci ! Nous avons bien reçu ta demande et te recontacterons très prochainement.
@@ -577,17 +570,52 @@ footer {
 <footer>&copy; 2026 Handball Club Mouy — Tous droits réservés</footer>
 
 <script>
-document.getElementById('interest-form').addEventListener('submit', function(e) {
+const form = document.getElementById('interest-form');
+const successMsg = document.getElementById('success-msg');
+const btnSubmit = document.getElementById('btn-submit');
+
+form.addEventListener('submit', async function(e) {
   e.preventDefault();
-  this.style.opacity = '0.4';
-  this.style.pointerEvents = 'none';
-  document.getElementById('success-msg').style.display = 'block';
-  this.reset();
-  setTimeout(() => {
-    this.style.opacity = '1';
-    this.style.pointerEvents = 'auto';
-    document.getElementById('success-msg').style.display = 'none';
-  }, 6000);
+  
+  // Animation de chargement
+  form.style.opacity = '0.5';
+  btnSubmit.disabled = true;
+  btnSubmit.innerText = 'Envoi en cours...';
+
+  const data = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      // Succès
+      successMsg.style.display = 'block';
+      form.reset();
+      btnSubmit.innerText = 'Envoyé !';
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+        btnSubmit.innerText = 'Envoyer ma demande';
+        btnSubmit.disabled = false;
+        form.style.opacity = '1';
+      }, 5000);
+    } else {
+      // Erreur serveur
+      alert("Oups ! Un problème est survenu. Merci de réessayer plus tard.");
+      btnSubmit.disabled = false;
+      btnSubmit.innerText = 'Envoyer ma demande';
+      form.style.opacity = '1';
+    }
+  } catch (error) {
+    // Erreur réseau
+    alert("Erreur de connexion. Vérifie ton internet.");
+    btnSubmit.disabled = false;
+    btnSubmit.innerText = 'Envoyer ma demande';
+    form.style.opacity = '1';
+  }
 });
 </script>
 
