@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* --- STYLES GÉNÉRAUX (Identiques à l'index) --- */
+/* --- STYLES GÉNÉRAUX --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --dark: #0a0f08;
@@ -33,11 +33,11 @@ body {
   min-height: 100vh;
 }
 
-/* --- NAV (Identique à l'index) --- */
+/* --- NAV --- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -46,24 +46,26 @@ nav {
   backdrop-filter: blur(15px);
   border-bottom: 1px solid rgba(34,139,34,0.25);
 }
-.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; transition: 0.3s; }
-.nav-logo:hover { transform: scale(1.05); }
+.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; z-index: 1100; }
 .nav-logo img { height: 45px; width: auto; }
 .nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-light); letter-spacing: 0.05em; }
+
 .nav-links { display: flex; gap: 1.5rem; list-style: none; }
 .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; position: relative; }
-.nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background: var(--green-bright); transition: 0.3s; }
 .nav-links a:hover { color: var(--green-bright); }
-.nav-links a:hover::after { width: 100%; }
+
+/* BURGER */
+.burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1100; }
+.burger div { width: 28px; height: 2px; background: var(--green-bright); transition: 0.4s; }
 
 /* --- CONTENU PRINCIPAL --- */
 main {
   flex: 1;
-  padding-top: 120px; /* Espace pour la nav fixe */
+  padding-top: 150px;
   padding-bottom: 60px;
 }
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
@@ -88,7 +90,6 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  margin-top: 2rem;
 }
 .sponsor-card {
   border: 1px solid rgba(34,139,34,0.2);
@@ -100,14 +101,18 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
+  min-height: 250px;
 }
 .sponsor-card:hover {
   transform: translateY(-5px);
   border-color: var(--green-bright);
   background: rgba(34,139,34,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 .sponsor-logo {
-  max-width: 200px;
+  max-width: 220px;
+  max-height: 120px;
+  width: auto;
   height: auto;
   display: block;
 }
@@ -125,10 +130,12 @@ h1 {
 .btn-secondary {
   border: 1px solid var(--green-light);
   color: var(--green-light);
-  padding: 0.8rem 2rem;
+  padding: 1rem 2.5rem;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
   transition: 0.3s;
 }
 .btn-secondary:hover {
@@ -136,7 +143,7 @@ h1 {
   color: white;
 }
 
-/* --- FOOTER (Identique à l'index) --- */
+/* --- FOOTER --- */
 footer {
   text-align: center;
   padding: 40px;
@@ -146,9 +153,29 @@ footer {
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
+/* --- MOBILE RESPONSIVE --- */
 @media (max-width: 950px) {
-  .nav-links { display: none; }
-  main { padding-top: 100px; }
+  nav { padding: 1rem 1.5rem; }
+  .burger { display: flex; }
+  .nav-links {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background: var(--dark);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    z-index: 1000;
+  }
+  .nav-links.active { right: 0; }
+  .nav-links a { font-size: 1.8rem; font-family: var(--font-display); }
+  
+  .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+  .burger.toggle .line2 { opacity: 0; }
+  .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 }
 </style>
 </head>
@@ -159,8 +186,16 @@ footer {
     <img src="images/logo.png" alt="HBM Logo">
     <span class="nav-logo-text">HBM</span>
   </a>
-  <ul class="nav-links">
+
+  <div class="burger" id="burger">
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+  </div>
+
+  <ul class="nav-links" id="nav-links">
     <li><a href="index.html">Accueil</a></li>
+    <li><a href="actualites.html">Actualités</a></li>
     <li><a href="equipes.html">Équipes</a></li>
     <li><a href="inscriptions.html">Inscriptions</a></li>
     <li><a href="partenaires.html">Partenaires</a></li>
@@ -180,7 +215,12 @@ footer {
         <span class="sponsor-name">LV CHAUFF</span>
       </div>
       
-      <div class="sponsor-card" style="opacity: 0.5;">
+      <div class="sponsor-card">
+        <img src="images/sirocco.png" alt="Logo Sirocco" class="sponsor-logo">
+        <span class="sponsor-name">SIROCCO</span>
+      </div>
+      
+      <div class="sponsor-card" style="opacity: 0.5; border-style: dashed;">
         <span style="font-size: 4rem; color: var(--muted);">➕</span>
         <span class="sponsor-name" style="color: var(--muted);">Futur Partenaire</span>
       </div>
@@ -195,6 +235,23 @@ footer {
 <footer>
   &copy; 2026 HBM — Handball Club Mouy — Tous droits réservés
 </footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('nav-links');
+
+  burger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      burger.classList.toggle('toggle');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          burger.classList.remove('toggle');
+      });
+  });
+</script>
 
 </body>
 </html>
