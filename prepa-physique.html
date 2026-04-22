@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon Club - HBM</title>
+<title>Préparation Physique - HBM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -27,7 +27,7 @@ body {
   line-height: 1.6;
 }
 
-/* --- NAV --- */
+/* --- NAVIGATION --- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -43,9 +43,35 @@ nav {
 .nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; }
 .nav-logo img { height: 45px; }
 .nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-bright); letter-spacing: 1px; }
-.nav-links { display: flex; gap: 1.5rem; list-style: none; }
-.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
+
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; position: relative; }
 .nav-links a:hover { color: var(--green-bright); }
+
+/* DROPDOWN LOGIC */
+.dropdown { position: relative; }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--dark2);
+  min-width: 200px;
+  border: 1px solid rgba(34,139,34,0.3);
+  border-top: 2px solid var(--green-bright);
+  padding: 0.5rem 0;
+  list-style: none;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+.dropdown-content li a {
+  padding: 0.7rem 1.2rem;
+  font-size: 0.75rem;
+  display: block;
+  text-transform: none;
+  letter-spacing: 0.05em;
+}
+.dropdown-content li a:hover { background: rgba(34,139,34,0.1); }
+.dropdown:hover .dropdown-content { display: block; }
 
 /* BURGER MENU */
 .burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1100; }
@@ -65,49 +91,25 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter
   margin: 0 auto;
   padding: 40px 20px 100px;
 }
-
 .intro-box {
   background: var(--dark2);
   border-left: 4px solid var(--green-bright);
   padding: 2rem;
   margin-bottom: 3rem;
 }
-
 h2 { font-family: var(--font-display); font-size: 2.2rem; color: var(--green-bright); margin: 2.5rem 0 1.5rem; border-bottom: 1px solid rgba(34,139,34,0.2); padding-bottom: 0.5rem; }
 
-/* TABLEAUX */
 .table-wrapper { overflow-x: auto; margin-bottom: 2rem; }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: rgba(255,255,255,0.02);
-}
-th, td {
-  padding: 15px;
-  text-align: left;
-  border: 1px solid rgba(255,255,255,0.05);
-}
+table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.02); }
+th, td { padding: 15px; text-align: left; border: 1px solid rgba(255,255,255,0.05); }
 th { background: rgba(34,139,34,0.2); font-family: var(--font-display); letter-spacing: 1px; color: var(--green-light); }
 
-/* CARDS CONSEILS */
-.grid-tips {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-.tip-card {
-  background: rgba(255,255,255,0.03);
-  padding: 1.5rem;
-  border-radius: 4px;
-  border: 1px solid rgba(34,139,34,0.1);
-}
+.grid-tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.tip-card { background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 4px; border: 1px solid rgba(34,139,34,0.1); }
 .tip-card strong { color: var(--green-bright); display: block; margin-bottom: 0.5rem; }
 
-/* --- FOOTER --- */
 footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); }
 
-/* --- RESPONSIVE --- */
 @media (max-width: 950px) {
   nav { padding: 1rem 1.5rem; }
   .burger { display: flex; }
@@ -121,6 +123,12 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
   }
   .nav-links.active { right: 0; }
   .nav-links a { font-size: 1.8rem; font-family: var(--font-display); }
+  
+  .dropdown-content { 
+    position: static; display: block; background: transparent; border: none; box-shadow: none; text-align: center; padding: 0;
+  }
+  .dropdown-content li a { font-size: 1.2rem !important; color: var(--muted); }
+  
   .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
   .burger.toggle .line2 { opacity: 0; }
   .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
@@ -147,7 +155,14 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
     <li><a href="equipes.html">Équipes</a></li>
     <li><a href="inscriptions.html">Inscriptions</a></li>
     <li><a href="partenaires.html">Partenaires</a></li>
-    <li><a href="saison.html">Saison</a></li>
+    <li class="dropdown">
+      <a href="#">Saison ▾</a>
+      <ul class="dropdown-content">
+        <li><a href="planning.html">Planning des entraînements</a></li>
+        <li><a href="effectifs.html">Effectifs</a></li>
+        <li><a href="prepa-physique.html">Prépa Physique</a></li>
+      </ul>
+    </li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
 </nav>
@@ -158,7 +173,6 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
 </header>
 
 <main class="program-container">
-  
   <div class="intro-box">
     <p>Ce programme est conçu pour les futurs licenciés du <strong>HBM</strong> souhaitant reprendre une activité physique progressive, travailler le cardio et tonifier la sangle abdominale.</p>
     <ul style="margin-top: 1rem; list-style: inside;">
@@ -169,15 +183,14 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
   </div>
 
   <h2>1. L'ÉCHAUFFEMENT (5-7 MIN)</h2>
-  <p style="margin-bottom: 1rem;"><em>Ne négligez jamais cette étape pour protéger vos articulations.</em></p>
+  <p><em>Ne négligez jamais cette étape pour protéger vos articulations.</em></p>
   <ul>
     <li><strong>Rotations articulaires :</strong> Chevilles, genoux, hanches, épaules (30s par zone).</li>
     <li><strong>Cardio léger :</strong> 2-3 min de marche rapide ou sauts légers.</li>
-    <li><strong>Activation :</strong> Montées de genoux et talons-fesses.</li>
   </ul>
 
   <h2>2. CIRCUIT TRAINING (3 À 5 TOURS)</h2>
-  <p style="margin-bottom: 1.5rem;">Repos : 45s entre les exercices | 2 min entre les tours.</p>
+  <p>Repos : 45s entre les exercices | 2 min entre les tours.</p>
   
   <div class="table-wrapper">
     <table>
@@ -189,105 +202,23 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>Corde à sauter</strong></td>
-          <td>45 sec</td>
-          <td>Cardio + Explosivité</td>
-        </tr>
-        <tr>
-          <td><strong>Squats</strong></td>
-          <td>15 répétitions</td>
-          <td>Jambes + Fessiers</td>
-        </tr>
-        <tr>
-          <td><strong>Gainage Planche</strong></td>
-          <td>30 à 45 sec</td>
-          <td>Abdominaux (Ventre plat)</td>
-        </tr>
-        <tr>
-          <td><strong>Fentes alternées</strong></td>
-          <td>10 / jambe</td>
-          <td>Équilibre + Appuis</td>
-        </tr>
-        <tr>
-          <td><strong>Pompes</strong></td>
-          <td>8 à 12 rép.</td>
-          <td>Haut du corps</td>
-        </tr>
-        <tr>
-          <td><strong>Mountain climbers</strong></td>
-          <td>30 sec</td>
-          <td>Cardio + Abdos profonds</td>
-        </tr>
+        <tr><td><strong>Corde à sauter</strong></td><td>45 sec</td><td>Cardio + Explosivité</td></tr>
+        <tr><td><strong>Squats</strong></td><td>15 répétitions</td><td>Jambes + Fessiers</td></tr>
+        <tr><td><strong>Gainage Planche</strong></td><td>30 à 45 sec</td><td>Abdominaux</td></tr>
+        <tr><td><strong>Fentes alternées</strong></td><td>10 / jambe</td><td>Appuis</td></tr>
+        <tr><td><strong>Pompes</strong></td><td>8 à 12 rép.</td><td>Haut du corps</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h2>3. PROGRESSION</h2>
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>Semaine</th>
-          <th>Volume</th>
-          <th>Focus</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Semaine 1</td>
-          <td>3 Tours</td>
-          <td>Technique propre</td>
-        </tr>
-        <tr>
-          <td>Semaine 2</td>
-          <td>4 Tours</td>
-          <td>Repos réduit (40s)</td>
-        </tr>
-        <tr>
-          <td>Semaine 3</td>
-          <td>4 Tours</td>
-          <td>Plus de vitesse</td>
-        </tr>
-        <tr>
-          <td>Semaine 4</td>
-          <td>5 Tours</td>
-          <td>Intensité maximale</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>ADAPTABILITÉ & CARDIO EXTÉRIEUR</h2>
-  <div class="intro-box" style="border-left-color: var(--green-light); background: rgba(34,139,34,0.05);">
-    <p><strong>À chacun son rythme :</strong> Ce programme est une base. Il peut être adapté selon vos capacités actuelles. Si un exercice est trop difficile, réduisez le nombre de répétitions. Si vous êtes à l'aise, augmentez l'intensité !</p>
-    <p style="margin-top: 1rem;"><strong>Course à pied :</strong> Pour les plus motivés, ce circuit peut être complété par une sortie de course à pied (20 à 40 min en endurance fondamentale) une à deux fois par semaine. C'est l'idéal pour travailler le "coffre" nécessaire sur un terrain de handball.</p>
-  </div>
-
-  <h2>CONSEILS DE SÉCURITÉ</h2>
   <div class="grid-tips">
-    <div class="tip-card">
-      <strong>Qualité > Quantité</strong>
-      Privilégiez toujours un mouvement bien réalisé pour éviter les blessures.
-    </div>
-    <div class="tip-card">
-      <strong>Hydratation</strong>
-      Buvez de l'eau par petites gorgées tout au long de votre séance.
-    </div>
-    <div class="tip-card">
-      <strong>Ventre plat</strong>
-      Aspirez le nombril vers la colonne pour protéger votre dos (gainage).
-    </div>
-    <div class="tip-card">
-      <strong>Repos</strong>
-      Laissez au moins 24h de repos entre deux séances.
-    </div>
+    <div class="tip-card"><strong>Qualité > Quantité</strong>Privilégiez toujours le bon mouvement.</div>
+    <div class="tip-card"><strong>Hydratation</strong>Buvez de l'eau par petites gorgées.</div>
   </div>
 
   <p style="text-align: center; margin-top: 5rem; font-weight: bold; color: var(--green-bright);">
     🤾‍♂️ BONNE PRÉPARATION À TOUS LES JOUEURS DE MOUY !
   </p>
-
 </main>
 
 <footer>
@@ -297,17 +228,9 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
 <script>
   const burger = document.getElementById('burger');
   const navLinks = document.getElementById('nav-links');
-
   burger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     burger.classList.toggle('toggle');
-  });
-
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-      burger.classList.remove('toggle');
-    });
   });
 </script>
 
