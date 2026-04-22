@@ -39,7 +39,7 @@ nav {
   backdrop-filter: blur(15px);
   border-bottom: 1px solid rgba(34,139,34,0.25);
 }
-.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; }
+.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; z-index: 1100; }
 .nav-logo img { height: 45px; }
 .nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-bright); letter-spacing: 1px; }
 
@@ -64,13 +64,17 @@ nav {
 }
 .dropdown-content li a {
   padding: 0.7rem 1.2rem;
-  font-size: 0.75rem;
+  font-size: 0.75rem !important;
   display: block;
   text-transform: none;
   letter-spacing: 0.05em;
 }
-.dropdown-content li a:hover { background: rgba(34,139,34,0.1); }
+.dropdown-content li a:hover { background: rgba(34,139,34,0.1); color: var(--green-bright); }
 .dropdown:hover .dropdown-content { display: block; }
+
+/* BURGER */
+.burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1100; }
+.burger div { width: 28px; height: 2px; background: var(--green-bright); transition: 0.4s; }
 
 /* --- HEADER PAGE --- */
 .page-header {
@@ -150,8 +154,29 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter
 /* --- FOOTER --- */
 footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); }
 
-@media (max-width: 950px) { 
-  .nav-links { display: none; } /* On cache pour l'instant comme sur ton original en attendant ton menu mobile */
+/* --- RESPONSIVE --- */
+@media (max-width: 950px) {
+  nav { padding: 1rem 1.5rem; }
+  .burger { display: flex; }
+  .nav-links {
+    position: fixed;
+    right: -100%; top: 0; height: 100vh; width: 100%;
+    background: var(--dark);
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    transition: 0.5s; z-index: 1000;
+  }
+  .nav-links.active { right: 0; }
+  .nav-links a { font-size: 1.5rem; font-family: var(--font-display); }
+  
+  .dropdown-content { 
+    position: static; display: block; background: transparent; border: none; box-shadow: none; text-align: center; padding: 0;
+  }
+  .dropdown-content li a { font-size: 1rem !important; color: var(--muted); }
+
+  .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+  .burger.toggle .line2 { opacity: 0; }
+  .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 }
 </style>
 </head>
@@ -162,20 +187,37 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
     <img src="images/logo.png" alt="HBM">
     <span class="nav-logo-text">HBM</span>
   </a>
-  <ul class="nav-links">
+
+  <div class="burger" id="burger">
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+  </div>
+
+  <ul class="nav-links" id="nav-links">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="actualites.html">Actualités</a></li>
-    <li><a href="leclub.html">Le club</a></li>
-    <li><a href="inscriptions.html">Inscriptions</a></li>
-    <li><a href="partenaires.html">Partenaires</a></li>
+    
     <li class="dropdown">
       <a href="#">Saison ▾</a>
       <ul class="dropdown-content">
-        <li><a href="planning.html">Planning des entraînements</a></li>
+        <li><a href="planning.html">Planning</a></li>
         <li><a href="effectifs.html">Effectifs</a></li>
         <li><a href="prepa-physique.html">Prépa Physique</a></li>
       </ul>
     </li>
+
+    <li class="dropdown">
+      <a href="#">Le Club ▾</a>
+      <ul class="dropdown-content">
+        <li><a href="qui.html">Qui sommes-nous ?</a></li>
+        <li><a href="organigramme.html">Le Bureau</a></li>
+        <li><a href="docs.html">Documents utiles</a></li>
+      </ul>
+    </li>
+
+    <li><a href="inscriptions.html">Inscriptions</a></li>
+    <li><a href="partenaires.html">Partenaires</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
 </nav>
@@ -244,6 +286,23 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
 <footer>
   &copy; 2026 HBM — Handball Club Mouy — L'aventure ne fait que commencer.
 </footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('nav-links');
+
+  burger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    burger.classList.toggle('toggle');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      burger.classList.remove('toggle');
+    });
+  });
+</script>
 
 </body>
 </html>
