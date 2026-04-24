@@ -21,7 +21,9 @@
   --font-body: 'DM Sans', sans-serif;
 }
 body {
-  background: var(--dark);
+  /* MODIFICATION DU FOND : Dégradé radial inspiré du maillot */
+  background: radial-gradient(circle at center, #1a2e15 0%, var(--dark) 100%);
+  background-attachment: fixed;
   color: var(--white);
   font-family: var(--font-body);
   line-height: 1.6;
@@ -81,7 +83,7 @@ nav {
 .page-header {
   padding: 150px 20px 60px;
   text-align: center;
-  background: linear-gradient(to bottom, rgba(34,139,34,0.1), transparent);
+  background: linear-gradient(to bottom, rgba(34,139,34,0.15), transparent);
 }
 h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter-spacing: 2px; }
 
@@ -96,13 +98,14 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter
 }
 
 .news-card {
-  background: var(--dark2);
+  background: rgba(18, 26, 14, 0.6); /* Transparence pour laisser passer le dégradé */
   border: 1px solid rgba(255,255,255,0.05);
   border-radius: 4px;
   overflow: hidden;
   transition: 0.4s;
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(5px);
 }
 .news-card:hover {
   transform: translateY(-10px);
@@ -179,7 +182,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter
 }
 
 /* --- FOOTER --- */
-footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); }
+footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); background: rgba(10, 15, 8, 0.6); }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 950px) {
