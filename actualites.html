@@ -152,6 +152,32 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter
 }
 .read-more:hover { color: var(--green-bright); padding-left: 5px; }
 
+/* --- STYLE VOIR PLUS --- */
+.full-text {
+  display: none;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(61, 220, 61, 0.1);
+  animation: fadeIn 0.4s ease;
+}
+.read-more-btn {
+  background: transparent;
+  border: 1px solid var(--green-mid);
+  color: var(--white);
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  margin-bottom: 1rem;
+}
+.read-more-btn:hover { background: var(--green-mid); border-color: var(--green-bright); }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* --- FOOTER --- */
 footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); }
 
@@ -238,8 +264,23 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
     <div class="news-content">
       <span class="news-date">24 AVRIL 2026</span>
       <h2 class="news-title">Réunion le 25 avril</h2>
-      <p class="news-excerpt">Une première réunion du bureau aura lieu le 25 avril. Au programme, discussions sur les futurs maillots, le gymnase, un point sur les sponsors... Et enfin, gros point sur l'achat du matériel !</p>
-      <a href="index.html#contact" class="read-more">REJOINDRE L'ÉQUIPE →</a>
+      <p class="news-excerpt">Une première réunion du bureau aura lieu le 25 avril pour structurer le lancement officiel du club.</p>
+      
+      <div class="full-text" id="details-reunion">
+        <p>Au programme de cette séance de travail intensive :</p>
+        <ul style="margin: 10px 0 10px 20px; color: var(--muted); font-size: 0.9rem;">
+          <li><strong>Équipements :</strong> Choix du design final des maillots (on reste sur le doré et vert !).</li>
+          <li><strong>Infrastructure :</strong> Validation des créneaux au gymnase avec la mairie.</li>
+          <li><strong>Sponsors :</strong> Point sur les premiers dossiers envoyés et les partenaires potentiels.</li>
+          <li><strong>Matériel :</strong> Commande des ballons, plots et chasubles pour les futurs licenciés.</li>
+        </ul>
+        <p style="font-size: 0.9rem; color: var(--green-bright);"><em>Le bureau s'active pour que tout soit prêt pour la reprise !</em></p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 1rem;">
+        <button onclick="toggleDetails('details-reunion', this)" class="read-more-btn">VOIR LES DÉTAILS</button>
+        <a href="index.html#contact" class="read-more">REJOINDRE L'ÉQUIPE →</a>
+      </div>
     </div>
   </article>
 
@@ -329,6 +370,17 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
       burger.classList.remove('toggle');
     });
   });
+
+  function toggleDetails(id, btn) {
+    const target = document.getElementById(id);
+    if (target.style.display === "block") {
+      target.style.display = "none";
+      btn.innerText = "VOIR LES DÉTAILS";
+    } else {
+      target.style.display = "block";
+      btn.innerText = "RÉDUIRE";
+    }
+  }
 </script>
 
 </body>
