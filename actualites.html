@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualités - HBM</title>
 
-    <!-- META TAGS -->
     <meta property="og:title" content="CHOC DES LIONS : Méru vs Mouy le 20 Mai !">
     <meta property="og:description" content="Le HBM défie l'équipe Loisir de Méru pour leur premier match de préparation !">
     <meta property="og:image" content="https://hbmouy.github.io/images/meruvsmouy.png"> 
@@ -36,21 +35,41 @@
             line-height: 1.6;
         }
 
-        /* --- NAVIGATION COMPLÈTE --- */
+        /* --- NAVIGATION OPTIMISÉE AVEC BURGER --- */
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
             padding: 1rem 3rem; background: rgba(10,15,8,0.9); backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(34,139,34,0.25);
         }
-        .nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; }
+        .nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; z-index: 1100; }
         .nav-logo img { height: 45px; }
         .nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-bright); }
+
+        /* BOUTON BURGER */
+        .burger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+        }
+        .burger span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--green-bright);
+            transition: all 0.3s ease;
+        }
 
         .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
         .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
         .nav-links a:hover { color: var(--green-bright); }
 
+        /* DROPDOWN LOGIC (PC) */
         .dropdown { position: relative; }
         .dropdown-content {
             display: none; position: absolute; top: 100%; left: 0;
@@ -60,6 +79,56 @@
         }
         .dropdown:hover .dropdown-content { display: block; }
         .dropdown-content li a { padding: 0.7rem 1.2rem; display: block; font-size: 0.75rem !important; }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 950px) {
+            nav { padding: 1rem 1.5rem; }
+            
+            .burger { display: flex; }
+
+            /* Animation du burger en croix "X" */
+            .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .burger.toggle span:nth-child(2) { opacity: 0; }
+            .burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+            /* Menu latéral mobile glissant */
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 0;
+                height: 100vh;
+                width: 280px;
+                background: var(--dark2);
+                border-left: 1px solid rgba(34,139,34,0.25);
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 100px 2rem 2rem 2rem;
+                gap: 1.5rem;
+                transition: right 0.4s ease;
+                overflow-y: auto;
+                z-index: 1000;
+            }
+            .nav-links.active { right: 0; }
+            
+            .nav-links a { font-size: 1rem; width: 100%; display: block; }
+
+            /* Dropdowns sur mobile */
+            .dropdown { width: 100%; }
+            .dropdown-content { 
+                display: none;
+                position: static; 
+                background: rgba(10,15,8,0.5); 
+                border: none; 
+                border-left: 2px solid var(--green-bright);
+                box-shadow: none; 
+                text-align: left;
+                padding: 0 0 0 1rem;
+                margin-top: 0.5rem;
+            }
+            .dropdown-content li a { font-size: 0.9rem !important; color: var(--muted); padding: 0.5rem 0; }
+            .dropdown.active .dropdown-content { display: block; }
+        }
 
         /* --- CONTENU --- */
         .page-header { padding: 150px 20px 40px; text-align: center; }
@@ -101,11 +170,18 @@
         <img src="images/logo.png" alt="HBM">
         <span class="nav-logo-text">HBM</span>
     </a>
-    <ul class="nav-links">
+
+    <button class="burger" id="burger" aria-label="Ouvrir le menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Accueil</a></li>
         <li><a href="actualites.html" style="color: var(--green-bright);">Actualités</a></li>
         <li class="dropdown">
-            <a href="#">Saison ▾</a>
+            <a href="#" class="dropdown-trigger">Saison ▾</a>
             <ul class="dropdown-content">
                 <li><a href="planning.html">Planning</a></li>
                 <li><a href="effectifs.html">Effectifs</a></li>
@@ -114,7 +190,7 @@
             </ul>
         </li>
         <li class="dropdown">
-            <a href="#">Le Club ▾</a>
+            <a href="#" class="dropdown-trigger">Le Club ▾</a>
             <ul class="dropdown-content">
                 <li><a href="qui.html">Qui sommes-nous ?</a></li>
                 <li><a href="organigramme.html">Le Bureau</a></li>
@@ -131,11 +207,10 @@
 </header>
 
 <main class="news-container">
-    <!-- ACTU MATCH PREPA -->
     <article class="news-card featured">
         <div class="news-img" style="height: 350px;">
             <div class="badge" style="background: var(--gold); color: black;">MATCH DE PREPA</div>
-            <img src="images/meruvsmouy.png">
+            <img src="images/meruvsmouy.png" alt="Méru vs Mouy">
         </div>
         <div class="news-content" style="text-align: center;">
             <span class="news-date">05 MAI 2026</span>
@@ -147,9 +222,8 @@
         </div>
     </article>
 
-    <!-- ACTUS RÉCENTES -->
     <article class="news-card">
-        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/cerclevert.png"></div>
+        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/cerclevert.png" alt="Cercle Vert"></div>
         <div class="news-content">
             <span class="news-date">04 MAI 2026</span>
             <h2 class="news-title">GROUPE CERCLE VERT</h2>
@@ -158,7 +232,7 @@
     </article>
 
     <article class="news-card">
-        <div class="news-img"><div class="badge">CLUB</div><img src="images/logonb.png"></div>
+        <div class="news-img"><div class="badge">CLUB</div><img src="images/logonb.png" alt="HBM N&B"></div>
         <div class="news-content">
             <span class="news-date">24 AVRIL 2026</span>
             <h2 class="news-title">RÉUNION DU BUREAU</h2>
@@ -166,9 +240,8 @@
         </div>
     </article>
 
-    <!-- ARCHIVES -->
     <article class="news-card old-news">
-        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/klein.png"></div>
+        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/klein.png" alt="Klein Expertise"></div>
         <div class="news-content">
             <span class="news-date">24 AVRIL 2026</span>
             <h2 class="news-title">KLEIN EXPERTISE</h2>
@@ -176,7 +249,7 @@
     </article>
 
     <article class="news-card old-news">
-        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/tvm.png"></div>
+        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/tvm.png" alt="TVM"></div>
         <div class="news-content">
             <span class="news-date">22 AVRIL 2026</span>
             <h2 class="news-title">TVM TECHNOLOGIE</h2>
@@ -184,7 +257,7 @@
     </article>
 
     <article class="news-card old-news">
-        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/sirocco.png"></div>
+        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/sirocco.png" alt="Sirocco"></div>
         <div class="news-content">
             <span class="news-date">17 AVRIL 2026</span>
             <h2 class="news-title">SIROCCO</h2>
@@ -192,7 +265,7 @@
     </article>
 
     <article class="news-card old-news">
-        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/lv-chauff.png"></div>
+        <div class="news-img"><div class="badge">SPONSOR</div><img src="images/lv-chauff.png" alt="LV Chauff"></div>
         <div class="news-content">
             <span class="news-date">16 AVRIL 2026</span>
             <h2 class="news-title">LV CHAUFF</h2>
@@ -205,6 +278,7 @@
 </div>
 
 <script>
+    // --- GESTION DU BOUTON CHARGER PLUS ---
     const btn = document.getElementById('loadMoreBtn');
     const oldNews = document.querySelectorAll('.old-news');
     let isExpanded = false;
@@ -217,6 +291,46 @@
         });
 
         btn.innerText = isExpanded ? 'MASQUER LES ARCHIVES' : 'VOIR TOUTES LES ACTUALITÉS';
+    });
+
+    // --- SCRIPT MENU BURGER ---
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    burger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        burger.classList.toggle('toggle');
+    });
+
+    // Fermer le menu lors du clic sur un lien classique
+    document.querySelectorAll('.nav-links a:not(.dropdown-trigger)').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            burger.classList.remove('toggle');
+        });
+    });
+
+    // Gestion des dropdowns tactiles pour mobile
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        if (trigger) {
+            trigger.addEventListener('click', (e) => {
+                if (window.innerWidth <= 950) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                }
+            });
+        } else {
+            // Fallback si la classe n'est pas encore posée sur les ancres parentes directes du HTML d'origine
+            const fallbackTrigger = dropdown.querySelector('a');
+            fallbackTrigger.addEventListener('click', (e) => {
+                if (window.innerWidth <= 950) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                }
+            });
+        }
     });
 </script>
 
