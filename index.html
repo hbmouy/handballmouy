@@ -50,7 +50,7 @@ body {
   overflow-x: hidden;
 }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION OPTIMISÉE AVEC BURGER --- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -59,7 +59,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 3rem;
-  background: rgba(10,15,8,0.85);
+  background: rgba(10,15,8,0.9);
   backdrop-filter: blur(15px);
   border-bottom: 1px solid rgba(34,139,34,0.25);
 }
@@ -68,13 +68,32 @@ nav {
 .nav-logo img { height: 45px; width: auto; }
 .nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-light); letter-spacing: 0.05em; }
 
+/* BOUTON BURGER */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+}
+.burger span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--green-bright);
+  transition: all 0.3s ease;
+}
+
 .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
 .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; position: relative; }
 .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background: var(--green-bright); transition: 0.3s; }
 .nav-links a:hover { color: var(--green-bright); }
 .nav-links a:hover::after { width: 100% !important; }
 
-/* DROPDOWN LOGIC */
+/* DROPDOWN LOGIC (PC) */
 .dropdown { position: relative; }
 .dropdown-content {
   display: none;
@@ -100,9 +119,56 @@ nav {
 .dropdown-content li a:hover { background: rgba(34,139,34,0.1); }
 .dropdown:hover .dropdown-content { display: block; }
 
-/* BURGER MENU */
-.burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1100; }
-.burger div { width: 28px; height: 2px; background: var(--green-bright); transition: 0.4s; }
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 950px) {
+  nav { padding: 1rem 1.5rem; }
+  
+  .burger { display: flex; }
+
+  /* Animation du burger en croix "X" */
+  .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  .burger.toggle span:nth-child(2) { opacity: 0; }
+  .burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+  /* Menu latéral mobile glissant */
+  .nav-links {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    background: var(--dark2);
+    border-left: 1px solid rgba(34,139,34,0.25);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 100px 2rem 2rem 2rem;
+    gap: 1.5rem;
+    transition: right 0.4s ease;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  .nav-links.active { right: 0; }
+  
+  .nav-links a { font-size: 1rem; width: 100%; display: block; }
+  .nav-links a::after { display: none; }
+
+  /* Dropdowns sur mobile */
+  .dropdown { width: 100%; }
+  .dropdown-content { 
+    display: none;
+    position: static; 
+    background: rgba(10,15,8,0.5); 
+    border: none; 
+    border-left: 2px solid var(--green-bright);
+    box-shadow: none; 
+    text-align: left;
+    padding: 0 0 0 1rem;
+    margin-top: 0.5rem;
+  }
+  .dropdown-content li a { font-size: 0.9rem !important; color: var(--muted); padding: 0.5rem 0; }
+  .dropdown.active .dropdown-content { display: block; }
+}
 
 /* --- HERO SECTION --- */
 .hero {
@@ -113,7 +179,6 @@ nav {
   justify-content: center;
   text-align: center;
   padding: 120px 20px 60px;
-  /* Ajustement de l'éclat central pour qu'il se fonde dans le nouveau background */
   background: radial-gradient(circle at center, rgba(34,139,34,0.15) 0%, transparent 70%);
 }
 .hero-logo {
@@ -129,7 +194,6 @@ nav {
 /* --- ABOUT SECTION --- */
 .about { 
   padding: 120px 3rem; 
-  /* Fond légèrement transparent pour laisser deviner le dégradé du body */
   background: rgba(10, 15, 8, 0.4); 
   display: grid; 
   grid-template-columns: 1fr 1fr; 
@@ -200,42 +264,10 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
 }
 .btn-primary:hover { background: var(--green-bright); transform: scale(1.05) translateY(-5px); box-shadow: 0 15px 30px rgba(34,139,34,0.3); }
 
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE GRIDS --- */
 @media (max-width: 950px) {
-  nav { padding: 1rem 1.5rem; }
-  .burger { display: flex; }
-  .nav-links {
-    position: fixed;
-    right: -100%;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    background: var(--dark);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-    z-index: 1000;
-  }
-  .nav-links.active { right: 0; }
-  .nav-links a { font-size: 1.8rem; font-family: var(--font-display); }
   .about { grid-template-columns: 1fr; padding: 60px 1.5rem; text-align: center; }
   .about-visual-wrapper { margin-bottom: 3rem; }
-  
-  .dropdown-content { 
-    position: static; 
-    display: block; 
-    background: transparent; 
-    border: none; 
-    box-shadow: none; 
-    text-align: center;
-    padding: 0;
-  }
-  .dropdown-content li a { font-size: 1.2rem !important; color: var(--muted); }
-
-  .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
-  .burger.toggle .line2 { opacity: 0; }
-  .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 }
 
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
@@ -259,38 +291,38 @@ footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8r
     <span class="nav-logo-text">HBM</span>
   </div>
   
-  <div class="burger" id="burger">
-    <div class="line1"></div>
-    <div class="line2"></div>
-    <div class="line3"></div>
-  </div>
+  <button class="burger" id="burger" aria-label="Ouvrir le menu">
+    <span class="line1"></span>
+    <span class="line2"></span>
+    <span class="line3"></span>
+  </button>
 
   <ul class="nav-links" id="nav-links">
-  <li><a href="index.html">Accueil</a></li>
-  <li><a href="actualites.html">Actualités</a></li>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="actualites.html">Actualités</a></li>
   
-  <li class="dropdown">
-    <a href="#">Saison ▾</a>
-    <ul class="dropdown-content">
-      <li><a href="planning.html">Planning</a></li>
-      <li><a href="effectifs.html">Effectifs</a></li>
-      <li><a href="prepa-physique.html">Prépa Physique</a></li>
-    </ul>
-  </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-trigger">Saison ▾</a>
+      <ul class="dropdown-content">
+        <li><a href="planning.html">Planning</a></li>
+        <li><a href="effectifs.html">Effectifs</a></li>
+        <li><a href="prepa-physique.html">Prépa Physique</a></li>
+      </ul>
+    </li>
 
-  <li class="dropdown">
-    <a href="#">Le Club ▾</a>
-    <ul class="dropdown-content">
-      <li><a href="qui.html">Qui sommes-nous ?</a></li>
-      <li><a href="organigramme.html">Le Bureau</a></li>
-      <li><a href="docs.html">Documents utiles</a></li>
-    </ul>
-  </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-trigger">Le Club ▾</a>
+      <ul class="dropdown-content">
+        <li><a href="qui.html">Qui sommes-nous ?</a></li>
+        <li><a href="organigramme.html">Le Bureau</a></li>
+        <li><a href="docs.html">Documents utiles</a></li>
+      </ul>
+    </li>
 
-  <li><a href="inscriptions.html">Inscriptions</a></li>
-  <li><a href="partenaires.html">Partenaires</a></li>
-  <li><a href="index.html#contact">Contact</a></li>
-</ul>
+    <li><a href="inscriptions.html">Inscriptions</a></li>
+    <li><a href="partenaires.html">Partenaires</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
 </nav>
 
 <section class="hero" id="accueil">
@@ -319,7 +351,7 @@ footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8r
   <div class="about-text-content">
     <span class="section-label">L'aventure commence</span>
     <h2>Réveillez le Lion en Vous</h2>
-    <p>Le HBM est un club en cours de création, porté par des passionnés de handball de l'Oise. Notre objectif est clair : construire une structure sportive conviviale, ambitieuse et durable pour notre territoire.</p>
+    <p>Le HBM is un club en cours de création, porté par des passionnés de handball de l'Oise. Notre objectif est clair : construire une structure sportive conviviale, ambitieuse et durable pour notre territoire.</p>
     <p>Peu importe votre niveau ou votre âge (des seniors aux plus jeunes, avec notre projet d'école de hand), c'est votre envie de bâtir ce club avec nous qui fera la différence.</p>
   </div>
 </section>
@@ -371,14 +403,29 @@ footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8r
 // --- MENU MOBILE ---
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('nav-links');
+const dropdowns = document.querySelectorAll('.dropdown');
+
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     burger.classList.toggle('toggle');
 });
-document.querySelectorAll('.nav-links a').forEach(link => {
+
+// Fermeture du menu lors du clic sur un lien normal
+document.querySelectorAll('.nav-links a:not(.dropdown-trigger)').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
         burger.classList.remove('toggle');
+    });
+});
+
+// Gestion des dropdowns tactiles sur mobile
+dropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector('.dropdown-trigger');
+    trigger.addEventListener('click', (e) => {
+        if (window.innerWidth <= 950) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+        }
     });
 });
 
