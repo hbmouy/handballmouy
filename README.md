@@ -1,6 +1,6 @@
 # Handball Mouy - HBM
 
-Bienvenue sur le dépôt source du site officiel du **Handball Mouy**.
+Bienvenue sur le site officiel du **Handball Mouy**.
 
 Ce site est développé pour présenter le club, gérer les inscriptions et partager les actualités de la saison 2026-2027.
 
