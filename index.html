@@ -60,10 +60,45 @@ body {
   overflow-x: hidden;
 }
 
+/* --- BANDEAU DÉFILANT --- */
+.match-ticker {
+  width: 100%;
+  background: var(--gold);
+  color: var(--dark);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.ticker-wrap {
+  display: flex;
+  width: 200%;
+  animation: ticker 25s linear infinite;
+}
+.ticker-item {
+  width: 50%;
+  flex-shrink: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+.match-ticker:hover .ticker-wrap {
+  animation-play-state: paused;
+}
+
 /* --- NAVIGATION OPTIMISÉE AVEC BURGER --- */
 nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 33px; left: 0; right: 0;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -144,7 +179,7 @@ nav {
   .nav-links {
     position: fixed;
     right: -100%;
-    top: 0;
+    top: 33px;
     height: 100vh;
     width: 280px;
     background: var(--dark2);
@@ -294,6 +329,17 @@ footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8r
 </style>
 </head>
 <body>
+
+<div class="match-ticker">
+  <div class="ticker-wrap">
+    <div class="ticker-item">
+      🔥 PROCHAIN MATCH : Match amical de reprise — Mercredi 20 Mai à 20h00 — HB Mouy vs Équipe Loisir ! Venez encourager les Lions ! 🔥
+    </div>
+    <div class="ticker-item">
+      🔥 PROCHAIN MATCH : Match amical de reprise — Mercredi 20 Mai à 20h00 — HB Mouy vs Équipe Loisir ! Venez encourager les Lions ! 🔥
+    </div>
+  </div>
+</div>
 
 <nav>
   <div class="nav-logo" id="logo-trigger">
