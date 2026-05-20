@@ -97,7 +97,7 @@
         }
         .search-input {
             width: 100%; background: rgba(18, 26, 14, 0.8); border: 1px solid rgba(34,139,34,0.4);
-            color: var(--white); padding: 12px 20px; font-size: 0.9.rem; border-radius: 30px;
+            color: var(--white); padding: 12px 20px; font-size: 0.9rem; border-radius: 30px;
             outline: none; transition: 0.3s; text-align: center; font-family: 'DM Sans', sans-serif;
         }
         .search-input:focus {
@@ -312,6 +312,23 @@
         </div>
     </article>
 </main>
+
+<div style="max-width: 1100px; margin: 40px auto; padding: 0 20px;">
+    <div id="disqus_thread" style="background: rgba(18, 26, 14, 0.6); padding: 2.5rem; border: 1px solid rgba(34,139,34,0.25); border-radius: 4px;"></div>
+</div>
+<script>
+    var disqus_config = function () {
+        this.page.url = window.location.href;  
+        this.page.identifier = window.location.pathname; 
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');
+        s.src = 'https://hbmouy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Veuillez activer JavaScript pour voir les commentaires.</noscript>
 
 <div class="archive-section" id="archiveSection">
     <button class="load-btn" id="loadMoreBtn">VOIR TOUTES LES ACTUALITÉS</button>
