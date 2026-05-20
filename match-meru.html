@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match de Prépa : Méru vs HBM - HBM</title>
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Match de Prépa : Loisir Méru VS HBM">
+    <meta property="og:description" content="Le HBM défie l'équipe Loisir de Méru pour leur premier match de préparation !">
+    <meta property="og:url" content="https://hbmouy.github.io/handballmouy/match-meru.html">
+    <meta property="og:image" content="https://hbmouy.github.io/handballmouy/images/meruvsmouy.png">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --dark: #0a0f08;
+            --dark2: #121a0e;
+            --green-mid: #228b22;
+            --green-bright: #3ddc3d;
+            --white: #f0f5f0;
+            --muted: #7a9a7a;
+            --font-display: 'Bebas Neue', sans-serif;
+            --gold: #d4af37;
+        }
+        body {
+            background: radial-gradient(circle at center, #1a2e15 0%, var(--dark) 100%);
+            background-attachment: fixed;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 3rem; background: rgba(10,15,8,0.9); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(34,139,34,0.25);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; z-index: 1100; }
+        .nav-logo img { height: 45px; }
+        .nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-bright); }
+
+        .burger {
+            display: none; flex-direction: column; justify-content: space-between;
+            width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1100;
+        }
+        .burger span { width: 100%; height: 3px; background-color: var(--green-bright); transition: all 0.3s ease; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
+        .nav-links a:hover { color: var(--green-bright); }
+
+        .dropdown { position: relative; }
+        .dropdown-content {
+            display: none; position: absolute; top: 100%; left: 0; background: var(--dark2); min-width: 200px;
+            border: 1px solid rgba(34,139,34,0.3); border-top: 2px solid var(--green-bright); padding: 0.5rem 0; list-style: none;
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content li a { padding: 0.7rem 1.2rem; display: block; font-size: 0.75rem !important; }
+
+        @media (max-width: 950px) {
+            nav { padding: 1rem 1.5rem; }
+            .burger { display: flex; }
+            .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .burger.toggle span:nth-child(2) { opacity: 0; }
+            .burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+            .nav-links {
+                position: fixed; right: -100%; top: 0; height: 100vh; width: 280px; background: var(--dark2);
+                border-left: 1px solid rgba(34,139,34,0.25); flex-direction: column; align-items: flex-start;
+                justify-content: flex-start; padding: 100px 2rem 2rem 2rem; gap: 1.5rem; transition: right 0.4s ease; overflow-y: auto; z-index: 1000;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1rem; width: 100%; display: block; }
+            .dropdown { width: 100%; }
+            .dropdown-content { 
+                display: none; position: static; background: rgba(10,15,8,0.5); border: none;
+                border-left: 2px solid var(--green-bright); padding: 0 0 0 1rem; margin-top: 0.5rem;
+            }
+            .dropdown-content li a { font-size: 0.9rem !important; color: var(--muted); padding: 0.5rem 0; }
+            .dropdown.active .dropdown-content { display: block; }
+        }
+
+        /* --- STYLES DE L'ARTICLE --- */
+        .article-container { max-width: 900px; margin: 140px auto 40px; padding: 20px; }
+        .back-link { display: inline-block; color: var(--green-bright); text-decoration: none; margin-bottom: 20px; font-size: 0.9rem; transition: 0.3s; }
+        .back-link:hover { text-decoration: underline; }
+        
+        .main-article { background: rgba(18, 26, 14, 0.6); border: 1px solid rgba(255,255,255,0.05); padding: 40px; border-radius: 4px; }
+        .article-header { text-align: center; margin-bottom: 30px; }
+        .article-badge { display: inline-block; background: var(--gold); color: black; padding: 4px 12px; font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 15px; }
+        .article-date { color: var(--green-bright); font-size: 0.9rem; display: block; margin-bottom: 10px; }
+        .article-title { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; color: var(--white); }
+        
+        .article-banner { width: 100%; max-height: 450px; object-fit: contain; background: #1a2514; padding: 20px; border-radius: 4px; margin-bottom: 30px; border: 1px solid rgba(34,139,34,0.2); }
+        
+        .article-body { font-size: 1.1rem; color: var(--white); margin-bottom: 30px; text-align: justify; }
+        .article-info-box { background: rgba(34,139,34,0.1); border-left: 4px solid var(--gold); padding: 20px; margin: 30px 0; text-align: center; }
+        .article-info-text { display: block; color: var(--gold); font-family: var(--font-display); font-size: 1.8rem; }
+        
+        .article-footer { display: flex; justify-content: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        
+        .share-btn {
+            background: transparent; border: none; color: var(--muted); cursor: pointer;
+            display: flex; align-items: center; gap: 8px; font-size: 1rem; transition: 0.3s;
+            padding: 8px 16px; border-radius: 4px; border: 1px solid rgba(122,154,122,0.3);
+        }
+        .share-btn:hover { color: var(--green-bright); background: rgba(34,139,34,0.1); border-color: var(--green-bright); }
+        .share-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* Commentaires */
+        .comments-section { margin-top: 40px; }
+        .comments-title { font-family: var(--font-display); font-size: 2rem; color: var(--green-bright); margin-bottom: 15px; letter-spacing: 1px; }
+
+        .toast-notification {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: var(--green-mid); color: white; padding: 10px 25px;
+            border-radius: 30px; font-family: var(--font-display); font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 2000;
+            opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="HBM">
+        <span class="nav-logo-text">HBM</span>
+    </a>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="actualites.html" style="color: var(--green-bright);">Actualités</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-trigger">Saison ▾</a>
+            <ul class="dropdown-content">
+                <li><a href="planning.html">Planning</a></li>
+                <li><a href="effectifs.html">Effectifs</a></li>
+                <li><a href="prepa-physique.html">Prépa Physique</a></li>
+                <li><a href="jeu.html">Le Jeu 🎮</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-trigger">Le Club ▾</a>
+            <ul class="dropdown-content">
+                <li><a href="qui.html">Qui sommes-nous ?</a></li>
+                <li><a href="organigramme.html">Le Bureau</a></li>
+                <li><a href="docs.html">Documents utiles</a></li>
+            </ul>
+        </li>
+        <li><a href="inscriptions.html">Inscriptions</a></li>
+        <li><a href="partenaires.html">Partenaires</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="article-container">
+    <a href="actualites.html" class="back-link">← Retour aux actualités</a>
+    
+    <article class="main-article">
+        <div class="article-header">
+            <div class="article-badge">MATCH DE PREPA</div>
+            <span class="article-date">05 MAI 2026</span>
+            <h1 class="article-title">MATCH DE PREPA : MÉRU LOISIR vs HBM</h1>
+        </div>
+
+        <img src="images/meruvsmouy.png" alt="Méru vs Mouy" class="article-banner">
+
+        <div class="article-body">
+            <p>Nos joueurs se déplacent à Méru pour un match amical contre l'équipe Loisir. Une belle opportunité pour jauger notre collectif, mettre en place les nouvelles stratégies travaillées aux entraînements et intégrer au mieux les nouveaux arrivants au sein du groupe ! Venez nombreux encourager les Lions !</p>
+            
+            <div class="article-info-box">
+                <span class="article-info-text">📅 MERCREDI 20 MAI — 20H00</span>
+                <span style="color: var(--white); font-size: 0.9rem;">Gymnase de Méru</span>
+            </div>
+        </div>
+
+        <div class="article-footer">
+            <button class="share-btn" onclick="shareActu('MATCH DE PREPA : MÉRU vs HBM', 'Le HBM défie l\'équipe Loisir de Méru pour son premier match !')">
+                <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                Partager cet article
+            </button>
+        </div>
+    </article>
+
+    <section class="comments-section">
+        <h2 class="comments-title">Espace Débrief'</h2>
+        <div id="disqus_thread" style="background: rgba(18, 26, 14, 0.6); padding: 2rem; border: 1px solid rgba(34,139,34,0.25); border-radius: 4px;"></div>
+    </section>
+</div>
+
+<div id="toast" class="toast-notification">Lien de l'article copié ! 🦁</div>
+
+<script>
+    // --- SCRIPT DE CONFIGURATION DISQUS UNIQUE POUR CE MATCH ---
+    var disqus_config = function () {
+        this.page.url = window.location.href;  // Identifie précisément l'adresse de cet article
+        this.page.identifier = 'match-meru-2026'; // Identifiant unique interne à Disqus pour ce match
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');
+        s.src = 'https://hbmouy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+
+    // --- SCRIPT DE PARTAGE ---
+    function shareActu(title, text) {
+        const currentUrl = window.location.href;
+        if (navigator.share) {
+            navigator.share({
+                title: title,
+                text: text + " - Découvre l'article complet :",
+                url: currentUrl
+            }).catch(err => console.log("Erreur lors du partage : ", err));
+        } else {
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.opacity = '1';
+                setTimeout(() => { toast.style.opacity = '0'; }, 2500);
+            }).catch(err => console.error("Impossible de copier le lien : ", err));
+        }
+    }
+
+    // --- SCRIPT MENU BURGER ---
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        burger.classList.toggle('toggle');
+    });
+</script>
+
+</body>
+</html>
