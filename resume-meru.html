@@ -185,16 +185,19 @@
             
             <p>La rencontre s'est déroulée dans une ambiance très amicale et saine. Sur le plan sportif, le staff a fait au mieux pour intégrer nos futurs joueurs au collectif. Ce n'est jamais un exercice simple de commencer une toute nouvelle discipline directement par un match, qu'il soit amical ou non. C'est pourquoi nous tenions fermement à les remercier et les féliciter pour leur implication exemplaire et leur écoute tout au long de la soirée.</p>
             
-            <p>Un grand merci également aux "anciens" d'avoir parfaitement joué le jeu et d'avoir grandement participé à la bonne intégration de chacun au sein du groupe. L'esprit d'équipe est déjà bien présent !</p>
+            <p>Un grand merci également aux "anciens" d'avoir parfaitement joué le jeu et d'avoir grandement participé à la bonne intégration de chacun au sein du groupe. L'esprit club des Lions est déjà bien présent !</p>
             
             <p>En espérant de tout cœur que ce match ne soit simplement que le premier chapitre d'une très belle, longue et grande aventure collective pour le HBM.</p>
 
             <div style="margin: 30px 0; text-align: center;">
-    <img src="images/meru-hbm.jpg" alt="Photo de groupe HBM et AAE Méru" style="width: 100%; max-height: 450px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(34,139,34,0.3); padding: 5px; background: rgba(18, 26, 14, 0.8);">
-    <p style="font-size: 0.9rem; color: var(--muted); font-style: italic; margin-top: 5px;">Les deux équipes réunies à la fin de la rencontre dans un superbe esprit de camaraderie.</p>
-</div>
+                <div style="position: relative; cursor: zoom-in;" onclick="ouvrirZoom()">
+                    <img src="images/meru-hbm.jpg" id="photoGroupe" alt="Photo de groupe HBM et AAE Méru" style="width: 100%; max-height: 450px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(34,139,34,0.3); padding: 5px; background: rgba(18, 26, 14, 0.8); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
+                    <span style="position: absolute; bottom: 15px; right: 15px; background: rgba(10,15,8,0.8); color: var(--green-bright); padding: 4px 10px; font-size: 0.75rem; border-radius: 4px; font-family: 'DM Sans', sans-serif;">🔍 Cliquez pour agrandir</span>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--muted); font-style: italic; margin-top: 5px;">Les deux équipes réunies à la fin de la rencontre dans un superbe esprit de camaraderie.</p>
+            </div>
             
-            <p style="font-family: var(--font-display); font-size: 1.5rem; color: var(--gold); text-align: center; margin-top: 30px;">À très vite sur le terrain ! </p>
+            <p style="font-family: var(--font-display); font-size: 1.5rem; color: var(--gold); text-align: center; margin-top: 30px;">🦁 À très vite sur le terrain ! 🦁</p>
         </div>
 
         <div class="article-footer">
@@ -205,6 +208,11 @@
             </button>
         </div>
     </article>
+</div>
+
+<div id="lightbox" onclick="fermerZoom()" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 8, 0.95); align-items: center; justify-content: center; cursor: zoom-out; opacity: 0; transition: opacity 0.3s ease;">
+    <span style="position: absolute; top: 20px; right: 30px; color: var(--white); font-size: 40px; font-family: var(--font-display); cursor: pointer;">&times;</span>
+    <img id="imgZoom" src="" alt="Photo en grand" style="max-width: 95%; max-height: 90vh; object-fit: contain; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
 </div>
 
 <div style="max-width: 850px; margin: 40px auto; padding: 0 20px;">
@@ -227,6 +235,23 @@
 <div id="toast" class="toast-notification">Lien du résumé copié ! 🦁</div>
 
 <script>
+    // --- SCRIPT DE ZOOM (LIGHTBOX) ---
+    function ouvrirZoom() {
+        const lightbox = document.getElementById('lightbox');
+        const imgZoom = document.getElementById('imgZoom');
+        const photoOrigine = document.getElementById('photoGroupe');
+        
+        imgZoom.src = photoOrigine.src;
+        lightbox.style.display = 'flex';
+        setTimeout(() => { lightbox.style.opacity = '1'; }, 10);
+    }
+
+    function fermerZoom() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.style.opacity = '0';
+        setTimeout(() => { lightbox.style.display = 'none'; }, 300);
+    }
+
     // --- SCRIPT DE PARTAGE ---
     function shareCurrentPage() {
         const currentUrl = window.location.href;
