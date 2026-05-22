@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé Méru VS HBM - HBM</title>
 
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Résumé Match : Loisir Méru VS HBM">
+    <meta property="og:description" content="Découvrez le résumé complet du premier match historique des Lions du HBM à Méru !">
+    <meta property="og:url" content="https://hbmouy.github.io/handballmouy/resume-meru.html">
+    <meta property="og:image" content="https://hbmouy.github.io/handballmouy/images/meruvsmouy.png">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --dark: #0a0f08;
+            --dark2: #121a0e;
+            --green-mid: #228b22;
+            --green-bright: #3ddc3d;
+            --white: #f0f5f0;
+            --muted: #7a9a7a;
+            --font-display: 'Bebas Neue', sans-serif;
+            --gold: #d4af37;
+        }
+        body {
+            background: radial-gradient(circle at center, #1a2e15 0%, var(--dark) 100%);
+            background-attachment: fixed;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 3rem; background: rgba(10,15,8,0.9); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(34,139,34,0.25);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; z-index: 1100; }
+        .nav-logo img { height: 45px; }
+        .nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-bright); }
+
+        .burger {
+            display: none; flex-direction: column; justify-content: space-between;
+            width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1100;
+        }
+        .burger span { width: 100%; height: 3px; background-color: var(--green-bright); transition: all 0.3s ease; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+        .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
+        .nav-links a:hover { color: var(--green-bright); }
+
+        .dropdown { position: relative; }
+        .dropdown-content {
+            display: none; position: absolute; top: 100%; left: 0; background: var(--dark2); min-width: 200px;
+            border: 1px solid rgba(34,139,34,0.3); border-top: 2px solid var(--green-bright); padding: 0.5rem 0; list-style: none;
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content li a { padding: 0.7rem 1.2rem; display: block; font-size: 0.75rem !important; }
+
+        @media (max-width: 950px) {
+            nav { padding: 1rem 1.5rem; }
+            .burger { display: flex; }
+            .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .burger.toggle span:nth-child(2) { opacity: 0; }
+            .burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+            .nav-links {
+                position: fixed; right: -100%; top: 0; height: 100vh; width: 280px; background: var(--dark2);
+                border-left: 1px solid rgba(34,139,34,0.25); flex-direction: column; align-items: flex-start;
+                justify-content: flex-start; padding: 100px 2rem 2rem 2rem; gap: 1.5rem; transition: right 0.4s ease; overflow-y: auto; z-index: 1000;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1rem; width: 100%; display: block; }
+            .dropdown { width: 100%; }
+            .dropdown-content { 
+                display: none; position: static; background: rgba(10,15,8,0.5); border: none;
+                border-left: 2px solid var(--green-bright); padding: 0 0 0 1rem; margin-top: 0.5rem;
+            }
+            .dropdown-content li a { font-size: 0.9rem !important; color: var(--muted); padding: 0.5rem 0; }
+            .dropdown.active .dropdown-content { display: block; }
+        }
+
+        /* --- CONTENU DE L'ARTICLE --- */
+        .article-wrapper { max-width: 850px; margin: 140px auto 40px; padding: 0 20px; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--
