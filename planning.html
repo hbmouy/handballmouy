@@ -6,267 +6,359 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Planning & Rencontres - HBM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* --- STYLES COMMUNS --- */
+/* --- BASE LUMINEUSE & ENERGIE MAILLOT (Identique à la charte globale) --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --dark: #0a0f08;
-  --dark2: #121a0e;
-  --green-mid: #228b22;
-  --green-bright: #3ddc3d;
-  --white: #f0f5f0;
-  --muted: #7a9a7a;
-  --font-display: 'Bebas Neue', sans-serif;
+  --bg-light: #f5f8f5; 
+  --jersey-yellow: #e2f438;  
+  --jersey-green: #2cd646;   
+  --jersey-purple: #9d4edd;  
+  --dark-text: #0b130a;      
+  --white: #ffffff; 
+  --font-display: 'Anton', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --gold: #d4af37;
-  --meru-red: #e30613;
-  --hcl-blue: #1e40af;
 }
 
-body {
-  background: radial-gradient(circle at center, #1a2e15 0%, var(--dark) 100%);
-  background-attachment: fixed;
-  color: var(--white);
-  font-family: var(--font-body);
-  line-height: 1.6;
+body { 
+  background: var(--bg-light); 
+  color: var(--dark-text); 
+  font-family: var(--font-body); 
+  line-height: 1.8;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* --- NAVIGATION COMPLÈTE --- */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 3rem;
-  background: rgba(10,15,8,0.85);
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(34,139,34,0.25);
-}
-.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; z-index: 1100; }
-.nav-logo img { height: 45px; }
-.nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-bright); letter-spacing: 1px; }
-
-.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
-.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; position: relative; }
-.nav-links a:hover { color: var(--green-bright); }
-
-/* DROPDOWNS */
-.dropdown { position: relative; }
-.dropdown-content {
-  display: none;
+/* --- FORMES GÉOMÉTRIQUES ASYMÉTRIQUES --- */
+body::before, body::after {
+  content: "";
   position: absolute;
-  top: 100%;
+  width: 100%;
+  height: 1200px;
+  z-index: -1;
+  opacity: 0.85;
+  pointer-events: none;
+}
+body::before {
+  top: 0;
   left: 0;
-  background: var(--dark2);
-  min-width: 200px;
-  border: 1px solid rgba(34,139,34,0.3);
-  border-top: 2px solid var(--green-bright);
-  padding: 0.5rem 0;
-  list-style: none;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px);
 }
-.dropdown-content li a {
-  padding: 0.7rem 1.2rem;
-  font-size: 0.75rem !important;
-  display: block;
-  text-transform: none;
-  letter-spacing: 0.05em;
+body::after {
+  top: 700px;
+  right: 0;
+  width: 80%;
+  background: linear-gradient(225deg, rgba(226, 244, 56, 0.6) 0%, rgba(44, 214, 70, 0.6) 100%);
+  clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px);
 }
-.dropdown-content li a:hover { background: rgba(34,139,34,0.1); color: var(--green-bright); }
-.dropdown:hover .dropdown-content { display: block; }
+
+/* --- NAVIGATION TRANSFERENCE SYMETRIQUE --- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  height: 95px; padding: 0 2rem; 
+  background: rgba(255, 255, 255, 0.85); 
+  backdrop-filter: blur(15px);
+  border-bottom: 4px solid var(--dark-text);
+}
+
+.nav-container {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; max-width: 1200px; height: 100%; position: relative;
+}
+
+.nav-logo {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%); 
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: inherit; z-index: 1002;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.nav-logo img { 
+  height: 85px; 
+  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); 
+}
+.nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
+
+.nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
+.nav-group.left { justify-content: flex-end; }  
+.nav-group.right { justify-content: flex-start; } 
+
+.nav-group a, .dropdown-trigger { 
+  color: var(--dark-text); text-decoration: none; 
+  font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
+  text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
+  cursor: pointer;
+}
+.nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
 
 /* BURGER MOBILE */
-.burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1100; }
-.burger div { width: 28px; height: 2px; background: var(--green-bright); transition: 0.4s; }
-
-/* --- HEADER --- */
-.page-header {
-  padding: 150px 20px 40px;
-  text-align: center;
+.menu-toggle {
+  display: none; flex-direction: column; justify-content: space-between;
+  width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
 }
-h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter-spacing: 2px; margin-bottom: 10px; }
+.menu-toggle span { width: 100%; height: 3px; background-color: var(--dark-text); transition: all 0.3s ease; }
+
+/* DROPDOWN (PC) */
+.dropdown { position: relative; }
+.dropdown-content {
+  display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  background: var(--white); min-width: 180px;
+  border: 3px solid var(--dark-text);
+  padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--dark-text);
+}
+.dropdown-content li a { 
+  padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
+  font-style: normal; display: block; text-transform: none; text-align: center; color: var(--dark-text);
+}
+.dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-purple); }
+.dropdown:hover .dropdown-content { display: block; }
+
+/* --- CONTENU --- */
+.content-wrapper { max-width: 900px; margin: 180px auto 100px; padding: 0 20px; position: relative; z-index: 2; }
+
+.label-container { text-align: center; }
+.section-label { 
+  color: var(--dark-text); 
+  background: var(--white);
+  border: 2px solid var(--dark-text);
+  box-shadow: 3px 3px 0px var(--dark-text);
+  text-transform: uppercase; 
+  font-family: var(--font-display); font-style: italic; font-size: 1.2rem; 
+  letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem;
+  transform: rotate(-1deg);
+}
+
+h1 { 
+  font-family: var(--font-display); 
+  font-size: clamp(2.8rem, 7.5vw, 4.8rem); 
+  text-align: center; margin-bottom: 3rem; line-height: 1; font-style: italic; letter-spacing: -1px;
+  color: var(--dark-text);
+  text-shadow: 
+    4px 4px 0px var(--white), 
+    8px 8px 0px var(--dark-text);
+}
+
+/* Surlignage (Style étiquette maillot) */
+.highlight { 
+  background: var(--jersey-purple);
+  color: var(--white);
+  padding: 0.1rem 0.5rem;
+  font-weight: 700;
+  display: inline-block;
+  transform: skewX(-10deg);
+}
 
 /* --- ENCADRÉ ENTRAÎNEMENTS --- */
-.training-banner {
-  max-width: 900px;
-  margin: 0 auto 50px;
-  padding: 0 20px;
-}
 .training-card {
-  background: rgba(34,139,34,0.1);
-  border: 1px solid rgba(61,220,61,0.35);
-  border-left: 4px solid var(--green-bright);
-  border-radius: 8px;
-  padding: 20px 28px;
+  background: var(--white);
+  border: 3px solid var(--dark-text);
+  border-left: 10px solid var(--jersey-green);
+  padding: 1.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 16px;
+  box-shadow: 8px 8px 0px var(--dark-text);
+  margin-bottom: 4rem;
 }
 .training-card-left { display: flex; align-items: center; gap: 16px; }
-.training-icon { font-size: 2rem; }
-.training-title { font-family: var(--font-display); font-size: 1.5rem; color: var(--green-bright); letter-spacing: 1px; line-height: 1; margin-bottom: 4px; }
-.training-subtitle { font-size: 0.85rem; color: var(--muted); }
+.training-icon { font-size: 2.2rem; }
+.training-title { font-family: var(--font-display); font-size: 1.8rem; font-style: italic; color: var(--dark-text); letter-spacing: 0.5px; }
+.training-subtitle { font-size: 1rem; color: var(--dark-text); font-weight: 500; }
 .training-badge {
-  background: var(--green-bright);
-  color: var(--dark);
+  background: var(--jersey-yellow);
+  color: var(--dark-text);
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-style: italic;
+  font-size: 1.2rem;
   letter-spacing: 1px;
-  padding: 8px 20px;
-  border-radius: 4px;
+  padding: 6px 16px;
+  border: 2px solid var(--dark-text);
+  box-shadow: 4px 4px 0px var(--dark-text);
   white-space: nowrap;
 }
 
-/* --- MATCH CARD --- */
-.planning-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 20px 100px;
-}
+/* --- MATCH CARD POP ART --- */
 .match-card {
-  background: rgba(18, 26, 14, 0.8);
-  border: 1px solid var(--green-mid);
-  border-radius: 12px;
-  padding: 40px;
+  background: var(--white);
+  border: 3px solid var(--dark-text); 
+  padding: 3.5rem 2rem 2.5rem;
   text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  box-shadow: 12px 12px 0px var(--dark-text);
   position: relative;
-  overflow: hidden;
-  margin-bottom: 50px;
+  margin-bottom: 4rem;
+  clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
 }
+
 .match-card::before {
   content: "MATCH À L'EXTÉRIEUR";
   position: absolute;
   top: 15px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(-1deg);
   background: var(--gold);
-  color: var(--dark);
-  padding: 2px 15px;
+  color: var(--dark-text);
+  padding: 3px 20px;
+  border: 2px solid var(--dark-text);
   font-family: var(--font-display);
-  font-size: 0.9rem;
-  border-radius: 20px;
+  font-style: italic;
+  font-size: 1.1rem;
+  box-shadow: 3px 3px 0px var(--dark-text);
+  z-index: 3;
 }
-.match-vs { display: flex; align-items: center; justify-content: space-around; margin: 40px 0; }
-.team { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-.team-name { font-family: var(--font-display); font-size: 2.2rem; line-height: 1; }
-.team-logo { width: 120px; height: 120px; object-fit: contain; }
+
+.match-vs { display: flex; align-items: center; justify-content: space-around; margin: 2rem 0; }
+.team { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.team-name { font-family: var(--font-display); font-size: 2.8rem; font-style: italic; line-height: 1; text-transform: uppercase; }
+.team-logo { width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1)); }
 
 .vs-circle {
-  width: 50px; height: 50px;
-  background: var(--white);
-  color: var(--dark);
+  width: 55px; height: 55px;
+  background: var(--jersey-purple);
+  color: var(--white);
   display: flex; align-items: center; justify-content: center;
+  border: 3px solid var(--dark-text);
+  box-shadow: 4px 4px 0px var(--dark-text);
   border-radius: 50%;
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-style: italic;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
-.match-details { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; color: var(--muted); }
-.match-info-item { display: inline-block; margin: 5px 15px; font-size: 1rem; }
-.match-info-item strong { color: var(--white); }
+.match-details { border-top: 3px dashed rgba(11,19,10,0.15); padding-top: 20px; color: var(--dark-text); }
+.match-info-item { display: inline-block; margin: 5px 15px; font-size: 1.05rem; font-weight: 500; }
+.match-info-item strong { font-weight: 700; color: var(--dark-text); }
 
-/* --- SCHEDULE LIST --- */
-.schedule-list { background: rgba(255,255,255,0.03); border-radius: 8px; overflow: hidden; }
+/* --- AUTRES ÉVÉNEMENTS --- */
+h2.section-title {
+  font-family: var(--font-display); font-size: 2.4rem; 
+  color: var(--dark-text); 
+  margin: 1rem 0 1.5rem; font-style: italic; letter-spacing: -0.5px; text-transform: uppercase;
+  border-bottom: 3px solid var(--jersey-green);
+  display: inline-block; padding-bottom: 2px;
+}
+
+.schedule-list { 
+  background: var(--white); 
+  border: 3px solid var(--dark-text); 
+  box-shadow: 10px 10px 0px var(--dark-text);
+}
 .schedule-item {
   display: grid;
-  grid-template-columns: 120px 1fr 150px;
-  padding: 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  grid-template-columns: 140px 1fr 120px;
+  padding: 1.2rem 2rem;
+  border-bottom: 2px dashed rgba(11,19,10,0.15);
   align-items: center;
 }
-.date-box { font-family: var(--font-display); color: var(--green-bright); font-size: 1.2rem; }
+.schedule-item:last-child { border-bottom: none; }
+.date-box { font-family: var(--font-display); font-style: italic; color: var(--jersey-purple); font-size: 1.4rem; }
+.event-name { font-weight: 600; color: var(--dark-text); font-size: 1.05rem; }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 950px) {
-  nav { padding: 1rem 1.5rem; }
-  .burger { display: flex; }
-  .nav-links {
-    position: fixed;
-    right: -100%; top: 0; height: 100vh; width: 100%;
-    background: var(--dark);
-    flex-direction: column;
-    align-items: center; justify-content: center;
-    transition: 0.5s; z-index: 1000;
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 992px) {
+  nav { height: 75px; }
+  .nav-container { justify-content: space-between; }
+  .nav-logo { position: static; transform: none; }
+  .nav-logo img { height: 60px; }
+  .nav-logo:hover { transform: none; }
+  .menu-toggle { display: flex; }
+  
+  .nav-group {
+    position: fixed; top: 0; width: 280px; height: 100vh;
+    background: var(--white); flex-direction: column; align-items: flex-start;
+    padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000;
   }
-  .nav-links.active { right: 0; }
-  .dropdown-content { position: static; display: block; background: transparent; border: none; box-shadow: none; text-align: center; }
-  .match-vs { flex-direction: column; gap: 30px; }
-  .schedule-item { grid-template-columns: 1fr; text-align: center; }
-  .training-card { flex-direction: column; text-align: center; }
+  .nav-group.left { right: -100%; border-left: 4px solid var(--dark-text); transition: right 0.4s ease; }
+  .nav-group.right { display: none; } 
+  .nav-group.left.active { right: 0; }
+
+  .content-wrapper { margin-top: 140px; }
+  body::before { clip-path: polygon(0 0, 100% 0, 100% 200px, 0 120px); }
+  
+  .training-card { flex-direction: column; text-align: center; padding: 1.5rem; }
   .training-card-left { flex-direction: column; }
+  .match-vs { flex-direction: column; gap: 20px; }
+  .schedule-item { grid-template-columns: 1fr; text-align: center; gap: 10px; padding: 1.5rem; }
+  .schedule-item div { text-align: center !important; }
+  .match-card { padding: 4rem 1.5rem 2rem; clip-path: none; box-shadow: 8px 8px 0px var(--dark-text); }
+}
+
+footer { 
+  text-align: center; padding: 60px; color: var(--dark-text); font-weight: 700;
+  border-top: 3px dashed var(--dark-text); 
+  background: var(--white);
+  position: relative; z-index: 2;
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">
-    <img src="images/logo.png" alt="HBM">
-    <span class="nav-logo-text">HBM</span>
-  </a>
+  <div class="nav-container">
+    <ul class="nav-group left">
+      <li><a href="./">Accueil</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li class="dropdown">
+        <a class="dropdown-trigger" style="color: var(--jersey-purple);">Saison ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="planning.html">Planning</a></li>
+          <li><a href="effectifs.html">Effectifs</a></li>
+          <li><a href="prepa-physique.html">Prépa Physique</a></li>
+          <li><a href="jeu.html">Le Jeu 🎮</a></li>
+        </ul>
+      </li>
+    </ul>
 
-  <div class="burger" id="burger">
-    <div class="line1"></div>
-    <div class="line2"></div>
-    <div class="line3"></div>
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="HBM">
+    </a>
+
+    <button class="menu-toggle" aria-label="Ouvrir le menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-group right">
+      <li class="dropdown">
+        <a class="dropdown-trigger">Le Club ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="qui.html">Qui sommes-nous ?</a></li>
+          <li><a href="organigramme.html">Le Bureau</a></li>
+          <li><a href="docs.html">Documents utiles</a></li>
+        </ul>
+      </li>
+      <li><a href="inscriptions.html">Inscriptions</a></li>
+      <li><a href="partenaires.html">Partenaires</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
   </div>
-
-  <ul class="nav-links" id="nav-links">
-    <li><a href="./">Accueil</a></li>
-    <li><a href="actualites.html">Actualités</a></li>
-    
-    <li class="dropdown">
-      <a href="#" style="color: var(--green-bright);">Saison ▾</a>
-      <ul class="dropdown-content">
-        <li><a href="planning.html">Planning</a></li>
-        <li><a href="effectifs.html">Effectifs</a></li>
-        <li><a href="prepa-physique.html">Prépa Physique</a></li>
-        <li><a href="jeu.html">Le Jeu 🎮</a></li>
-      </ul>
-    </li>
-
-    <li class="dropdown">
-      <a href="#">Le Club ▾</a>
-      <ul class="dropdown-content">
-        <li><a href="qui.html">Qui sommes-nous ?</a></li>
-        <li><a href="organigramme.html">Le Bureau</a></li>
-        <li><a href="docs.html">Documents utiles</a></li>
-      </ul>
-    </li>
-
-    <li><a href="inscriptions.html">Inscriptions</a></li>
-    <li><a href="partenaires.html">Partenaires</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-  </ul>
 </nav>
 
-<header class="page-header">
-  <h1>CALENDRIER</h1>
-  <p style="color: var(--muted);">Planning du HBM</p>
-</header>
-
-<div class="training-banner">
-  <div class="training-card">
-    <div class="training-card-left">
-      <div class="training-icon">🏐</div>
-      <div>
-        <div class="training-title">ENTRAÎNEMENTS</div>
-        <div class="training-subtitle">📍 Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</div>
-      </div>
-    </div>
-    <div class="training-badge">TOUS LES JEUDIS — 20H À 22H</div>
+<main class="content-wrapper">
+  <div class="label-container">
+    <span class="section-label">Planning du HBM</span>
   </div>
-</div>
+  <h1>CALENDRIER</h1>
 
-<main class="planning-container">
+  <div class="training-banner">
+    <div class="training-card">
+      <div class="training-card-left">
+        <div class="training-icon">🏐</div>
+        <div>
+          <div class="training-title">ENTRAÎNEMENTS</div>
+          <div class="training-subtitle">📍 Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</div>
+        </div>
+      </div>
+      <div class="training-badge">TOUS LES JEUDIS — 20H À 22H</div>
+    </div>
+  </div>
 
   <div class="match-card">
     <div class="match-vs">
@@ -290,41 +382,57 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter
     </div>
   </div>
 
-  <h2 style="font-family: var(--font-display); margin-bottom: 20px; letter-spacing: 1px;">AUTRES ÉVÉNEMENTS</h2>
+  <h2 class="section-title">AUTRES ÉVÉNEMENTS</h2>
   
   <div class="schedule-list">
     <div class="schedule-item">
       <div class="date-box">20 MAI 2026</div>
       <div class="event-name">Match de prépa : AAE Méru Loisir (28) vs HB Mouy (19)</div>
-      <div style="text-align: right; color: var(--muted);">Match amical</div>
+      <div style="text-align: right; font-weight: 700; color: var(--jersey-purple); text-transform: uppercase; font-family: var(--font-display); font-size: 1.1rem; font-style: italic;">Match amical</div>
     </div>
     <div class="schedule-item">
       <div class="date-box">25 AVRIL</div>
       <div class="event-name">Réunion de structuration du bureau</div>
-      <div style="text-align: right; color: var(--muted);">Interne</div>
+      <div style="text-align: right; font-weight: 700; color: var(--jersey-purple); text-transform: uppercase; font-family: var(--font-display); font-size: 1.1rem; font-style: italic;">Interne</div>
     </div>
     <div class="schedule-item">
       <div class="date-box">JUIN 2026</div>
       <div class="event-name">Ouverture des inscriptions saison 26/27</div>
-      <div style="text-align: right; color: var(--muted);">Club</div>
+      <div style="text-align: right; font-weight: 700; color: var(--jersey-purple); text-transform: uppercase; font-family: var(--font-display); font-size: 1.1rem; font-style: italic;">Club</div>
     </div>
   </div>
-
 </main>
 
-<footer style="text-align: center; padding: 60px; color: var(--muted); font-size: 0.8rem;">
-  &copy; 2026 HBM — Handball Club Mouy
+<footer>
+  © 2026 HBM — Handball Club Mouy
 </footer>
 
 <script>
-  const burger = document.getElementById('burger');
-  const navLinks = document.getElementById('nav-links');
+const menuToggle = document.querySelector('.menu-toggle');
+const navGroupLeft = document.querySelector('.nav-group.left');
+const navGroupRight = document.querySelector('.nav-group.right');
 
-  burger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    burger.classList.toggle('toggle');
+if (window.innerWidth <= 992) {
+  const rightLinks = navGroupRight.querySelectorAll('li');
+  rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
+}
+
+const dropdowns = document.querySelectorAll('.dropdown');
+
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
+  navGroupLeft.classList.toggle('active');
+});
+
+dropdowns.forEach(dropdown => {
+  const trigger = dropdown.querySelector('.dropdown-trigger');
+  trigger.addEventListener('click', (e) => {
+    if (window.innerWidth <= 992) {
+      e.preventDefault();
+      dropdown.classList.toggle('active');
+    }
   });
+});
 </script>
-
 </body>
 </html>
