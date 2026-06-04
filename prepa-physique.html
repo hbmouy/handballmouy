@@ -1,248 +1,272 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Préparation Physique - HBM</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-/* --- STYLES COMMUNS --- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --dark: #0a0f08;
-  --dark2: #121a0e;
-  --green-mid: #228b22;
-  --green-light: #2db82d;
-  --green-bright: #3ddc3d;
-  --white: #f0f5f0;
-  --muted: #7a9a7a;
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-}
-body {
-  background: var(--dark);
-  color: var(--white);
-  font-family: var(--font-body);
-  line-height: 1.6;
-}
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En construction - HBM</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- BASE LUMINEUSE & STYLE MAILLOT POP-ART --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg-light: #f5f8f5; 
+            --jersey-yellow: #e2f438;  
+            --jersey-green: #2cd646;   
+            --jersey-purple: #9d4edd;  
+            --dark-text: #0b130a;      
+            --white: #ffffff; 
+            --font-display: 'Anton', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+        
+        body { 
+            background: var(--bg-light); 
+            color: var(--dark-text); 
+            font-family: var(--font-body); 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            text-align: center; 
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-/* --- NAVIGATION --- */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 3rem;
-  background: rgba(10,15,8,0.85);
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(34,139,34,0.25);
-}
-.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; }
-.nav-logo img { height: 45px; }
-.nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-bright); letter-spacing: 1px; }
+        /* --- DESIGN GÉOMÉTRIQUE ASYMÉTRIQUE D'ARRIÈRE-PLAN --- */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.85;
+            background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 40vh, 0 65vh);
+        }
 
-.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
-.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; position: relative; }
-.nav-links a:hover { color: var(--green-bright); }
+        /* --- NAVIGATION SYMÉTRIQUE --- */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+            height: 95px; padding: 0 2rem; 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(15px);
+            border-bottom: 4px solid var(--dark-text);
+        }
+        .nav-container {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; max-width: 1200px; height: 100%; position: relative;
+        }
+        .nav-logo {
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%); 
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: inherit; z-index: 1002;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .nav-logo img { height: 85px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); }
+        .nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 
-/* DROPDOWN LOGIC */
-.dropdown { position: relative; }
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: var(--dark2);
-  min-width: 200px;
-  border: 1px solid rgba(34,139,34,0.3);
-  border-top: 2px solid var(--green-bright);
-  padding: 0.5rem 0;
-  list-style: none;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-.dropdown-content li a {
-  padding: 0.7rem 1.2rem;
-  font-size: 0.75rem;
-  display: block;
-  text-transform: none;
-  letter-spacing: 0.05em;
-}
-.dropdown-content li a:hover { background: rgba(34,139,34,0.1); }
-.dropdown:hover .dropdown-content { display: block; }
+        .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
+        .nav-group.left { justify-content: flex-end; }  
+        .nav-group.right { justify-content: flex-start; } 
 
-/* BURGER MENU */
-.burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1100; }
-.burger div { width: 28px; height: 2px; background: var(--green-bright); transition: 0.4s; }
+        .nav-group a, .dropdown-trigger { 
+            color: var(--dark-text); text-decoration: none; 
+            font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
+            text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
+            cursor: pointer;
+        }
+        .nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
 
-/* --- HEADER PAGE --- */
-.page-header {
-  padding: 150px 20px 60px;
-  text-align: center;
-  background: linear-gradient(to bottom, rgba(34,139,34,0.1), transparent);
-}
-h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); letter-spacing: 2px; line-height: 1; margin-bottom: 1rem; }
+        /* BURGER */
+        .menu-toggle {
+            display: none; flex-direction: column; justify-content: space-between;
+            width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
+        }
+        .menu-toggle span { width: 100%; height: 3px; background-color: var(--dark-text); transition: all 0.3s ease; }
 
-/* --- SECTION PROGRAMME --- */
-.program-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 20px 100px;
-}
-.intro-box {
-  background: var(--dark2);
-  border-left: 4px solid var(--green-bright);
-  padding: 2rem;
-  margin-bottom: 3rem;
-}
-h2 { font-family: var(--font-display); font-size: 2.2rem; color: var(--green-bright); margin: 2.5rem 0 1.5rem; border-bottom: 1px solid rgba(34,139,34,0.2); padding-bottom: 0.5rem; }
+        /* DROPDOWNS */
+        .dropdown { position: relative; }
+        .dropdown-content {
+            display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            background: var(--white); min-width: 180px; border: 3px solid var(--dark-text);
+            padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--dark-text);
+        }
+        .dropdown-content li a { 
+            padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
+            font-style: normal; display: block; text-transform: none; text-align: center; color: var(--dark-text);
+        }
+        .dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-purple); }
+        .dropdown:hover .dropdown-content { display: block; }
 
-.table-wrapper { overflow-x: auto; margin-bottom: 2rem; }
-table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.02); }
-th, td { padding: 15px; text-align: left; border: 1px solid rgba(255,255,255,0.05); }
-th { background: rgba(34,139,34,0.2); font-family: var(--font-display); letter-spacing: 1px; color: var(--green-light); }
+        /* --- BLOC CENTRAL DE CONSTRUCTION --- */
+        .container { 
+            padding: 50px 40px; 
+            background: var(--white);
+            border: 4px solid var(--dark-text);
+            box-shadow: 12px 12px 0px var(--dark-text);
+            max-width: 600px;
+            width: 90%;
+            margin-top: 130px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+            clip-path: polygon(0% 0%, 95% 0%, 100% 5%, 100% 100%, 5% 100%, 0% 95%);
+        }
+        
+        h1 { 
+            font-family: var(--font-display); 
+            font-size: clamp(2.5rem, 6vw, 4.5rem); 
+            font-style: italic;
+            color: var(--dark-text); 
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 0px var(--jersey-yellow);
+        }
+        
+        p { 
+            font-size: 1.2rem; 
+            color: var(--dark-text); 
+            font-weight: 500;
+            margin-bottom: 2.5rem; 
+        }
+        
+        /* BOUTON RETOUR POP-ART */
+        .btn-back { 
+            display: inline-block;
+            background: var(--white);
+            border: 3px solid var(--dark-text); 
+            color: var(--dark-text); 
+            padding: 12px 30px; 
+            text-decoration: none; 
+            text-transform: uppercase; 
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.1rem; 
+            letter-spacing: 1px;
+            box-shadow: 5px 5px 0px var(--dark-text);
+            transition: 0.2s; 
+        }
+        .btn-back:hover { 
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px var(--jersey-purple);
+            color: var(--jersey-purple);
+        }
 
-.grid-tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-.tip-card { background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 4px; border: 1px solid rgba(34,139,34,0.1); }
-.tip-card strong { color: var(--green-bright); display: block; margin-bottom: 0.5rem; }
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 992px) {
+            nav { height: 75px; }
+            .nav-container { justify-content: space-between; }
+            .nav-logo { position: static; transform: none; }
+            .nav-logo img { height: 60px; }
+            .nav-logo:hover { transform: none; }
+            .menu-toggle { display: flex; }
+            
+            .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); }
+            .nav-group {
+                position: fixed; top: 0; width: 280px; height: 100vh;
+                background: var(--white); flex-direction: column; align-items: flex-start;
+                padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000;
+                text-align: left;
+            }
+            .nav-group.left { right: -100%; border-left: 4px solid var(--dark-text); transition: right 0.4s ease; }
+            .nav-group.right { display: none; } 
+            .nav-group.left.active { right: 0; }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 950px) {
-  nav { padding: 1rem 1.5rem; }
-  .burger { display: flex; }
-  .nav-links {
-    position: fixed;
-    right: -100%; top: 0; height: 100vh; width: 100%;
-    background: var(--dark);
-    flex-direction: column;
-    align-items: center; justify-content: center;
-    transition: 0.5s; z-index: 1000;
-  }
-  .nav-links.active { right: 0; }
-  .nav-links a { font-size: 1.8rem; font-family: var(--font-display); }
-  
-  .dropdown-content { 
-    position: static; display: block; background: transparent; border: none; box-shadow: none; text-align: center; padding: 0;
-  }
-  .dropdown-content li a { font-size: 1.2rem !important; color: var(--muted); }
-  
-  .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
-  .burger.toggle .line2 { opacity: 0; }
-  .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
-}
-</style>
+            .container { margin-top: 110px; padding: 30px 20px; clip-path: none; }
+            body::before { clip-path: polygon(0 0, 100% 0, 100% 35vh, 0 50vh); }
+        }
+    </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">
-    <img src="images/logo.png" alt="HBM">
-    <span class="nav-logo-text">HBM</span>
-  </a>
+    <div class="nav-container">
+        <ul class="nav-group left">
+            <li><a href="./">Accueil</a></li>
+            <li><a href="actualites.html">Actualités</a></li>
+            <li class="dropdown">
+                <a class="dropdown-trigger" style="color: var(--jersey-purple);">Saison ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="planning.html">Planning</a></li>
+                    <li><a href="effectifs.html">Effectifs</a></li>
+                    <li><a href="prepa-physique.html">Prépa Physique</a></li>
+                </ul>
+            </li>
+        </ul>
 
-  <div class="burger" id="burger">
-    <div class="line1"></div>
-    <div class="line2"></div>
-    <div class="line3"></div>
-  </div>
+        <a href="index.html" class="nav-logo">
+            <img src="images/logo.png" alt="HBM Logo">
+        </a>
 
-  <ul class="nav-links" id="nav-links">
-    <li><a href="./">Accueil</a></li>
-    <li><a href="actualites.html">Actualités</a></li>
+        <button class="menu-toggle" aria-label="Ouvrir le menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-    <li class="dropdown">
-      <a href="#">Saison ▾</a>
-      <ul class="dropdown-content">
-        <li><a href="planning.html">Planning</a></li>
-        <li><a href="effectifs.html">Effectifs</a></li>
-        <li><a href="prepa-physique.html">Prépa Physique</a></li>
-      </ul>
-    </li>
-
-    <li class="dropdown">
-      <a href="#">Le Club ▾</a>
-      <ul class="dropdown-content">
-        <li><a href="qui.html">Qui sommes-nous ?</a></li>
-        <li><a href="organigramme.html">Le Bureau</a></li>
-        <li><a href="docs.html">Documents utiles</a></li>
-      </ul>
-    </li>
-
-    <li><a href="inscriptions.html">Inscriptions</a></li>
-    <li><a href="partenaires.html">Partenaires</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-  </ul>
+        <ul class="nav-group right">
+            <li class="dropdown">
+                <a class="dropdown-trigger">Le Club ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="qui.html">Qui sommes-nous ?</a></li>
+                    <li><a href="organigramme.html">Le Bureau</a></li>
+                    <li><a href="docs.html">Documents utiles</a></li>
+                </ul>
+            </li>
+            <li><a href="inscriptions.html">Inscriptions</a></li>
+            <li><a href="partenaires.html">Partenaires</a></li>
+        </ul>
+    </div>
 </nav>
 
-<header class="page-header">
-  <h1>PRÉPARATION PHYSIQUE</h1>
-  <p style="color: var(--muted);">Arrivez en forme pour la reprise de septembre.</p>
-</header>
-
-<main class="program-container">
-  <div class="intro-box">
-    <p>Ce programme est conçu pour les futurs licenciés du <strong>HBM</strong> souhaitant reprendre une activité physique progressive, travailler le cardio et tonifier la sangle abdominale.</p>
-    <ul style="margin-top: 1rem; list-style: inside;">
-      <li><strong>Objectif :</strong> Cardio, renforcement spécifique Handball.</li>
-      <li><strong>Durée :</strong> 4 semaines (3 séances / semaine).</li>
-      <li><strong>Matériel :</strong> Corde à sauter (optionnelle).</li>
-    </ul>
-  </div>
-
-  <h2>1. L'ÉCHAUFFEMENT (5-7 MIN)</h2>
-  <p><em>Ne négligez jamais cette étape pour protéger vos articulations.</em></p>
-  <ul>
-    <li><strong>Rotations articulaires :</strong> Chevilles, genoux, hanches, épaules (30s par zone).</li>
-    <li><strong>Cardio léger :</strong> 2-3 min de marche rapide ou sauts légers.</li>
-  </ul>
-
-  <h2>2. CIRCUIT TRAINING (3 À 5 TOURS)</h2>
-  <p>Repos : 45s entre les exercices | 2 min entre les tours.</p>
-  
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>Exercice</th>
-          <th>Durée / Rép</th>
-          <th>Objectif</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Corde à sauter</strong></td><td>45 sec</td><td>Cardio + Explosivité</td></tr>
-        <tr><td><strong>Squats</strong></td><td>15 répétitions</td><td>Jambes + Fessiers</td></tr>
-        <tr><td><strong>Gainage Planche</strong></td><td>30 à 45 sec</td><td>Abdominaux</td></tr>
-        <tr><td><strong>Fentes alternées</strong></td><td>10 / jambe</td><td>Appuis</td></tr>
-        <tr><td><strong>Pompes</strong></td><td>8 à 12 rép.</td><td>Haut du corps</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="grid-tips">
-    <div class="tip-card"><strong>Qualité > Quantité</strong>Privilégiez toujours le bon mouvement.</div>
-    <div class="tip-card"><strong>Hydratation</strong>Buvez de l'eau par petites gorgées.</div>
-  </div>
-
-  <p style="text-align: center; margin-top: 5rem; font-weight: bold; color: var(--green-bright);">
-    🤾‍♂️ BONNE PRÉPARATION À TOUS LES JOUEURS DE MOUY !
-  </p>
-</main>
-
-<footer>
-  &copy; 2026 HBM — Handball Club Mouy — L'aventure ne fait que commencer.
-</footer>
+<div class="container">
+    <h1>PAGE EN CONSTRUCTION</h1>
+    <p>Le club HBM se prépare. Cette page sera bientôt disponible !</p>
+    <a href="index.html" class="btn-back">Retour à l'accueil</a>
+</div>
 
 <script>
-  const burger = document.getElementById('burger');
-  const navLinks = document.getElementById('nav-links');
-  burger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    burger.classList.toggle('toggle');
-  });
+    // --- SCRIPT NAVIGATION (DUAL GROUP + MOBILE FUSION) ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navGroupLeft = document.querySelector('.nav-group.left');
+    const navGroupRight = document.querySelector('.nav-group.right');
+
+    if (window.innerWidth <= 992) {
+        const rightLinks = navGroupRight.querySelectorAll('li');
+        rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
+    }
+
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navGroupLeft.classList.toggle('active');
+    });
+
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        trigger.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            }
+        });
+    });
+
+    document.querySelectorAll('.nav-group a:not(.dropdown-trigger)').forEach(link => {
+        link.addEventListener('click', () => {
+            navGroupLeft.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    });
 </script>
 
 </body>
