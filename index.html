@@ -36,7 +36,7 @@
 <style>
 /* --- BASE LUMINEUSE & CHARTE MAILLOT HBM --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
+:root {
     /* Couleurs communes */
     --jersey-yellow: #e2f438;  
     --jersey-green: #2cd646;   
@@ -65,12 +65,13 @@
 
 html { scroll-behavior: smooth; }
 body { 
-  background: var(--bg-light); 
-  color: var(--dark-text); 
+  background: var(--bg-body); 
+  color: var(--text-main); 
   font-family: var(--font-body); 
   line-height: 1.8;
   overflow-x: hidden;
   position: relative;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* --- FORMES GÉOMÉTRIQUES ASSYMÉTRIQUES --- */
@@ -103,7 +104,7 @@ body::after {
 /* --- BANDEAU DÉFILANT MATCH TICKER --- */
 .match-ticker {
   width: 100%;
-  background: var(--dark-text);
+  background: #0b130a;
   color: var(--jersey-yellow);
   font-family: var(--font-display);
   font-size: 1.2rem;
@@ -142,11 +143,12 @@ body::after {
 nav {
   position: fixed; 
   top: 39px; left: 0; right: 0; z-index: 1000;
-  display: flex; align-items: center; justify-content: center; /* Centre le contenu global */
+  display: flex; align-items: center; justify-content: center; 
   height: 95px; padding: 0 2rem; 
-  background: rgba(255, 255, 255, 0.85); 
+  background: var(--nav-bg); 
   backdrop-filter: blur(15px);
-  border-bottom: 4px solid var(--dark-text);
+  border-bottom: 4px solid var(--border-color);
+  transition: background 0.3s, border-color 0.3s;
 }
 .nav-container {
   width: 100%;
@@ -168,45 +170,74 @@ nav {
 }
 .nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 .nav-logo img { height: 75px; width: auto; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.15)); }
-.nav-logo-text { font-family: var(--font-display); font-size: 1.8rem; font-style: italic; color: var(--dark-text); letter-spacing: 0.05em; }
 
 /* BOUTON BURGER */
 .burger {
   display: none; flex-direction: column; justify-content: space-between;
   width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1100;
 }
-.burger span { width: 100%; height: 3px; background-color: var(--dark-text); transition: all 0.3s ease; }
+.burger span { width: 100%; height: 3px; background-color: var(--border-color); transition: all 0.3s ease; }
 
 /* Répartition des liens à gauche et à droite du logo central */
 .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; width: 100%; }
-.nav-links li:nth-child(4) { margin-left: auto; } /* Pousse la seconde moitié des liens à droite */
+.nav-links li:nth-child(4) { margin-left: auto; } /* Pushes second half to the right */
 
 .nav-links a { 
-  color: var(--dark-text); text-decoration: none; 
+  color: var(--text-main); text-decoration: none; 
   font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
   text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; position: relative;
 }
 .nav-links a:hover { color: var(--jersey-purple); }
 
+/* BOUTON SWITCH THEME (PC) */
+.theme-toggle-btn {
+  background: transparent;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  box-shadow: 3px 3px 0px var(--border-color);
+  transition: 0.2s;
+}
+.theme-toggle-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px var(--jersey-purple);
+}
+.theme-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text-main);
+  transition: fill 0.3s;
+}
+/* Gestion affichage icone soleil / lune */
+[data-theme="dark"] .sun-icon { display: block; }
+[data-theme="dark"] .moon-icon { display: none; }
+.sun-icon { display: none; }
+.moon-icon { display: block; }
+
 /* DROPDOWN LOGIC (PC) */
 .dropdown { position: relative; }
 .dropdown-content {
   display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  background: var(--white); min-width: 180px;
-  border: 3px solid var(--dark-text);
-  padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--dark-text);
+  background: var(--bg-card); min-width: 180px;
+  border: 3px solid var(--border-color);
+  padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--border-color);
 }
 .dropdown-content li a {
   padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; font-style: normal;
-  display: block; text-transform: none; text-align: center; color: var(--dark-text);
+  display: block; text-transform: none; text-align: center; color: var(--text-main);
 }
-.dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-purple); }
+.dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
 .dropdown:hover .dropdown-content { display: block; }
 
 /* --- RESPONSIVE NAVIGATION MOBILE --- */
 @media (max-width: 950px) {
   nav { height: 75px; padding: 0 1.5rem; justify-content: space-between; }
-  .nav-container { justify-content: space-between; position: static; }
+  .nav-container { justify-content: space-between; position: static; display: flex; }
   
   .nav-logo { 
     position: static; 
@@ -215,25 +246,29 @@ nav {
   .nav-logo:hover { transform: scale(1.08); }
   .nav-logo img { height: 55px; }
 
-  .burger { display: flex; }
+  .burger { display: flex; order: 3; }
   .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
   .burger.toggle span:nth-child(2) { opacity: 0; }
   .burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
+  /* Placement du bouton thème sur mobile à côté du burger */
+  .theme-toggle-btn { order: 2; margin-left: auto; margin-right: 1.5rem; }
+
   .nav-links {
     position: fixed; right: -100%; top: 39px; height: 100vh; width: 280px;
-    background: var(--white); border-left: 4px solid var(--dark-text);
+    background: var(--bg-card); border-left: 4px solid var(--border-color);
     flex-direction: column; align-items: flex-start; justify-content: flex-start;
     padding: 100px 2rem 2rem 2rem; gap: 1.5rem; transition: right 0.4s ease;
     overflow-y: auto; z-index: 1000;
   }
   .nav-links li:nth-child(4) { margin-left: 0; }
+  .nav-links .theme-li { display: none; } /* On cache le bouton de la liste sur mobile car il est déjà dans la barre */
   .nav-links.active { right: 0; }
   .nav-links a { font-size: 1.5rem; width: 100%; display: block; }
 
   .dropdown { width: 100%; }
   .dropdown-content { 
-    display: none; position: static; transform: none; background: var(--bg-light); 
+    display: none; position: static; transform: none; background: var(--bg-body); 
     border: none; border-left: 3px solid var(--jersey-purple); box-shadow: none; padding: 0 0 0 1rem; margin-top: 0.5rem;
   }
   .dropdown-content li a { text-align: left; font-size: 1rem !important; }
@@ -254,21 +289,21 @@ nav {
 }
 .hero-saison { 
   font-family: var(--font-display); font-size: 1.8rem; font-style: italic;
-  color: var(--dark-text); background: var(--white); border: 2px solid var(--dark-text);
-  box-shadow: 4px 4px 0px var(--dark-text);
+  color: #0b130a; background: #ffffff; border: 2px solid #0b130a;
+  box-shadow: 4px 4px 0px #0b130a;
   padding: 0.3rem 1.5rem; letter-spacing: 0.2em; margin-bottom: 2rem; 
   animation: slideIn 1s ease-out; transform: rotate(-1deg);
 }
 .hero-sub { 
-  max-width: 700px; font-size: 1.3rem; font-weight: 500; color: var(--dark-text); 
+  max-width: 700px; font-size: 1.3rem; font-weight: 500; color: #0b130a; 
   margin-bottom: 3rem; background: rgba(255,255,255,0.75); padding: 1.5rem;
   border-radius: 8px; backdrop-filter: blur(5px);
 }
 
 /* --- SECTION LABELS --- */
 .section-label { 
-  color: var(--dark-text); background: var(--white); border: 2px solid var(--dark-text);
-  box-shadow: 3px 3px 0px var(--dark-text); text-transform: uppercase; 
+  color: #0b130a; background: #ffffff; border: 2px solid #0b130a;
+  box-shadow: 3px 3px 0px #0b130a; text-transform: uppercase; 
   font-family: var(--font-display); font-style: italic; font-size: 1.2rem; 
   letter-spacing: 2px; display: inline-block; margin-bottom: 1rem; padding: 0.2rem 1rem;
   transform: rotate(-1deg);
@@ -277,8 +312,8 @@ nav {
 /* --- H2 IMPACT GRAPHIQUE --- */
 h2 { 
   font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem); 
-  line-height: 1; font-style: italic; margin-bottom: 2rem; color: var(--dark-text); 
-  text-shadow: 3px 3px 0px var(--white), 6px 6px 0px var(--dark-text);
+  line-height: 1; font-style: italic; margin-bottom: 2rem; color: var(--text-main); 
+  text-shadow: 3px 3px 0px var(--bg-card), 6px 6px 0px var(--border-color);
 }
 
 /* --- ABOUT SECTION (GRILLE) --- */
@@ -296,8 +331,8 @@ h2 {
 
 /* BLOC TEXTE BLANC --- */
 .about-text-content {
-  background: var(--white); padding: 3.5rem 3rem; border: 3px solid var(--dark-text); 
-  position: relative; box-shadow: 12px 12px 0px var(--dark-text);
+  background: var(--bg-card); padding: 3.5rem 3rem; border: 3px solid var(--border-color); 
+  position: relative; box-shadow: 12px 12px 0px var(--border-color);
   clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
 }
 .about-text-content::before {
@@ -309,32 +344,32 @@ h2 {
 /* --- CARTES DE STATS --- */
 .stats-grid-centered { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; width: 100%; max-width: 440px; }
 .stat-card { 
-  border: 3px solid var(--dark-text); padding: 2rem 1rem; background: var(--white); 
+  border: 3px solid var(--border-color); padding: 2rem 1rem; background: var(--bg-card); 
   transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; position: relative;
-  box-shadow: 6px 6px 0px var(--dark-text);
+  box-shadow: 6px 6px 0px var(--border-color);
 }
-.stat-card:hover { transform: translateY(-8px) rotate(1deg); border-color: var(--jersey-purple); box-shadow: 10px 10px 0px var(--dark-text); }
-.stat-number { font-family: var(--font-display); font-size: 3.5rem; font-style: italic; color: var(--dark-text); line-height: 1; margin-bottom: 0.3rem; }
-.stat-label { font-size: 0.9rem; font-weight: 700; color: var(--dark-text); text-transform: uppercase; letter-spacing: 1px; }
+.stat-card:hover { transform: translateY(-8px) rotate(1deg); border-color: var(--jersey-purple); box-shadow: 10px 10px 0px var(--border-color); }
+.stat-number { font-family: var(--font-display); font-size: 3.5rem; font-style: italic; color: var(--text-main); line-height: 1; margin-bottom: 0.3rem; }
+.stat-label { font-size: 0.9rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; }
 
 /* --- FORM SECTION --- */
 .form-section { padding: 120px 20px; position: relative; z-index: 2; }
 .form-container { 
-  max-width: 750px; margin: 0 auto; background: var(--white);
-  padding: 4rem 3rem; border: 3px solid var(--dark-text);
-  box-shadow: 14px 14px 0px var(--dark-text);
+  max-width: 750px; margin: 0 auto; background: var(--bg-card);
+  padding: 4rem 3rem; border: 3px solid var(--border-color);
+  box-shadow: 14px 14px 0px var(--border-color);
 }
-label { display: block; margin-bottom: 7px; font-size: 0.95rem; font-weight: 700; color: var(--dark-text); text-transform: uppercase; }
+label { display: block; margin-bottom: 7px; font-size: 0.95rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; }
 input, select, textarea { 
-  width: 100%; padding: 14px; background: var(--bg-light); 
-  border: 2px solid var(--dark-text); color: var(--dark-text); font-weight: 500; border-radius: 0px; font-family: var(--font-body); margin-bottom: 1.2rem;
+  width: 100%; padding: 14px; background: var(--bg-body); 
+  border: 2px solid var(--border-color); color: var(--text-main); font-weight: 500; border-radius: 0px; font-family: var(--font-body); margin-bottom: 1.2rem;
   transition: 0.2s;
 }
-input:focus, select:focus, textarea:focus { outline: none; border-color: var(--jersey-purple); background: var(--white); box-shadow: 4px 4px 0px var(--dark-text); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--jersey-purple); background: var(--bg-card); box-shadow: 4px 4px 0px var(--border-color); }
 
 /* --- BOUTONS MASSIFS STYLE MATCH --- */
 .btn-primary {
-  background: var(--dark-text);
+  background: var(--border-color);
   color: var(--jersey-yellow);
   padding: 1.2rem 3rem;
   text-decoration: none;
@@ -344,21 +379,21 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--j
   letter-spacing: 0.1em;
   transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: inline-block;
-  border: 3px solid var(--dark-text);
+  border: 3px solid var(--border-color);
   box-shadow: 6px 6px 0px var(--jersey-purple);
   cursor: pointer;
   text-transform: uppercase;
 }
 .btn-primary:hover { 
-  background: var(--jersey-purple); color: var(--white);
-  transform: translateY(-4px); box-shadow: 8px 8px 0px var(--dark-text); 
+  background: var(--jersey-purple); color: #ffffff;
+  transform: translateY(-4px); box-shadow: 8px 8px 0px var(--border-color); 
 }
 
 /* MAP CONTAINER --- */
 .map-container {
   width: 100%; height: 300px; margin-top: 2.5rem; 
-  border: 4px solid var(--dark-text); 
-  box-shadow: 8px 8px 0px var(--dark-text);
+  border: 4px solid var(--border-color); 
+  box-shadow: 8px 8px 0px var(--border-color);
   transform: rotate(-0.5deg);
 }
 
@@ -366,8 +401,8 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--j
 @media (max-width: 950px) {
   .about { grid-template-columns: 1fr; padding: 60px 1.5rem; text-align: center; }
   .about-visual-wrapper { margin-bottom: 2rem; }
-  .about-text-content { padding: 2.5rem 1.5rem; clip-path: none; box-shadow: 8px 8px 0px var(--dark-text); }
-  .form-container { padding: 2.5rem 1.5rem; box-shadow: 8px 8px 0px var(--dark-text); }
+  .about-text-content { padding: 2.5rem 1.5rem; clip-path: none; box-shadow: 8px 8px 0px var(--border-color); }
+  .form-container { padding: 2.5rem 1.5rem; box-shadow: 8px 8px 0px var(--border-color); }
   body::before { clip-path: polygon(0 0, 100% 0, 100% 300px, 0 180px); }
 }
 
@@ -377,23 +412,23 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--j
 @keyframes slideIn { from { transform: translateX(-30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
 /* --- BARRE DE CONTACT & FOOTER --- */
-.contact-bar { padding: 5rem 2rem; background: var(--white); border-top: 4px solid var(--dark-text); text-align: center; position: relative; z-index: 2; }
+.contact-bar { padding: 5rem 2rem; background: var(--bg-card); border-top: 4px solid var(--border-color); text-align: center; position: relative; z-index: 2; }
 .contact-address { font-size: 1.1rem; font-weight: 700; margin: 1rem 0 0; display: flex; align-items: center; justify-content: center; gap: 0.4rem; }
-.contact-address a { color: var(--dark-text); text-decoration: none; transition: 0.2s; border-bottom: 2px solid var(--jersey-green); }
+.contact-address a { color: var(--text-main); text-decoration: none; transition: 0.2s; border-bottom: 2px solid var(--jersey-green); }
 .contact-address a:hover { color: var(--jersey-purple); border-color: var(--jersey-purple); }
 
 .social-group { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; }
 .social-link { 
-  background: var(--bg-light); color: var(--dark-text); border: 2px solid var(--dark-text);
-  box-shadow: 4px 4px 0px var(--dark-text); padding: 0.5rem 1.2rem;
+  background: var(--bg-body); color: var(--text-main); border: 2px solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--border-color); padding: 0.5rem 1.2rem;
   font-family: var(--font-display); font-size: 1.2rem; font-style: italic;
   text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: 0.2s; 
 }
-.social-link:hover { background: var(--dark-text); color: var(--jersey-yellow); transform: translateY(-3px); }
+.social-link:hover { background: var(--border-color); color: var(--jersey-yellow); transform: translateY(-3px); }
 
 footer { 
-  text-align: center; padding: 40px; color: var(--dark-text); font-weight: 700; font-size: 0.9rem; 
-  background: var(--white); border-top: 3px dashed var(--dark-text); position: relative; z-index: 2;
+  text-align: center; padding: 40px; color: var(--text-main); font-weight: 700; font-size: 0.9rem; 
+  background: var(--bg-card); border-top: 3px dashed var(--border-color); position: relative; z-index: 2;
 }
 </style>
 </head>
@@ -422,6 +457,12 @@ footer {
       <span></span>
     </button>
 
+    <!-- Bouton Theme inséré dans la barre pour l'affichage Mobile -->
+    <button class="theme-toggle-btn" id="theme-toggle-mobile" aria-label="Changer de thème">
+      <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8.2-9.8.6-.1 1.2.3 1.3.9.1.6-.3 1.2-.9 1.3-3.5.7-6 3.7-6 7.6 0 4.1 3.4 7.5 7.5 7.5 3.9 0 6.9-2.5 7.6-6 .1-.6.7-1 1.3-.9.6.1 1 .7.9 1.3-.9 4.7-5 8.2-9.8 8.2z"/></svg>
+      <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 4.5c-.8 0-1.5-.7-1.5-1.5V1.5c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5V3c0 .8-.7 1.5-1.5 1.5zm0 15c-.8 0-1.5.7-1.5 1.5V22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V21c0-.8.7-1.5 1.5-1.5zm7.5-7.5c0-.8.7-1.5 1.5-1.5H22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5H21c0-.8-.7-1.5-1.5-1.5zm-15 0c0-.8.7-1.5 1.5-1.5H1.5c0 .8-.7 1.5-1.5 1.5S0 12.8 0 12h1.5c0-.8.7-1.5 1.5-1.5zm12.7-5.3c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.6-.6-.6-1.5 0-2.1zm-10.6 10.6c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.5-.6-.5-1.5 0-2.1zm10.6 0c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.5-1.5.5-2.1 0zm-10.6-10.6c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.6-1.5.6-2.1 0zM12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>
+    </button>
+
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Accueil</a></li>
       <li><a href="actualites.html">Actualités</a></li>
@@ -447,6 +488,14 @@ footer {
       <li><a href="inscriptions.html">Inscriptions</a></li>
       <li><a href="partenaires.html">Partenaires</a></li>
       <li><a href="index.html#contact">Contact</a></li>
+      
+      <!-- Bouton Theme de fin de liste pour l'affichage PC -->
+      <li class="theme-li">
+        <button class="theme-toggle-btn" id="theme-toggle-pc" aria-label="Changer de thème">
+          <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8.2-9.8.6-.1 1.2.3 1.3.9.1.6-.3 1.2-.9 1.3-3.5.7-6 3.7-6 7.6 0 4.1 3.4 7.5 7.5 7.5 3.9 0 6.9-2.5 7.6-6 .1-.6.7-1 1.3-.9.6.1 1 .7.9 1.3-.9 4.7-5 8.2-9.8 8.2z"/></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 4.5c-.8 0-1.5-.7-1.5-1.5V1.5c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5V3c0 .8-.7 1.5-1.5 1.5zm0 15c-.8 0-1.5.7-1.5 1.5V22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V21c0-.8.7-1.5 1.5-1.5zm7.5-7.5c0-.8.7-1.5 1.5-1.5H22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5H21c0-.8-.7-1.5-1.5-1.5zm-15 0c0-.8.7-1.5 1.5-1.5H1.5c0 .8-.7 1.5-1.5 1.5S0 12.8 0 12h1.5c0-.8.7-1.5 1.5-1.5zm12.7-5.3c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.6-.6-.6-1.5 0-2.1zm-10.6 10.6c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.5-.6-.5-1.5 0-2.1zm10.6 0c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.5-1.5.5-2.1 0zm-10.6-10.6c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.6-1.5.6-2.1 0zM12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>
+        </button>
+      </li>
     </ul>
   </div>
 </nav>
@@ -485,7 +534,7 @@ footer {
 <section class="form-section" id="contact">
   <div class="form-container">
     <h2 style="text-align: center;">REJOINDRE LE CLUB</h2>
-    <p style="text-align: center; color: var(--dark-text); font-weight: 500; margin-bottom: 3rem;">Inscrivez-vous pour être les premiers informés des entraînements et des événements.</p>
+    <p style="text-align: center; color: var(--text-main); font-weight: 500; margin-bottom: 3rem;">Inscrivez-vous pour être les premiers informés des entraînements et des événements.</p>
     
     <form action="https://formspree.io/f/xqewepzw" method="POST" id="interest-form">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
@@ -515,7 +564,7 @@ footer {
 </section>
 
 <div class="contact-bar">
-  <p style="color: var(--dark-text); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Suivez la création du club en direct</p>
+  <p style="color: var(--text-main); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Suivez la création du club en direct</p>
   <p class="contact-address">
     📍 <a href="https://maps.google.com/?q=Complexe+Sportif+6-8+Avenue+du+8+Mai+1945+60250+Mouy" target="_blank">Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</a>
   </p>
@@ -533,6 +582,33 @@ footer {
 </footer>
 
 <script>
+// --- LOGIQUE INTÉGRÉE DU CHANGEMENT DE THÈME (Pas besoin de fichier externe pour l'instant) ---
+(function () {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+})();
+
+window.addEventListener('DOMContentLoaded', () => {
+    const toggles = [document.getElementById('theme-toggle-pc'), document.getElementById('theme-toggle-mobile')];
+    
+    toggles.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                let theme = document.documentElement.getAttribute('data-theme');
+                if (theme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        }
+    });
+});
+
 // --- MENU MOBILE ---
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('nav-links');
