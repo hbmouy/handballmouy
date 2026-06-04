@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <link rel="icon" type="image/png" href="images/logo.png">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>En construction - HBM</title>
@@ -89,7 +90,7 @@
         }
         .menu-toggle span { width: 100%; height: 3px; background-color: var(--dark-text); transition: all 0.3s ease; }
 
-        /* DROPDOWNS */
+        /* DROPDOWNS (Bureau & Mobile) */
         .dropdown { position: relative; }
         .dropdown-content {
             display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
@@ -101,7 +102,21 @@
             font-style: normal; display: block; text-transform: none; text-align: center; color: var(--dark-text);
         }
         .dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-purple); }
+        
+        /* Ouverture au survol sur ordinateur */
         .dropdown:hover .dropdown-content { display: block; }
+        
+        /* Correction : Ouverture au clic sur mobile */
+        .dropdown.active .dropdown-content { 
+            display: block; 
+            position: static; 
+            transform: none; 
+            box-shadow: none; 
+            border: none;
+            border-left: 2px solid var(--jersey-purple);
+            margin-left: 10px;
+            padding-left: 5px;
+        }
 
         /* --- BLOC CENTRAL DE CONSTRUCTION --- */
         .container { 
@@ -111,7 +126,7 @@
             box-shadow: 12px 12px 0px var(--dark-text);
             max-width: 600px;
             width: 90%;
-            margin-top: 130px;
+            margin-top: 150px;
             margin-bottom: 40px;
             position: relative;
             z-index: 2;
@@ -166,6 +181,7 @@
             .nav-logo:hover { transform: none; }
             .menu-toggle { display: flex; }
             
+            /* Animation des barres du burger */
             .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
             .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
@@ -240,6 +256,7 @@
     const navGroupLeft = document.querySelector('.nav-group.left');
     const navGroupRight = document.querySelector('.nav-group.right');
 
+    // Fusionne le menu de droite dans celui de gauche sur mobile
     if (window.innerWidth <= 992) {
         const rightLinks = navGroupRight.querySelectorAll('li');
         rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
@@ -247,11 +264,13 @@
 
     const dropdowns = document.querySelectorAll('.dropdown');
 
+    // Gestion de l'ouverture du burger mobile
     menuToggle.addEventListener('click', () => {
         menuToggle.classList.toggle('active');
         navGroupLeft.classList.toggle('active');
     });
 
+    // Gestion du clic sur les dropdowns (surtout sur mobile)
     dropdowns.forEach(dropdown => {
         const trigger = dropdown.querySelector('.dropdown-trigger');
         trigger.addEventListener('click', (e) => {
@@ -262,6 +281,7 @@
         });
     });
 
+    // Ferme le menu si on clique sur un lien classique
     document.querySelectorAll('.nav-group a:not(.dropdown-trigger)').forEach(link => {
         link.addEventListener('click', () => {
             navGroupLeft.classList.remove('active');
