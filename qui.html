@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qui sommes-nous ? - HBM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- J'ai ajouté la police 'Anton' qui correspond exactement au style massif et serré de ton image -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 /* --- ON GARDE TES STYLES RACINES --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -13,7 +14,8 @@
   --dark: #0a0f08; --dark2: #121a0e;
   --green-mid: #228b22; --green-bright: #3ddc3d;
   --white: #f0f5f0; --muted: #7a9a7a;
-  --font-display: 'Bebas Neue', sans-serif;
+  /* Utilisation d'Anton pour le côté impactant du sport */
+  --font-display: 'Anton', sans-serif;
   --font-body: 'DM Sans', sans-serif;
 }
 body { background: var(--dark); color: var(--white); font-family: var(--font-body); line-height: 1.8; }
@@ -27,9 +29,9 @@ nav {
 }
 .nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; z-index: 1001; }
 .nav-logo img { height: 45px; }
-.nav-logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--green-bright); letter-spacing: 1px; }
+.nav-logo-text { font-family: var(--font-display); font-size: 1.8rem; color: var(--green-bright); letter-spacing: 1px; font-style: italic; }
 
-/* BOUTON BURGER (Masqué sur PC, visible sur mobile) */
+/* BOUTON BURGER */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -52,7 +54,7 @@ nav {
 .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
 .nav-links a:hover { color: var(--green-bright); }
 
-/* DROPDOWN LOGIC (PC uniquement) */
+/* DROPDOWN LOGIC */
 .dropdown { position: relative; }
 .dropdown-content {
   display: none; position: absolute; top: 100%; left: 0;
@@ -66,72 +68,111 @@ nav {
 /* --- RESPONSIVE MOBILE --- */
 @media (max-width: 992px) {
   nav { padding: 1rem 1.5rem; }
-  
   .menu-toggle { display: flex; }
-
-  /* Animation du burger en croix "X" quand ouvert */
   .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); background-color: var(--green-bright); }
   .menu-toggle.active span:nth-child(2) { opacity: 0; }
   .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); background-color: var(--green-bright); }
 
-  /* Le menu latéral mobile */
   .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 280px;
-    height: 100vh;
-    background: var(--dark2);
-    border-left: 1px solid rgba(34,139,34,0.25);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 100px 2rem 2rem 2rem;
-    gap: 1.5rem;
-    transition: right 0.4s ease;
-    overflow-y: auto;
+    position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+    background: var(--dark2); border-left: 1px solid rgba(34,139,34,0.25);
+    flex-direction: column; align-items: flex-start; padding: 100px 2rem 2rem 2rem; gap: 1.5rem;
+    transition: right 0.4s ease; overflow-y: auto;
   }
   .nav-links.active { right: 0; }
-
   .nav-links a { font-size: 1rem; width: 100%; display: block; }
-
-  /* Ajustements dropdowns pour le tactile */
   .dropdown { width: 100%; }
   .dropdown-content {
-    display: none;
-    position: static;
-    background: rgba(10,15,8,0.5);
-    border: none;
-    border-left: 2px solid var(--green-bright);
-    margin-top: 0.5rem;
-    padding-left: 1rem;
-    box-shadow: none;
+    display: none; position: static; background: rgba(10,15,8,0.5); border: none;
+    border-left: 2px solid var(--green-bright); margin-top: 0.5rem; padding-left: 1rem; box-shadow: none;
   }
   .dropdown.active .dropdown-content { display: block; }
 }
 
-/* --- CONTENU --- */
+/* --- CONTENU MODIFIÉ POUR LE LOOK SPORT / BRUT --- */
 .content-wrapper { max-width: 800px; margin: 150px auto 100px; padding: 0 20px; }
-.section-label { color: var(--green-bright); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 3px; display: block; margin-bottom: 1rem; text-align: center; }
-h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); text-align: center; margin-bottom: 3rem; line-height: 1; }
 
-.text-block { background: var(--dark2); padding: 3rem; border-radius: 4px; border: 1px solid rgba(34,139,34,0.15); position: relative; margin-bottom: 3rem; }
-.text-block::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 100px; height: 3px; background: var(--green-bright); }
-
-/* Style pour l'intégration de la carte */
-.map-container { position: relative; width: 100%; height: 300px; margin-top: 1.5rem; border: 1px solid rgba(34,139,34,0.3); border-radius: 4px; overflow: hidden; }
-.map-container iframe { width: 100%; height: 100%; border: 0; }
-
-@media (max-width: 480px) {
-  .text-block { padding: 1.5rem; }
-  .content-wrapper { margin-top: 100px; }
+/* Label plus agressif en italique */
+.section-label { 
+  color: var(--green-bright); 
+  text-transform: uppercase; 
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem; 
+  letter-spacing: 2px; 
+  display: block; 
+  margin-bottom: 0.5rem; 
+  text-align: center; 
 }
 
-h3 { font-family: var(--font-display); font-size: 1.8rem; color: var(--green-bright); margin: 2rem 0 1rem; }
-.text-block > h3:first-of-type { margin-top: 0; } /* Aligne le premier titre du bloc */
-p { margin-bottom: 1.5rem; color: var(--white); opacity: 0.9; }
-.highlight { color: var(--green-bright); font-weight: 500; }
+/* H1 : EFFET EXACT DE TON IMAGE image_3ee2c5.png (Ombres bicolores décalées, inclinaison et police compacte) */
+h1 { 
+  font-family: var(--font-display); 
+  font-size: clamp(3.5rem, 10vw, 6rem); 
+  text-align: center; 
+  margin-bottom: 4rem; 
+  line-height: 0.9; 
+  font-style: italic;
+  letter-spacing: -2px;
+  color: var(--white);
+  text-shadow: 
+    3px 3px 0px var(--green-mid), 
+    -2px -2px 0px rgba(255,255,255,0.15);
+}
 
-footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); }
+/* BLOCS DE TEXTE : Fini le côté lisse. Découpe en biais + Grosse ombre brute */
+.text-block { 
+  background: var(--dark2); 
+  padding: 3.5rem 3rem; 
+  border: 2px solid var(--green-mid); 
+  position: relative; 
+  margin-bottom: 4rem; 
+  /* Grosse ombre noire pleine style BD/Affiche de sport */
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8);
+  /* Léger biseau dynamique sur les coins pour casser le rectangle parfait */
+  clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
+}
+
+/* On vire la petite ligne verte centrée trop sage et on met un angle marqué à la place */
+.text-block::before { 
+  content: ''; 
+  position: absolute; 
+  top: 0; left: 0; 
+  width: 30px; height: 30px; 
+  background: var(--green-bright); 
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+/* H3 : Style dynamique assorti au grand titre */
+h3 { 
+  font-family: var(--font-display); 
+  font-size: 2.2rem; 
+  color: var(--green-bright); 
+  margin: 2.5rem 0 1rem; 
+  font-style: italic;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+.text-block > h3:first-of-type { margin-top: 0; } 
+
+p { margin-bottom: 1.5rem; color: var(--white); opacity: 0.95; font-size: 1.05rem; }
+.highlight { color: var(--green-bright); font-weight: 700; }
+
+/* CARTOGRAPHIE BRUTE */
+.map-container { 
+  position: relative; width: 100%; height: 300px; margin-top: 2rem; 
+  border: 3px solid var(--green-mid); 
+  box-shadow: 6px 6px 0px rgba(0,0,0,0.9);
+  transform: rotate(-0.5deg); /* Légère torsion pour casser le parallélisme */
+}
+.map-container iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.3) contract(1.1); }
+
+@media (max-width: 480px) {
+  .text-block { padding: 2rem 1.5rem; clip-path: none; }
+  .content-wrapper { margin-top: 120px; }
+}
+
+footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); font-family: var(--font-body); }
 </style>
 </head>
 <body>
@@ -180,7 +221,7 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
   <!-- BLOC TEXTE PRINCIPAL -->
   <div class="text-block">
     <h3>L'Aube d'un Nouveau Projet</h3>
-    <p>Le <span class="highlight">Handball Mouy (HBM)</span> n'est pas seulement un club de sport, c'est une aventure humaine qui démarre. Né de la volonté de passionnés du ballon rond, notre club est actuellement en pleine phase de création. Nous bâtissons aujourd'hui les fondations d'un projet durable et concret pour notre territoire.</p>
+    <p>Le <span class="highlight">Handball Mouy (HBM)</span> n'est pas seulement un club de sport, c'est une aventure humaine qui démarre. Né de la volonté de passionnés du ballon rond, notre club est actuellement en pleine phase de création. We bâtissons aujourd'hui les fondations d'un projet durable et concret pour notre territoire.</p>
 
     <h3>Du Plaisir pour Tous, du Jeu pour Chacun</h3>
     <p>Notre philosophie est simple : le handball doit être accessible à tous. Que vous soyez un ancien joueur de haut niveau, un débutant curieux ou simplement à la recherche d'une activité <span class="highlight">conviviale</span>, vous avez votre place chez nous. Nous formons une équipe soudée où l'esprit de famille prime sur le score.</p>
@@ -216,18 +257,16 @@ const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const dropdowns = document.querySelectorAll('.dropdown');
 
-// Ouvre / Ferme le menu burger principal
 menuToggle.addEventListener('click', () => {
   menuToggle.classList.toggle('active');
   navLinks.classList.toggle('active');
 });
 
-// Gère le clic sur les catégories "Saison" et "Le Club" pour les ouvrir sur mobile
 dropdowns.forEach(dropdown => {
   const trigger = dropdown.querySelector('.dropdown-trigger');
   trigger.addEventListener('click', (e) => {
     if (window.innerWidth <= 992) {
-      e.preventDefault(); // Empêche de suivre le lien vide '#'
+      e.preventDefault();
       dropdown.classList.toggle('active');
     }
   });
