@@ -10,23 +10,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+    
     <style>
         /* --- BASE LUMINEUSE & STYLE MAILLOT POP-ART --- */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
         :root {
-            --bg-light: #f5f8f5; 
             --jersey-yellow: #e2f438;  
             --jersey-green: #2cd646;   
             --jersey-purple: #9d4edd;  
-            --dark-text: #0b130a;      
-            --white: #ffffff; 
             --font-display: 'Anton', sans-serif;
             --font-body: 'DM Sans', sans-serif;
+
+            /* Mode Clair (par défaut) */
+            --bg-body: #f5f8f5; 
+            --bg-card: #ffffff; 
+            --text-main: #0b130a;      
+            --border-color: #0b130a;
+            --shadow-color: #0b130a;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+        }
+        
+        /* Mode Sombre */
+        [data-theme="dark"] {
+            --bg-body: #0b130a;
+            --bg-card: #142113;
+            --text-main: #f5f8f5;
+            --border-color: #f5f8f5;
+            --shadow-color: var(--jersey-green); 
+            --nav-bg: rgba(11, 19, 10, 0.85);
         }
         
         body { 
-            background: var(--bg-light); 
-            color: var(--dark-text); 
+            background: var(--bg-body); 
+            color: var(--text-main); 
             font-family: var(--font-body); 
             display: flex; 
             flex-direction: column;
@@ -48,14 +70,14 @@
             clip-path: polygon(0 0, 100% 0, 100% 40vh, 0 65vh);
         }
 
-        /* --- NAVIGATION SYMÉTRIQUE --- */
+        /* --- NAVIGATION --- */
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             display: flex; align-items: center; justify-content: center;
             height: 95px; padding: 0 2rem; 
-            background: rgba(255, 255, 255, 0.85); 
+            background: var(--nav-bg); 
             backdrop-filter: blur(15px);
-            border-bottom: 4px solid var(--dark-text);
+            border-bottom: 4px solid var(--border-color);
         }
         .nav-container {
             display: flex; align-items: center; justify-content: space-between;
@@ -76,7 +98,7 @@
         .nav-group.right { justify-content: flex-start; } 
 
         .nav-group a, .dropdown-trigger { 
-            color: var(--dark-text); text-decoration: none; 
+            color: var(--text-main); text-decoration: none; 
             font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
             text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
             cursor: pointer;
@@ -88,25 +110,23 @@
             display: none; flex-direction: column; justify-content: space-between;
             width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
         }
-        .menu-toggle span { width: 100%; height: 3px; background-color: var(--dark-text); transition: all 0.3s ease; }
+        .menu-toggle span { width: 100%; height: 3px; background-color: var(--text-main); transition: all 0.3s ease; }
 
-        /* DROPDOWNS (Bureau & Mobile) */
+        /* DROPDOWNS */
         .dropdown { position: relative; }
         .dropdown-content {
             display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-            background: var(--white); min-width: 180px; border: 3px solid var(--dark-text);
-            padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--dark-text);
+            background: var(--bg-card); min-width: 180px; border: 3px solid var(--border-color);
+            padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color);
         }
         .dropdown-content li a { 
             padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
-            font-style: normal; display: block; text-transform: none; text-align: center; color: var(--dark-text);
+            font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main);
         }
-        .dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-purple); }
+        .dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
         
-        /* Ouverture au survol sur ordinateur */
         .dropdown:hover .dropdown-content { display: block; }
         
-        /* Correction : Ouverture au clic sur mobile */
         .dropdown.active .dropdown-content { 
             display: block; 
             position: static; 
@@ -121,9 +141,9 @@
         /* --- BLOC CENTRAL DE CONSTRUCTION --- */
         .container { 
             padding: 50px 40px; 
-            background: var(--white);
-            border: 4px solid var(--dark-text);
-            box-shadow: 12px 12px 0px var(--dark-text);
+            background: var(--bg-card);
+            border: 4px solid var(--border-color);
+            box-shadow: 12px 12px 0px var(--shadow-color);
             max-width: 600px;
             width: 90%;
             margin-top: 150px;
@@ -137,7 +157,7 @@
             font-family: var(--font-display); 
             font-size: clamp(2.5rem, 6vw, 4.5rem); 
             font-style: italic;
-            color: var(--dark-text); 
+            color: var(--text-main); 
             line-height: 1;
             margin-bottom: 1.5rem;
             text-shadow: 3px 3px 0px var(--jersey-yellow);
@@ -145,7 +165,7 @@
         
         p { 
             font-size: 1.2rem; 
-            color: var(--dark-text); 
+            color: var(--text-main); 
             font-weight: 500;
             margin-bottom: 2.5rem; 
         }
@@ -153,9 +173,9 @@
         /* BOUTON RETOUR POP-ART */
         .btn-back { 
             display: inline-block;
-            background: var(--white);
-            border: 3px solid var(--dark-text); 
-            color: var(--dark-text); 
+            background: var(--bg-card);
+            border: 3px solid var(--border-color); 
+            color: var(--text-main); 
             padding: 12px 30px; 
             text-decoration: none; 
             text-transform: uppercase; 
@@ -163,7 +183,7 @@
             font-style: italic;
             font-size: 1.1rem; 
             letter-spacing: 1px;
-            box-shadow: 5px 5px 0px var(--dark-text);
+            box-shadow: 5px 5px 0px var(--shadow-color);
             transition: 0.2s; 
         }
         .btn-back:hover { 
@@ -181,18 +201,17 @@
             .nav-logo:hover { transform: none; }
             .menu-toggle { display: flex; }
             
-            /* Animation des barres du burger */
             .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
             .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
             .nav-group {
                 position: fixed; top: 0; width: 280px; height: 100vh;
-                background: var(--white); flex-direction: column; align-items: flex-start;
+                background: var(--bg-card); flex-direction: column; align-items: flex-start;
                 padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000;
                 text-align: left;
             }
-            .nav-group.left { right: -100%; border-left: 4px solid var(--dark-text); transition: right 0.4s ease; }
+            .nav-group.left { right: -100%; border-left: 4px solid var(--border-color); transition: right 0.4s ease; }
             .nav-group.right { display: none; } 
             .nav-group.left.active { right: 0; }
 
@@ -256,7 +275,6 @@
     const navGroupLeft = document.querySelector('.nav-group.left');
     const navGroupRight = document.querySelector('.nav-group.right');
 
-    // Fusionne le menu de droite dans celui de gauche sur mobile
     if (window.innerWidth <= 992) {
         const rightLinks = navGroupRight.querySelectorAll('li');
         rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
@@ -264,13 +282,11 @@
 
     const dropdowns = document.querySelectorAll('.dropdown');
 
-    // Gestion de l'ouverture du burger mobile
     menuToggle.addEventListener('click', () => {
         menuToggle.classList.toggle('active');
         navGroupLeft.classList.toggle('active');
     });
 
-    // Gestion du clic sur les dropdowns (surtout sur mobile)
     dropdowns.forEach(dropdown => {
         const trigger = dropdown.querySelector('.dropdown-trigger');
         trigger.addEventListener('click', (e) => {
@@ -281,7 +297,6 @@
         });
     });
 
-    // Ferme le menu si on clique sur un lien classique
     document.querySelectorAll('.nav-group a:not(.dropdown-trigger)').forEach(link => {
         link.addEventListener('click', () => {
             navGroupLeft.classList.remove('active');
