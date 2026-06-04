@@ -37,14 +37,13 @@
 /* --- BASE LUMINEUSE & CHARTE MAILLOT HBM --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-    /* Couleurs communes */
     --jersey-yellow: #e2f438;  
     --jersey-green: #2cd646;   
     --jersey-purple: #9d4edd;  
     --font-display: 'Anton', sans-serif;
     --font-body: 'DM Sans', sans-serif;
 
-    /* Mode Clair (par défaut) */
+    /* Mode Clair */
     --bg-body: #f5f8f5;
     --bg-card: #ffffff;
     --text-main: #0b130a;
@@ -83,7 +82,6 @@ body::before, body::after {
   opacity: 0.85;
   pointer-events: none;
 }
-
 body::before {
   top: 0;
   left: 0;
@@ -91,7 +89,6 @@ body::before {
   background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
   clip-path: polygon(0 0, 100% 0, 100% 450px, 70% 320px, 30% 680px, 0 400px);
 }
-
 body::after {
   bottom: 200px;
   right: 0;
@@ -159,7 +156,7 @@ nav {
   position: relative;
 }
 
-/* Logo forcé au centre absolu sur PC */
+/* Logo au centre absolu sur PC */
 .nav-logo { 
   display: flex; align-items: center; gap: 0.8rem; text-decoration: none; cursor: pointer; z-index: 1100; 
   transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -171,16 +168,16 @@ nav {
 .nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 .nav-logo img { height: 75px; width: auto; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.15)); }
 
-/* BOUTON BURGER */
+/* BOUTON BURGER (MOBILE) */
 .burger {
   display: none; flex-direction: column; justify-content: space-between;
   width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1100;
 }
 .burger span { width: 100%; height: 3px; background-color: var(--border-color); transition: all 0.3s ease; }
 
-/* Répartition des liens à gauche et à droite du logo central */
+/* Répartition des liens à gauche et à droite du logo */
 .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; width: 100%; }
-.nav-links li:nth-child(4) { margin-left: auto; } /* Repousse la seconde moitié vers la droite */
+.nav-links li:nth-child(5) { margin-left: auto; } /* Repousse la seconde moitié après le logo */
 
 .nav-links a { 
   color: var(--text-main); text-decoration: none; 
@@ -189,7 +186,7 @@ nav {
 }
 .nav-links a:hover { color: var(--jersey-purple); }
 
-/* BOUTON SWITCH THEME (PC) */
+/* BOUTON UNIQUE SWITCH THEME */
 .theme-toggle-btn {
   background: transparent;
   border: 2px solid var(--border-color);
@@ -210,14 +207,15 @@ nav {
 .theme-toggle-btn svg {
   width: 20px;
   height: 20px;
-  fill: var(--text-main);
-  transition: fill 0.3s;
+  fill: var(--text-main); /* Assure la visibilité de l'icône selon le thème */
+  transition: fill 0.3s ease;
 }
-/* Gestion affichage icone soleil / lune */
-[data-theme="dark"] .sun-icon { display: block; }
-[data-theme="dark"] .moon-icon { display: none; }
+
+/* Visibilité des icônes lune/soleil */
 .sun-icon { display: none; }
 .moon-icon { display: block; }
+[data-theme="dark"] .sun-icon { display: block; }
+[data-theme="dark"] .moon-icon { display: none; }
 
 /* DROPDOWN LOGIC (PC) */
 .dropdown { position: relative; }
@@ -236,23 +234,20 @@ nav {
 
 /* --- RESPONSIVE NAVIGATION MOBILE --- */
 @media (max-width: 950px) {
-  nav { height: 75px; padding: 0 1.5rem; justify-content: space-between; }
+  nav { height: 75px; padding: 0 1.5rem; }
   .nav-container { justify-content: space-between; position: static; display: flex; }
    
-  .nav-logo { 
-    position: static; 
-    transform: none; 
-  }
+  .nav-logo { position: static; transform: none; }
   .nav-logo:hover { transform: scale(1.08); }
   .nav-logo img { height: 55px; }
 
-  .burger { display: flex; order: 3; }
+  .burger { display: flex; order: 3; margin-left: 1.5rem; }
   .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
   .burger.toggle span:nth-child(2) { opacity: 0; }
   .burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-  /* Placement du bouton thème sur mobile à côté du burger */
-  .theme-toggle-btn { order: 2; margin-left: auto; margin-right: 1.5rem; }
+  /* Le bouton unique se cale à droite à côté du burger sur mobile */
+  .theme-li { order: 2; margin-left: auto; }
 
   .nav-links {
     position: fixed; right: -100%; top: 39px; height: 100vh; width: 280px;
@@ -261,8 +256,7 @@ nav {
     padding: 100px 2rem 2rem 2rem; gap: 1.5rem; transition: right 0.4s ease;
     overflow-y: auto; z-index: 1000;
   }
-  .nav-links li:nth-child(4) { margin-left: 0; }
-  .nav-links .theme-li { display: none; } /* Caché sur mobile car déjà géré dans la topbar */
+  .nav-links li:nth-child(5) { margin-left: 0; }
   .nav-links.active { right: 0; }
   .nav-links a { font-size: 1.5rem; width: 100%; display: block; }
 
@@ -316,7 +310,7 @@ h2 {
   text-shadow: 3px 3px 0px var(--bg-card), 6px 6px 0px var(--border-color);
 }
 
-/* --- ABOUT SECTION (GRILLE) --- */
+/* --- ABOUT SECTION --- */
 .about { 
   padding: 120px 3rem; max-width: 1200px; margin: 0 auto;
   display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; 
@@ -329,7 +323,6 @@ h2 {
   animation: floatSimple 6s ease-in-out infinite;
 }
 
-/* BLOC TEXTE BLANC --- */
 .about-text-content {
   background: var(--bg-card); padding: 3.5rem 3rem; border: 3px solid var(--border-color); 
   position: relative; box-shadow: 12px 12px 0px var(--border-color);
@@ -457,13 +450,21 @@ footer {
       <span></span>
     </button>
 
-    <!-- Bouton Theme inséré dans la barre pour l'affichage Mobile -->
-    <button class="theme-toggle-btn" id="theme-toggle-mobile" aria-label="Changer de thème">
-      <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8.2-9.8.6-.1 1.2.3 1.3.9.1.6-.3 1.2-.9 1.3-3.5.7-6 3.7-6 7.6 0 4.1 3.4 7.5 7.5 7.5 3.9 0 6.9-2.5 7.6-6 .1-.6.7-1 1.3-.9.6.1 1 .7.9 1.3-.9 4.7-5 8.2-9.8 8.2z"/></svg>
-      <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 4.5c-.8 0-1.5-.7-1.5-1.5V1.5c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5V3c0 .8-.7 1.5-1.5 1.5zm0 15c-.8 0-1.5.7-1.5 1.5V22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V21c0-.8.7-1.5 1.5-1.5zm7.5-7.5c0-.8.7-1.5 1.5-1.5H22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5H21c0-.8-.7-1.5-1.5-1.5zm-15 0c0-.8.7-1.5 1.5-1.5H1.5c0 .8-.7 1.5-1.5 1.5S0 12.8 0 12h1.5c0-.8.7-1.5 1.5-1.5zm12.7-5.3c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.6-.6-.6-1.5 0-2.1zm-10.6 10.6c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.5-.6-.5-1.5 0-2.1zm10.6 0c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.5-1.5.5-2.1 0zm-10.6-10.6c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.6-1.5.6-2.1 0zM12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>
-    </button>
-
     <ul class="nav-links" id="nav-links">
+      <!-- Bouton unique placé tout à gauche du menu -->
+      <li class="theme-li">
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Changer de thème">
+          <!-- Icône Lune (Mode Clair) -->
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8.2-9.8.6-.1 1.2.3 1.3.9.1.6-.3 1.2-.9 1.3-3.5.7-6 3.7-6 7.6 0 4.1 3.4 7.5 7.5 7.5 3.9 0 6.9-2.5 7.6-6 .1-.6.7-1 1.3-.9.6.1 1 .7.9 1.3-.9 4.7-5 8.2-9.8 8.2z"/>
+          </svg>
+          <!-- Icône Soleil (Mode Sombre) -->
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <path d="M12 4.5c-.8 0-1.5-.7-1.5-1.5V1.5c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5V3c0 .8-.7 1.5-1.5 1.5zm0 15c-.8 0-1.5.7-1.5 1.5V22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V21c0-.8.7-1.5 1.5-1.5zm7.5-7.5c0-.8.7-1.5 1.5-1.5H22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5H21c0-.8-.7-1.5-1.5-1.5zm-15 0c0-.8.7-1.5 1.5-1.5H1.5c0 .8-.7 1.5-1.5 1.5S0 12.8 0 12h1.5c0-.8.7-1.5 1.5-1.5zm12.7-5.3c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.6-.6-.6-1.5 0-2.1zm-10.6 10.6c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.5-.6-.5-1.5 0-2.1zm10.6 0c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.5-1.5.5-2.1 0zm-10.6-10.6c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.6-1.5.6-2.1 0zM12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/>
+          </svg>
+        </button>
+      </li>
+
       <li><a href="index.html">Accueil</a></li>
       <li><a href="actualites.html">Actualités</a></li>
     
@@ -474,14 +475,6 @@ footer {
           <li><a href="effectifs.html">Effectifs</a></li>
           <li><a href="prepa-physique.html">Prépa Physique</a></li>
         </ul>
-      </li >
-
-      <!-- Le bouton thème PC est placé ici pour glisser à gauche du logo central -->
-      <li class="theme-li">
-        <button class="theme-toggle-btn" id="theme-toggle-pc" aria-label="Changer de thème">
-          <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8.2-9.8.6-.1 1.2.3 1.3.9.1.6-.3 1.2-.9 1.3-3.5.7-6 3.7-6 7.6 0 4.1 3.4 7.5 7.5 7.5 3.9 0 6.9-2.5 7.6-6 .1-.6.7-1 1.3-.9.6.1 1 .7.9 1.3-.9 4.7-5 8.2-9.8 8.2z"/></svg>
-          <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 4.5c-.8 0-1.5-.7-1.5-1.5V1.5c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5V3c0 .8-.7 1.5-1.5 1.5zm0 15c-.8 0-1.5.7-1.5 1.5V22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V21c0-.8.7-1.5 1.5-1.5zm7.5-7.5c0-.8.7-1.5 1.5-1.5H22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5H21c0-.8-.7-1.5-1.5-1.5zm-15 0c0-.8.7-1.5 1.5-1.5H1.5c0 .8-.7 1.5-1.5 1.5S0 12.8 0 12h1.5c0-.8.7-1.5 1.5-1.5zm12.7-5.3c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.6-.6-.6-1.5 0-2.1zm-10.6 10.6c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.5-.6-.5-1.5 0-2.1zm10.6 0c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.5-1.5.5-2.1 0zm-10.6-10.6c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.6-1.5.6-2.1 0zM12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>
-        </button>
       </li>
 
       <li class="dropdown">
@@ -582,7 +575,7 @@ footer {
 </footer>
 
 <script>
-// --- LOGIQUE INTÉGRÉE DU CHANGEMENT DE THÈME ---
+// --- HISTORIQUE DU THÈME ---
 (function () {
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
@@ -591,22 +584,20 @@ footer {
 })();
 
 window.addEventListener('DOMContentLoaded', () => {
-    const toggles = [document.getElementById('theme-toggle-pc'), document.getElementById('theme-toggle-mobile')];
+    const themeBtn = document.getElementById('theme-toggle');
     
-    toggles.forEach(btn => {
-        if (btn) {
-            btn.addEventListener('click', () => {
-                let theme = document.documentElement.getAttribute('data-theme');
-                if (theme === 'dark') {
-                    document.documentElement.removeAttribute('data-theme');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
-        }
-    });
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    }
 });
 
 // --- MENU MOBILE ---
