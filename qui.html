@@ -10,15 +10,11 @@
 /* --- BASE LUMINEUSE & ENERGIE MAILLOT --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  /* Fond clair et lumineux */
   --bg-light: #f4f7f4; 
-  
-  /* Les couleurs flashy du maillot Prototype */
   --jersey-yellow: #e2f438;  
   --jersey-green: #2cd646;   
   --jersey-purple: #9d4edd;  
   --dark-text: #0b130a;      
-  
   --white: #ffffff; 
   --font-display: 'Anton', sans-serif;
   --font-body: 'DM Sans', sans-serif;
@@ -26,7 +22,6 @@
 
 body { 
   background: var(--bg-light); 
-  /* Un léger effet de grille athlétique en fond pour casser le côté lisse */
   background-image: radial-gradient(rgba(44, 214, 70, 0.15) 1px, transparent 0);
   background-size: 24px 24px;
   color: var(--dark-text); 
@@ -39,7 +34,6 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   display: flex; align-items: center; justify-content: center;
   height: 95px; padding: 0 2rem; 
-  /* Fond blanc pur translucide */
   background: rgba(255, 255, 255, 0.85); 
   backdrop-filter: blur(15px);
   border-bottom: 4px solid var(--dark-text);
@@ -50,24 +44,19 @@ nav {
   width: 100%; max-width: 1200px; height: 100%; position: relative;
 }
 
-/* Le bloc Logo au centre */
+/* Le bloc Logo au centre (sans texte HBM) */
 .nav-logo {
   position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -35%); 
-  display: flex; flex-direction: column; align-items: center;
+  transform: translate(-50%, -50%); /* Centrage vertical parfait ajusté */
+  display: flex; align-items: center; justify-content: center;
   text-decoration: none; color: inherit; z-index: 1002;
   transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .nav-logo img { 
-  height: 95px; 
+  height: 85px; 
   filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); 
 }
-.nav-logo-text { 
-  font-family: var(--font-display); font-size: 1.4rem; 
-  color: var(--dark-text); letter-spacing: 1px; font-style: italic; 
-  margin-top: -5px;
-}
-.nav-logo:hover { transform: translate(-50%, -30%) scale(1.08); }
+.nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 
 /* Liens navigation */
 .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
@@ -108,9 +97,9 @@ nav {
 @media (max-width: 992px) {
   nav { height: 75px; }
   .nav-container { justify-content: space-between; }
-  .nav-logo { position: static; transform: none; flex-direction: row; gap: 0.5rem; }
-  .nav-logo img { height: 55px; }
-  .nav-logo-text { margin-top: 0; font-size: 1.6rem; }
+  .nav-logo { position: static; transform: none; }
+  .nav-logo img { height: 60px; }
+  .nav-logo:hover { transform: none; }
   .menu-toggle { display: flex; }
   
   .nav-group {
@@ -124,7 +113,7 @@ nav {
 }
 
 /* --- CONTENU MAILLOT STYLE --- */
-.content-wrapper { max-width: 800px; margin: 180px auto 100px; padding: 0 20px; }
+.content-wrapper { max-width: 850px; margin: 180px auto 100px; padding: 0 20px; }
 
 .section-label { 
   color: var(--jersey-purple); 
@@ -133,36 +122,34 @@ nav {
   letter-spacing: 3px; display: block; margin-bottom: 0.5rem; text-align: center;
 }
 
-/* H1 : Énorme impact avec ombres noire et violette décalées */
+/* H1 : Légèrement rétréci et plus condensé pour forcer la ligne unique */
 h1 { 
   font-family: var(--font-display); 
-  font-size: clamp(3.5rem, 10vw, 6.5rem); 
-  text-align: center; margin-bottom: 4rem; line-height: 0.85; font-style: italic; letter-spacing: -2px;
+  font-size: clamp(2.8rem, 7.5vw, 4.8rem); 
+  text-align: center; margin-bottom: 4rem; line-height: 1; font-style: italic; letter-spacing: -1px;
   color: var(--dark-text);
+  white-space: nowrap; /* Empêche le retour à la ligne automatique */
   text-shadow: 
     4px 4px 0px var(--jersey-yellow), 
     7px 7px 0px var(--jersey-purple);
 }
 
-/* LES BLOCS DE TEXTE : Ils prennent le dégradé du maillot en fond ! */
+/* LES BLOCS DE TEXTE */
 .text-block { 
   background: linear-gradient(135deg, var(--jersey-yellow) 0%, var(--jersey-green) 100%);
   padding: 3.5rem 3rem; 
   border: 3px solid var(--dark-text); 
   position: relative; margin-bottom: 4rem; 
-  /* Énorme ombre noire bien lourde style griffe/BD */
   box-shadow: 12px 12px 0px var(--dark-text);
   clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
 }
 
-/* Le petit coin du bloc prend la couleur violette des sponsors */
 .text-block::before { 
   content: ''; position: absolute; top: 0; left: 0; width: 35px; height: 35px; 
   background: var(--jersey-purple); 
   clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
-/* H3 : En noir profond pour se détacher violemment du fond flashy */
 h3 { 
   font-family: var(--font-display); font-size: 2.4rem; 
   color: var(--dark-text); 
@@ -172,10 +159,8 @@ h3 {
 }
 .text-block > h3:first-of-type { margin-top: 0; } 
 
-/* Le texte passe en noir ultra-lisible sur le fond fluo */
 p { margin-bottom: 1.5rem; color: var(--dark-text); font-weight: 500; font-size: 1.1rem; }
 
-/* Les mises en valeur se parent du Violet du numéro 1 ou du logo Sirocco */
 .highlight { 
   background: var(--dark-text);
   color: var(--white);
@@ -195,6 +180,7 @@ p { margin-bottom: 1.5rem; color: var(--dark-text); font-weight: 500; font-size:
 .map-container iframe { width: 100%; height: 100%; border: 0; }
 
 @media (max-width: 480px) {
+  h1 { white-space: normal; } /* Autorise le retour à la ligne sur très petit téléphone */
   .text-block { padding: 2rem 1.5rem; clip-path: none; box-shadow: 8px 8px 0px var(--dark-text); }
   .content-wrapper { margin-top: 140px; }
 }
@@ -223,9 +209,9 @@ footer {
       </li>
     </ul>
 
+    <!-- Le logo seul désormais -->
     <a href="index.html" class="nav-logo">
       <img src="images/logo.png" alt="HBM">
-      <span class="nav-logo-text">HBM</span>
     </a>
 
     <button class="menu-toggle" aria-label="Ouvrir le menu">
