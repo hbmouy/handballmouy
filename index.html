@@ -180,7 +180,7 @@ nav {
 
 /* Répartition des liens à gauche et à droite du logo central */
 .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; width: 100%; }
-.nav-links li:nth-child(4) { margin-left: auto; } /* Pushes second half to the right */
+.nav-links li:nth-child(4) { margin-left: auto; } /* Repousse la seconde moitié vers la droite */
 
 .nav-links a { 
   color: var(--text-main); text-decoration: none; 
@@ -238,7 +238,7 @@ nav {
 @media (max-width: 950px) {
   nav { height: 75px; padding: 0 1.5rem; justify-content: space-between; }
   .nav-container { justify-content: space-between; position: static; display: flex; }
-  
+   
   .nav-logo { 
     position: static; 
     transform: none; 
@@ -262,7 +262,7 @@ nav {
     overflow-y: auto; z-index: 1000;
   }
   .nav-links li:nth-child(4) { margin-left: 0; }
-  .nav-links .theme-li { display: none; } /* On cache le bouton de la liste sur mobile car il est déjà dans la barre */
+  .nav-links .theme-li { display: none; } /* Caché sur mobile car déjà géré dans la topbar */
   .nav-links.active { right: 0; }
   .nav-links a { font-size: 1.5rem; width: 100%; display: block; }
 
@@ -474,6 +474,14 @@ footer {
           <li><a href="effectifs.html">Effectifs</a></li>
           <li><a href="prepa-physique.html">Prépa Physique</a></li>
         </ul>
+      </li >
+
+      <!-- Le bouton thème PC est placé ici pour glisser à gauche du logo central -->
+      <li class="theme-li">
+        <button class="theme-toggle-btn" id="theme-toggle-pc" aria-label="Changer de thème">
+          <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8.2-9.8.6-.1 1.2.3 1.3.9.1.6-.3 1.2-.9 1.3-3.5.7-6 3.7-6 7.6 0 4.1 3.4 7.5 7.5 7.5 3.9 0 6.9-2.5 7.6-6 .1-.6.7-1 1.3-.9.6.1 1 .7.9 1.3-.9 4.7-5 8.2-9.8 8.2z"/></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 4.5c-.8 0-1.5-.7-1.5-1.5V1.5c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5V3c0 .8-.7 1.5-1.5 1.5zm0 15c-.8 0-1.5.7-1.5 1.5V22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V21c0-.8.7-1.5 1.5-1.5zm7.5-7.5c0-.8.7-1.5 1.5-1.5H22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5H21c0-.8-.7-1.5-1.5-1.5zm-15 0c0-.8.7-1.5 1.5-1.5H1.5c0 .8-.7 1.5-1.5 1.5S0 12.8 0 12h1.5c0-.8.7-1.5 1.5-1.5zm12.7-5.3c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.6-.6-.6-1.5 0-2.1zm-10.6 10.6c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.5-.6-.5-1.5 0-2.1zm10.6 0c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.5-1.5.5-2.1 0zm-10.6-10.6c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.6-1.5.6-2.1 0zM12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>
+        </button>
       </li>
 
       <li class="dropdown">
@@ -488,14 +496,6 @@ footer {
       <li><a href="inscriptions.html">Inscriptions</a></li>
       <li><a href="partenaires.html">Partenaires</a></li>
       <li><a href="index.html#contact">Contact</a></li>
-      
-      <!-- Bouton Theme de fin de liste pour l'affichage PC -->
-      <li class="theme-li">
-        <button class="theme-toggle-btn" id="theme-toggle-pc" aria-label="Changer de thème">
-          <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8.2-9.8.6-.1 1.2.3 1.3.9.1.6-.3 1.2-.9 1.3-3.5.7-6 3.7-6 7.6 0 4.1 3.4 7.5 7.5 7.5 3.9 0 6.9-2.5 7.6-6 .1-.6.7-1 1.3-.9.6.1 1 .7.9 1.3-.9 4.7-5 8.2-9.8 8.2z"/></svg>
-          <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 4.5c-.8 0-1.5-.7-1.5-1.5V1.5c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5V3c0 .8-.7 1.5-1.5 1.5zm0 15c-.8 0-1.5.7-1.5 1.5V22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V21c0-.8.7-1.5 1.5-1.5zm7.5-7.5c0-.8.7-1.5 1.5-1.5H22.5c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5H21c0-.8-.7-1.5-1.5-1.5zm-15 0c0-.8.7-1.5 1.5-1.5H1.5c0 .8-.7 1.5-1.5 1.5S0 12.8 0 12h1.5c0-.8.7-1.5 1.5-1.5zm12.7-5.3c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.6-.6-.6-1.5 0-2.1zm-10.6 10.6c.5-.5 1.4-.5 2.1 0l1.1 1.1c.5.5.5 1.4 0 2.1s-1.4.5-2.1 0l-1.1-1.1c-.5-.6-.5-1.5 0-2.1zm10.6 0c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.5-1.5.5-2.1 0zm-10.6-10.6c-.5-.5-.5-1.4 0-2.1l1.1-1.1c.5-.5 1.4-.5 2.1 0s.5 1.4 0 2.1l-1.1 1.1c-.6.6-1.5.6-2.1 0zM12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>
-        </button>
-      </li>
     </ul>
   </div>
 </nav>
@@ -582,7 +582,7 @@ footer {
 </footer>
 
 <script>
-// --- LOGIQUE INTÉGRÉE DU CHANGEMENT DE THÈME (Pas besoin de fichier externe pour l'instant) ---
+// --- LOGIQUE INTÉGRÉE DU CHANGEMENT DE THÈME ---
 (function () {
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
