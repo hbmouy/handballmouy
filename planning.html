@@ -1,438 +1,479 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<link rel="icon" type="image/png" href="images/logo.png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Planning & Rencontres - HBM</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-/* --- BASE LUMINEUSE & ENERGIE MAILLOT (Identique à la charte globale) --- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg-light: #f5f8f5; 
-  --jersey-yellow: #e2f438;  
-  --jersey-green: #2cd646;   
-  --jersey-purple: #9d4edd;  
-  --dark-text: #0b130a;      
-  --white: #ffffff; 
-  --font-display: 'Anton', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --gold: #d4af37;
-}
+    <!-- ICÔNE DANS L'ONGLET (FAVICON) -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning & Rencontres - HBM</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- ANTI-FLASH BLANC : Lecture immédiate du thème sélectionné -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+    
+    <style>
+        /* --- BASE LUMINEUSE & ENERGIE MAILLOT (Charte globale) --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --jersey-yellow: #e2f438;  
+            --jersey-green: #2cd646;   
+            --jersey-purple: #9d4edd;  
+            --font-display: 'Anton', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --gold: #d4af37;
 
-body { 
-  background: var(--bg-light); 
-  color: var(--dark-text); 
-  font-family: var(--font-body); 
-  line-height: 1.8;
-  overflow-x: hidden;
-  position: relative;
-}
+            /* Mode Clair (par défaut) */
+            --bg-body: #f5f8f5; 
+            --bg-card: #ffffff; 
+            --text-main: #0b130a;      
+            --border-color: #0b130a;
+            --shadow-color: #0b130a;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --dashed-color: rgba(11, 19, 10, 0.15);
+        }
 
-/* --- FORMES GÉOMÉTRIQUES ASYMÉTRIQUES --- */
-body::before, body::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1200px;
-  z-index: -1;
-  opacity: 0.85;
-  pointer-events: none;
-}
-body::before {
-  top: 0;
-  left: 0;
-  background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px);
-}
-body::after {
-  top: 700px;
-  right: 0;
-  width: 80%;
-  background: linear-gradient(225deg, rgba(226, 244, 56, 0.6) 0%, rgba(44, 214, 70, 0.6) 100%);
-  clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px);
-}
+        /* Mode Sombre */
+        [data-theme="dark"] {
+            --bg-body: #0b130a;
+            --bg-card: #142113;
+            --text-main: #f5f8f5;
+            --border-color: #f5f8f5;
+            --shadow-color: var(--jersey-green); 
+            --nav-bg: rgba(11, 19, 10, 0.85);
+            --dashed-color: rgba(245, 248, 245, 0.25);
+        }
 
-/* --- NAVIGATION TRANSFERENCE SYMETRIQUE --- */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  display: flex; align-items: center; justify-content: center;
-  height: 95px; padding: 0 2rem; 
-  background: rgba(255, 255, 255, 0.85); 
-  backdrop-filter: blur(15px);
-  border-bottom: 4px solid var(--dark-text);
-}
+        body { 
+            background: var(--bg-body); 
+            color: var(--text-main); 
+            font-family: var(--font-body); 
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-.nav-container {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; max-width: 1200px; height: 100%; position: relative;
-}
+        /* --- FORMES GÉOMÉTRIQUES ASYMÉTRIQUES --- */
+        body::before, body::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 1200px;
+            z-index: -1;
+            opacity: 0.85;
+            pointer-events: none;
+        }
+        body::before {
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px);
+        }
+        body::after {
+            top: 700px;
+            right: 0;
+            width: 80%;
+            background: linear-gradient(225deg, rgba(226, 244, 56, 0.6) 0%, rgba(44, 214, 70, 0.6) 100%);
+            clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px);
+        }
 
-.nav-logo {
-  position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%); 
-  display: flex; align-items: center; justify-content: center;
-  text-decoration: none; color: inherit; z-index: 1002;
-  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.nav-logo img { 
-  height: 85px; 
-  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); 
-}
-.nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+            height: 95px; padding: 0 2rem; 
+            background: var(--nav-bg); 
+            backdrop-filter: blur(15px);
+            border-bottom: 4px solid var(--border-color);
+        }
 
-.nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
-.nav-group.left { justify-content: flex-end; }  
-.nav-group.right { justify-content: flex-start; } 
+        .nav-container {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; max-width: 1200px; height: 100%; position: relative;
+        }
 
-.nav-group a, .dropdown-trigger { 
-  color: var(--dark-text); text-decoration: none; 
-  font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
-  text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
-  cursor: pointer;
-}
-.nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
+        .nav-logo {
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%); 
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: inherit; z-index: 1002;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .nav-logo img { 
+            height: 85px; 
+            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); 
+        }
+        .nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 
-/* BURGER MOBILE */
-.menu-toggle {
-  display: none; flex-direction: column; justify-content: space-between;
-  width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
-}
-.menu-toggle span { width: 100%; height: 3px; background-color: var(--dark-text); transition: all 0.3s ease; }
+        .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
+        .nav-group.left { justify-content: flex-end; }  
+        .nav-group.right { justify-content: flex-start; } 
 
-/* DROPDOWN (PC) */
-.dropdown { position: relative; }
-.dropdown-content {
-  display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  background: var(--white); min-width: 180px;
-  border: 3px solid var(--dark-text);
-  padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--dark-text);
-}
-.dropdown-content li a { 
-  padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
-  font-style: normal; display: block; text-transform: none; text-align: center; color: var(--dark-text);
-}
-.dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-purple); }
-.dropdown:hover .dropdown-content { display: block; }
+        .nav-group a, .dropdown-trigger { 
+            color: var(--text-main); text-decoration: none; 
+            font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
+            text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
+            cursor: pointer;
+        }
+        .nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
 
-/* --- CONTENU --- */
-.content-wrapper { max-width: 900px; margin: 180px auto 100px; padding: 0 20px; position: relative; z-index: 2; }
+        /* BURGER MOBILE */
+        .menu-toggle {
+            display: none; flex-direction: column; justify-content: space-between;
+            width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
+        }
+        .menu-toggle span { width: 100%; height: 3px; background-color: var(--text-main); transition: all 0.3s ease; }
 
-.label-container { text-align: center; }
-.section-label { 
-  color: var(--dark-text); 
-  background: var(--white);
-  border: 2px solid var(--dark-text);
-  box-shadow: 3px 3px 0px var(--dark-text);
-  text-transform: uppercase; 
-  font-family: var(--font-display); font-style: italic; font-size: 1.2rem; 
-  letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem;
-  transform: rotate(-1deg);
-}
+        /* DROPDOWNS */
+        .dropdown { position: relative; }
+        .dropdown-content {
+            display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            background: var(--bg-card); min-width: 180px;
+            border: 3px solid var(--border-color);
+            padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color);
+        }
+        .dropdown-content li a { 
+            padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
+            font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main);
+        }
+        .dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
+        .dropdown:hover .dropdown-content { display: block; }
 
-h1 { 
-  font-family: var(--font-display); 
-  font-size: clamp(2.8rem, 7.5vw, 4.8rem); 
-  text-align: center; margin-bottom: 3rem; line-height: 1; font-style: italic; letter-spacing: -1px;
-  color: var(--dark-text);
-  text-shadow: 
-    4px 4px 0px var(--white), 
-    8px 8px 0px var(--dark-text);
-}
+        .dropdown.active .dropdown-content { 
+            display: block; 
+            position: static; 
+            transform: none; 
+            box-shadow: none; 
+            border: none;
+            border-left: 2px solid var(--jersey-purple);
+            margin-left: 10px;
+            padding-left: 5px;
+        }
 
-/* Surlignage (Style étiquette maillot) */
-.highlight { 
-  background: var(--jersey-purple);
-  color: var(--white);
-  padding: 0.1rem 0.5rem;
-  font-weight: 700;
-  display: inline-block;
-  transform: skewX(-10deg);
-}
+        /* --- CONTENU --- */
+        .content-wrapper { max-width: 900px; margin: 180px auto 100px; padding: 0 20px; position: relative; z-index: 2; }
 
-/* --- ENCADRÉ ENTRAÎNEMENTS --- */
-.training-card {
-  background: var(--white);
-  border: 3px solid var(--dark-text);
-  border-left: 10px solid var(--jersey-green);
-  padding: 1.5rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  box-shadow: 8px 8px 0px var(--dark-text);
-  margin-bottom: 4rem;
-}
-.training-card-left { display: flex; align-items: center; gap: 16px; }
-.training-icon { font-size: 2.2rem; }
-.training-title { font-family: var(--font-display); font-size: 1.8rem; font-style: italic; color: var(--dark-text); letter-spacing: 0.5px; }
-.training-subtitle { font-size: 1rem; color: var(--dark-text); font-weight: 500; }
-.training-badge {
-  background: var(--jersey-yellow);
-  color: var(--dark-text);
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.2rem;
-  letter-spacing: 1px;
-  padding: 6px 16px;
-  border: 2px solid var(--dark-text);
-  box-shadow: 4px 4px 0px var(--dark-text);
-  white-space: nowrap;
-}
+        .label-container { text-align: center; }
+        .section-label { 
+            color: var(--text-main); 
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            box-shadow: 3px 3px 0px var(--shadow-color);
+            text-transform: uppercase; 
+            font-family: var(--font-display); font-style: italic; font-size: 1.2rem; 
+            letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem;
+            transform: rotate(-1deg);
+        }
 
-/* --- MATCH CARD POP ART --- */
-.match-card {
-  background: var(--white);
-  border: 3px solid var(--dark-text); 
-  padding: 3.5rem 2rem 2.5rem;
-  text-align: center;
-  box-shadow: 12px 12px 0px var(--dark-text);
-  position: relative;
-  margin-bottom: 4rem;
-  clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
-}
+        h1 { 
+            font-family: var(--font-display); 
+            font-size: clamp(2.8rem, 7.5vw, 4.8rem); 
+            text-align: center; margin-bottom: 3rem; line-height: 1; font-style: italic; letter-spacing: -1px;
+            color: var(--text-main);
+            text-shadow: 
+                4px 4px 0px var(--bg-card), 
+                8px 8px 0px var(--border-color);
+        }
 
-.match-card::before {
-  content: "MATCH À L'EXTÉRIEUR";
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-1deg);
-  background: var(--gold);
-  color: var(--dark-text);
-  padding: 3px 20px;
-  border: 2px solid var(--dark-text);
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.1rem;
-  box-shadow: 3px 3px 0px var(--dark-text);
-  z-index: 3;
-}
+        /* --- ENCADRÉ ENTRAÎNEMENTS --- */
+        .training-card {
+            background: var(--bg-card);
+            border: 3px solid var(--border-color);
+            border-left: 10px solid var(--jersey-green);
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            box-shadow: 8px 8px 0px var(--shadow-color);
+            margin-bottom: 4rem;
+        }
+        .training-card-left { display: flex; align-items: center; gap: 16px; }
+        .training-icon { font-size: 2.2rem; }
+        .training-title { font-family: var(--font-display); font-size: 1.8rem; font-style: italic; color: var(--text-main); letter-spacing: 0.5px; }
+        .training-subtitle { font-size: 1rem; color: var(--text-main); font-weight: 500; }
+        .training-badge {
+            background: var(--jersey-yellow);
+            color: #0b130a; /* Toujours sombre pour le contraste du jaune fluo */
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            padding: 6px 16px;
+            border: 2px solid #0b130a;
+            box-shadow: 4px 4px 0px #0b130a;
+            white-space: nowrap;
+        }
 
-.match-vs { display: flex; align-items: center; justify-content: space-around; margin: 2rem 0; }
-.team { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.team-name { font-family: var(--font-display); font-size: 2.8rem; font-style: italic; line-height: 1; text-transform: uppercase; }
-.team-logo { width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1)); }
+        /* --- MATCH CARD POP ART --- */
+        .match-card {
+            background: var(--bg-card);
+            border: 3px solid var(--border-color); 
+            padding: 3.5rem 2rem 2.5rem;
+            text-align: center;
+            box-shadow: 12px 12px 0px var(--shadow-color);
+            position: relative;
+            margin-bottom: 4rem;
+            clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
+        }
 
-.vs-circle {
-  width: 55px; height: 55px;
-  background: var(--jersey-purple);
-  color: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  border: 3px solid var(--dark-text);
-  box-shadow: 4px 4px 0px var(--dark-text);
-  border-radius: 50%;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
+        .match-card::before {
+            content: "MATCH À L'EXTÉRIEUR";
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-1deg);
+            background: var(--gold);
+            color: #0b130a;
+            padding: 3px 20px;
+            border: 2px solid #0b130a;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.1rem;
+            box-shadow: 3px 3px 0px #0b130a;
+            z-index: 3;
+        }
 
-.match-details { border-top: 3px dashed rgba(11,19,10,0.15); padding-top: 20px; color: var(--dark-text); }
-.match-info-item { display: inline-block; margin: 5px 15px; font-size: 1.05rem; font-weight: 500; }
-.match-info-item strong { font-weight: 700; color: var(--dark-text); }
+        .match-vs { display: flex; align-items: center; justify-content: space-around; margin: 2rem 0; }
+        .team { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .team-name { font-family: var(--font-display); font-size: 2.8rem; font-style: italic; line-height: 1; text-transform: uppercase; }
+        .team-logo { width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1)); }
 
-/* --- AUTRES ÉVÉNEMENTS --- */
-h2.section-title {
-  font-family: var(--font-display); font-size: 2.4rem; 
-  color: var(--dark-text); 
-  margin: 1rem 0 1.5rem; font-style: italic; letter-spacing: -0.5px; text-transform: uppercase;
-  border-bottom: 3px solid var(--jersey-green);
-  display: inline-block; padding-bottom: 2px;
-}
+        .vs-circle {
+            width: 55px; height: 55px;
+            background: var(--jersey-purple);
+            color: #ffffff;
+            display: flex; align-items: center; justify-content: center;
+            border: 3px solid var(--border-color);
+            box-shadow: 4px 4px 0px var(--shadow-color);
+            border-radius: 50%;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
 
-.schedule-list { 
-  background: var(--white); 
-  border: 3px solid var(--dark-text); 
-  box-shadow: 10px 10px 0px var(--dark-text);
-}
-.schedule-item {
-  display: grid;
-  grid-template-columns: 140px 1fr 120px;
-  padding: 1.2rem 2rem;
-  border-bottom: 2px dashed rgba(11,19,10,0.15);
-  align-items: center;
-}
-.schedule-item:last-child { border-bottom: none; }
-.date-box { font-family: var(--font-display); font-style: italic; color: var(--jersey-purple); font-size: 1.4rem; }
-.event-name { font-weight: 600; color: var(--dark-text); font-size: 1.05rem; }
+        .match-details { border-top: 3px dashed var(--dashed-color); padding-top: 20px; color: var(--text-main); }
+        .match-info-item { display: inline-block; margin: 5px 15px; font-size: 1.05rem; font-weight: 500; }
+        .match-info-item strong { font-weight: 700; color: var(--text-main); }
 
-/* --- RESPONSIVE MOBILE --- */
-@media (max-width: 992px) {
-  nav { height: 75px; }
-  .nav-container { justify-content: space-between; }
-  .nav-logo { position: static; transform: none; }
-  .nav-logo img { height: 60px; }
-  .nav-logo:hover { transform: none; }
-  .menu-toggle { display: flex; }
-  
-  .nav-group {
-    position: fixed; top: 0; width: 280px; height: 100vh;
-    background: var(--white); flex-direction: column; align-items: flex-start;
-    padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000;
-  }
-  .nav-group.left { right: -100%; border-left: 4px solid var(--dark-text); transition: right 0.4s ease; }
-  .nav-group.right { display: none; } 
-  .nav-group.left.active { right: 0; }
+        /* --- AUTRES ÉVÉNEMENTS --- */
+        h2.section-title {
+            font-family: var(--font-display); font-size: 2.4rem; 
+            color: var(--text-main); 
+            margin: 1rem 0 1.5rem; font-style: italic; letter-spacing: -0.5px; text-transform: uppercase;
+            border-bottom: 3px solid var(--jersey-green);
+            display: inline-block; padding-bottom: 2px;
+        }
 
-  .content-wrapper { margin-top: 140px; }
-  body::before { clip-path: polygon(0 0, 100% 0, 100% 200px, 0 120px); }
-  
-  .training-card { flex-direction: column; text-align: center; padding: 1.5rem; }
-  .training-card-left { flex-direction: column; }
-  .match-vs { flex-direction: column; gap: 20px; }
-  .schedule-item { grid-template-columns: 1fr; text-align: center; gap: 10px; padding: 1.5rem; }
-  .schedule-item div { text-align: center !important; }
-  .match-card { padding: 4rem 1.5rem 2rem; clip-path: none; box-shadow: 8px 8px 0px var(--dark-text); }
-}
+        .schedule-list { 
+            background: var(--bg-card); 
+            border: 3px solid var(--border-color); 
+            box-shadow: 10px 10px 0px var(--shadow-color);
+        }
+        .schedule-item {
+            display: grid;
+            grid-template-columns: 140px 1fr 120px;
+            padding: 1.2rem 2rem;
+            border-bottom: 2px dashed var(--dashed-color);
+            align-items: center;
+        }
+        .schedule-item:last-child { border-bottom: none; }
+        .date-box { font-family: var(--font-display); font-style: italic; color: var(--jersey-purple); font-size: 1.4rem; }
+        .event-name { font-weight: 600; color: var(--text-main); font-size: 1.05rem; }
 
-footer { 
-  text-align: center; padding: 60px; color: var(--dark-text); font-weight: 700;
-  border-top: 3px dashed var(--dark-text); 
-  background: var(--white);
-  position: relative; z-index: 2;
-}
-</style>
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 992px) {
+            nav { height: 75px; }
+            .nav-container { justify-content: space-between; }
+            .nav-logo { position: static; transform: none; }
+            .nav-logo img { height: 60px; }
+            .nav-logo:hover { transform: none; }
+            .menu-toggle { display: flex; }
+            
+            .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+            .nav-group {
+                position: fixed; top: 0; width: 280px; height: 100vh;
+                background: var(--bg-card); flex-direction: column; align-items: flex-start;
+                padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000;
+            }
+            .nav-group.left { right: -100%; border-left: 4px solid var(--border-color); transition: right 0.4s ease; }
+            .nav-group.right { display: none; } 
+            .nav-group.left.active { right: 0; }
+
+            .content-wrapper { margin-top: 140px; }
+            body::before { clip-path: polygon(0 0, 100% 0, 100% 200px, 0 120px); }
+            
+            .training-card { flex-direction: column; text-align: center; padding: 1.5rem; }
+            .training-card-left { flex-direction: column; }
+            .match-vs { flex-direction: column; gap: 20px; }
+            .schedule-item { grid-template-columns: 1fr; text-align: center; gap: 10px; padding: 1.5rem; }
+            .schedule-item div { text-align: center !important; }
+            .match-card { padding: 4rem 1.5rem 2rem; clip-path: none; box-shadow: 8px 8px 0px var(--shadow-color); }
+        }
+
+        footer { 
+            text-align: center; padding: 60px; color: var(--text-main); font-weight: 700;
+            border-top: 3px dashed var(--border-color); 
+            background: var(--bg-card);
+            position: relative; z-index: 2;
+        }
+    </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-container">
-    <ul class="nav-group left">
-      <li><a href="./">Accueil</a></li>
-      <li><a href="actualites.html">Actualités</a></li>
-      <li class="dropdown">
-        <a class="dropdown-trigger" style="color: var(--jersey-purple);">Saison ▾</a>
-        <ul class="dropdown-content">
-          <li><a href="planning.html">Planning</a></li>
-          <li><a href="effectifs.html">Effectifs</a></li>
-          <li><a href="prepa-physique.html">Prépa Physique</a></li>
-          <li><a href="jeu.html">Le Jeu 🎮</a></li>
+    <div class="nav-container">
+        <ul class="nav-group left">
+            <li><a href="./">Accueil</a></li>
+            <li><a href="actualites.html">Actualités</a></li>
+            <li class="dropdown">
+                <a class="dropdown-trigger" style="color: var(--jersey-purple);">Saison ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="planning.html">Planning</a></li>
+                    <li><a href="effectifs.html">Effectifs</a></li>
+                    <li><a href="prepa-physique.html">Prépa Physique</a></li>
+                    <li><a href="jeu.html">Le Jeu 🎮</a></li>
+                </ul>
+            </li>
         </ul>
-      </li>
-    </ul>
 
-    <a href="index.html" class="nav-logo">
-      <img src="images/logo.png" alt="HBM">
-    </a>
+        <a href="index.html" class="nav-logo">
+            <img src="images/logo.png" alt="HBM">
+        </a>
 
-    <button class="menu-toggle" aria-label="Ouvrir le menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+        <button class="menu-toggle" aria-label="Ouvrir le menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-    <ul class="nav-group right">
-      <li class="dropdown">
-        <a class="dropdown-trigger">Le Club ▾</a>
-        <ul class="dropdown-content">
-          <li><a href="qui.html">Qui sommes-nous ?</a></li>
-          <li><a href="organigramme.html">Le Bureau</a></li>
-          <li><a href="docs.html">Documents utiles</a></li>
+        <ul class="nav-group right">
+            <li class="dropdown">
+                <a class="dropdown-trigger">Le Club ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="qui.html">Qui sommes-nous ?</a></li>
+                    <li><a href="organigramme.html">Le Bureau</a></li>
+                    <li><a href="docs.html">Documents utiles</a></li>
+                </ul>
+            </li>
+            <li><a href="inscriptions.html">Inscriptions</a></li>
+            <li><a href="partenaires.html">Partenaires</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
         </ul>
-      </li>
-      <li><a href="inscriptions.html">Inscriptions</a></li>
-      <li><a href="partenaires.html">Partenaires</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </div>
+    </div>
 </nav>
 
 <main class="content-wrapper">
-  <div class="label-container">
-    <span class="section-label">Planning du HBM</span>
-  </div>
-  <h1>CALENDRIER</h1>
+    <div class="label-container">
+        <span class="section-label">Planning du HBM</span>
+    </div>
+    <h1>CALENDRIER</h1>
 
-  <div class="training-banner">
-    <div class="training-card">
-      <div class="training-card-left">
-        <div class="training-icon">🏐</div>
-        <div>
-          <div class="training-title">ENTRAÎNEMENTS</div>
-          <div class="training-subtitle">📍 Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</div>
+    <div class="training-banner">
+        <div class="training-card">
+            <div class="training-card-left">
+                <div class="training-icon">🏐</div>
+                <div>
+                    <div class="training-title">ENTRAÎNEMENTS</div>
+                    <div class="training-subtitle">📍 Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</div>
+                </div>
+            </div>
+            <div class="training-badge">TOUS LES JEUDIS — 20H À 22H</div>
         </div>
-      </div>
-      <div class="training-badge">TOUS LES JEUDIS — 20H À 22H</div>
-    </div>
-  </div>
-
-  <div class="match-card">
-    <div class="match-vs">
-      <div class="team">
-        <img src="images/logo-cires.jpg" class="team-logo" alt="H.C.L Loisir">
-        <span class="team-name" style="color: #e11d48;">HCL</span>
-      </div>
-      
-      <div class="vs-circle">VS</div>
-
-      <div class="team">
-        <img src="images/logo.png" class="team-logo" alt="HBM">
-        <span class="team-name" style="color: var(--gold);">HB MOUY</span>
-      </div>
     </div>
 
-    <div class="match-details">
-      <div class="match-info-item">📅 Jeudi <strong>11 Juin 2026</strong></div>
-      <div class="match-info-item">📍 Lieu <strong>Salle Multisports Céline Goberville, Cires-lès-Mello</strong></div>
-      <div class="match-info-item">⏰ Heure <strong>20h00</strong></div>
-    </div>
-  </div>
+    <div class="match-card">
+        <div class="match-vs">
+            <div class="team">
+                <img src="images/logo-cires.jpg" class="team-logo" alt="H.C.L Loisir">
+                <span class="team-name" style="color: #e11d48;">HCL</span>
+            </div>
+            
+            <div class="vs-circle">VS</div>
 
-  <h2 class="section-title">AUTRES ÉVÉNEMENTS</h2>
-  
-  <div class="schedule-list">
-    <div class="schedule-item">
-      <div class="date-box">20 MAI 2026</div>
-      <div class="event-name">Match de prépa : AAE Méru Loisir (28) vs HB Mouy (19)</div>
-      <div style="text-align: right; font-weight: 700; color: var(--jersey-purple); text-transform: uppercase; font-family: var(--font-display); font-size: 1.1rem; font-style: italic;">Match amical</div>
+            <div class="team">
+                <img src="images/logo.png" class="team-logo" alt="HBM">
+                <span class="team-name" style="color: var(--gold);">HB MOUY</span>
+            </div>
+        </div>
+
+        <div class="match-details">
+            <div class="match-info-item">📅 Jeudi <strong>11 Juin 2026</strong></div>
+            <div class="match-info-item">📍 Lieu <strong>Salle Multisports Céline Goberville, Cires-lès-Mello</strong></div>
+            <div class="match-info-item">⏰ Heure <strong>20h00</strong></div>
+        </div>
     </div>
-    <div class="schedule-item">
-      <div class="date-box">25 AVRIL</div>
-      <div class="event-name">Réunion de structuration du bureau</div>
-      <div style="text-align: right; font-weight: 700; color: var(--jersey-purple); text-transform: uppercase; font-family: var(--font-display); font-size: 1.1rem; font-style: italic;">Interne</div>
+
+    <h2 class="section-title">AUTRES ÉVÉNEMENTS</h2>
+    
+    <div class="schedule-list">
+        <div class="schedule-item">
+            <div class="date-box">20 MAI 2026</div>
+            <div class="event-name">Match de prépa : AAE Méru Loisir (28) vs HB Mouy (19)</div>
+            <div style="text-align: right; font-weight: 700; color: var(--jersey-purple); text-transform: uppercase; font-family: var(--font-display); font-size: 1.1rem; font-style: italic;">Match amical</div>
+        </div>
+        <div class="schedule-item">
+            <div class="date-box">25 AVRIL</div>
+            <div class="event-name">Réunion de structuration du bureau</div>
+            <div style="text-align: right; font-weight: 700; color: var(--jersey-purple); text-transform: uppercase; font-family: var(--font-display); font-size: 1.1rem; font-style: italic;">Interne</div>
+        </div>
+        <div class="schedule-item">
+            <div class="date-box">JUIN 2026</div>
+            <div class="event-name">Ouverture des inscriptions saison 26/27</div>
+            <div style="text-align: right; font-weight: 700; color: var(--jersey-purple); text-transform: uppercase; font-family: var(--font-display); font-size: 1.1rem; font-style: italic;">Club</div>
+        </div>
     </div>
-    <div class="schedule-item">
-      <div class="date-box">JUIN 2026</div>
-      <div class="event-name">Ouverture des inscriptions saison 26/27</div>
-      <div style="text-align: right; font-weight: 700; color: var(--jersey-purple); text-transform: uppercase; font-family: var(--font-display); font-size: 1.1rem; font-style: italic;">Club</div>
-    </div>
-  </div>
 </main>
 
 <footer>
-  © 2026 HBM — Handball Club Mouy
+    © 2026 HBM — Handball Club Mouy
 </footer>
 
 <script>
-const menuToggle = document.querySelector('.menu-toggle');
-const navGroupLeft = document.querySelector('.nav-group.left');
-const navGroupRight = document.querySelector('.nav-group.right');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navGroupLeft = document.querySelector('.nav-group.left');
+    const navGroupRight = document.querySelector('.nav-group.right');
 
-if (window.innerWidth <= 992) {
-  const rightLinks = navGroupRight.querySelectorAll('li');
-  rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
-}
-
-const dropdowns = document.querySelectorAll('.dropdown');
-
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  navGroupLeft.classList.toggle('active');
-});
-
-dropdowns.forEach(dropdown => {
-  const trigger = dropdown.querySelector('.dropdown-trigger');
-  trigger.addEventListener('click', (e) => {
     if (window.innerWidth <= 992) {
-      e.preventDefault();
-      dropdown.classList.toggle('active');
+        const rightLinks = navGroupRight.querySelectorAll('li');
+        rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
     }
-  });
-});
+
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navGroupLeft.classList.toggle('active');
+    });
+
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        trigger.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            }
+        });
+    });
+
+    document.querySelectorAll('.nav-group a:not(.dropdown-trigger)').forEach(link => {
+        link.addEventListener('click', () => {
+            navGroupLeft.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    });
 </script>
 </body>
 </html>
