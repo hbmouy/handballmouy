@@ -10,20 +10,37 @@
 <style>
 /* --- BASE LUMINEUSE & STYLE MAILLOT POP-ART --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-  --bg-light: #f5f8f5; 
   --jersey-yellow: #e2f438;  
   --jersey-green: #2cd646;   
   --jersey-purple: #9d4edd;  
-  --dark-text: #0b130a;      
-  --white: #ffffff; 
   --font-display: 'Anton', sans-serif;
   --font-body: 'DM Sans', sans-serif;
+
+  /* Mode Clair (par défaut) */
+  --bg-body: #f5f8f5; 
+  --bg-card: #ffffff; 
+  --text-main: #0b130a;      
+  --border-color: #0b130a;
+  --shadow-color: #0b130a;
+  --nav-bg: rgba(255, 255, 255, 0.85);
 }
+
+/* Mode Sombre */
+[data-theme="dark"] {
+  --bg-body: #0b130a;
+  --bg-card: #142113;
+  --text-main: #f5f8f5;
+  --border-color: #f5f8f5;
+  --shadow-color: var(--jersey-green); 
+  --nav-bg: rgba(11, 19, 10, 0.85);
+}
+
 html { scroll-behavior: smooth; }
 body {
-  background: var(--bg-light);
-  color: var(--dark-text);
+  background: var(--bg-body);
+  color: var(--text-main);
   font-family: var(--font-body);
   line-height: 1.7;
   overflow-x: hidden;
@@ -54,14 +71,14 @@ body::after {
   clip-path: polygon(100% 400px, 100% 100%, 0% 100%, 0% 700px, 50% 500px);
 }
 
-/* --- NAVIGATION TRANSFERENCE CONFIGURATION --- */
+/* --- NAVIGATION --- */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   display: flex; align-items: center; justify-content: center;
   height: 95px; padding: 0 2rem; 
-  background: rgba(255, 255, 255, 0.85); 
+  background: var(--nav-bg); 
   backdrop-filter: blur(15px);
-  border-bottom: 4px solid var(--dark-text);
+  border-bottom: 4px solid var(--border-color);
 }
 .nav-container {
   display: flex; align-items: center; justify-content: space-between;
@@ -82,7 +99,7 @@ nav {
 .nav-group.right { justify-content: flex-start; } 
 
 .nav-group a, .dropdown-trigger { 
-  color: var(--dark-text); text-decoration: none; 
+  color: var(--text-main); text-decoration: none; 
   font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
   text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
   cursor: pointer;
@@ -94,21 +111,33 @@ nav {
   display: none; flex-direction: column; justify-content: space-between;
   width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
 }
-.menu-toggle span { width: 100%; height: 3px; background-color: var(--dark-text); transition: all 0.3s ease; }
+.menu-toggle span { width: 100%; height: 3px; background-color: var(--text-main); transition: all 0.3s ease; }
 
 /* DROPDOWNS */
 .dropdown { position: relative; }
 .dropdown-content {
   display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  background: var(--white); min-width: 180px; border: 3px solid var(--dark-text);
-  padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--dark-text);
+  background: var(--bg-card); min-width: 180px; border: 3px solid var(--border-color);
+  padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color);
 }
 .dropdown-content li a { 
   padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
-  font-style: normal; display: block; text-transform: none; text-align: center; color: var(--dark-text);
+  font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main);
 }
-.dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-purple); }
+.dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
 .dropdown:hover .dropdown-content { display: block; }
+
+/* Correction affichage mobile au clic */
+.dropdown.active .dropdown-content { 
+  display: block; 
+  position: static; 
+  transform: none; 
+  box-shadow: none; 
+  border: none;
+  border-left: 2px solid var(--jersey-purple);
+  margin-left: 10px;
+  padding-left: 5px;
+}
 
 /* --- CONTENU PRINCIPAL --- */
 main {
@@ -127,8 +156,8 @@ main {
 
 .label-container { text-align: center; }
 .section-label { 
-  color: var(--dark-text); background: var(--white);
-  border: 2px solid var(--dark-text); box-shadow: 3px 3px 0px var(--dark-text);
+  color: var(--text-main); background: var(--bg-card);
+  border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color);
   text-transform: uppercase; font-family: var(--font-display); font-style: italic; font-size: 1.2rem; 
   letter-spacing: 2px; display: inline-block; margin-bottom: 1rem; padding: 0.2rem 1rem;
   transform: rotate(-1deg);
@@ -137,26 +166,26 @@ main {
 h1 { 
   font-family: var(--font-display); font-size: clamp(2.5rem, 7.5vw, 4.5rem); 
   text-align: center; margin-bottom: 0.5rem; line-height: 1; font-style: italic; letter-spacing: -1px;
-  text-shadow: 3px 3px 0px var(--white), 6px 6px 0px var(--dark-text);
+  text-shadow: 3px 3px 0px var(--bg-card), 6px 6px 0px var(--border-color);
 }
 .subtitle { 
-  display: inline-block; background: var(--dark-text); color: var(--white);
+  display: inline-block; background: var(--border-color); color: var(--bg-body);
   font-family: var(--font-display); font-style: italic; font-size: 1.3rem;
   padding: 2px 12px; transform: skewX(-10deg); letter-spacing: 0.5px;
   margin-bottom: 4rem;
 }
 
-/* --- GRILLE DES SPONSORS (Style cartes de collection) --- */
+/* --- GRILLE DES SPONSORS --- */
 .sponsors-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2.5rem;
 }
 .sponsor-card {
-  background: var(--white);
-  border: 3px solid var(--dark-text);
+  background: var(--bg-card);
+  border: 3px solid var(--border-color);
   padding: 3rem 2rem;
-  box-shadow: 8px 8px 0px var(--dark-text);
+  box-shadow: 8px 8px 0px var(--shadow-color);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
@@ -186,194 +215,5 @@ h1 {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.9rem;
-  color: var(--dark-text);
-  letter-spacing: 0.5px;
-}
-
-/* --- BOUTON RETOUR POP-ART --- */
-.back-actions { margin-top: 5rem; }
-.btn-secondary {
-  display: inline-block;
-  background: var(--white);
-  border: 3px solid var(--dark-text);
-  color: var(--dark-text);
-  padding: 0.8rem 2.5rem;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.4rem;
-  letter-spacing: 1px;
-  box-shadow: 5px 5px 0px var(--dark-text);
-  transition: 0.2s;
-}
-.btn-secondary:hover { 
-  transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0px var(--jersey-green);
-  background: var(--white);
-  color: var(--dark-text);
-}
-
-/* --- FOOTER --- */
-footer { 
-  text-align: center; padding: 40px; color: var(--dark-text); font-weight: 700;
-  border-top: 3px dashed var(--dark-text); 
-  background: var(--white);
-  position: relative; z-index: 2;
-}
-
-/* --- MOBILE RESPONSIVE --- */
-@media (max-width: 992px) {
-  nav { height: 75px; }
-  .nav-container { justify-content: space-between; }
-  .nav-logo { position: static; transform: none; }
-  .nav-logo img { height: 60px; }
-  .nav-logo:hover { transform: none; }
-  .menu-toggle { display: flex; }
-  
-  /* Burger Animation */
-  .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-  .menu-toggle.active span:nth-child(2) { opacity: 0; }
-  .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-  .nav-group {
-    position: fixed; top: 0; width: 280px; height: 100vh;
-    background: var(--white); flex-direction: column; align-items: flex-start;
-    padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000;
-  }
-  .nav-group.left { right: -100%; border-left: 4px solid var(--dark-text); transition: right 0.4s ease; }
-  .nav-group.right { display: none; } 
-  .nav-group.left.active { right: 0; }
-
-  main { padding-top: 130px; }
-  body::before { clip-path: polygon(0 0, 100% 0, 100% 180px, 0 110px); }
-  .sponsor-card { clip-path: none; max-width: 320px; margin: 0 auto; width: 100%; }
-}
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="nav-container">
-    <ul class="nav-group left">
-      <li><a href="./">Accueil</a></li>
-      <li><a href="actualites.html">Actualités</a></li>
-      <li class="dropdown">
-        <a class="dropdown-trigger">Saison ▾</a>
-        <ul class="dropdown-content">
-          <li><a href="planning.html">Planning</a></li>
-          <li><a href="effectifs.html">Effectifs</a></li>
-          <li><a href="prepa-physique.html">Prépa Physique</a></li>
-          <li><a href="jeu.html">Le Jeu 🎮</a></li>
-        </ul>
-      </li>
-    </ul>
-
-    <a href="index.html" class="nav-logo">
-      <img src="images/logo.png" alt="HBM Logo">
-    </a>
-
-    <button class="menu-toggle" aria-label="Ouvrir le menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <ul class="nav-group right">
-      <li class="dropdown">
-        <a class="dropdown-trigger">Le Club ▾</a>
-        <ul class="dropdown-content">
-          <li><a href="qui.html">Qui sommes-nous ?</a></li>
-          <li><a href="organigramme.html">Le Bureau</a></li>
-          <li><a href="docs.html">Documents utiles</a></li>
-        </ul>
-      </li>
-      <li><a href="inscriptions.html">Inscriptions</a></li>
-      <li><a href="partenaires.html" style="color: var(--jersey-purple);">Partenaires</a></li>
-    </ul>
-  </div>
-</nav>
-
-<main>
-  <div class="container">
-    <div class="label-container">
-      <span class="section-label">Handball Club Mouy</span>
-    </div>
-    <h1>PARTENAIRES OFFICIELS</h1>
-    <p class="subtitle">Ils soutiennent le club et nous font confiance.</p>
-    
-    <div class="sponsors-grid">
-      <div class="sponsor-card">
-        <img src="images/lv-chauff.png" alt="Logo LV CHAUFF" class="sponsor-logo">
-        <span class="sponsor-name">LV CHAUFF</span>
-      </div>
-      
-      <div class="sponsor-card">
-        <img src="images/sirocco.png" alt="Logo Sirocco" class="sponsor-logo">
-        <span class="sponsor-name">SIROCCO</span>
-      </div>
-
-      <div class="sponsor-card">
-        <img src="images/tvm.png" alt="Logo TVM" class="sponsor-logo">
-        <span class="sponsor-name">TVM TECHNOLOGIE</span>
-      </div>
-
-      <div class="sponsor-card">
-        <img src="images/klein.png" alt="Logo Klein" class="sponsor-logo">
-        <span class="sponsor-name">Klein</span>
-      </div>
-
-      <div class="sponsor-card">
-        <img src="images/cerclevert.png" alt="Logo Cercle Vert" class="sponsor-logo">
-        <span class="sponsor-name">GROUPE CERCLE VERT</span>
-      </div>
-    </div>
-    
-    <div class="back-actions">
-      <a href="index.html" class="btn-secondary">Retour à l'accueil</a>
-    </div>
-  </div>
-</main>
-
-<footer>
-  &copy; 2026 HBM — Handball Club Mouy — Tous droits réservés
-</footer>
-
-<script>
-const menuToggle = document.querySelector('.menu-toggle');
-const navGroupLeft = document.querySelector('.nav-group.left');
-const navGroupRight = document.querySelector('.nav-group.right');
-
-// Fusion des menus pour l'affichage mobile
-if (window.innerWidth <= 992) {
-  const rightLinks = navGroupRight.querySelectorAll('li');
-  rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
-}
-
-const dropdowns = document.querySelectorAll('.dropdown');
-
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  navGroupLeft.classList.toggle('active');
-});
-
-dropdowns.forEach(dropdown => {
-  const trigger = dropdown.querySelector('.dropdown-trigger');
-  trigger.addEventListener('click', (e) => {
-    if (window.innerWidth <= 992) {
-      e.preventDefault();
-      dropdown.classList.toggle('active');
-    }
-  });
-});
-
-// Fermeture auto sur clic (liens classiques)
-document.querySelectorAll('.nav-group a:not(.dropdown-trigger)').forEach(link => {
-  link.addEventListener('click', () => {
-    navGroupLeft.classList.remove('active');
-    menuToggle.classList.remove('active');
-  });
-});
-</script>
-</body>
-</html>
+  color: var(--text-main);
+  letter
