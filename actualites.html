@@ -4,8 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualités - HBM</title>
+    
+    <!-- ICÔNE DANS L'ONGLET (FAVICON) -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- ANTI-FLASH BLANC : Lecture immédiate du thème sélectionné sur l'accueil -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+
     <style>
         /* --- BASE LUMINEUSE & ENERGIE MAILLOT --- */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,7 +58,7 @@
             position: relative;
         }
 
-        /* --- FORMES GÉOMÉTRIQUES ASYMÉTRIQUES --- */
+        /* --- FORMS GÉOMÉTRIQUES ASYMÉTRIQUES --- */
         body::before, body::after {
             content: "";
             position: absolute;
@@ -74,8 +86,8 @@
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             display: flex; align-items: center; justify-content: center;
-            height: 95px; padding: 0 2rem; 
-            background: var(--nav-bg); 
+            height: 95px; padding: 0 2rem;  
+            background: var(--nav-bg);  
             backdrop-filter: blur(15px);
             border-bottom: 4px solid var(--border-color);
         }
@@ -559,7 +571,6 @@ searchInput.addEventListener('input', (e) => {
         archiveSection.style.display = 'none';
     } else {
         archiveSection.style.display = 'block';
-        // Restaure l'état initial des archives selon le bouton
         oldNews.forEach(news => news.style.display = isExpanded ? 'flex' : 'none');
     }
 });
@@ -577,22 +588,10 @@ function shareActu(title, text) {
         navigator.clipboard.writeText(currentUrl).then(() => {
             const toast = document.getElementById('toast');
             toast.style.opacity = '1';
-            setTimeout(() => { toast.style.opacity = '0'; }, 2500);
+            setTimeout(() => { toast.style.opacity = '0'; }, 2000);
         });
     }
 }
-
-// --- CONFIGURATION COMMENTAIRES DISQUS ---
-var disqus_config = function () {
-    this.page.url = window.location.href;  
-    this.page.identifier = window.location.pathname; 
-};
-(function() { 
-    var d = document, s = d.createElement('script');
-    s.src = 'https://hbmouy.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
 </script>
 </body>
 </html>
