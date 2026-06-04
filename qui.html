@@ -114,8 +114,12 @@ nav {
 .section-label { color: var(--green-bright); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 3px; display: block; margin-bottom: 1rem; text-align: center; }
 h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); text-align: center; margin-bottom: 3rem; line-height: 1; }
 
-.text-block { background: var(--dark2); padding: 3rem; border-radius: 4px; border: 1px solid rgba(34,139,34,0.15); position: relative; }
+.text-block { background: var(--dark2); padding: 3rem; border-radius: 4px; border: 1px solid rgba(34,139,34,0.15); position: relative; margin-bottom: 3rem; }
 .text-block::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 100px; height: 3px; background: var(--green-bright); }
+
+/* Style pour l'intégration de la carte */
+.map-container { position: relative; width: 100%; height: 300px; margin-top: 1.5rem; border: 1px solid rgba(34,139,34,0.3); border-radius: 4px; overflow: hidden; }
+.map-container iframe { width: 100%; height: 100%; border: 0; }
 
 @media (max-width: 480px) {
   .text-block { padding: 1.5rem; }
@@ -123,6 +127,7 @@ h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); text-a
 }
 
 h3 { font-family: var(--font-display); font-size: 1.8rem; color: var(--green-bright); margin: 2rem 0 1rem; }
+.text-block > h3:first-of-type { margin-top: 0; } /* Aligne le premier titre du bloc */
 p { margin-bottom: 1.5rem; color: var(--white); opacity: 0.9; }
 .highlight { color: var(--green-bright); font-weight: 500; }
 
@@ -172,6 +177,7 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
   <span class="section-label">L'Esprit HBM</span>
   <h1>QUI SOMMES-NOUS ?</h1>
   
+  <!-- BLOC TEXTE PRINCIPAL -->
   <div class="text-block">
     <h3>L'Aube d'un Nouveau Projet</h3>
     <p>Le <span class="highlight">Handball Mouy (HBM)</span> n'est pas seulement un club de sport, c'est une aventure humaine qui démarre. Né de la volonté de passionnés du ballon rond, notre club est actuellement en pleine phase de création. Nous bâtissons aujourd'hui les fondations d'un projet durable et concret pour notre territoire.</p>
@@ -181,6 +187,24 @@ footer { text-align: center; padding: 60px; color: var(--muted); border-top: 1px
 
     <h3>Notre Ambition : L'École de Hand</h3>
     <p>Si nous commençons cette saison avec énergie, notre regard est tourné vers l'avenir. Notre objectif est de créer, au fil du temps, une <span class="highlight">école de handball</span> structurée capable d'accueillir les joueurs de tous âges pour leur transmettre nos valeurs et notre passion.</p>
+  </div>
+
+  <!-- NOUVEAU ENCADRÉ INFRASTRUCTURES -->
+  <div class="text-block">
+    <h3>Nos Infrastructures</h3>
+    <p>Le HBM franchit un cap important ! Nous disposons désormais d'un <span class="highlight">créneau d'entraînement hebdomadaire</span> au sein de notre nouvelle salle. Nous travaillons également en étroite collaboration avec le comité pour finaliser <span class="highlight">l'homologation officielle du terrain</span> afin de pouvoir y disputer nos prochains matchs à domicile.</p>
+    
+    <p><strong>Adresse de la salle :</strong><br>
+    <span class="highlight">Rue Léon Bohard, 60250 Mouy</span></p>
+
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2589.6580556107475!2d2.2133446771131154!3d49.33022136724599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6ffca78572183%3A0xa19bf9cc2b4f699d!2sRue%20L%C3%A9on%20Bohard%2C%2060250%20Mouy!5e0!3m2!1sfr!2sfr!4v1714570000000!5m2!1sfr!2sfr" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
   </div>
 </main>
 
