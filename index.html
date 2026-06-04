@@ -67,7 +67,6 @@ body::before, body::after {
   pointer-events: none;
 }
 
-/* Grande forme supérieure jaune/vert */
 body::before {
   top: 0;
   left: 0;
@@ -76,7 +75,6 @@ body::before {
   clip-path: polygon(0 0, 100% 0, 100% 450px, 70% 320px, 30% 680px, 0 400px);
 }
 
-/* Deuxième grande forme en bas de page pour le formulaire */
 body::after {
   bottom: 200px;
   right: 0;
@@ -86,7 +84,7 @@ body::after {
   clip-path: polygon(100% 200px, 100% 1100px, 0% 950px, 10% 500px, 50% 300px);
 }
 
-/* --- BANDEAU DÉFILANT MATCH TICKER CORRIGÉ --- */
+/* --- BANDEAU DÉFILANT MATCH TICKER --- */
 .match-ticker {
   width: 100%;
   background: var(--dark-text);
@@ -108,12 +106,12 @@ body::after {
 .ticker-wrap {
   display: inline-flex;
   white-space: nowrap;
-  padding-left: 100%; /* Démarre l'animation en dehors de l'écran à droite */
+  padding-left: 100%;
   animation: ticker 35s linear infinite;
 }
 .ticker-item {
   display: inline-block;
-  padding-right: 4rem; /* Zone tampon pour éviter tout chevauchement */
+  padding-right: 4rem;
   flex-shrink: 0;
 }
 @keyframes ticker {
@@ -124,18 +122,35 @@ body::after {
   animation-play-state: paused;
 }
 
-/* --- NAVIGATION TRANSFERENCE PRO --- */
+/* --- NAVIGATION AVEC LOGO CENTRAL --- */
 nav {
   position: fixed; 
   top: 39px; left: 0; right: 0; z-index: 1000;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: center; /* Centre le contenu global */
   height: 95px; padding: 0 2rem; 
   background: rgba(255, 255, 255, 0.85); 
   backdrop-filter: blur(15px);
   border-bottom: 4px solid var(--dark-text);
 }
-.nav-logo { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; cursor: pointer; z-index: 1100; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-.nav-logo:hover { transform: scale(1.08); }
+.nav-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Logo forcé au centre absolu sur PC */
+.nav-logo { 
+  display: flex; align-items: center; gap: 0.8rem; text-decoration: none; cursor: pointer; z-index: 1100; 
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 .nav-logo img { height: 75px; width: auto; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.15)); }
 .nav-logo-text { font-family: var(--font-display); font-size: 1.8rem; font-style: italic; color: var(--dark-text); letter-spacing: 0.05em; }
 
@@ -146,7 +161,10 @@ nav {
 }
 .burger span { width: 100%; height: 3px; background-color: var(--dark-text); transition: all 0.3s ease; }
 
-.nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+/* Répartition des liens à gauche et à droite du logo central */
+.nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; width: 100%; }
+.nav-links li:nth-child(4) { margin-left: auto; } /* Pousse la seconde moitié des liens à droite */
+
 .nav-links a { 
   color: var(--dark-text); text-decoration: none; 
   font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
@@ -171,7 +189,16 @@ nav {
 
 /* --- RESPONSIVE NAVIGATION MOBILE --- */
 @media (max-width: 950px) {
-  nav { height: 75px; padding: 0 1.5rem; }
+  nav { height: 75px; padding: 0 1.5rem; justify-content: space-between; }
+  .nav-container { justify-content: space-between; position: static; }
+  
+  .nav-logo { 
+    position: static; 
+    transform: none; 
+  }
+  .nav-logo:hover { transform: scale(1.08); }
+  .nav-logo img { height: 55px; }
+
   .burger { display: flex; }
   .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
   .burger.toggle span:nth-child(2) { opacity: 0; }
@@ -184,6 +211,7 @@ nav {
     padding: 100px 2rem 2rem 2rem; gap: 1.5rem; transition: right 0.4s ease;
     overflow-y: auto; z-index: 1000;
   }
+  .nav-links li:nth-child(4) { margin-left: 0; }
   .nav-links.active { right: 0; }
   .nav-links a { font-size: 1.5rem; width: 100%; display: block; }
 
@@ -250,7 +278,7 @@ h2 {
   animation: floatSimple 6s ease-in-out infinite;
 }
 
-/* BLOC TEXTE BLANC ET PROPRE */
+/* BLOC TEXTE BLANC --- */
 .about-text-content {
   background: var(--white); padding: 3.5rem 3rem; border: 3px solid var(--dark-text); 
   position: relative; box-shadow: 12px 12px 0px var(--dark-text);
@@ -273,7 +301,7 @@ h2 {
 .stat-number { font-family: var(--font-display); font-size: 3.5rem; font-style: italic; color: var(--dark-text); line-height: 1; margin-bottom: 0.3rem; }
 .stat-label { font-size: 0.9rem; font-weight: 700; color: var(--dark-text); text-transform: uppercase; letter-spacing: 1px; }
 
-/* --- FORM SECTION (REJOINDRE LE CLUB) --- */
+/* --- FORM SECTION --- */
 .form-section { padding: 120px 20px; position: relative; z-index: 2; }
 .form-container { 
   max-width: 750px; margin: 0 auto; background: var(--white);
@@ -310,7 +338,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--j
   transform: translateY(-4px); box-shadow: 8px 8px 0px var(--dark-text); 
 }
 
-/* MAP CONTAINER STYLE CARTE TEXTE */
+/* MAP CONTAINER --- */
 .map-container {
   width: 100%; height: 300px; margin-top: 2.5rem; 
   border: 4px solid var(--dark-text); 
@@ -367,43 +395,45 @@ footer {
 </div>
 
 <nav>
-  <div class="nav-logo" id="logo-trigger">
-    <img src="images/logo.png" alt="HBM Logo">
-    <span class="nav-logo-text">HBM</span>
+  <div class="nav-container">
+    <div class="nav-logo" id="logo-trigger">
+      <img src="images/logo.png" alt="HBM Logo">
+      <span class="nav-logo-text">HBM</span>
+    </div>
+    
+    <button class="burger" id="burger" aria-label="Ouvrir le menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+    
+      <li class="dropdown">
+        <a href="#" class="dropdown-trigger">Saison ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="planning.html">Planning</a></li>
+          <li><a href="effectifs.html">Effectifs</a></li>
+          <li><a href="prepa-physique.html">Prépa Physique</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-trigger">Le Club ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="qui.html">Qui sommes-nous ?</a></li>
+          <li><a href="organigramme.html">Le Bureau</a></li>
+          <li><a href="docs.html">Documents utiles</a></li>
+        </ul>
+      </li>
+
+      <li><a href="inscriptions.html">Inscriptions</a></li>
+      <li><a href="partenaires.html">Partenaires</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
   </div>
-  
-  <button class="burger" id="burger" aria-label="Ouvrir le menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
-  <ul class="nav-links" id="nav-links">
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="actualites.html">Actualités</a></li>
-  
-    <li class="dropdown">
-      <a href="#" class="dropdown-trigger">Saison ▾</a>
-      <ul class="dropdown-content">
-        <li><a href="planning.html">Planning</a></li>
-        <li><a href="effectifs.html">Effectifs</a></li>
-        <li><a href="prepa-physique.html">Prépa Physique</a></li>
-      </ul>
-    </li>
-
-    <li class="dropdown">
-      <a href="#" class="dropdown-trigger">Le Club ▾</a>
-      <ul class="dropdown-content">
-        <li><a href="qui.html">Qui sommes-nous ?</a></li>
-        <li><a href="organigramme.html">Le Bureau</a></li>
-        <li><a href="docs.html">Documents utiles</a></li>
-      </ul>
-    </li>
-
-    <li><a href="inscriptions.html">Inscriptions</a></li>
-    <li><a href="partenaires.html">Partenaires</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-  </ul>
 </nav>
 
 <section class="hero" id="accueil">
@@ -432,7 +462,7 @@ footer {
   <div class="about-text-content">
     <span class="section-label">L'aventure commence</span>
     <h2>Réveillez le Lion en Vous</h2>
-    <p>Le HBM est un club en cours de création, porté par des passionnés de handball de l'Oise. Notre objectif est clair : construire une structure sportive conviviale, ambitieuse et durable pour notre territory.</p>
+    <p>Le HBM est un club en cours de création, porté par des passionnés de handball de l'Oise. Notre objectif est clair : construire une structure sportive conviviale, ambitieuse et durable pour notre territoire.</p>
     <p>Peu importe votre niveau ou votre âge (des seniors aux plus jeunes, avec notre projet d'école de hand), c'est votre envie de bâtir ce club avec nous qui fera la différence.</p>
   </div>
 </section>
@@ -498,7 +528,6 @@ burger.addEventListener('click', () => {
     burger.classList.toggle('toggle');
 });
 
-// Fermeture du menu lors du clic sur un lien normal
 document.querySelectorAll('.nav-links a:not(.dropdown-trigger)').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
@@ -506,7 +535,6 @@ document.querySelectorAll('.nav-links a:not(.dropdown-trigger)').forEach(link =>
     });
 });
 
-// Gestion des dropdowns tactiles sur mobile
 dropdowns.forEach(dropdown => {
     const trigger = dropdown.querySelector('.dropdown-trigger');
     trigger.addEventListener('click', (e) => {
