@@ -57,7 +57,7 @@ body {
   position: relative;
 }
 
-/* --- FORMES GÉOMÉTRIQUES ASSYMÉTRIQUES (STYLE IMAGE_3E5B60.JPG) --- */
+/* --- FORMES GÉOMÉTRIQUES ASSYMÉTRIQUES --- */
 body::before, body::after {
   content: "";
   position: absolute;
@@ -86,7 +86,7 @@ body::after {
   clip-path: polygon(100% 200px, 100% 1100px, 0% 950px, 10% 500px, 50% 300px);
 }
 
-/* --- BANDEAU DÉFILANT MATCH TICKER --- */
+/* --- BANDEAU DÉFILANT MATCH TICKER CORRIGÉ --- */
 .match-ticker {
   width: 100%;
   background: var(--dark-text);
@@ -103,21 +103,22 @@ body::after {
   z-index: 2000;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   border-bottom: 2px solid var(--jersey-green);
+  display: flex;
 }
 .ticker-wrap {
-  display: flex;
-  width: 200%;
-  animation: ticker 25s linear infinite;
+  display: inline-flex;
+  white-space: nowrap;
+  padding-left: 100%; /* Démarre l'animation en dehors de l'écran à droite */
+  animation: ticker 35s linear infinite;
 }
 .ticker-item {
-  width: 50%;
+  display: inline-block;
+  padding-right: 4rem; /* Zone tampon pour éviter tout chevauchement */
   flex-shrink: 0;
-  text-align: center;
-  white-space: nowrap;
 }
 @keyframes ticker {
   0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
 }
 .match-ticker:hover .ticker-wrap {
   animation-play-state: paused;
@@ -431,7 +432,7 @@ footer {
   <div class="about-text-content">
     <span class="section-label">L'aventure commence</span>
     <h2>Réveillez le Lion en Vous</h2>
-    <p>Le HBM est un club en cours de création, porté par des passionnés de handball de l'Oise. Notre objectif est clair : construire une structure sportive conviviale, ambitieuse et durable pour notre territoire.</p>
+    <p>Le HBM est un club en cours de création, porté par des passionnés de handball de l'Oise. Notre objectif est clair : construire une structure sportive conviviale, ambitieuse et durable pour notre territory.</p>
     <p>Peu importe votre niveau ou votre âge (des seniors aux plus jeunes, avec notre projet d'école de hand), c'est votre envie de bâtir ce club avec nous qui fera la différence.</p>
   </div>
 </section>
