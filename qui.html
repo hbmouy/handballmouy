@@ -10,7 +10,7 @@
 /* --- BASE LUMINEUSE & ENERGIE MAILLOT --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg-light: #f4f7f4; 
+  --bg-light: #f5f8f5; 
   --jersey-yellow: #e2f438;  
   --jersey-green: #2cd646;   
   --jersey-purple: #9d4edd;  
@@ -22,14 +22,42 @@
 
 body { 
   background: var(--bg-light); 
-  background-image: radial-gradient(rgba(44, 214, 70, 0.15) 1px, transparent 0);
-  background-size: 24px 24px;
   color: var(--dark-text); 
   font-family: var(--font-body); 
   line-height: 1.8;
+  overflow-x: hidden; /* Évite les barres de défilement à cause des formes de fond */
+  position: relative;
 }
 
-/* --- NAVIGATION STYLE "HBC NANTES" REVISITÉE --- */
+/* --- FORMES GÉOMÉTRIQUES ASSYMÉTRIQUES (STYLE IMAGE_3E5B60.JPG) --- */
+body::before, body::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1200px;
+  z-index: -1;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Grande forme angulaire supérieure (fusion jaune/vert du maillot) */
+body::before {
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px);
+}
+
+/* Deuxième grande forme en bas de page pour garder le dynamisme au défilement */
+body::after {
+  top: 800px;
+  right: 0;
+  width: 80%;
+  background: linear-gradient(225deg, rgba(226, 244, 56, 0.6) 0%, rgba(44, 214, 70, 0.6) 100%);
+  clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px);
+}
+
+/* --- NAVIGATION TRANSFERENCE --- */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   display: flex; align-items: center; justify-content: center;
@@ -44,10 +72,9 @@ nav {
   width: 100%; max-width: 1200px; height: 100%; position: relative;
 }
 
-/* Le bloc Logo au centre (sans texte HBM) */
 .nav-logo {
   position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%); /* Centrage vertical parfait ajusté */
+  transform: translate(-50%, -50%); 
   display: flex; align-items: center; justify-content: center;
   text-decoration: none; color: inherit; z-index: 1002;
   transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -58,7 +85,6 @@ nav {
 }
 .nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 
-/* Liens navigation */
 .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
 .nav-group.left { justify-content: flex-end; }  
 .nav-group.right { justify-content: flex-start; } 
@@ -69,7 +95,7 @@ nav {
   text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
   cursor: pointer;
 }
-.nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-green); }
+.nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
 
 /* BURGER MOBILE */
 .menu-toggle {
@@ -90,7 +116,7 @@ nav {
   padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
   font-style: normal; display: block; text-transform: none; text-align: center; color: var(--dark-text);
 }
-.dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-green); }
+.dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-purple); }
 .dropdown:hover .dropdown-content { display: block; }
 
 /* --- RESPONSIVE MOBILE --- */
@@ -113,30 +139,36 @@ nav {
 }
 
 /* --- CONTENU MAILLOT STYLE --- */
-.content-wrapper { max-width: 850px; margin: 180px auto 100px; padding: 0 20px; }
+.content-wrapper { max-width: 850px; margin: 180px auto 100px; padding: 0 20px; position: relative; z-index: 2; }
 
+/* Label violet chic */
 .section-label { 
-  color: var(--jersey-purple); 
+  color: var(--dark-text); 
+  background: var(--white);
+  border: 2px solid var(--dark-text);
+  box-shadow: 3px 3px 0px var(--dark-text);
   text-transform: uppercase; 
-  font-family: var(--font-display); font-style: italic; font-size: 1.4rem; 
-  letter-spacing: 3px; display: block; margin-bottom: 0.5rem; text-align: center;
+  font-family: var(--font-display); font-style: italic; font-size: 1.2rem; 
+  letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem;
+  transform: rotate(-1deg);
 }
+.label-container { text-align: center; }
 
-/* H1 : Légèrement rétréci et plus condensé pour forcer la ligne unique */
+/* H1 : Énorme impact avec ombres noire et violette décalées */
 h1 { 
   font-family: var(--font-display); 
   font-size: clamp(2.8rem, 7.5vw, 4.8rem); 
   text-align: center; margin-bottom: 4rem; line-height: 1; font-style: italic; letter-spacing: -1px;
   color: var(--dark-text);
-  white-space: nowrap; /* Empêche le retour à la ligne automatique */
+  white-space: nowrap;
   text-shadow: 
-    4px 4px 0px var(--jersey-yellow), 
-    7px 7px 0px var(--jersey-purple);
+    4px 4px 0px var(--white), 
+    8px 8px 0px var(--dark-text);
 }
 
-/* LES BLOCS DE TEXTE */
+/* LES BLOCS DE TEXTE : Passent en blanc pour se détacher proprement sur le fond design */
 .text-block { 
-  background: linear-gradient(135deg, var(--jersey-yellow) 0%, var(--jersey-green) 100%);
+  background: var(--white);
   padding: 3.5rem 3rem; 
   border: 3px solid var(--dark-text); 
   position: relative; margin-bottom: 4rem; 
@@ -154,17 +186,18 @@ h3 {
   font-family: var(--font-display); font-size: 2.4rem; 
   color: var(--dark-text); 
   margin: 2.5rem 0 1rem; font-style: italic; letter-spacing: -0.5px; text-transform: uppercase;
-  border-bottom: 3px solid var(--dark-text);
+  border-bottom: 3px solid var(--jersey-green);
   display: inline-block; padding-bottom: 2px;
 }
 .text-block > h3:first-of-type { margin-top: 0; } 
 
 p { margin-bottom: 1.5rem; color: var(--dark-text); font-weight: 500; font-size: 1.1rem; }
 
+/* Surlignage violet (rappel numéro maillot) */
 .highlight { 
-  background: var(--dark-text);
+  background: var(--jersey-purple);
   color: var(--white);
-  padding: 0.1rem 0.4rem;
+  padding: 0.1rem 0.5rem;
   font-weight: 700;
   display: inline-block;
   transform: skewX(-10deg);
@@ -180,15 +213,17 @@ p { margin-bottom: 1.5rem; color: var(--dark-text); font-weight: 500; font-size:
 .map-container iframe { width: 100%; height: 100%; border: 0; }
 
 @media (max-width: 480px) {
-  h1 { white-space: normal; } /* Autorise le retour à la ligne sur très petit téléphone */
+  h1 { white-space: normal; }
   .text-block { padding: 2rem 1.5rem; clip-path: none; box-shadow: 8px 8px 0px var(--dark-text); }
   .content-wrapper { margin-top: 140px; }
+  body::before { clip-path: polygon(0 0, 100% 0, 100% 200px, 0 120px); } /* Forme réduite sur mobile */
 }
 
 footer { 
   text-align: center; padding: 60px; color: var(--dark-text); font-weight: 700;
   border-top: 3px dashed var(--dark-text); 
   background: var(--white);
+  position: relative; z-index: 2;
 }
 </style>
 </head>
@@ -209,7 +244,6 @@ footer {
       </li>
     </ul>
 
-    <!-- Le logo seul désormais -->
     <a href="index.html" class="nav-logo">
       <img src="images/logo.png" alt="HBM">
     </a>
@@ -236,7 +270,9 @@ footer {
 </nav>
 
 <main class="content-wrapper">
-  <span class="section-label">L'Esprit HBM</span>
+  <div class="label-container">
+    <span class="section-label">L'Esprit HBM</span>
+  </div>
   <h1>QUI SOMMES-NOUS ?</h1>
   
   <div class="text-block">
