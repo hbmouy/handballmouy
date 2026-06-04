@@ -1,331 +1,379 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qui sommes-nous ? - HBM</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-/* --- BASE LUMINEUSE & ENERGIE MAILLOT --- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg-light: #f5f8f5; 
-  --jersey-yellow: #e2f438;  
-  --jersey-green: #2cd646;   
-  --jersey-purple: #9d4edd;  
-  --dark-text: #0b130a;      
-  --white: #ffffff; 
-  --font-display: 'Anton', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-}
+    <!-- ICÔNE DANS L'ONGLET (FAVICON) -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qui sommes-nous ? - HBM</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- ANTI-FLASH BLANC : Lecture immédiate du thème sélectionné -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+    
+    <style>
+        /* --- BASE LUMINEUSE & ENERGIE MAILLOT (Charte globale) --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --jersey-yellow: #e2f438;  
+            --jersey-green: #2cd646;   
+            --jersey-purple: #9d4edd;  
+            --font-display: 'Anton', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
 
-body { 
-  background: var(--bg-light); 
-  color: var(--dark-text); 
-  font-family: var(--font-body); 
-  line-height: 1.8;
-  overflow-x: hidden; /* Évite les barres de défilement à cause des formes de fond */
-  position: relative;
-}
+            /* Mode Clair (par défaut) */
+            --bg-body: #f5f8f5; 
+            --bg-card: #ffffff; 
+            --text-main: #0b130a;      
+            --border-color: #0b130a;
+            --shadow-color: #0b130a;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --block-corner: var(--jersey-purple);
+        }
 
-/* --- FORMES GÉOMÉTRIQUES ASSYMÉTRIQUES (STYLE IMAGE_3E5B60.JPG) --- */
-body::before, body::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1200px;
-  z-index: -1;
-  opacity: 0.85;
-  pointer-events: none;
-}
+        /* Mode Sombre */
+        [data-theme="dark"] {
+            --bg-body: #0b130a;
+            --bg-card: #142113;
+            --text-main: #f5f8f5;
+            --border-color: #f5f8f5;
+            --shadow-color: var(--jersey-green); 
+            --nav-bg: rgba(11, 19, 10, 0.85);
+            --block-corner: var(--jersey-green);
+        }
 
-/* Grande forme angulaire supérieure (fusion jaune/vert du maillot) */
-body::before {
-  top: 0;
-  left: 0;
-  background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px);
-}
+        body { 
+            background: var(--bg-body); 
+            color: var(--text-main); 
+            font-family: var(--font-body); 
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-/* Deuxième grande forme en bas de page pour garder le dynamisme au défilement */
-body::after {
-  top: 800px;
-  right: 0;
-  width: 80%;
-  background: linear-gradient(225deg, rgba(226, 244, 56, 0.6) 0%, rgba(44, 214, 70, 0.6) 100%);
-  clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px);
-}
+        /* --- DESIGN GÉOMÉTRIQUE ASYMÉTRIQUE D'ARRIÈRE-PLAN --- */
+        body::before, body::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 1200px;
+            z-index: -1;
+            opacity: 0.85;
+            pointer-events: none;
+        }
+        body::before {
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px);
+        }
+        body::after {
+            top: 800px;
+            right: 0;
+            width: 80%;
+            background: linear-gradient(225deg, rgba(226, 244, 56, 0.6) 0%, rgba(44, 214, 70, 0.6) 100%);
+            clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px);
+        }
 
-/* --- NAVIGATION TRANSFERENCE --- */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  display: flex; align-items: center; justify-content: center;
-  height: 95px; padding: 0 2rem; 
-  background: rgba(255, 255, 255, 0.85); 
-  backdrop-filter: blur(15px);
-  border-bottom: 4px solid var(--dark-text);
-}
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+            height: 95px; padding: 0 2rem; 
+            background: var(--nav-bg); 
+            backdrop-filter: blur(15px);
+            border-bottom: 4px solid var(--border-color);
+        }
 
-.nav-container {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; max-width: 1200px; height: 100%; position: relative;
-}
+        .nav-container {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; max-width: 1200px; height: 100%; position: relative;
+        }
 
-.nav-logo {
-  position: absolute; left: 50%; top: 50%;
-  transform: translate(-50%, -50%); 
-  display: flex; align-items: center; justify-content: center;
-  text-decoration: none; color: inherit; z-index: 1002;
-  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.nav-logo img { 
-  height: 85px; 
-  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); 
-}
-.nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
+        .nav-logo {
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%); 
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: inherit; z-index: 1002;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .nav-logo img { 
+            height: 85px; 
+            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); 
+        }
+        .nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 
-.nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
-.nav-group.left { justify-content: flex-end; }  
-.nav-group.right { justify-content: flex-start; } 
+        .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
+        .nav-group.left { justify-content: flex-end; }  
+        .nav-group.right { justify-content: flex-start; } 
 
-.nav-group a, .dropdown-trigger { 
-  color: var(--dark-text); text-decoration: none; 
-  font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
-  text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
-  cursor: pointer;
-}
-.nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
+        .nav-group a, .dropdown-trigger { 
+            color: var(--text-main); text-decoration: none; 
+            font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
+            text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
+            cursor: pointer;
+        }
+        .nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
 
-/* BURGER MOBILE */
-.menu-toggle {
-  display: none; flex-direction: column; justify-content: space-between;
-  width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
-}
-.menu-toggle span { width: 100%; height: 3px; background-color: var(--dark-text); transition: all 0.3s ease; }
+        /* BURGER MOBILE */
+        .menu-toggle {
+            display: none; flex-direction: column; justify-content: space-between;
+            width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
+        }
+        .menu-toggle span { width: 100%; height: 3px; background-color: var(--text-main); transition: all 0.3s ease; }
 
-/* DROPDOWN (PC) */
-.dropdown { position: relative; }
-.dropdown-content {
-  display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  background: var(--white); min-width: 180px;
-  border: 3px solid var(--dark-text);
-  padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--dark-text);
-}
-.dropdown-content li a { 
-  padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
-  font-style: normal; display: block; text-transform: none; text-align: center; color: var(--dark-text);
-}
-.dropdown-content li a:hover { background: var(--bg-light); color: var(--jersey-purple); }
-.dropdown:hover .dropdown-content { display: block; }
+        /* DROPDOWNS */
+        .dropdown { position: relative; }
+        .dropdown-content {
+            display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            background: var(--bg-card); min-width: 180px;
+            border: 3px solid var(--border-color);
+            padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color);
+        }
+        .dropdown-content li a { 
+            padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
+            font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main);
+        }
+        .dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
+        .dropdown:hover .dropdown-content { display: block; }
 
-/* --- RESPONSIVE MOBILE --- */
-@media (max-width: 992px) {
-  nav { height: 75px; }
-  .nav-container { justify-content: space-between; }
-  .nav-logo { position: static; transform: none; }
-  .nav-logo img { height: 60px; }
-  .nav-logo:hover { transform: none; }
-  .menu-toggle { display: flex; }
-  
-  .nav-group {
-    position: fixed; top: 0; width: 280px; height: 100vh;
-    background: var(--white); flex-direction: column; align-items: flex-start;
-    padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000;
-  }
-  .nav-group.left { right: -100%; border-left: 4px solid var(--dark-text); transition: right 0.4s ease; }
-  .nav-group.right { display: none; } 
-  .nav-group.left.active { right: 0; }
-}
+        /* Correction de l'affichage mobile */
+        .dropdown.active .dropdown-content { 
+            display: block; 
+            position: static; 
+            transform: none; 
+            box-shadow: none; 
+            border: none;
+            border-left: 2px solid var(--jersey-purple);
+            margin-left: 10px;
+            padding-left: 5px;
+        }
 
-/* --- CONTENU MAILLOT STYLE --- */
-.content-wrapper { max-width: 850px; margin: 180px auto 100px; padding: 0 20px; position: relative; z-index: 2; }
+        /* --- CONTENU MAILLOT STYLE --- */
+        .content-wrapper { max-width: 850px; margin: 180px auto 100px; padding: 0 20px; position: relative; z-index: 2; }
 
-/* Label violet chic */
-.section-label { 
-  color: var(--dark-text); 
-  background: var(--white);
-  border: 2px solid var(--dark-text);
-  box-shadow: 3px 3px 0px var(--dark-text);
-  text-transform: uppercase; 
-  font-family: var(--font-display); font-style: italic; font-size: 1.2rem; 
-  letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem;
-  transform: rotate(-1deg);
-}
-.label-container { text-align: center; }
+        .label-container { text-align: center; }
+        .section-label { 
+            color: var(--text-main); 
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            box-shadow: 3px 3px 0px var(--shadow-color);
+            text-transform: uppercase; 
+            font-family: var(--font-display); font-style: italic; font-size: 1.2rem; 
+            letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem;
+            transform: rotate(-1deg);
+        }
 
-/* H1 : Énorme impact avec ombres noire et violette décalées */
-h1 { 
-  font-family: var(--font-display); 
-  font-size: clamp(2.8rem, 7.5vw, 4.8rem); 
-  text-align: center; margin-bottom: 4rem; line-height: 1; font-style: italic; letter-spacing: -1px;
-  color: var(--dark-text);
-  white-space: nowrap;
-  text-shadow: 
-    4px 4px 0px var(--white), 
-    8px 8px 0px var(--dark-text);
-}
+        h1 { 
+            font-family: var(--font-display); 
+            font-size: clamp(2.8rem, 7.5vw, 4.8rem); 
+            text-align: center; margin-bottom: 4rem; line-height: 1; font-style: italic; letter-spacing: -1px;
+            color: var(--text-main);
+            white-space: nowrap;
+            text-shadow: 
+                4px 4px 0px var(--bg-card), 
+                8px 8px 0px var(--border-color);
+        }
 
-/* LES BLOCS DE TEXTE : Passent en blanc pour se détacher proprement sur le fond design */
-.text-block { 
-  background: var(--white);
-  padding: 3.5rem 3rem; 
-  border: 3px solid var(--dark-text); 
-  position: relative; margin-bottom: 4rem; 
-  box-shadow: 12px 12px 0px var(--dark-text);
-  clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
-}
+        /* LES BLOCS DE TEXTE */
+        .text-block { 
+            background: var(--bg-card);
+            padding: 3.5rem 3rem; 
+            border: 3px solid var(--border-color); 
+            position: relative; margin-bottom: 4rem; 
+            box-shadow: 12px 12px 0px var(--shadow-color);
+            clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
+        }
 
-.text-block::before { 
-  content: ''; position: absolute; top: 0; left: 0; width: 35px; height: 35px; 
-  background: var(--jersey-purple); 
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-}
+        .text-block::before { 
+            content: ''; position: absolute; top: 0; left: 0; width: 35px; height: 35px; 
+            background: var(--block-corner); 
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
 
-h3 { 
-  font-family: var(--font-display); font-size: 2.4rem; 
-  color: var(--dark-text); 
-  margin: 2.5rem 0 1rem; font-style: italic; letter-spacing: -0.5px; text-transform: uppercase;
-  border-bottom: 3px solid var(--jersey-green);
-  display: inline-block; padding-bottom: 2px;
-}
-.text-block > h3:first-of-type { margin-top: 0; } 
+        h3 { 
+            font-family: var(--font-display); font-size: 2.4rem; 
+            color: var(--text-main); 
+            margin: 2.5rem 0 1rem; font-style: italic; letter-spacing: -0.5px; text-transform: uppercase;
+            border-bottom: 3px solid var(--jersey-green);
+            display: inline-block; padding-bottom: 2px;
+        }
+        .text-block > h3:first-of-type { margin-top: 0; } 
 
-p { margin-bottom: 1.5rem; color: var(--dark-text); font-weight: 500; font-size: 1.1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-main); font-weight: 500; font-size: 1.1rem; }
 
-/* Surlignage violet (rappel numéro maillot) */
-.highlight { 
-  background: var(--jersey-purple);
-  color: var(--white);
-  padding: 0.1rem 0.5rem;
-  font-weight: 700;
-  display: inline-block;
-  transform: skewX(-10deg);
-}
+        /* Surlignage (Ajustement dynamique de la couleur de police pour lisibilité) */
+        .highlight { 
+            background: var(--jersey-purple);
+            color: #ffffff;
+            padding: 0.1rem 0.5rem;
+            font-weight: 700;
+            display: inline-block;
+            transform: skewX(-10deg);
+        }
 
-/* CARTE INTEGRÉE */
-.map-container { 
-  position: relative; width: 100%; height: 300px; margin-top: 2rem; 
-  border: 4px solid var(--dark-text); 
-  box-shadow: 8px 8px 0px var(--dark-text);
-  transform: rotate(-0.5deg);
-}
-.map-container iframe { width: 100%; height: 100%; border: 0; }
+        /* CARTE INTEGRÉE */
+        .map-container { 
+            position: relative; width: 100%; height: 300px; margin-top: 2rem; 
+            border: 4px solid var(--border-color); 
+            box-shadow: 8px 8px 0px var(--shadow-color);
+            transform: rotate(-0.5deg);
+        }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
 
-@media (max-width: 480px) {
-  h1 { white-space: normal; }
-  .text-block { padding: 2rem 1.5rem; clip-path: none; box-shadow: 8px 8px 0px var(--dark-text); }
-  .content-wrapper { margin-top: 140px; }
-  body::before { clip-path: polygon(0 0, 100% 0, 100% 200px, 0 120px); } /* Forme réduite sur mobile */
-}
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 992px) {
+            nav { height: 75px; }
+            .nav-container { justify-content: space-between; }
+            .nav-logo { position: static; transform: none; }
+            .nav-logo img { height: 60px; }
+            .nav-logo:hover { transform: none; }
+            .menu-toggle { display: flex; }
+            
+            .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-footer { 
-  text-align: center; padding: 60px; color: var(--dark-text); font-weight: 700;
-  border-top: 3px dashed var(--dark-text); 
-  background: var(--white);
-  position: relative; z-index: 2;
-}
-</style>
+            .nav-group {
+                position: fixed; top: 0; width: 280px; height: 100vh;
+                background: var(--bg-card); flex-direction: column; align-items: flex-start;
+                padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000;
+            }
+            .nav-group.left { right: -100%; border-left: 4px solid var(--border-color); transition: right 0.4s ease; }
+            .nav-group.right { display: none; } 
+            .nav-group.left.active { right: 0; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { white-space: normal; }
+            .text-block { padding: 2rem 1.5rem; clip-path: none; box-shadow: 8px 8px 0px var(--shadow-color); }
+            .content-wrapper { margin-top: 140px; }
+            body::before { clip-path: polygon(0 0, 100% 0, 100% 200px, 0 120px); }
+        }
+
+        footer { 
+            text-align: center; padding: 60px; color: var(--text-main); font-weight: 700;
+            border-top: 3px dashed var(--border-color); 
+            background: var(--bg-card);
+            position: relative; z-index: 2;
+        }
+    </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-container">
-    <ul class="nav-group left">
-      <li><a href="./">Accueil</a></li>
-      <li><a href="actualites.html">Actualités</a></li>
-      <li class="dropdown">
-        <a class="dropdown-trigger">Saison ▾</a>
-        <ul class="dropdown-content">
-          <li><a href="planning.html">Planning</a></li>
-          <li><a href="effectifs.html">Effectifs</a></li>
-          <li><a href="prepa-physique.html">Prépa Physique</a></li>
+    <div class="nav-container">
+        <ul class="nav-group left">
+            <li><a href="./">Accueil</a></li>
+            <li><a href="actualites.html">Actualités</a></li>
+            <li class="dropdown">
+                <a class="dropdown-trigger">Saison ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="planning.html">Planning</a></li>
+                    <li><a href="effectifs.html">Effectifs</a></li>
+                    <li><a href="prepa-physique.html">Prépa Physique</a></li>
+                </ul>
+            </li>
         </ul>
-      </li>
-    </ul>
 
-    <a href="index.html" class="nav-logo">
-      <img src="images/logo.png" alt="HBM">
-    </a>
+        <a href="index.html" class="nav-logo">
+            <img src="images/logo.png" alt="HBM">
+        </a>
 
-    <button class="menu-toggle" aria-label="Ouvrir le menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+        <button class="menu-toggle" aria-label="Ouvrir le menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-    <ul class="nav-group right">
-      <li class="dropdown">
-        <a class="dropdown-trigger">Le Club ▾</a>
-        <ul class="dropdown-content">
-          <li><a href="qui.html">Qui sommes-nous ?</a></li>
-          <li><a href="organigramme.html">Le Bureau</a></li>
-          <li><a href="docs.html">Documents utiles</a></li>
+        <ul class="nav-group right">
+            <li class="dropdown">
+                <a class="dropdown-trigger" style="color: var(--jersey-purple);">Le Club ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="qui.html">Qui sommes-nous ?</a></li>
+                    <li><a href="organigramme.html">Le Bureau</a></li>
+                    <li><a href="docs.html">Documents utiles</a></li>
+                </ul>
+            </li>
+            <li><a href="inscriptions.html">Inscriptions</a></li>
+            <li><a href="partenaires.html">Partenaires</a></li>
         </ul>
-      </li>
-      <li><a href="inscriptions.html">Inscriptions</a></li>
-      <li><a href="partenaires.html">Partenaires</a></li>
-    </ul>
-  </div>
+    </div>
 </nav>
 
 <main class="content-wrapper">
-  <div class="label-container">
-    <span class="section-label">L'Esprit HBM</span>
-  </div>
-  <h1>QUI SOMMES-NOUS ?</h1>
-  
-  <div class="text-block">
-    <h3>L'Aube d'un Nouveau Projet</h3>
-    <p>Le <span class="highlight">Handball Mouy (HBM)</span> n'est pas seulement un club de sport, c'est une aventure humaine qui démarre. Né de la volonté de passionnés du ballon rond, notre club est actuellement en pleine phase de création. Nous bâtissons aujourd'hui les fondations d'un projet durable et concret pour notre territoire.</p>
-
-    <h3>Du Plaisir pour Tous, du Jeu pour Chacun</h3>
-    <p>Notre philosophie est simple : le handball doit être accessible à tous. Que vous soyez un ancien joueur de haut niveau, un débutant curieux ou simplement à la recherche d'une activité <span class="highlight">conviviale</span>, vous avez votre place chez nous. Nous formons une équipe soudée où l'esprit de famille prime sur le score.</p>
-
-    <h3>Notre Ambition : L'École de Hand</h3>
-    <p>Si nous commençons cette saison avec énergie, notre regard est tourné vers l'avenir. Notre objectif est de créer, au fil du temps, une <span class="highlight">école de handball</span> structurée capable d'accueillir les joueurs de tous âges pour leur transmettre nos valeurs et notre passion.</p>
-  </div>
-
-  <div class="text-block">
-    <h3>Nos Infrastructures</h3>
-    <p><strong>Adresse de la salle :</strong><br>
-    <span class="highlight">Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</span></p>
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600.7535577479516!2d2.323413211759135!3d49.318950571278975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e64d666f8b0fd5%3A0x4c52bdead9e4e6c7!2sComplexe%20Sportif!5e0!3m2!1sfr!2sfr!4v1780562750522!5m2!1sfr!2sfr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div class="label-container">
+        <span class="section-label">L'Esprit HBM</span>
     </div>
-  </div>
+    <h1>QUI SOMMES-NOUS ?</h1>
+    
+    <div class="text-block">
+        <h3>L'Aube d'un Nouveau Projet</h3>
+        <p>Le <span class="highlight">Handball Mouy (HBM)</span> n'est pas seulement un club de sport, c'est une aventure humaine qui démarre. Né de la volonté de passionnés du ballon rond, notre club est actuellement en pleine phase de création. Nous bâtissons aujourd'hui les fondations d'un projet durable et concret pour notre territoire.</p>
+
+        <h3>Du Plaisir pour Tous, du Jeu pour Chacun</h3>
+        <p>Notre philosophie est simple : le handball doit être accessible à tous. Que vous soyez un ancien joueur de haut niveau, un débutant curieux ou simplement à la recherche d'une activité <span class="highlight">conviviale</span>, vous avez votre place chez nous. Nous formons une équipe soudée où l'esprit de famille prime sur le score.</p>
+
+        <h3>Notre Ambition : L'École de Hand</h3>
+        <p>Si nous commençons cette saison avec énergie, notre regard est tourné vers l'avenir. Notre objectif est de créer, au fil du temps, une <span class="highlight">école de handball</span> structurée capable d'accueillir les joueurs de tous âges pour leur transmettre nos valeurs et notre passion.</p>
+    </div>
+
+    <div class="text-block">
+        <h3>Nos Infrastructures</h3>
+        <p><strong>Adresse de la salle :</strong><br>
+        <span class="highlight">Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</span></p>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600.7535577479516!2d2.323413211759135!3d49.318950571278975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e64d666f8b0fd5%3A0x4c52bdead9e4e6c7!2sComplexe%20Sportif!5e0!3m2!1sfr!2sfr!4v1780562750522!5m2!1sfr!2sfr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
 </main>
 
 <footer>
-  © 2026 HBM — Handball Mouy — L'aventure ne fait que commencer.
+    © 2026 HBM — Handball Mouy — L'aventure ne fait que commencer.
 </footer>
 
 <script>
-const menuToggle = document.querySelector('.menu-toggle');
-const navGroupLeft = document.querySelector('.nav-group.left');
-const navGroupRight = document.querySelector('.nav-group.right');
+    // --- SCRIPT NAVIGATION (DUAL GROUP + MOBILE FUSION) ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navGroupLeft = document.querySelector('.nav-group.left');
+    const navGroupRight = document.querySelector('.nav-group.right');
 
-if (window.innerWidth <= 992) {
-  const rightLinks = navGroupRight.querySelectorAll('li');
-  rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
-}
-
-const dropdowns = document.querySelectorAll('.dropdown');
-
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  navGroupLeft.classList.toggle('active');
-});
-
-dropdowns.forEach(dropdown => {
-  const trigger = dropdown.querySelector('.dropdown-trigger');
-  trigger.addEventListener('click', (e) => {
     if (window.innerWidth <= 992) {
-      e.preventDefault();
-      dropdown.classList.toggle('active');
+        const rightLinks = navGroupRight.querySelectorAll('li');
+        rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
     }
-  });
-});
+
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navGroupLeft.classList.toggle('active');
+    });
+
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        trigger.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            }
+        });
+    });
+
+    document.querySelectorAll('.nav-group a:not(.dropdown-trigger)').forEach(link => {
+        link.addEventListener('click', () => {
+            navGroupLeft.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    });
 </script>
 </body>
 </html>
