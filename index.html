@@ -51,7 +51,6 @@
 
 html { scroll-behavior: smooth; }
 body {
-  /* MODIFICATION DU FOND ICI : Dégradé inspiré du maillot */
   background: radial-gradient(circle at center, #1a2e15 0%, var(--dark) 100%);
   background-attachment: fixed;
   color: var(--white);
@@ -171,12 +170,10 @@ nav {
   
   .burger { display: flex; }
 
-  /* Animation du burger en croix "X" */
   .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
   .burger.toggle span:nth-child(2) { opacity: 0; }
   .burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-  /* Menu latéral mobile glissant */
   .nav-links {
     position: fixed;
     right: -100%;
@@ -199,7 +196,6 @@ nav {
   .nav-links a { font-size: 1rem; width: 100%; display: block; }
   .nav-links a::after { display: none; }
 
-  /* Dropdowns sur mobile */
   .dropdown { width: 100%; }
   .dropdown-content { 
     display: none;
@@ -323,6 +319,9 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g
 
 /* --- FOOTER & SOCIAL --- */
 .contact-bar { padding: 4rem 3rem; background: rgba(10, 15, 8, 0.6); border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
+.contact-address { color: var(--muted); font-size: 0.85rem; margin: 0.8rem 0 0; display: flex; align-items: center; justify-content: center; gap: 0.4rem; }
+.contact-address a { color: var(--muted); text-decoration: none; transition: 0.3s; }
+.contact-address a:hover { color: var(--green-bright); }
 .social-group { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
 .social-link { color: var(--green-bright); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: 0.3s; }
 .social-link:hover { color: white; transform: translateY(-3px); }
@@ -436,6 +435,9 @@ footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8r
       </div>
       <div style="margin-top:1.5rem;"><label>Message (optionnel)</label><textarea name="message" rows="4"></textarea></div>
       <button type="submit" id="btn-submit" class="btn-primary" style="width:100%; margin-top:2rem;">ENVOYER MA DEMANDE</button>
+      <div class="map-container" style="width:100%; height:300px; margin-top:2rem; border:1px solid rgba(34,139,34,0.3); border-radius:4px; overflow:hidden;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600.7535577479516!2d2.323413211759135!3d49.318950571278975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e64d666f8b0fd5%3A0x4c52bdead9e4e6c7!2sComplexe%20Sportif!5e0!3m2!1sfr!2sfr!4v1780562750522!5m2!1sfr!2sfr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
       <div id="success-msg" style="display:none; color:var(--green-bright); text-align:center; margin-top:1.5rem; font-weight:bold;">Message envoyé ! Bienvenue dans l'équipe.</div>
     </form>
   </div>
@@ -443,6 +445,9 @@ footer { text-align: center; padding: 40px; color: var(--muted); font-size: 0.8r
 
 <div class="contact-bar">
   <p style="color: var(--muted); text-align: center;">Suivez la création du club en direct</p>
+  <p class="contact-address">
+    📍 <a href="https://maps.google.com/?q=Complexe+Sportif+6-8+Avenue+du+8+Mai+1945+60250+Mouy" target="_blank">Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</a>
+  </p>
   <div class="social-group">
     <a href="mailto:Handball.mouy@gmail.com" class="social-link">✉ Email</a>
     <a href="https://www.facebook.com/profile.php?id=61572143188788" target="_blank" class="social-link">Facebook</a>
