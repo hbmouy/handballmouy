@@ -116,12 +116,15 @@
   </div>
 </nav>
 
-<!-- NOUVEAU : Logo HBM très gros -->
-<section style="display: flex; justify-content: center; align-items: center; padding: 60px 20px;">
-    <img src="images/logo.png" alt="Logo HBM" style="max-width: 450px; width: 100%; height: auto; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
+<!-- RESTAURATION DE L'ACCUEIL (Recadrage du menu du haut) -->
+<section class="hero" id="accueil">
+  <img src="images/logo.png" alt="Logo HBM" class="hero-logo">
+  <p class="hero-saison">SAISON 2026 — 2027</p>
+  <p class="hero-sub">Le Handball Mouy s'éveille. Un projet ambitieux, une équipe soudée, et bientôt... vos premiers exploits sur le terrain.</p>
+  <a href="#contact" class="btn-primary">REJOINDRE L'AVENTURE</a>
 </section>
 
-<!-- NOUVEAU : Prochain Match avec compte à rebours -->
+<!-- Prochain Match avec compte à rebours -->
 <section id="match-countdown" style="text-align: center; padding: 50px 20px; background-color: var(--bg-card); border-top: 4px solid var(--jersey-green); border-bottom: 4px solid var(--jersey-green);">
     <h2 style="color: var(--text-main); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 2px;">Prochain match : Cires-lès-Mello</h2>
     <div id="countdown" style="font-family: var(--font-display); font-size: 3.5rem; color: var(--jersey-purple); margin-top: 20px;">
@@ -129,22 +132,11 @@
     </div>
 </section>
 
-<!-- NOUVEAU : Les 3 dernières actualités -->
+<!-- Les 3 dernières actualités (Chargées dynamiquement) -->
 <section id="actus" style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
     <h2 style="text-align: center; color: var(--text-main); font-family: var(--font-display); margin-bottom: 40px; text-transform: uppercase;">Dernières actualités</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-        <div style="background: var(--bg-card); border: 2px solid var(--jersey-yellow); border-radius: 8px; padding: 25px;">
-            <h3 style="color: var(--jersey-purple); margin-bottom: 15px;">Préparation du match</h3>
-            <p style="color: var(--text-main); line-height: 1.5;">Les joueurs se préparent intensivement pour la rencontre de la semaine prochaine face à Cires-lès-Mello. Venez nombreux !</p>
-        </div>
-        <div style="background: var(--bg-card); border: 2px solid var(--jersey-yellow); border-radius: 8px; padding: 25px;">
-            <h3 style="color: var(--jersey-purple); margin-bottom: 15px;">Ouverture Inscriptions</h3>
-            <p style="color: var(--text-main); line-height: 1.5;">Les inscriptions pour la saison 2026-2027 sont officiellement ouvertes. Rejoignez la meute dès aujourd'hui.</p>
-        </div>
-        <div style="background: var(--bg-card); border: 2px solid var(--jersey-yellow); border-radius: 8px; padding: 25px;">
-            <h3 style="color: var(--jersey-purple); margin-bottom: 15px;">Nouveaux Partenaires</h3>
-            <p style="color: var(--text-main); line-height: 1.5;">Le club est fier d'annoncer l'arrivée de nouveaux sponsors locaux pour soutenir notre projet sportif.</p>
-        </div>
+    <div id="actus-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <p style="text-align:center; grid-column: 1 / -1;">Chargement des actualités...</p>
     </div>
 </section>
 
@@ -180,6 +172,11 @@
   </div>
 </section>
 
+<!-- Logo HBM XXL juste au-dessus des réseaux sociaux -->
+<section style="display: flex; justify-content: center; align-items: center; padding: 40px 20px 0 20px;">
+    <img src="images/logo.png" alt="Logo HBM" style="max-width: 450px; width: 100%; height: auto; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
+</section>
+
 <div class="contact-bar">
   <p style="color: var(--text-main); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Suivez la création du club en direct</p>
   <p class="contact-address">
@@ -199,9 +196,43 @@
 </footer>
 
 <script>
+// --- RECUPERATION AUTOMATIQUE DES ACTUS DEPUIS actualites.html ---
+async function loadLatestActus() {
+    try {
+        const response = await fetch('actualites.html');
+        if (!response.ok) throw new Error("Impossible de charger la page actualites.html");
+        
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Modifiez ce sélecteur en fonction de la structure réelle de vos articles dans actualites.html
+        // Ici on cherche des balises <article> ou des div avec une classe "actu-card" / "actu"
+        const actusElements = doc.querySelectorAll('article, .actu-card, .actu');
+        const container = document.getElementById('actus-container');
+
+        if (actusElements.length > 0) {
+            container.innerHTML = ''; // On vide le message de chargement
+            
+            // On récupère au maximum les 3 premières actus
+            for (let i = 0; i < Math.min(3, actusElements.length); i++) {
+                const actuCard = document.createElement('div');
+                actuCard.style.cssText = "background: var(--bg-card); border: 2px solid var(--jersey-yellow); border-radius: 8px; padding: 25px;";
+                actuCard.innerHTML = actusElements[i].innerHTML;
+                container.appendChild(actuCard);
+            }
+        } else {
+            container.innerHTML = '<p style="text-align:center; grid-column: 1 / -1;">Aucune actualité trouvée pour le moment.</p>';
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        document.getElementById('actus-container').innerHTML = '<p style="text-align:center; grid-column: 1 / -1;">Les actualités sont actuellement indisponibles.</p>';
+    }
+}
+loadLatestActus();
+
 // --- COMPTE A REBOURS MATCH ---
 function startCountdown() {
-    // La date du match annoncée dans votre bandeau défilant : 11 juin 2026 à 20h00
     const targetDate = new Date("2026-06-11T20:00:00").getTime();
     const countdownEl = document.getElementById('countdown');
     
