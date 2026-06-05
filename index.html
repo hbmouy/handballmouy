@@ -14,7 +14,7 @@
 <link rel="canonical" href="https://hbmouy.github.io/handballmouy/">
 
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="HB Mouy">
+<meta property="og:site_name" content="HB Mouy">  
 <meta property="og:title" content="HB Mouy - Club de Handball à Mouy (60)">
 <meta property="og:description" content="Bienvenue sur le site officiel du Handball Mouy (HBM). Rejoignez l'aventure des Lions pour la saison 2026-2027 !">
 <meta property="og:url" content="https://hbmouy.github.io/handballmouy/">
@@ -25,7 +25,7 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "HBM - Handball Club Mouy",
-  "url": "https://hbmouy.github.io/handballmouy/"
+  "url": "https://hbmouy.github.io/handballmouy/index.html"
 }
 </script>
 
@@ -33,9 +33,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
+<!-- Liaison vers ton fichier CSS global centralisé -->
 <link rel="stylesheet" href="style.css">
 
 <script>
+// --- HISTORIQUE DU THÈME (Exécuté immédiatement pour éviter le flash blanc) ---
 (function () {
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
@@ -49,10 +51,10 @@
 <div class="match-ticker">
   <div class="ticker-wrap">
     <div class="ticker-item">
-      🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'équipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥
+      🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'equipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥
     </div>
     <div class="ticker-item">
-      🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'équipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥
+      🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'equipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥
     </div>
   </div>
 </div>
@@ -62,7 +64,7 @@
     <div class="nav-logo" id="logo-trigger">
       <img src="images/logo.png" alt="HBM Logo">
     </div>
-
+    
     <button class="burger" id="burger" aria-label="Ouvrir le menu">
       <span></span>
       <span></span>
@@ -70,20 +72,31 @@
     </button>
 
     <ul class="nav-links" id="nav-links">
+      <!-- Bouton unique placé tout à gauche du menu -->
       <li class="theme-li">
         <button class="theme-toggle-btn" id="theme-toggle" aria-label="Changer de thème">
-          <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <!-- Icône Lune épurée et épaisse (Mode Clair) -->
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <!-- Icône Soleil épurée et épaisse (Mode Sombre) -->
           <svg class="sun-icon" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
           </svg>
         </button>
       </li>
+
       <li><a href="index.html">Accueil</a></li>
       <li><a href="actualites.html">Actualités</a></li>
+    
       <li class="dropdown">
         <a href="#" class="dropdown-trigger">Saison ▾</a>
         <ul class="dropdown-content">
@@ -92,6 +105,7 @@
           <li><a href="prepa-physique.html">Prépa Physique</a></li>
         </ul>
       </li>
+
       <li class="dropdown">
         <a href="#" class="dropdown-trigger">Le Club ▾</a>
         <ul class="dropdown-content">
@@ -100,6 +114,7 @@
           <li><a href="docs.html">Documents utiles</a></li>
         </ul>
       </li>
+
       <li><a href="inscriptions.html">Inscriptions</a></li>
       <li><a href="partenaires.html">Partenaires</a></li>
       <li><a href="index.html#contact">Contact</a></li>
@@ -107,86 +122,42 @@
   </div>
 </nav>
 
-<!-- ===================== HERO ===================== -->
 <section class="hero" id="accueil">
   <img src="images/logo.png" alt="Logo HBM" class="hero-logo">
   <p class="hero-saison">SAISON 2026 — 2027</p>
-  <p class="hero-sub">Mouy n'avait pas de club de handball. On a décidé de changer ça.</p>
+  <p class="hero-sub">Le Handball Mouy s'éveille. Un projet ambitieux, une équipe soudée, et bientôt... vos premiers exploits sur le terrain.</p>
   <a href="#contact" class="btn-primary">REJOINDRE L'AVENTURE</a>
 </section>
 
-<!-- ===================== ACTUALITÉS ===================== -->
-<section class="actus-section" id="actus">
-  <div class="actus-container">
-    <h2 class="section-heading">Les actualités</h2>
-    <div class="actus-grid">
-
-      <!-- Actu featured : Prochain match -->
-      <div class="actu-card featured">
-        <span class="actu-cat match">Prochain match</span>
-        <h3 class="actu-title">Match amical — HBM vs Cires-lès-Mello</h3>
-        <p class="actu-date">11 juin 2026</p>
-        <p class="actu-excerpt">Rendez-vous le jeudi 11 juin à 20h00 à la Salle Multisports Céline Goberville de Cires-lès-Mello. Venez nombreux encourager les Lions !</p>
-        <a href="planning.html" class="actu-link">Voir le planning →</a>
+<section class="about" id="about">
+  <div class="about-visual-wrapper">
+    <img src="images/griffe-gold.png" alt="Esprit Lion HBM" class="about-griffe">
+    
+    <div class="stats-grid-centered">
+      <div class="stat-card">
+        <div class="stat-number">2026</div>
+        <div class="stat-label">Lancement Officiel</div>
       </div>
-
-      <!-- Actu 2 : Match de Méru -->
-      <div class="actu-card">
-        <span class="actu-cat result">Résultat</span>
-        <h3 class="actu-title">Premier match historique du HBM !</h3>
-        <p class="actu-date">20 mai 2026</p>
-        <p class="actu-excerpt">Défaite 28–19 face à l'AAE Méru. Le score est anecdotique — les Lions ont disputé leur tout premier match.</p>
-        <a href="actualites.html" class="actu-link">Lire la suite →</a>
-      </div>
-
-      <!-- Actu 3 : Réunion bureau -->
-      <div class="actu-card">
-        <span class="actu-cat club">Club</span>
-        <h3 class="actu-title">Réunion du bureau — les maillots sont choisis</h3>
-        <p class="actu-date">24 avril 2026</p>
-        <p class="actu-excerpt">Le bureau s'est réuni pour finaliser le design des maillots de la saison 2026-2027.</p>
-        <a href="actualites.html" class="actu-link">Lire la suite →</a>
-      </div>
-
-    </div>
-    <a href="actualites.html" class="see-all-link">Voir toutes les actualités →</a>
-  </div>
-</section>
-
-<!-- ===================== PROCHAIN MATCH ===================== -->
-<section class="match-section" id="match">
-  <div class="actus-container">
-    <h2 class="section-heading">Prochain match</h2>
-    <div class="match-card">
-      <div class="match-team">
-        <img src="images/logo-cires.jpg" alt="HCL" class="match-logo" onerror="this.style.display='none'">
-        <span class="match-team-name">Cires-lès-Mello</span>
-      </div>
-      <div class="match-center">
-        <div class="match-badge">Match amical</div>
-        <div class="match-vs">VS</div>
-        <div class="match-detail"><strong>Jeudi 11 juin 2026</strong> — 20h00</div>
-        <div class="match-detail">📍 Le Beaucamp, Cires-lès-Mello (60660)</div>
-        <div class="countdown" id="countdown">
-          <div class="cd-block"><div class="cd-num" id="cd-j">--</div><div class="cd-lbl">Jours</div></div>
-          <div class="cd-block"><div class="cd-num" id="cd-h">--</div><div class="cd-lbl">Heures</div></div>
-          <div class="cd-block"><div class="cd-num" id="cd-m">--</div><div class="cd-lbl">Min</div></div>
-        </div>
-      </div>
-      <div class="match-team">
-        <img src="images/logo.png" alt="HBM" class="match-logo">
-        <span class="match-team-name" style="color: var(--jersey-yellow);">HB Mouy</span>
+      <div class="stat-card">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Passion</div>
       </div>
     </div>
   </div>
+
+  <div class="about-text-content">
+    <span class="section-label">L'aventure commence</span>
+    <h2>Réveillez le Lion en Vous</h2>
+    <p>Le HBM est un club en cours de création, porté par des passionnés de handball de l'Oise. Notre objectif est clair : construire une structure sportive conviviale, ambitieuse et durable pour notre territoire.</p>
+    <p>Peu importe votre niveau ou votre âge (des seniors aux plus jeunes, avec notre projet d'école de hand), c'est votre envie de bâtir ce club avec nous qui fera la différence.</p>
+  </div>
 </section>
 
-<!-- ===================== FORMULAIRE ===================== -->
 <section class="form-section" id="contact">
   <div class="form-container">
     <h2 style="text-align: center;">REJOINDRE LE CLUB</h2>
     <p style="text-align: center; color: var(--text-main); font-weight: 500; margin-bottom: 3rem;">Inscrivez-vous pour être les premiers informés des entraînements et des événements.</p>
-
+    
     <form action="https://formspree.io/f/xqewepzw" method="POST" id="interest-form">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
         <div><label>Prénom</label><input type="text" name="prenom" required></div>
@@ -205,27 +176,24 @@
       </div>
       <div style="margin-top:1.5rem;"><label>Message (optionnel)</label><textarea name="message" rows="4"></textarea></div>
       <button type="submit" id="btn-submit" class="btn-primary" style="width:100%; margin-top:2rem;">ENVOYER MA DEMANDE</button>
-
+      
       <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600.7535577479516!2d2.323413211759135!3d49.318950571278975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e64d666f8b0fd5%3A0x4c52bdead9e4e6c7!2sComplexe%20Sportif!5e0!3m2!1sfr!2sfr!4v1780562750522!5m2!1sfr!2sfr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
-
       <div id="success-msg" style="display:none; color:var(--jersey-purple); text-align:center; margin-top:1.5rem; font-family: var(--font-display); font-size: 1.5rem; font-style: italic;">Message envoyé ! Bienvenue dans l'équipe.</div>
     </form>
   </div>
 </section>
 
-<!-- ===================== FOOTER COMMUNAUTÉ ===================== -->
 <div class="contact-bar">
-  <div class="big-hbm-logo">HBM</div>
-  <p style="color: var(--text-main); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; text-align: center; margin-bottom: 0.5rem;">Suivez la création du club en direct</p>
+  <p style="color: var(--text-main); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Suivez la création du club en direct</p>
   <p class="contact-address">
     📍 <a href="https://maps.google.com/?q=Complexe+Sportif+6-8+Avenue+du+8+Mai+1945+60250+Mouy" target="_blank">Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</a>
   </p>
   <div class="social-group">
     <a href="mailto:Handball.mouy@gmail.com" class="social-link">✉ Email</a>
     <a href="https://www.facebook.com/profile.php?id=61572143188788" target="_blank" class="social-link">Facebook</a>
-    <a href="https://www.instagram.com/handball.mouy/" target="_blank" class="social-link">Instagram</a>
+    <a href="https://www.indigo.com/handball.mouy/" target="_blank" class="social-link">Instagram</a>
     <a href="https://www.tiktok.com/@mouy.handball" target="_blank" class="social-link">TikTok</a>
     <a href="https://www.ffhandball.fr/" target="_blank" class="social-link">FFHB</a>
   </div>
@@ -236,7 +204,7 @@
 </footer>
 
 <script>
-// --- THÈME ---
+// --- LOGIQUE DU BOUTON THÈME ---
 window.addEventListener('DOMContentLoaded', () => {
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
@@ -292,31 +260,10 @@ form.addEventListener('submit', async function(e) {
     if (response.ok) {
       document.getElementById('success-msg').style.display = 'block';
       form.reset();
-      btn.innerText = "C'EST REÇU !";
+      btn.innerText = 'C\'EST REÇU !';
     }
   } catch (error) { alert("Erreur de connexion."); }
 });
-
-// --- COMPTE À REBOURS ---
-function updateCountdown() {
-    const target = new Date('2026-06-11T20:00:00');
-    const now = new Date();
-    const diff = target - now;
-    if (diff <= 0) {
-        document.getElementById('cd-j').textContent = '00';
-        document.getElementById('cd-h').textContent = '00';
-        document.getElementById('cd-m').textContent = '00';
-        return;
-    }
-    const j = Math.floor(diff / (1000*60*60*24));
-    const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-    document.getElementById('cd-j').textContent = String(j).padStart(2,'0');
-    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
-}
-updateCountdown();
-setInterval(updateCountdown, 60000);
 
 // --- EASTER EGG ---
 let logoClickCount = 0;
@@ -325,6 +272,7 @@ document.getElementById('logo-trigger').addEventListener('click', () => {
     if (logoClickCount === 5) { lancerAnimationSupporter(); logoClickCount = 0; }
     setTimeout(() => { logoClickCount = 0; }, 3000);
 });
+
 function lancerAnimationSupporter() {
     for (let i = 0; i < 30; i++) {
         const ball = document.createElement('div');
