@@ -35,9 +35,9 @@
 
 <link rel="stylesheet" href="style.css">
 
-<!-- CORRECTIFS DE DESIGN POUR LES ACTUS (Basé sur l'image_9887c0.png) -->
+<!-- NETTOYAGE ET CORRECTION FINALE DES ACTUALITES (image_982da1.jpg) -->
 <style>
-  /* Encadrés plus petits et homogènes */
+  /* Encadrés compacts et de taille uniforme */
   .home-actu-card {
     background: var(--bg-card);
     border: 2px solid var(--jersey-yellow);
@@ -45,67 +45,58 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    max-height: 480px; /* Limite la hauteur globale de la carte */
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    height: 100%;
   }
 
-  /* Nettoyage complet des textes dédoublés/buggés de l'image */
-  #actus-container h1, 
-  #actus-container h2, 
-  #actus-container h3, 
-  #actus-container h4,
-  #actus-container [class*="title"] {
-    font-size: 1.25rem !important;
-    line-height: 1.3 !important;
-    font-weight: 700 !important;
-    font-family: var(--font-body), sans-serif !important;
+  /* Correction de la couleur des liens (adieu le violet par défaut) */
+  #actus-container a {
     color: var(--jersey-green) !important;
-    text-shadow: none !important; /* Supprime le dédoublement */
-    -webkit-text-stroke: 0px !important; /* Supprime les contours épais */
-    font-style: normal !important; /* Remet le texte droit si besoin */
-    margin: 8px 0 !important;
-    text-transform: none !important;
+    text-decoration: none !important;
+    font-family: var(--font-body), sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    line-height: 1.4 !important;
+    margin: 5px 0 !important;
+    display: block !important;
+    text-transform: uppercase !important;
+    text-shadow: none !important;
+    -webkit-text-stroke: 0px !important;
+  }
+  
+  #actus-container a:hover {
+    color: var(--jersey-yellow) !important;
   }
 
-  /* Limitation stricte des paragraphes pour réduire la taille des blocs */
+  /* Nettoyage des dates ou des textes alternatifs */
+  #actus-container h1, #actus-container h2, #actus-container h3, #actus-container h4 {
+    font-size: 1.1rem !important;
+    color: var(--text-main) !important;
+    margin: 5px 0 !important;
+    text-transform: none !important;
+    text-shadow: none !important;
+    -webkit-text-stroke: 0px !important;
+  }
+
+  /* Raccourcissement strict du texte pour garder des blocs très petits */
   #actus-container p {
-    font-size: 0.9rem !important;
+    font-size: 0.85rem !important;
     line-height: 1.4 !important;
     color: var(--text-main) !important;
-    margin: 0 0 8px 0 !important;
-    display: -webkit-box !
-    -webkit-line-clamp: 3; /* Coupe le texte après la 3ème ligne */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 0 0 10px 0 !important;
+    opacity: 0.8;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important; /* Limite à deux lignes maximum */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
-  /* Ajustement des mini-widgets de match à l'intérieur */
+  /* Ajustement des vignettes de match importées */
   #actus-container [class*="match"], 
-  #actus-container .match-ticker,
-  #actus-container iframe {
+  #actus-container .match-ticker {
     max-width: 100% !important;
-    border-radius: 6px !important;
-    margin-bottom: 5px !important;
-  }
-
-  /* Bouton "Lire la suite" standardisé en bas de chaque carte */
-  .actu-read-more {
-    margin-top: auto;
-    color: var(--jersey-yellow);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: inline-flex;
-    align-items: center;
-  }
-  .actu-read-more:hover {
-    color: var(--jersey-green);
+    margin-bottom: 10px !important;
   }
 </style>
 
@@ -204,7 +195,7 @@
     </div>
 </section>
 
-<!-- Section des 3 actualités fixes et redimensionnées -->
+<!-- Section des actualités dynamiques épurées -->
 <section id="actus" style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
     <h2 style="text-align: center; color: var(--text-main); font-family: var(--font-display); margin-bottom: 40px; text-transform: uppercase;">Dernières actualités</h2>
     <div id="actus-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
@@ -268,7 +259,7 @@
 </footer>
 
 <script>
-// --- SYSTEME DE CAPTURE INTELLIGENT ET NETTOYAGE DES ACTUS ---
+// --- SYSTEME DE CAPTURE ET NETTOYAGE DES ACTUS ---
 async function loadLatestActus() {
     try {
         const response = await fetch('actualites.html');
@@ -278,7 +269,6 @@ async function loadLatestActus() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
-        // Cible les conteneurs d'articles de votre page actualites.html
         const actusElements = doc.querySelectorAll('article, .actu-card, .actu, .news-card');
         const container = document.getElementById('actus-container');
 
@@ -288,17 +278,7 @@ async function loadLatestActus() {
             for (let i = 0; i < Math.min(3, actusElements.length); i++) {
                 const actuCard = document.createElement('div');
                 actuCard.className = 'home-actu-card';
-                
-                // Injection du contenu épuré
                 actuCard.innerHTML = actusElements[i].innerHTML;
-                
-                // Ajout automatique du bouton de redirection pour épurer la carte
-                const readMore = document.createElement('a');
-                readMore.href = 'actualites.html';
-                readMore.className = 'actu-read-more';
-                readMore.innerHTML = 'Lire la suite →';
-                actuCard.appendChild(readMore);
-                
                 container.appendChild(actuCard);
             }
         } else {
