@@ -16,18 +16,24 @@
 <body>
 
 <div class="match-ticker">
-  <div class="ticker-wrap"><div class="ticker-item">🔥 PROCHAIN MATCH : HB Mouy vs HCL - Jeudi 11 juin à 20h00 !</div></div>
+  <div class="ticker-wrap"><div class="ticker-item">🔥 PROCHAIN MATCH : HB Mouy vs Cires-lès-Mello le 11 Juin 2026 ! 🔥</div></div>
 </div>
 
 <nav>
   <div class="nav-container">
-    <div class="nav-logo"><img src="images/logo.png" alt="Logo"></div>
+    <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Logo"></a>
     <button class="burger" id="burger"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="nav-links">
-      <li><button class="theme-toggle-btn" id="theme-toggle">🌙</button></li>
+      <li class="theme-li"><button class="theme-toggle-btn" id="theme-toggle">🌙</button></li>
       <li><a href="index.html">Accueil</a></li>
       <li><a href="actualites.html">Actualités</a></li>
-      <li class="dropdown"><a href="#">Saison ▾</a><ul class="dropdown-content"><li><a href="planning.html">Planning</a></li></ul></li>
+      <li class="dropdown"><a href="#">Saison ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="planning.html">Planning</a></li>
+          <li><a href="effectifs.html">Effectifs</a></li>
+          <li><a href="prepa-physique.html">Prépa Physique</a></li>
+        </ul>
+      </li>
       <li><a href="inscriptions.html">Inscriptions</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -40,47 +46,20 @@
   <a href="#contact" class="btn-primary">REJOINDRE L'AVENTURE</a>
 </section>
 
-<!-- SECTION PROCHAIN MATCH (style image_a55ba9.png) -->
-<section style="padding: 60px 3rem; background: #1a1a1a;">
-    <div style="max-width: 900px; margin: 0 auto; background: #0f160f; border: 1px solid #333; padding: 2rem; position: relative;">
-        <div style="background: #a855f7; color: white; padding: 0.5rem 1rem; display: inline-block; font-weight: bold; position: absolute; top: -15px; left: 10px;">PROCHAIN MATCH</div>
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2rem;">
-            <div style="text-align: center;"><p style="color: #ef4444; font-weight: bold; font-size: 1.5rem;">HCL</p></div>
-            <div style="background: white; border-radius: 50%; padding: 0.5rem; font-weight: bold;">VS</div>
-            <div style="text-align: center;"><p style="color: #eab308; font-weight: bold; font-size: 1.5rem;">HB MOUY</p></div>
-        </div>
-        <div style="border-top: 1px solid #333; margin-top: 2rem; padding-top: 1rem; display: flex; justify-content: space-around; font-size: 0.9rem; color: #fff;">
-            <span>📅 Jeudi 11 Juin 2026</span>
-            <span>📍 Salle Multisports Céline Goberville, Cires-lès-Mello</span>
-            <span>⏰ 20h00</span>
-        </div>
+<section style="padding: 120px 3rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 3rem;">
+    <div class="actus-col">
+        <h2 style="margin-bottom: 2rem;">Actualités</h2>
+        <a href="actualites.html#art1" style="text-decoration:none;"><article class="about-text-content" style="margin-bottom: 2rem;"><h3>Premier match historique !</h3><p>Défaite 28–19 face à l'AAE Méru.</p></article></a>
+        <a href="actualites.html#art2" style="text-decoration:none;"><article class="about-text-content" style="margin-bottom: 2rem;"><h3>Design des maillots</h3><p>Les couleurs : vert et jaune !</p></article></a>
+        <a href="actualites.html#art3" style="text-decoration:none;"><article class="about-text-content"><h3>Entraînements</h3><p>Le calendrier est dispo.</p></article></a>
     </div>
-</section>
-
-<!-- SECTION ACTUALITÉS (style image_a55c2c.jpg) -->
-<section style="padding: 60px 3rem; max-width: 1200px; margin: 0 auto;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
-        <article style="background: #0f160f; border: 1px solid #333; color: white;">
-            <div style="background: #22c55e; color: black; padding: 0.5rem; display: inline-block; font-weight: bold; margin: 1rem;">RÉSULTAT MATCH</div>
-            <div style="padding: 1rem;">
-                <p style="font-size: 0.8rem;">21 MAI 2026</p>
-                <h3 style="font-size: 1.5rem; text-transform: uppercase;">PREMIER MATCH HISTORIQUE !</h3>
-            </div>
-        </article>
-        <article style="background: #0f160f; border: 1px solid #333; color: white;">
-            <div style="background: #22c55e; color: black; padding: 0.5rem; display: inline-block; font-weight: bold; margin: 1rem;">MATCH DE PREPA</div>
-            <div style="padding: 1rem;">
-                <p style="font-size: 0.8rem;">05 MAI 2026</p>
-                <h3 style="font-size: 1.5rem; text-transform: uppercase;">MÉRU LOISIR VS HBM</h3>
-            </div>
-        </article>
-        <article style="background: #0f160f; border: 1px solid #333; color: white;">
-            <div style="background: #22c55e; color: black; padding: 0.5rem; display: inline-block; font-weight: bold; margin: 1rem;">SPONSOR</div>
-            <div style="padding: 1rem;">
-                <p style="font-size: 0.8rem;">04 MAI 2026</p>
-                <h3 style="font-size: 1.5rem; text-transform: uppercase;">GROUPE CERCLE VERT</h3>
-            </div>
-        </article>
+    <div class="match-col">
+        <h2 style="margin-bottom: 2rem;">Match</h2>
+        <div class="stat-card">
+            <div class="stat-number" style="font-size: 2rem;">11 JUIN</div>
+            <div class="stat-label">HB Mouy vs Cires-lès-Mello</div>
+            <p style="margin-top:1rem; font-weight:bold;">📍 Le Beaucamp, 20h00</p>
+        </div>
     </div>
 </section>
 
@@ -88,25 +67,34 @@
   <div class="form-container">
     <h2>REJOINDRE LE CLUB</h2>
     <form action="https://formspree.io/f/xqewepzw" method="POST">
-      <input type="text" name="nom" placeholder="Nom" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <button type="submit" class="btn-primary">ENVOYER</button>
+      <label>Nom</label><input type="text" name="nom" required>
+      <label>Email</label><input type="email" name="email" required>
+      <label>Message</label><textarea name="message" rows="4"></textarea>
+      <button type="submit" class="btn-primary" style="width:100%;">ENVOYER</button>
     </form>
+    <div class="map-container"></div>
   </div>
 </section>
 
 <div class="contact-bar">
-  <img src="images/logo.png" style="width: 150px;">
+  <img src="images/logo.png" style="width: 150px;" alt="Logo Footer">
+  <p>SUIVEZ LA CRÉATION DU CLUB</p>
   <div class="social-group">
-    <a href="mailto:Handball.mouy@gmail.com">Email</a>
-    <a href="https://www.facebook.com/profile.php?id=61572143188788">Facebook</a>
+    <a href="mailto:Handball.mouy@gmail.com" class="social-link">✉ Email</a>
+    <a href="https://www.facebook.com/profile.php?id=61572143188788" target="_blank" class="social-link">Facebook</a>
+    <a href="https://www.instagram.com/handball.mouy/" target="_blank" class="social-link">Instagram</a>
+    <a href="https://www.tiktok.com/@mouy.handball" target="_blank" class="social-link">TikTok</a>
+    <a href="https://www.ffhandball.fr/" target="_blank" class="social-link">FFHB</a>
   </div>
+  <p class="contact-address">📍 Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</p>
 </div>
+
+<footer>© 2026 HBM — Handball Mouy — Tous droits réservés</footer>
 
 <script>
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('nav-links');
-    burger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+    burger.addEventListener('click', () => { navLinks.classList.toggle('active'); burger.classList.toggle('toggle'); });
     document.getElementById('theme-toggle').addEventListener('click', () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
