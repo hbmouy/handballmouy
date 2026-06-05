@@ -35,43 +35,77 @@
 
 <link rel="stylesheet" href="style.css">
 
+<!-- CORRECTIFS DE DESIGN POUR LES ACTUS (Basé sur l'image_9887c0.png) -->
 <style>
-  #actus-container img {
-    width: 100% !important;
-    max-height: 180px !important;
-    object-fit: cover !important;
-    border-radius: 6px !important;
-    margin-bottom: 12px !important;
-  }
-  #actus-container h1, #actus-container h2, #actus-container h3 {
-    font-size: 1.3rem !important;
-    line-height: 1.3 !important;
-    margin-bottom: 10px !important;
-    color: var(--jersey-purple) !important;
-    font-family: var(--font-body) !important;
-    font-weight: 700 !important;
-    text-transform: none !important;
-    letter-spacing: normal !important;
-  }
-  #actus-container p {
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
-    color: var(--text-main) !important;
-  }
-  #actus-container a {
-    color: var(--jersey-green);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-  }
+  /* Encadrés plus petits et homogènes */
   .home-actu-card {
     background: var(--bg-card);
     border: 2px solid var(--jersey-yellow);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 12px;
+    max-height: 480px; /* Limite la hauteur globale de la carte */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Nettoyage complet des textes dédoublés/buggés de l'image */
+  #actus-container h1, 
+  #actus-container h2, 
+  #actus-container h3, 
+  #actus-container h4,
+  #actus-container [class*="title"] {
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    font-family: var(--font-body), sans-serif !important;
+    color: var(--jersey-green) !important;
+    text-shadow: none !important; /* Supprime le dédoublement */
+    -webkit-text-stroke: 0px !important; /* Supprime les contours épais */
+    font-style: normal !important; /* Remet le texte droit si besoin */
+    margin: 8px 0 !important;
+    text-transform: none !important;
+  }
+
+  /* Limitation stricte des paragraphes pour réduire la taille des blocs */
+  #actus-container p {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+    color: var(--text-main) !important;
+    margin: 0 0 8px 0 !important;
+    display: -webkit-box !
+    -webkit-line-clamp: 3; /* Coupe le texte après la 3ème ligne */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Ajustement des mini-widgets de match à l'intérieur */
+  #actus-container [class*="match"], 
+  #actus-container .match-ticker,
+  #actus-container iframe {
+    max-width: 100% !important;
+    border-radius: 6px !important;
+    margin-bottom: 5px !important;
+  }
+
+  /* Bouton "Lire la suite" standardisé en bas de chaque carte */
+  .actu-read-more {
+    margin-top: auto;
+    color: var(--jersey-yellow);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .actu-read-more:hover {
+    color: var(--jersey-green);
   }
 </style>
 
@@ -170,9 +204,10 @@
     </div>
 </section>
 
+<!-- Section des 3 actualités fixes et redimensionnées -->
 <section id="actus" style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
     <h2 style="text-align: center; color: var(--text-main); font-family: var(--font-display); margin-bottom: 40px; text-transform: uppercase;">Dernières actualités</h2>
-    <div id="actus-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+    <div id="actus-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
         <p style="text-align:center; grid-column: 1 / -1;">Chargement des actualités...</p>
     </div>
 </section>
@@ -209,6 +244,7 @@
   </div>
 </section>
 
+<!-- Gros logo HBM au-dessus des réseaux sociaux -->
 <section style="display: flex; justify-content: center; align-items: center; padding: 40px 20px 0 20px;">
     <img src="images/logo.png" alt="Logo HBM" style="max-width: 450px; width: 100%; height: auto; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
 </section>
@@ -232,17 +268,17 @@
 </footer>
 
 <script>
-// --- RECUPERATION AUTOMATIQUE DES ACTUS ---
+// --- SYSTEME DE CAPTURE INTELLIGENT ET NETTOYAGE DES ACTUS ---
 async function loadLatestActus() {
     try {
         const response = await fetch('actualites.html');
-        if (!response.ok) throw new Error("Impossible de charger la page actualites.html");
+        if (!response.ok) throw new Error("Erreur de chargement");
         
         const html = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
-        // Recherche des sélecteurs d'articles ou de cartes d'actualités
+        // Cible les conteneurs d'articles de votre page actualites.html
         const actusElements = doc.querySelectorAll('article, .actu-card, .actu, .news-card');
         const container = document.getElementById('actus-container');
 
@@ -252,20 +288,30 @@ async function loadLatestActus() {
             for (let i = 0; i < Math.min(3, actusElements.length); i++) {
                 const actuCard = document.createElement('div');
                 actuCard.className = 'home-actu-card';
+                
+                // Injection du contenu épuré
                 actuCard.innerHTML = actusElements[i].innerHTML;
+                
+                // Ajout automatique du bouton de redirection pour épurer la carte
+                const readMore = document.createElement('a');
+                readMore.href = 'actualites.html';
+                readMore.className = 'actu-read-more';
+                readMore.innerHTML = 'Lire la suite →';
+                actuCard.appendChild(readMore);
+                
                 container.appendChild(actuCard);
             }
         } else {
-            container.innerHTML = '<p style="text-align:center; grid-column: 1 / -1;">Aucune actualité trouvée pour le moment.</p>';
+            container.innerHTML = '<p style="text-align:center; grid-column: 1 / -1;">Aucune actualité récente.</p>';
         }
     } catch (error) {
         console.error('Erreur:', error);
-        document.getElementById('actus-container').innerHTML = '<p style="text-align:center; grid-column: 1 / -1;">Les actualités sont actuellement indisponibles.</p>';
+        document.getElementById('actus-container').innerHTML = '<p style="text-align:center; grid-column: 1 / -1;">Actualités indisponibles.</p>';
     }
 }
 loadLatestActus();
 
-// --- COMPTE A REBOURS MATCH ---
+// --- COMPTE A REBOURS ---
 function startCountdown() {
     const targetDate = new Date("2026-06-11T20:00:00").getTime();
     const countdownEl = document.getElementById('countdown');
@@ -290,7 +336,7 @@ function startCountdown() {
 }
 startCountdown();
 
-// --- LOGIQUE DU BOUTON THÈME ---
+// --- THEME ---
 window.addEventListener('DOMContentLoaded', () => {
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
@@ -307,70 +353,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- MENU MOBILE ---
+// --- BURGER MENU ---
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('nav-links');
-const dropdowns = document.querySelectorAll('.dropdown');
-
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     burger.classList.toggle('toggle');
 });
-
-document.querySelectorAll('.nav-links a:not(.dropdown-trigger)').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        burger.classList.remove('toggle');
-    });
-});
-
-dropdowns.forEach(dropdown => {
-    const trigger = dropdown.querySelector('.dropdown-trigger');
-    trigger.addEventListener('click', (e) => {
-        if (window.innerWidth <= 950) {
-            e.preventDefault();
-            dropdown.classList.toggle('active');
-        }
-    });
-});
-
-// --- FORMULAIRE ---
-const form = document.getElementById('interest-form');
-form.addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = document.getElementById('btn-submit');
-  btn.innerText = 'ENVOI EN COURS...';
-  const data = new FormData(form);
-  try {
-    const response = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-    if (response.ok) {
-      document.getElementById('success-msg').style.display = 'block';
-      form.reset();
-      btn.innerText = 'C\'EST REÇU !';
-    }
-  } catch (error) { alert("Erreur de connexion."); }
-});
-
-// --- EASTER EGG ---
-let logoClickCount = 0;
-document.getElementById('logo-trigger').addEventListener('click', () => {
-    logoClickCount++;
-    if (logoClickCount === 5) { lancerAnimationSupporter(); logoClickCount = 0; }
-    setTimeout(() => { logoClickCount = 0; }, 3000);
-});
-
-function lancerAnimationSupporter() {
-    for (let i = 0; i < 30; i++) {
-        const ball = document.createElement('div');
-        ball.innerText = '🤾';
-        ball.style.position = 'fixed'; ball.style.left = Math.random() * 100 + 'vw';
-        ball.style.top = '-50px'; ball.style.fontSize = '30px'; ball.style.zIndex = '9999';
-        ball.style.transition = `transform ${Math.random() * 2 + 1}s linear`;
-        document.body.appendChild(ball);
-        setTimeout(() => { ball.style.transform = `translateY(${window.innerHeight + 100}px) rotate(360deg)`; }, 100);
-        setTimeout(() => ball.remove(), 3000);
-    }
-}
 </script>
 </body>
 </html>
