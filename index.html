@@ -35,68 +35,89 @@
 
 <link rel="stylesheet" href="style.css">
 
-<!-- NETTOYAGE ET CORRECTION FINALE DES ACTUALITES (image_982da1.jpg) -->
+<!-- CONFIGURATION ULTRA-STRICTE ANTI-DEBORDEMENT (image_982622.jpg) -->
 <style>
-  /* Encadrés compacts et de taille uniforme */
+  /* Encadrés épurés, sans bordure jaune, parfaitement confinés */
   .home-actu-card {
     background: var(--bg-card);
-    border: 2px solid var(--jersey-yellow);
+    border: 1px solid rgba(255, 255, 255, 0.12) !important; /* Ligne fine et haut de gamme */
     border-radius: 12px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    height: 100%;
+    justify-content: flex-start;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden !important; /* Empêche STRICTEMENT les images et blocs de sortir */
+    box-sizing: border-box !important;
+    width: 100%;
   }
 
-  /* Correction de la couleur des liens (adieu le violet par défaut) */
+  /* Force tout le contenu interne importé à respecter la largeur disponible */
+  .home-actu-card * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    flex-wrap: wrap !important; /* Force les structures horizontales trop larges à revenir à la ligne */
+    white-space: normal !important;
+  }
+
+  /* Domptage des blocs de match, tableaux ou lignes de score importés */
+  .home-actu-card div, 
+  .home-actu-card [style*="display"] {
+    max-width: 100% !important;
+    background: transparent !important; /* Évite les superpositions de fonds sombres */
+    padding: 2px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Redimensionnement automatique des logos et visuels pour qu'ils restent petits */
+  .home-actu-card img {
+    max-width: 80px !important; /* Limite la taille des logos de match importés */
+    height: auto !important;
+    object-fit: contain !important;
+    margin: 5px auto !important;
+    display: block !important;
+  }
+
+  /* Si une image d'actualité classique (bannière) est présente */
+  .home-actu-card img:not([src*="logo"]):not([style*="width"]) {
+    max-width: 100% !important;
+    height: 120px !important;
+    object-fit: cover !important;
+    border-radius: 6px !important;
+  }
+
+  /* Formatage propre des titres cliquables */
   #actus-container a {
     color: var(--jersey-green) !important;
     text-decoration: none !important;
     font-family: var(--font-body), sans-serif !important;
     font-weight: 700 !important;
-    font-size: 1.1rem !important;
-    line-height: 1.4 !important;
-    margin: 5px 0 !important;
+    font-size: 1.05rem !important;
+    line-height: 1.3 !important;
+    margin: 8px 0 !important;
     display: block !important;
     text-transform: uppercase !important;
     text-shadow: none !important;
     -webkit-text-stroke: 0px !important;
+    text-align: center;
   }
   
   #actus-container a:hover {
     color: var(--jersey-yellow) !important;
   }
 
-  /* Nettoyage des dates ou des textes alternatifs */
-  #actus-container h1, #actus-container h2, #actus-container h3, #actus-container h4 {
-    font-size: 1.1rem !important;
-    color: var(--text-main) !important;
-    margin: 5px 0 !important;
-    text-transform: none !important;
-    text-shadow: none !important;
-    -webkit-text-stroke: 0px !important;
-  }
-
-  /* Raccourcissement strict du texte pour garder des blocs très petits */
+  /* Masquage des longs textes descriptifs pour garder des blocs très courts */
   #actus-container p {
     font-size: 0.85rem !important;
     line-height: 1.4 !important;
     color: var(--text-main) !important;
-    margin: 0 0 10px 0 !important;
-    opacity: 0.8;
+    margin: 5px 0 !important;
+    opacity: 0.85;
     display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important; /* Limite à deux lignes maximum */
+    -webkit-line-clamp: 2 !important; /* Coupe après 2 lignes pour un rendu condensé */
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
-  }
-
-  /* Ajustement des vignettes de match importées */
-  #actus-container [class*="match"], 
-  #actus-container .match-ticker {
-    max-width: 100% !important;
-    margin-bottom: 10px !important;
+    text-align: center;
   }
 </style>
 
@@ -195,7 +216,7 @@
     </div>
 </section>
 
-<!-- Section des actualités dynamiques épurées -->
+<!-- Zone des actualités remaquetées -->
 <section id="actus" style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
     <h2 style="text-align: center; color: var(--text-main); font-family: var(--font-display); margin-bottom: 40px; text-transform: uppercase;">Dernières actualités</h2>
     <div id="actus-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
@@ -259,7 +280,7 @@
 </footer>
 
 <script>
-// --- SYSTEME DE CAPTURE ET NETTOYAGE DES ACTUS ---
+// --- ALGORITHME DE CAPTURE ET NETTOYAGE ---
 async function loadLatestActus() {
     try {
         const response = await fetch('actualites.html');
