@@ -33,11 +33,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-<!-- Liaison vers ton fichier CSS global centralisé -->
 <link rel="stylesheet" href="style.css">
 
 <script>
-// --- HISTORIQUE DU THÈME (Exécuté immédiatement pour éviter le flash blanc) ---
 (function () {
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
@@ -72,14 +70,11 @@
     </button>
 
     <ul class="nav-links" id="nav-links">
-      <!-- Bouton unique placé tout à gauche du menu -->
       <li class="theme-li">
         <button class="theme-toggle-btn" id="theme-toggle" aria-label="Changer de thème">
-          <!-- Icône Lune épurée et épaisse (Mode Clair) -->
           <svg class="moon-icon" viewBox="0 0 24 24">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
-          <!-- Icône Soleil épurée et épaisse (Mode Sombre) -->
           <svg class="sun-icon" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="5"/>
             <line x1="12" y1="1" x2="12" y2="3"/>
@@ -93,7 +88,6 @@
           </svg>
         </button>
       </li>
-
       <li><a href="index.html">Accueil</a></li>
       <li><a href="actualites.html">Actualités</a></li>
     
@@ -122,35 +116,36 @@
   </div>
 </nav>
 
-<section class="hero" id="accueil">
-  <img src="images/logo.png" alt="Logo HBM" class="hero-logo">
-  <p class="hero-saison">SAISON 2026 — 2027</p>
-  <p class="hero-sub">Le Handball Mouy s'éveille. Un projet ambitieux, une équipe soudée, et bientôt... vos premiers exploits sur le terrain.</p>
-  <a href="#contact" class="btn-primary">REJOINDRE L'AVENTURE</a>
+<!-- NOUVEAU : Logo HBM très gros -->
+<section style="display: flex; justify-content: center; align-items: center; padding: 60px 20px;">
+    <img src="images/logo.png" alt="Logo HBM" style="max-width: 450px; width: 100%; height: auto; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
 </section>
 
-<section class="about" id="about">
-  <div class="about-visual-wrapper">
-    <img src="images/griffe-gold.png" alt="Esprit Lion HBM" class="about-griffe">
-    
-    <div class="stats-grid-centered">
-      <div class="stat-card">
-        <div class="stat-number">2026</div>
-        <div class="stat-label">Lancement Officiel</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Passion</div>
-      </div>
+<!-- NOUVEAU : Prochain Match avec compte à rebours -->
+<section id="match-countdown" style="text-align: center; padding: 50px 20px; background-color: var(--bg-card); border-top: 4px solid var(--jersey-green); border-bottom: 4px solid var(--jersey-green);">
+    <h2 style="color: var(--text-main); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 2px;">Prochain match : Cires-lès-Mello</h2>
+    <div id="countdown" style="font-family: var(--font-display); font-size: 3.5rem; color: var(--jersey-purple); margin-top: 20px;">
+        Calcul...
     </div>
-  </div>
+</section>
 
-  <div class="about-text-content">
-    <span class="section-label">L'aventure commence</span>
-    <h2>Réveillez le Lion en Vous</h2>
-    <p>Le HBM est un club en cours de création, porté par des passionnés de handball de l'Oise. Notre objectif est clair : construire une structure sportive conviviale, ambitieuse et durable pour notre territoire.</p>
-    <p>Peu importe votre niveau ou votre âge (des seniors aux plus jeunes, avec notre projet d'école de hand), c'est votre envie de bâtir ce club avec nous qui fera la différence.</p>
-  </div>
+<!-- NOUVEAU : Les 3 dernières actualités -->
+<section id="actus" style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
+    <h2 style="text-align: center; color: var(--text-main); font-family: var(--font-display); margin-bottom: 40px; text-transform: uppercase;">Dernières actualités</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <div style="background: var(--bg-card); border: 2px solid var(--jersey-yellow); border-radius: 8px; padding: 25px;">
+            <h3 style="color: var(--jersey-purple); margin-bottom: 15px;">Préparation du match</h3>
+            <p style="color: var(--text-main); line-height: 1.5;">Les joueurs se préparent intensivement pour la rencontre de la semaine prochaine face à Cires-lès-Mello. Venez nombreux !</p>
+        </div>
+        <div style="background: var(--bg-card); border: 2px solid var(--jersey-yellow); border-radius: 8px; padding: 25px;">
+            <h3 style="color: var(--jersey-purple); margin-bottom: 15px;">Ouverture Inscriptions</h3>
+            <p style="color: var(--text-main); line-height: 1.5;">Les inscriptions pour la saison 2026-2027 sont officiellement ouvertes. Rejoignez la meute dès aujourd'hui.</p>
+        </div>
+        <div style="background: var(--bg-card); border: 2px solid var(--jersey-yellow); border-radius: 8px; padding: 25px;">
+            <h3 style="color: var(--jersey-purple); margin-bottom: 15px;">Nouveaux Partenaires</h3>
+            <p style="color: var(--text-main); line-height: 1.5;">Le club est fier d'annoncer l'arrivée de nouveaux sponsors locaux pour soutenir notre projet sportif.</p>
+        </div>
+    </div>
 </section>
 
 <section class="form-section" id="contact">
@@ -204,6 +199,32 @@
 </footer>
 
 <script>
+// --- COMPTE A REBOURS MATCH ---
+function startCountdown() {
+    // La date du match annoncée dans votre bandeau défilant : 11 juin 2026 à 20h00
+    const targetDate = new Date("2026-06-11T20:00:00").getTime();
+    const countdownEl = document.getElementById('countdown');
+    
+    const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        if (distance < 0) {
+            clearInterval(timer);
+            countdownEl.innerHTML = "LE MATCH A COMMENCÉ !";
+            return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        countdownEl.innerHTML = `${days}j ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+}
+startCountdown();
+
 // --- LOGIQUE DU BOUTON THÈME ---
 window.addEventListener('DOMContentLoaded', () => {
     const themeBtn = document.getElementById('theme-toggle');
