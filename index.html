@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link rel="icon" type="image/png" href="images/logo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="google-site-verification" content="KMgoocgJ5szVHBN-vqGdJA3qf8-vNbCcbCpQVgf54NE" />
+
+<title>HB Mouy - Club de Handball à Mouy (60) | HBM</title>
+<meta name="description" content="Bienvenue sur le site officiel du Handball Mouy (HBM). Rejoignez l'aventure du hand à Mouy (Oise) pour la saison 2026-2027. Inscriptions et actualités en ligne.">
+<meta name="keywords" content="Handball Mouy, HBM, Club sport Mouy, HBC Mouy, Handball Oise">
+<link rel="canonical" href="https://hbmouy.github.io/handballmouy/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HB Mouy">
+<meta property="og:title" content="HB Mouy - Club de Handball à Mouy (60)">
+<meta property="og:description" content="Bienvenue sur le site officiel du Handball Mouy (HBM). Rejoignez l'aventure des Lions pour la saison 2026-2027 !">
+<meta property="og:url" content="https://hbmouy.github.io/handballmouy/">
+<meta property="og:image" content="https://hbmouy.github.io/handballmouy/images/logo.png">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"HBM - Handball Club Mouy","url":"https://hbmouy.github.io/handballmouy/"}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script>
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+}
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --jersey-yellow: #e2f438;
+    --jersey-green:  #2cd646;
+    --jersey-purple: #9d4edd;
+    --font-display:  'Anton', sans-serif;
+    --font-body:     'DM Sans', sans-serif;
+    --bg-body:   #f5f8f5;
+    --bg-card:   #ffffff;
+    --text-main: #0b130a;
+    --border-color: #0b130a;
+    --shadow-color: #0b130a;
+    --nav-bg: rgba(255,255,255,0.85);
+}
+[data-theme="dark"] {
+    --bg-body:   #0b130a;
+    --bg-card:   #142113;
+    --text-main: #dcdcdc;
+    --border-color: #f5f8f5;
+    --shadow-color: #2cd646;
+    --nav-bg: rgba(11,19,10,0.85);
+}
+
+html { scroll-behavior: smooth; }
+body {
+    background: var(--bg-body);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.8;
+    overflow-x: hidden;
+    position: relative;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* --- FORMES GÉOMÉTRIQUES BG --- */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%; height: 1400px;
+    top: 0; left: 0; z-index: -1;
+    opacity: 0.85; pointer-events: none;
+    background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 450px, 70% 320px, 30% 680px, 0 400px);
+}
+body::after {
+    content: "";
+    position: absolute;
+    width: 90%; height: 1200px;
+    bottom: 200px; right: 0; z-index: -1;
+    opacity: 0.85; pointer-events: none;
+    background: linear-gradient(225deg, rgba(226,244,56,0.6) 0%, rgba(44,214,70,0.6) 100%);
+    clip-path: polygon(100% 200px, 100% 1100px, 0% 950px, 10% 500px, 50% 300px);
+}
+
+/* --- TICKER --- */
+.match-ticker {
+    width: 100%; background: #0b130a; color: var(--jersey-yellow);
+    font-family: var(--font-display); font-size: 1.2rem; font-style: italic;
+    letter-spacing: 0.05em; padding: 0.5rem 0; overflow: hidden;
+    position: fixed; top: 0; left: 0; z-index: 2000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-bottom: 2px solid var(--jersey-green);
+    display: flex;
+}
+.ticker-wrap {
+    display: inline-flex; white-space: nowrap;
+    padding-left: 100%; animation: ticker 35s linear infinite;
+}
+.ticker-item { display: inline-block; padding-right: 4rem; flex-shrink: 0; }
+@keyframes ticker {
+    0%   { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(-100%,0,0); }
+}
+.match-ticker:hover .ticker-wrap { animation-play-state: paused; }
+
+/* --- NAVIGATION --- */
+nav {
+    position: fixed; top: 39px; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    height: 95px; padding: 0 2rem;
+    background: var(--nav-bg); backdrop-filter: blur(15px);
+    border-bottom: 4px solid var(--border-color);
+    transition: background 0.3s, border-color 0.3s;
+}
+.nav-container {
+    width: 100%; max-width: 1200px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; height: 100%;
+}
+.nav-logo {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%,-50%);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; cursor: pointer; z-index: 1100;
+    transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+.nav-logo:hover { transform: translate(-50%,-50%) scale(1.08); }
+.nav-logo img { height: 75px; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.15)); }
+
+.nav-group { display: flex; gap: 1.8rem; list-style: none; align-items: center; width: 42%; }
+.nav-group.left  { justify-content: flex-end; }
+.nav-group.right { justify-content: flex-start; }
+.nav-group a, .dropdown-trigger {
+    color: var(--text-main); text-decoration: none;
+    font-family: var(--font-display); font-size: 1.2rem; font-style: italic;
+    text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; cursor: pointer;
+}
+.nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
+
+/* Theme toggle */
+.theme-toggle-btn {
+    background: transparent; border: 2px solid var(--border-color);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 8px;
+    box-shadow: 3px 3px 0px var(--border-color); transition: transform 0.2s, box-shadow 0.2s;
+}
+.theme-toggle-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0px var(--jersey-purple); }
+.theme-toggle-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--text-main); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.3s; }
+.sun-icon  { display: none; }
+.moon-icon { display: block; }
+[data-theme="dark"] .sun-icon  { display: block; }
+[data-theme="dark"] .moon-icon { display: none; }
+
+/* Burger */
+.burger {
+    display: none; flex-direction: column; justify-content: space-between;
+    width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1100;
+}
+.burger span { width: 100%; height: 3px; background-color: var(--border-color); transition: all 0.3s ease; }
+.burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.burger.toggle span:nth-child(2) { opacity: 0; }
+.burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* Dropdown */
+.dropdown { position: relative; }
+.dropdown-content {
+    display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    background: var(--bg-card); min-width: 180px;
+    border: 3px solid var(--border-color); padding: 0.5rem 0; list-style: none;
+    box-shadow: 6px 6px 0px var(--shadow-color);
+}
+.dropdown-content li a {
+    padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem;
+    font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main);
+}
+.dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown.active .dropdown-content { display: block; }
+
+/* Mobile nav */
+@media (max-width: 950px) {
+    nav { height: 70px; }
+    .nav-logo { position: static; transform: none; }
+    .nav-logo:hover { transform: scale(1.05); }
+    .nav-logo img { height: 55px; }
+    .burger { display: flex; }
+    .nav-group.right { display: none; }
+    .nav-group.left {
+        position: fixed; right: -100%; top: 39px;
+        height: 100vh; width: 280px;
+        background: var(--bg-card); border-left: 4px solid var(--border-color);
+        flex-direction: column; align-items: flex-start; justify-content: flex-start;
+        padding: 100px 2rem 2rem; gap: 1.5rem;
+        transition: right 0.4s ease; overflow-y: auto; z-index: 1000; width: 280px;
+    }
+    .nav-group.left.active { right: 0; }
+    .nav-group.left a { font-size: 1.3rem; width: 100%; display: block; }
+    .dropdown { width: 100%; }
+    .dropdown-content {
+        position: static; transform: none; background: var(--bg-body);
+        border: none; border-left: 3px solid var(--jersey-purple);
+        box-shadow: none; padding: 0 0 0 1rem; margin-top: 0.5rem;
+    }
+    .dropdown-content li a { text-align: left; }
+    body::before { clip-path: polygon(0 0, 100% 0, 100% 300px, 0 180px); }
+}
+
+/* ===================== HERO ===================== */
+.hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 180px 20px 80px;
+    position: relative; z-index: 2;
+}
+.hero-logo {
+    width: min(320px, 70vw); height: auto; margin-bottom: 2rem;
+    filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.15));
+    animation: float 4s ease-in-out infinite, fadeIn 1.2s ease-out;
+}
+.hero-saison {
+    font-family: var(--font-display); font-size: 1.8rem; font-style: italic;
+    color: #0b130a; background: #ffffff; border: 2px solid #0b130a;
+    box-shadow: 4px 4px 0px #0b130a;
+    padding: 0.3rem 1.5rem; letter-spacing: 0.2em; margin-bottom: 2rem;
+    animation: slideIn 1s ease-out; transform: rotate(-1deg);
+    display: inline-block;
+}
+.hero-sub {
+    max-width: 700px; font-size: 1.3rem; font-weight: 500; color: #0b130a;
+    margin-bottom: 3rem; background: rgba(255,255,255,0.75); padding: 1.5rem;
+    border-radius: 8px; backdrop-filter: blur(5px);
+}
+.btn-primary {
+    background: var(--border-color); color: var(--jersey-yellow);
+    padding: 1.2rem 3rem; text-decoration: none;
+    font-family: var(--font-display); font-size: 1.6rem; font-style: italic;
+    letter-spacing: 0.1em; transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+    display: inline-block; border: 3px solid var(--border-color);
+    box-shadow: 6px 6px 0px var(--jersey-purple); cursor: pointer; text-transform: uppercase;
+}
+.btn-primary:hover {
+    background: var(--jersey-purple); color: #ffffff;
+    transform: translateY(-4px); box-shadow: 8px 8px 0px var(--border-color);
+}
+
+/* ===================== SECTION HEADING ===================== */
+.section-heading {
+    font-family: var(--font-display); font-size: clamp(1.8rem,4vw,2.8rem);
+    font-style: italic; color: var(--text-main); letter-spacing: 1px;
+    margin-bottom: 28px; display: flex; align-items: center; gap: 14px;
+}
+.section-heading::before {
+    content: ''; display: inline-block; width: 40px; height: 4px;
+    background: var(--jersey-purple); flex-shrink: 0;
+}
+
+/* ===================== ACTUS ===================== */
+.actus-section { padding: 60px 20px; position: relative; z-index: 2; }
+.actus-container { max-width: 1100px; margin: 0 auto; }
+
+.actus-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 20px; margin-bottom: 24px;
+}
+.actu-card {
+    background: var(--bg-card); border: 3px solid var(--border-color);
+    box-shadow: 8px 8px 0 var(--shadow-color);
+    display: flex; flex-direction: column;
+    clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+}
+.actu-card:hover { transform: translate(-2px,-2px); box-shadow: 10px 10px 0 var(--shadow-color); }
+.actu-card.featured { background: var(--border-color); }
+.actu-card.featured::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 36px; height: 36px; background: var(--jersey-yellow);
+    clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 3;
+}
+
+.actu-img {
+    background: rgba(0,0,0,0.04); border-bottom: 3px solid var(--border-color);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; height: 180px;
+}
+.actu-card.featured .actu-img { height: 260px; }
+.actu-img img { width: 100%; height: 100%; object-fit: contain; padding: 16px; transition: transform 0.4s; }
+.actu-card:hover .actu-img img { transform: scale(1.04); }
+.actu-img-placeholder {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 3rem; font-style: italic;
+    color: rgba(11,19,10,0.1);
+}
+.actu-card.featured .actu-img-placeholder { color: rgba(255,255,255,0.08); }
+
+.actu-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--jersey-green); color: #0b130a;
+    font-family: var(--font-display); font-style: italic; font-size: 1rem;
+    padding: 2px 10px; border: 2px solid var(--border-color);
+    box-shadow: 3px 3px 0 var(--shadow-color); z-index: 4;
+}
+.actu-badge.match  { background: var(--jersey-green); }
+.actu-badge.result { background: var(--jersey-purple); color: #ffffff; }
+.actu-badge.club   { background: var(--jersey-yellow); color: #0b130a; }
+.actu-badge.spon   { background: #f59e0b; color: #0b130a; }
+
+.actu-content { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.actu-date {
+    font-family: var(--font-display); font-style: italic; font-size: 0.9rem;
+    background: var(--border-color); color: var(--bg-card);
+    display: inline-block; padding: 1px 10px; letter-spacing: 1px;
+}
+.actu-card.featured .actu-date { background: var(--jersey-yellow); color: #0b130a; }
+.actu-title {
+    font-family: var(--font-display); font-size: 1.2rem; font-style: italic;
+    line-height: 1.15; color: var(--text-main); text-transform: uppercase;
+}
+.actu-card.featured .actu-title { font-size: 1.6rem; color: var(--jersey-yellow); }
+.actu-excerpt { font-size: 0.88rem; font-weight: 500; line-height: 1.6; flex: 1; opacity: 0.8; }
+.actu-card.featured .actu-excerpt { color: rgba(255,255,255,0.7); opacity: 1; }
+.actu-link {
+    display: inline-block; margin-top: 6px;
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--text-main); border-bottom: 2px solid var(--jersey-purple); text-decoration: none;
+}
+.actu-card.featured .actu-link { color: var(--jersey-yellow); border-color: var(--jersey-yellow); }
+
+.see-all-link {
+    display: inline-block; font-size: 0.8rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px; color: var(--text-main);
+    text-decoration: none; border-bottom: 2px solid var(--jersey-green); transition: color 0.2s;
+}
+.see-all-link:hover { color: var(--jersey-purple); border-color: var(--jersey-purple); }
+
+@media (max-width: 950px) {
+    .actus-grid { grid-template-columns: 1fr; }
+    .actu-card { clip-path: none; }
+}
+
+/* ===================== PROCHAIN MATCH ===================== */
+.match-section { padding: 0 20px 60px; position: relative; z-index: 2; }
+.match-card {
+    background: var(--border-color); border: 3px solid var(--border-color);
+    box-shadow: 10px 10px 0 var(--jersey-purple); padding: 32px;
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 24px;
+}
+.match-team { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.match-logo {
+    width: 80px; height: 80px; object-fit: contain; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.2); padding: 6px;
+}
+.match-team-name {
+    font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
+    color: #ffffff; letter-spacing: 1px; text-align: center;
+}
+.match-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.match-badge {
+    font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px;
+    background: var(--jersey-yellow); color: var(--border-color);
+    padding: 3px 14px; font-weight: 700;
+}
+.match-vs {
+    font-family: var(--font-display); font-size: 2.5rem; font-style: italic;
+    color: rgba(255,255,255,0.3);
+}
+.match-detail { font-size: 0.88rem; color: rgba(255,255,255,0.7); font-weight: 500; text-align: center; }
+.match-detail strong { color: #ffffff; display: block; }
+
+.countdown { display: flex; gap: 8px; margin-top: 6px; }
+.cd-block {
+    background: var(--jersey-yellow); color: var(--border-color);
+    border: 2px solid rgba(255,255,255,0.15); padding: 6px 10px; text-align: center; min-width: 50px;
+}
+.cd-num { font-family: var(--font-display); font-size: 1.6rem; font-style: italic; line-height: 1; }
+.cd-lbl { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-top: 2px; }
+
+@media (max-width: 950px) {
+    .match-card { grid-template-columns: 1fr; gap: 20px; }
+    .match-center { order: -1; }
+}
+
+/* ===================== FORMULAIRE ===================== */
+.form-section { padding: 60px 20px; position: relative; z-index: 2; }
+.form-container {
+    max-width: 750px; margin: 0 auto; background: var(--bg-card);
+    padding: 4rem 3rem; border: 3px solid var(--border-color);
+    box-shadow: 14px 14px 0px var(--border-color);
+}
+.form-container h2 {
+    font-family: var(--font-display); font-size: clamp(2rem,5vw,3rem);
+    font-style: italic; color: var(--text-main); text-align: center; margin-bottom: 0.5rem;
+    text-shadow: 3px 3px 0px var(--bg-body), 6px 6px 0px var(--border-color);
+}
+label { display: block; margin-bottom: 7px; font-size: 0.9rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; }
+input, select, textarea {
+    width: 100%; padding: 14px; background: var(--bg-body);
+    border: 2px solid var(--border-color); color: var(--text-main);
+    font-weight: 500; border-radius: 0; font-family: var(--font-body); margin-bottom: 1.2rem; transition: 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--jersey-purple);
+    background: var(--bg-card); box-shadow: 4px 4px 0px var(--border-color);
+}
+.map-container {
+    width: 100%; height: 300px; margin-top: 2rem;
+    border: 4px solid var(--border-color);
+    box-shadow: 8px 8px 0px var(--border-color); transform: rotate(-0.5deg); overflow: hidden;
+}
+.map-container iframe { width: 100%; height: 100%; border: 0; }
+
+@media (max-width: 950px) {
+    .form-container { padding: 2.5rem 1.5rem; box-shadow: 8px 8px 0 var(--border-color); }
+}
+
+/* ===================== CONTACT BAR & BIG LOGO ===================== */
+.contact-bar {
+    padding: 5rem 2rem; background: var(--bg-card);
+    border-top: 4px solid var(--border-color); text-align: center; position: relative; z-index: 2;
+}
+.big-hbm-logo {
+    font-family: var(--font-display); font-size: clamp(5rem,16vw,10rem);
+    font-style: italic; color: var(--text-main); letter-spacing: 4px; line-height: 1;
+    margin-bottom: 24px;
+    text-shadow: 5px 5px 0 var(--jersey-yellow), 8px 8px 0 var(--border-color);
+}
+.contact-bar-label {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 10px; color: var(--text-main);
+}
+.contact-address {
+    font-size: 1rem; font-weight: 700; margin: 0.8rem 0 0;
+    display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+}
+.contact-address a {
+    color: var(--text-main); text-decoration: none;
+    border-bottom: 2px solid var(--jersey-green); transition: 0.2s;
+}
+.contact-address a:hover { color: var(--jersey-purple); border-color: var(--jersey-purple); }
+.social-group {
+    display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;
+}
+.social-link {
+    background: var(--bg-body); color: var(--text-main); border: 2px solid var(--border-color);
+    box-shadow: 4px 4px 0px var(--border-color); padding: 0.5rem 1.2rem;
+    font-family: var(--font-display); font-size: 1.2rem; font-style: italic;
+    text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: 0.2s;
+}
+.social-link:hover { background: var(--border-color); color: var(--jersey-yellow); transform: translateY(-3px); }
+
+footer {
+    text-align: center; padding: 40px; color: var(--text-main);
+    font-weight: 700; font-size: 0.9rem;
+    background: var(--bg-card); border-top: 3px dashed var(--border-color); position: relative; z-index: 2;
+}
+
+/* ===================== KEYFRAMES ===================== */
+@keyframes float   { 0%,100% { transform: translateY(0); }   50% { transform: translateY(-12px); } }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn { from { transform: translateX(-30px) rotate(-1deg); opacity: 0; } to { transform: translateX(0) rotate(-1deg); opacity: 1; } }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="match-ticker">
+  <div class="ticker-wrap">
+    <div class="ticker-item">🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'équipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥</div>
+    <div class="ticker-item">🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'équipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥</div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-container">
+
+    <ul class="nav-group left" id="nav-left">
+      <li>
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Changer de thème">
+          <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </li>
+      <li><a href="index.html" style="color: var(--jersey-purple);">Accueil</a></li>
+      <li><a href="actualites.html">Actualités</a></li>
+      <li class="dropdown">
+        <a class="dropdown-trigger">Saison ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="planning.html">Planning</a></li>
+          <li><a href="effectifs.html">Effectifs</a></li>
+          <li><a href="prepa-physique.html">Prépa Physique</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <a href="index.html" class="nav-logo" id="logo-trigger">
+      <img src="images/logo.png" alt="HBM Logo">
+    </a>
+
+    <button class="burger" id="burger" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-group right">
+      <li class="dropdown">
+        <a class="dropdown-trigger">Le Club ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="qui.html">Qui sommes-nous ?</a></li>
+          <li><a href="organigramme.html">Le Bureau</a></li>
+          <li><a href="docs.html">Documents utiles</a></li>
+        </ul>
+      </li>
+      <li><a href="inscriptions.html">Inscriptions</a></li>
+      <li><a href="partenaires.html">Partenaires</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="accueil">
+  <img src="images/logo.png" alt="Logo HBM" class="hero-logo">
+  <p class="hero-saison">SAISON 2026 — 2027</p>
+  <p class="hero-sub">Mouy n'avait pas de club de handball. On a décidé de changer ça.</p>
+  <a href="#contact" class="btn-primary">REJOINDRE L'AVENTURE</a>
+</section>
+
+<!-- ===================== ACTUALITÉS ===================== -->
+<section class="actus-section" id="actus">
+  <div class="actus-container">
+    <h2 class="section-heading">Les actualités</h2>
+    <div class="actus-grid">
+
+      <!-- Featured : Prochain match -->
+      <article class="actu-card featured">
+        <div class="actu-img">
+          <span class="actu-badge match">Prochain match</span>
+          <img src="images/ciresvsmouy.png" alt="Cires vs HBM" onerror="this.parentElement.innerHTML='<div class=\'actu-img-placeholder\'>🤾</div>'">
+        </div>
+        <div class="actu-content">
+          <span class="actu-date">03 JUIN 2026</span>
+          <h3 class="actu-title">Les Lions de retour sur le terrain !</h3>
+          <p class="actu-excerpt">Deuxième rencontre amicale contre l'équipe Loisir de Cires-lès-Mello. Jeudi 11 juin, 20h00 à la Salle Multisports Céline Goberville. Venez encourager les Lions !</p>
+          <a href="planning.html" class="actu-link">Voir le planning →</a>
+        </div>
+      </article>
+
+      <!-- Actu 2 : Résultat Méru -->
+      <article class="actu-card">
+        <div class="actu-img">
+          <span class="actu-badge result">Résultat</span>
+          <img src="images/meruvsmouy.png" alt="Méru vs HBM" onerror="this.parentElement.innerHTML='<div class=\'actu-img-placeholder\'>🏆</div>'">
+        </div>
+        <div class="actu-content">
+          <span class="actu-date">21 MAI 2026</span>
+          <h3 class="actu-title">Premier match historique du HBM !</h3>
+          <p class="actu-excerpt">Défaite 28–19 face à l'AAE Méru. Le score reste anecdotique — les Lions ont disputé leur tout premier match.</p>
+          <a href="actualites.html" class="actu-link">Lire le résumé →</a>
+        </div>
+      </article>
+
+      <!-- Actu 3 : Réunion bureau -->
+      <article class="actu-card">
+        <div class="actu-img">
+          <span class="actu-badge club">Club</span>
+          <img src="images/logonb.png" alt="Réunion bureau" onerror="this.parentElement.innerHTML='<div class=\'actu-img-placeholder\'>📋</div>'">
+        </div>
+        <div class="actu-content">
+          <span class="actu-date">24 AVRIL 2026</span>
+          <h3 class="actu-title">Réunion du bureau — maillots validés</h3>
+          <p class="actu-excerpt">Le bureau s'est réuni pour finaliser le design des maillots officiels de la saison 2026-2027.</p>
+          <a href="actualites.html" class="actu-link">Lire la suite →</a>
+        </div>
+      </article>
+
+    </div>
+    <a href="actualites.html" class="see-all-link">Voir toutes les actualités →</a>
+  </div>
+</section>
+
+<!-- ===================== PROCHAIN MATCH ===================== -->
+<section class="match-section" id="match">
+  <div class="actus-container">
+    <h2 class="section-heading">Prochain match</h2>
+    <div class="match-card">
+      <div class="match-team">
+        <img src="images/logo-cires.jpg" alt="HCL" class="match-logo" onerror="this.style.display='none'">
+        <span class="match-team-name">Cires-lès-<br>Mello</span>
+      </div>
+      <div class="match-center">
+        <span class="match-badge">Match amical</span>
+        <div class="match-vs">VS</div>
+        <div class="match-detail"><strong>Jeudi 11 juin 2026</strong>20h00</div>
+        <div class="match-detail"><strong>Le Beaucamp</strong>Cires-lès-Mello, 60660</div>
+        <div class="countdown">
+          <div class="cd-block"><div class="cd-num" id="cd-j">--</div><div class="cd-lbl">Jours</div></div>
+          <div class="cd-block"><div class="cd-num" id="cd-h">--</div><div class="cd-lbl">Heures</div></div>
+          <div class="cd-block"><div class="cd-num" id="cd-m">--</div><div class="cd-lbl">Min</div></div>
+        </div>
+      </div>
+      <div class="match-team">
+        <img src="images/logo.png" alt="HBM" class="match-logo">
+        <span class="match-team-name" style="color: var(--jersey-yellow);">HB<br>Mouy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FORMULAIRE ===================== -->
+<section class="form-section" id="contact">
+  <div class="form-container">
+    <h2>REJOINDRE LE CLUB</h2>
+    <p style="text-align:center; font-weight:500; margin-bottom:3rem; margin-top:0.5rem;">Inscrivez-vous pour être parmi les premiers informés des entraînements et des événements.</p>
+    <form action="https://formspree.io/f/xqewepzw" method="POST" id="interest-form">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem;">
+        <div><label>Prénom</label><input type="text" name="prenom" required></div>
+        <div><label>Nom</label><input type="text" name="nom" required></div>
+        <div><label>Email</label><input type="email" name="email" required></div>
+        <div><label>Téléphone</label><input type="tel" name="telephone"></div>
+        <div>
+          <label>Niveau</label>
+          <select name="niveau">
+            <option value="debutant">Débutant</option>
+            <option value="intermediaire">Déjà joué</option>
+            <option value="expert">Compétition</option>
+          </select>
+        </div>
+        <div><label>Ville</label><input type="text" name="ville"></div>
+      </div>
+      <div style="margin-top:1.5rem;"><label>Message (optionnel)</label><textarea name="message" rows="4"></textarea></div>
+      <button type="submit" id="btn-submit" class="btn-primary" style="width:100%; margin-top:2rem;">ENVOYER MA DEMANDE</button>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600.7535577479516!2d2.323413211759135!3d49.318950571278975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e64d666f8b0fd5%3A0x4c52bdead9e4e6c7!2sComplexe%20Sportif!5e0!3m2!1sfr!2sfr!4v1780562750522!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div id="success-msg" style="display:none; color:var(--jersey-purple); text-align:center; margin-top:1.5rem; font-family:var(--font-display); font-size:1.5rem; font-style:italic;">Message envoyé ! Bienvenue dans l'équipe.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<div class="contact-bar">
+  <div class="big-hbm-logo">HBM</div>
+  <p class="contact-bar-label">Suivez la création du club en direct</p>
+  <p class="contact-address">
+    📍 <a href="https://maps.google.com/?q=Complexe+Sportif+6-8+Avenue+du+8+Mai+1945+60250+Mouy" target="_blank">Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</a>
+  </p>
+  <div class="social-group">
+    <a href="mailto:Handball.mouy@gmail.com" class="social-link">✉ Email</a>
+    <a href="https://www.facebook.com/profile.php?id=61572143188788" target="_blank" class="social-link">Facebook</a>
+    <a href="https://www.instagram.com/handball.mouy/" target="_blank" class="social-link">Instagram</a>
+    <a href="https://www.tiktok.com/@mouy.handball" target="_blank" class="social-link">TikTok</a>
+    <a href="https://www.ffhandball.fr/" target="_blank" class="social-link">FFHB</a>
+  </div>
+</div>
+
+<footer>© 2026 HBM — Handball Mouy — Tous droits réservés</footer>
+
+<script>
+// --- THÈME ---
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    }
+});
+
+// --- MENU MOBILE ---
+const burger = document.getElementById('burger');
+const navLeft = document.getElementById('nav-left');
+const dropdowns = document.querySelectorAll('.dropdown');
+
+// Copier les liens du nav-right dans le menu mobile
+if (window.innerWidth <= 950) {
+    document.querySelectorAll('.nav-group.right li').forEach(li => {
+        navLeft.appendChild(li.cloneNode(true));
+    });
+}
+
+burger.addEventListener('click', () => {
+    navLeft.classList.toggle('active');
+    burger.classList.toggle('toggle');
+});
+
+dropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector('.dropdown-trigger');
+    trigger.addEventListener('click', (e) => {
+        if (window.innerWidth <= 950) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+        }
+    });
+});
+
+// --- FORMULAIRE ---
+document.getElementById('interest-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-submit');
+    btn.innerText = 'ENVOI EN COURS...';
+    try {
+        const response = await fetch(this.action, {
+            method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+            document.getElementById('success-msg').style.display = 'block';
+            this.reset();
+            btn.innerText = "C'EST REÇU !";
+        }
+    } catch { alert("Erreur de connexion."); }
+});
+
+// --- COMPTE À REBOURS ---
+function updateCountdown() {
+    const diff = new Date('2026-06-11T20:00:00') - new Date();
+    if (diff <= 0) {
+        ['cd-j','cd-h','cd-m'].forEach(id => document.getElementById(id).textContent = '00');
+        return;
+    }
+    document.getElementById('cd-j').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+    document.getElementById('cd-h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+// --- EASTER EGG ---
+let clicks = 0;
+document.getElementById('logo-trigger').addEventListener('click', () => {
+    if (++clicks === 5) { easterEgg(); clicks = 0; }
+    setTimeout(() => clicks = 0, 3000);
+});
+function easterEgg() {
+    for (let i = 0; i < 30; i++) {
+        const el = document.createElement('div');
+        el.innerText = '🤾';
+        el.style.cssText = `position:fixed;left:${Math.random()*100}vw;top:-50px;font-size:30px;z-index:9999;transition:transform ${Math.random()*2+1}s linear;pointer-events:none`;
+        document.body.appendChild(el);
+        setTimeout(() => el.style.transform = `translateY(${window.innerHeight+100}px) rotate(360deg)`, 100);
+        setTimeout(() => el.remove(), 3000);
+    }
+}
+</script>
+</body>
+</html>
