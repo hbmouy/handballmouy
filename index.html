@@ -470,6 +470,14 @@ footer {
 </head>
 <body>
 
+<!-- TICKER -->
+<div class="match-ticker">
+  <div class="ticker-wrap">
+    <div class="ticker-item">🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'équipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥</div>
+    <div class="ticker-item">🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'équipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥</div>
+  </div>
+</div>
+
 <!-- NAVIGATION -->
 <nav>
   <div class="nav-container">
@@ -532,52 +540,6 @@ footer {
   <a href="#contact" class="btn-primary">REJOINDRE L'AVENTURE</a>
 </section>
 
-<!-- CIBLE LES TITRES ET LES ZONES BLANCHES INVISIBLES -->
-<style>
-  /* Aligne la police de tous les grands titres sur celle de "REJOINDRE LE CLUB" */
-  .section-heading {
-    font-family: inherit !important; /* Utilise la même police globale définie pour les H2 */
-    font-size: 2rem !important;
-    text-transform: uppercase !important;
-    text-align: center !important;
-    color: var(--text-main) !important;
-    margin-bottom: 3rem !important;
-    letter-spacing: 1px;
-  }
-
-  /* Correction stricte de la section Prochain Match (Anti-écran blanc) */
-  .match-section {
-    background-color: transparent !important;
-    padding: 60px 20px !important;
-  }
-
-  .match-card {
-    background: var(--bg-card, #1a1a1a) !important; /* Force le fond sombre de la carte */
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 12px !important;
-    color: var(--text-main) !important;
-    padding: 30px !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  }
-
-  .match-team-name, .match-vs, .match-detail, .cd-num, .cd-lbl {
-    color: var(--text-main) !important; /* Force la visibilité de tous les textes du match */
-  }
-
-  /* Correction stricte de la 1ère Actu "Featured" (Anti-écran blanc) */
-  .actu-card.featured {
-    background: var(--bg-card, #1a1a1a) !important; /* Force le fond sombre */
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: var(--text-main) !important;
-  }
-
-  .actu-card.featured .actu-title,
-  .actu-card.featured .actu-excerpt,
-  .actu-card.featured .actu-date {
-    color: var(--text-main) !important; /* Force la visibilité des textes de l'actu mise en avant */
-  }
-</style>
-
 <!-- ===================== ACTUALITÉS ===================== -->
 <section class="actus-section" id="actus">
   <div class="actus-container">
@@ -608,7 +570,7 @@ footer {
           <span class="actu-date">21 MAI 2026</span>
           <h3 class="actu-title">Premier match historique du HBM !</h3>
           <p class="actu-excerpt">Défaite 28–19 face à l'AAE Méru. Le score reste anecdotique — les Lions ont disputé leur tout premier match.</p>
-          <a href="resume-meru.html" class="actu-link">Lire le résumé →</a>
+          <a href="actualites.html" class="actu-link">Lire le résumé →</a>
         </div>
       </article>
 
@@ -692,9 +654,7 @@ footer {
 
 <!-- ===================== FOOTER ===================== -->
 <div class="contact-bar">
-  <div class="big-hbm-logo">
-    <img src="images/logo.png" alt="Logo HBM" style="max-width: 150px; height: auto;">
-  </div>
+  <div class="big-hbm-logo">HBM</div>
   <p class="contact-bar-label">Suivez la création du club en direct</p>
   <p class="contact-address">
     📍 <a href="https://maps.google.com/?q=Complexe+Sportif+6-8+Avenue+du+8+Mai+1945+60250+Mouy" target="_blank">Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</a>
@@ -728,6 +688,7 @@ const burger = document.getElementById('burger');
 const navLeft = document.getElementById('nav-left');
 const dropdowns = document.querySelectorAll('.dropdown');
 
+// Copier les liens du nav-right dans le menu mobile
 if (window.innerWidth <= 950) {
     document.querySelectorAll('.nav-group.right li').forEach(li => {
         navLeft.appendChild(li.cloneNode(true));
@@ -779,7 +740,7 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 60000);
-</script>
+
 // --- EASTER EGG ---
 let clicks = 0;
 document.getElementById('logo-trigger').addEventListener('click', () => {
