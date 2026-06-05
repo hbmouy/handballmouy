@@ -81,30 +81,11 @@ body::after {
     clip-path: polygon(100% 200px, 100% 1100px, 0% 950px, 10% 500px, 50% 300px);
 }
 
-/* --- TICKER --- */
-.match-ticker {
-    width: 100%; background: #0b130a; color: var(--jersey-yellow);
-    font-family: var(--font-display); font-size: 1.2rem; font-style: italic;
-    letter-spacing: 0.05em; padding: 0.5rem 0; overflow: hidden;
-    position: fixed; top: 0; left: 0; z-index: 2000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    border-bottom: 2px solid var(--jersey-green);
-    display: flex;
-}
-.ticker-wrap {
-    display: inline-flex; white-space: nowrap;
-    padding-left: 100%; animation: ticker 35s linear infinite;
-}
-.ticker-item { display: inline-block; padding-right: 4rem; flex-shrink: 0; }
-@keyframes ticker {
-    0%   { transform: translate3d(0,0,0); }
-    100% { transform: translate3d(-100%,0,0); }
-}
-.match-ticker:hover .ticker-wrap { animation-play-state: paused; }
+
 
 /* --- NAVIGATION --- */
 nav {
-    position: fixed; top: 39px; left: 0; right: 0; z-index: 1000;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
     display: flex; align-items: center; justify-content: center;
     height: 95px; padding: 0 2rem;
     background: var(--nav-bg); backdrop-filter: blur(15px);
@@ -181,7 +162,7 @@ nav {
     .burger { display: flex; }
     .nav-group.right { display: none; }
     .nav-group.left {
-        position: fixed; right: -100%; top: 39px;
+        position: fixed; right: -100%; top: 0;
         height: 100vh; width: 280px;
         background: var(--bg-card); border-left: 4px solid var(--border-color);
         flex-direction: column; align-items: flex-start; justify-content: flex-start;
@@ -453,12 +434,6 @@ footer {
 </head>
 <body>
 
-<div class="match-ticker">
-  <div class="ticker-wrap">
-    <div class="ticker-item">🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'équipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥</div>
-    <div class="ticker-item">🔥 PROCHAIN MATCH : Match amical — Jeudi 11 juin à 20h00 (Le Beaucamp, 60660 Cires-lès-Mello) — HB Mouy vs l'équipe Loisir de Cires Les Mello ! Venez encourager le HBM ! 🔥</div>
-  </div>
-</div>
 
 <nav>
   <div class="nav-container">
