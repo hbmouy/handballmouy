@@ -326,11 +326,21 @@ nav {
     box-shadow: 10px 10px 0 var(--jersey-purple); padding: 32px;
     display: grid; grid-template-columns: 1fr auto 1fr;
     align-items: center; gap: 24px;
+    overflow: hidden;
 }
-.match-team { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.match-team { display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 0; }
 .match-logo {
     width: 80px; height: 80px; object-fit: contain; border-radius: 50%;
     background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.2); padding: 6px;
+    flex-shrink: 0;
+}
+/* Logo adverse fallback : si image absente, affiche initiales */
+.match-logo-fallback {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 1.2rem; font-style: italic; color: #ffffff;
+    flex-shrink: 0;
 }
 .match-logo.big {
     width: 130px; height: 130px; padding: 8px;
@@ -338,13 +348,13 @@ nav {
 }
 .match-team-name {
     font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
-    color: #ffffff; letter-spacing: 1px; text-align: center;
+    color: #ffffff; letter-spacing: 1px; text-align: center; word-break: break-word;
 }
-.match-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.match-center { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
 .match-badge {
     font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px;
     background: var(--jersey-yellow); color: #0b130a;
-    padding: 3px 14px; font-weight: 700;
+    padding: 3px 14px; font-weight: 700; white-space: nowrap;
 }
 .match-vs {
     font-family: var(--font-display); font-size: 2.5rem; font-style: italic;
@@ -353,7 +363,7 @@ nav {
 .match-detail { font-size: 0.88rem; color: rgba(255,255,255,0.7); font-weight: 500; text-align: center; }
 .match-detail strong { color: #ffffff; display: block; }
 /* FIX DARK : compte à rebours texte toujours #0b130a sur fond jaune */
-.countdown { display: flex; gap: 8px; margin-top: 6px; }
+.countdown { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; justify-content: center; }
 .cd-block {
     background: var(--jersey-yellow); color: #0b130a;
     border: 2px solid rgba(255,255,255,0.15); padding: 6px 10px; text-align: center; min-width: 50px;
@@ -392,6 +402,13 @@ nav {
 .match-result-badge.victoire { background: var(--jersey-green); color: #0b130a; }
 .match-result-badge.defaite  { background: #e03030; color: #ffffff; }
 .match-result-badge.nul      { background: rgba(255,255,255,0.15); color: #ffffff; }
+
+/* Responsive match */
+@media (max-width: 700px) {
+    .match-card { grid-template-columns: 1fr; padding: 20px; gap: 16px; }
+    .match-center { order: -1; }
+    .match-logo.big { width: 90px; height: 90px; }
+}
 
 /* ===================== FORMULAIRE ===================== */
 .form-section { padding: 60px 20px; position: relative; z-index: 2; }
@@ -592,7 +609,7 @@ footer {
 
       <!-- Équipe adverse -->
       <div class="match-team">
-        <img src="" alt="" class="match-logo" id="match-logo-adverse" onerror="this.style.display='none'">
+        <img src="" alt="" class="match-logo" id="match-logo-adverse" onerror="this.outerHTML='<div class=\'match-logo-fallback\' id=\'match-logo-adverse-fb\'></div>'; document.getElementById('match-logo-adverse-fb') && (document.getElementById('match-logo-adverse-fb').textContent = window._matchInitiales || '?')">
         <span class="match-team-name" id="match-equipe-adverse">--</span>
         <!-- Score adverse (caché par défaut) -->
         <div class="match-score" id="score-adverse" style="display:none;">--</div>
@@ -765,6 +782,9 @@ async function chargerMatch() {
         const min = String(matchDate.getMinutes()).padStart(2,'0');
 
         // Infos communes
+        // Initiales pour fallback si logo absent
+        window._matchInitiales = match.equipe_adverse.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,3);
+
         document.getElementById('match-type').textContent         = match.type;
         document.getElementById('match-equipe-adverse').innerHTML = match.equipe_adverse.replace(' ', '<br>');
         document.getElementById('match-logo-adverse').src         = match.logo_adverse;
