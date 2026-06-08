@@ -1,0 +1,13 @@
+{
+  "actif": true,
+  "statut": "a_venir",
+  "type": "Match amical",
+  "domicile": false,
+  "equipe_adverse": "Cires-lès-Mello",
+  "logo_adverse": "images/logo-cires.jpg",
+  "date": "2026-06-11T20:00:00",
+  "lieu": "Le Beaucamp",
+  "ville": "Cires-lès-Mello, 60660",
+  "score_hbm": null,
+  "score_adverse": null
+}
