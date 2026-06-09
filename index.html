@@ -442,6 +442,43 @@ input:focus, select:focus, textarea:focus {
     .form-container { padding: 2.5rem 1.5rem; box-shadow: 8px 8px 0 var(--border-color); }
 }
 
+/* ===================== PARTENAIRES ===================== */
+.partners-section {
+    padding: 60px 20px;
+    background: var(--bg-card);
+    border-top: 4px solid var(--border-color);
+    position: relative; z-index: 2;
+}
+.partners-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+}
+.partner-card {
+    background: var(--bg-body);
+    border: 3px solid var(--border-color);
+    box-shadow: 5px 5px 0 var(--border-color);
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: center;
+    width: 160px; height: 100px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex-shrink: 0;
+}
+.partner-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--jersey-purple);
+}
+.partner-card img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(30%);
+    transition: filter 0.2s;
+}
+.partner-card:hover img { filter: grayscale(0%); }
+
 /* ===================== CONTACT BAR & LOGO ===================== */
 .contact-bar {
     padding: 5rem 2rem; background: var(--bg-card);
@@ -652,6 +689,33 @@ footer {
   </div>
 </section>
 
+<!-- ===================== PARTENAIRES ===================== -->
+<section class="partners-section">
+  <div class="actus-container">
+    <h2 class="section-heading">Nos partenaires</h2>
+    <div class="partners-grid">
+      <a href="partenaires.html" class="partner-card">
+        <img src="images/lv-chauff.png" alt="LV Chauff">
+      </a>
+      <a href="partenaires.html" class="partner-card">
+        <img src="images/sirocco.png" alt="Sirocco">
+      </a>
+      <a href="partenaires.html" class="partner-card">
+        <img src="images/tvm.png" alt="TVM Technologies">
+      </a>
+      <a href="partenaires.html" class="partner-card">
+        <img src="images/klein.png" alt="Klein Expertise">
+      </a>
+      <a href="partenaires.html" class="partner-card">
+        <img src="images/cerclevert.png" alt="Cercle Vert">
+      </a>
+    </div>
+    <div style="text-align:center; margin-top:24px;">
+      <a href="partenaires.html" class="see-all-link">Voir tous nos partenaires →</a>
+    </div>
+  </div>
+</section>
+
 <div class="contact-bar">
   <div class="big-hbm-logo">
     <img src="images/logo.png" alt="HBM Logo">
@@ -663,7 +727,7 @@ footer {
   <div class="social-group">
     <a href="mailto:Handball.mouy@gmail.com" class="social-link">✉ Email</a>
     <a href="https://www.facebook.com/profile.php?id=61572143188788" target="_blank" class="social-link">Facebook</a>
-    <a href="https://www.instagram.com/mouy.handball/" target="_blank" class="social-link">Instagram</a>
+    <a href="https://www.instagram.com/handball.mouy/" target="_blank" class="social-link">Instagram</a>
     <a href="https://www.tiktok.com/@mouy.handball" target="_blank" class="social-link">TikTok</a>
     <a href="https://www.ffhandball.fr/" target="_blank" class="social-link">FFHB</a>
   </div>
