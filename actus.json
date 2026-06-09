@@ -1,22 +1,5 @@
 [
   {
-    "id": "test-actus",
-    "featured": true,
-    "archive": false,
-    "badge": "CLUB",
-    "badgeType": "club",
-    "date": "2026-06-010",
-    "dateAffichee": "10 JUIN 2026",
-    "titre": "test !",
-    "excerpt": "<strong>Deuxième rencontre amicale contre l'équipe Loisir de Cires-lès-Mello.</strong><br><br>Après un premier baptême du feu historique à Méru, nos joueurs poursuivent leur préparation ! Le jeudi 11 juin, le HBM se déplace pour défier la belle équipe de Cires-lès-Mello. Venez nombreux encourager et soutenir nos Lions pour ce nouveau derby amical !",
-    "image": "images/ciresvsmouy.png",
-    "imageAlt": "Cires-lès-Mello vs Mouy",
-    "lien": "planning.html",
-    "lienTexte": "VOIR LE PLANNING →",
-    "partageTitle": "Prochain match : Cires-lès-Mello vs HBM",
-    "partageText": "Les Lions du HBM affrontent l'équipe Loisir de Cires-lès-Mello le 11 juin !"
-  },
-  {
     "id": "cires-2026",
     "featured": false,
     "archive": false,
