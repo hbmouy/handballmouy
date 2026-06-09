@@ -609,7 +609,8 @@ footer {
 
       <!-- Équipe adverse -->
       <div class="match-team">
-        <img src="" alt="" class="match-logo" id="match-logo-adverse" onerror="this.outerHTML='<div class=\'match-logo-fallback\' id=\'match-logo-adverse-fb\'></div>'; document.getElementById('match-logo-adverse-fb') && (document.getElementById('match-logo-adverse-fb').textContent = window._matchInitiales || '?')">
+        <img src="" alt="" class="match-logo" id="match-logo-adverse" onerror="this.style.display='none'; document.getElementById('match-logo-adverse-fb').style.display='flex'">
+        <div class="match-logo-fallback" id="match-logo-adverse-fb" style="display:none;"></div>
         <span class="match-team-name" id="match-equipe-adverse">--</span>
         <!-- Score adverse (caché par défaut) -->
         <div class="match-score" id="score-adverse" style="display:none;">--</div>
@@ -784,6 +785,7 @@ async function chargerMatch() {
         // Infos communes
         // Initiales pour fallback si logo absent
         window._matchInitiales = match.equipe_adverse.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,3);
+        document.getElementById('match-logo-adverse-fb').textContent = window._matchInitiales;
 
         document.getElementById('match-type').textContent         = match.type;
         document.getElementById('match-equipe-adverse').innerHTML = match.equipe_adverse.replace(' ', '<br>');
