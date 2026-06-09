@@ -559,43 +559,8 @@ footer {
 <section class="actus-section" id="actus">
   <div class="actus-container">
     <h2 class="section-heading">Les actualités</h2>
-    <div class="actus-grid">
-      <article class="actu-card featured">
-        <div class="actu-img">
-          <span class="actu-badge match">Prochain match</span>
-          <img src="images/ciresvsmouy.png" alt="Cires vs HBM" onerror="this.parentElement.innerHTML='<div class=\'actu-img-placeholder\'>🤾</div>'">
-        </div>
-        <div class="actu-content">
-          <span class="actu-date">03 JUIN 2026</span>
-          <h3 class="actu-title">Les Lions de retour sur le terrain !</h3>
-          <p class="actu-excerpt">Deuxième rencontre amicale contre l'équipe Loisir de Cires-lès-Mello. Jeudi 11 juin, 20h00 à la Salle Multisports Céline Goberville. Venez encourager les Lions !</p>
-          <a href="planning.html" class="actu-link">Voir le planning →</a>
-        </div>
-      </article>
-      <article class="actu-card">
-        <div class="actu-img">
-          <span class="actu-badge result">Résultat</span>
-          <img src="images/meruvsmouy.png" alt="Méru vs HBM" onerror="this.parentElement.innerHTML='<div class=\'actu-img-placeholder\'>🏆</div>'">
-        </div>
-        <div class="actu-content">
-          <span class="actu-date">21 MAI 2026</span>
-          <h3 class="actu-title">Premier match historique du HBM !</h3>
-          <p class="actu-excerpt">Défaite 28–19 face à l'AAE Méru. Le score reste anecdotique — les Lions ont disputé leur tout premier match.</p>
-          <a href="actualites.html" class="actu-link">Lire le résumé →</a>
-        </div>
-      </article>
-      <article class="actu-card">
-        <div class="actu-img">
-          <span class="actu-badge club">Club</span>
-          <img src="images/logonb.png" alt="Réunion bureau" onerror="this.parentElement.innerHTML='<div class=\'actu-img-placeholder\'>📋</div>'">
-        </div>
-        <div class="actu-content">
-          <span class="actu-date">24 AVRIL 2026</span>
-          <h3 class="actu-title">Réunion du bureau — maillots validés</h3>
-          <p class="actu-excerpt">Le bureau s'est réuni pour finaliser le design des maillots officiels de la saison 2026-2027.</p>
-          <a href="actualites.html" class="actu-link">Lire la suite →</a>
-        </div>
-      </article>
+    <div class="actus-grid" id="actus-grid-home">
+      <div style="grid-column:1/-1; text-align:center; padding:2rem; font-family:var(--font-display); font-size:1.2rem; font-style:italic; opacity:0.5;">Chargement...</div>
     </div>
     <a href="actualites.html" class="see-all-link">Voir toutes les actualités →</a>
   </div>
@@ -852,6 +817,40 @@ function updateCountdown() {
 }
 
 chargerMatch();
+
+// --- ACTUS DYNAMIQUES HOME (actus.json) ---
+async function chargerActusHome() {
+    try {
+        const res   = await fetch('actus.json?v=' + Date.now());
+        const actus = await res.json();
+        const visibles = actus.filter(a => !a.archive).slice(0, 3);
+        const container = document.getElementById('actus-grid-home');
+        if (!container) return;
+
+        container.innerHTML = visibles.map((a, i) => {
+            const isFeatured = i === 0;
+            const badgeClass = `actu-badge ${a.badgeType}`;
+            const excerptText = a.excerpt.replace(/<[^>]*>/g,'').slice(0, 120) + '...';
+            return `
+            <article class="actu-card ${isFeatured ? 'featured' : ''}">
+                <div class="actu-img">
+                    <span class="${badgeClass}">${a.badge}</span>
+                    <img src="${a.image}" alt="${a.imageAlt}" loading="${i === 0 ? 'eager' : 'lazy'}" onerror="this.style.display='none'">
+                </div>
+                <div class="actu-content">
+                    <span class="actu-date">${a.dateAffichee}</span>
+                    <h3 class="actu-title">${a.titre}</h3>
+                    <p class="actu-excerpt">${excerptText}</p>
+                    ${a.lien ? `<a href="${a.lien}" class="actu-link">${a.lienTexte}</a>` : ''}
+                </div>
+            </article>`;
+        }).join('');
+
+    } catch(e) {
+        console.warn('actus.json introuvable', e);
+    }
+}
+chargerActusHome();
 
 let clicks = 0;
 document.getElementById('logo-trigger').addEventListener('click', () => {
