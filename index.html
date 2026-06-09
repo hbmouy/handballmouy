@@ -442,6 +442,32 @@ input:focus, select:focus, textarea:focus {
     .form-container { padding: 2.5rem 1.5rem; box-shadow: 8px 8px 0 var(--border-color); }
 }
 
+/* ===================== ENTRAÎNEMENTS HOME ===================== */
+.training-section {
+    padding: 60px 20px 0;
+    position: relative; z-index: 2;
+}
+.training-home-card {
+    background: var(--bg-card);
+    border: 3px solid var(--border-color);
+    border-left: 10px solid var(--jersey-green);
+    box-shadow: 8px 8px 0 var(--border-color);
+    padding: 24px 32px;
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.training-home-left { display: flex; align-items: center; gap: 20px; }
+.training-home-icon { font-size: 2.5rem; flex-shrink: 0; }
+.training-home-title {
+    font-family: var(--font-display); font-size: 1.6rem; font-style: italic;
+    color: var(--text-main); letter-spacing: 1px; margin-bottom: 4px;
+}
+.training-home-sub { font-size: 0.9rem; font-weight: 500; color: var(--text-main); opacity: 0.7; }
+@media (max-width: 700px) {
+    .training-home-card { flex-direction: column; text-align: center; padding: 20px; }
+    .training-home-left { flex-direction: column; }
+}
+
 /* ===================== PARTENAIRES ===================== */
 .partners-section {
     padding: 60px 20px;
@@ -686,6 +712,23 @@ footer {
       </div>
       <div id="success-msg" style="display:none; color:var(--jersey-purple); text-align:center; margin-top:1.5rem; font-family:var(--font-display); font-size:1.5rem; font-style:italic;">Message envoyé ! Bienvenue dans l'équipe.</div>
     </form>
+  </div>
+</section>
+
+<!-- ===================== ENTRAÎNEMENTS ===================== -->
+<section class="training-section">
+  <div class="actus-container">
+    <h2 class="section-heading">Entraînements</h2>
+    <div class="training-home-card">
+      <div class="training-home-left">
+        <div class="training-home-icon">🏐</div>
+        <div>
+          <div class="training-home-title">TOUS LES JEUDIS — 20H À 22H</div>
+          <div class="training-home-sub">📍 Complexe Sportif, 6-8 Av. du 8 Mai 1945, 60250 Mouy</div>
+        </div>
+      </div>
+      <a href="planning.html" class="btn-primary" style="font-size:1.1rem; padding:0.9rem 2rem;">VOIR LE PLANNING →</a>
+    </div>
   </div>
 </section>
 
