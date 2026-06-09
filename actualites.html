@@ -4,251 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualités - HBM</title>
-    
-    <!-- ICÔNE DANS L'ONGLET (FAVICON) -->
     <link rel="icon" type="image/png" href="images/logo.png">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- ANTI-FLASH BLANC : Lecture immédiate du thème sélectionné sur l'accueil -->
     <script>
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
         }
     </script>
-
     <style>
-        /* --- BASE LUMINEUSE & ENERGIE MAILLOT --- */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
         :root {
-            /* Couleurs communes */
-            --jersey-yellow: #e2f438;  
-            --jersey-green: #2cd646;   
-            --jersey-purple: #9d4edd;  
+            --jersey-yellow: #e2f438;
+            --jersey-green: #2cd646;
+            --jersey-purple: #9d4edd;
             --font-display: 'Anton', sans-serif;
             --font-body: 'DM Sans', sans-serif;
-
-            /* Mode Clair (par défaut) */
             --bg-body: #f5f8f5;
             --bg-card: #ffffff;
             --text-main: #0b130a;
             --border-color: #0b130a;
             --shadow-color: #0b130a;
-            --nav-bg: rgba(255, 255, 255, 0.85);
+            --nav-bg: rgba(255,255,255,0.85);
         }
-
-        /* Mode Sombre */
         [data-theme="dark"] {
             --bg-body: #0b130a;
             --bg-card: #142113;
             --text-main: #dcdcdc;
             --border-color: #f5f8f5;
-            --shadow-color: #2cd646; 
-            --nav-bg: rgba(11, 19, 10, 0.85);
+            --shadow-color: #2cd646;
+            --nav-bg: rgba(11,19,10,0.85);
         }
+        body {
+            background: var(--bg-body); color: var(--text-main);
+            font-family: var(--font-body); line-height: 1.8;
+            overflow-x: hidden; position: relative;
+            transition: background 0.3s, color 0.3s;
+        }
+        body::before, body::after { content: ""; position: absolute; width: 100%; height: 1200px; z-index: -1; opacity: 0.85; pointer-events: none; }
+        body::before { top: 0; left: 0; background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%); clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px); }
+        body::after { top: 1200px; right: 0; width: 80%; background: linear-gradient(225deg, rgba(226,244,56,0.6) 0%, rgba(44,214,70,0.6) 100%); clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px); }
 
-        body { 
-            background: var(--bg-body); 
-            color: var(--text-main); 
-            font-family: var(--font-body); 
-            line-height: 1.8;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* --- FORMS GÉOMÉTRIQUES ASYMÉTRIQUES --- */
-        body::before, body::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 1200px;
-            z-index: -1;
-            opacity: 0.85;
-            pointer-events: none;
-        }
-        body::before {
-            top: 0;
-            left: 0;
-            background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px);
-        }
-        body::after {
-            top: 1200px;
-            right: 0;
-            width: 80%;
-            background: linear-gradient(225deg, rgba(226, 244, 56, 0.6) 0%, rgba(44, 214, 70, 0.6) 100%);
-            clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px);
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            display: flex; align-items: center; justify-content: center;
-            height: 95px; padding: 0 2rem;  
-            background: var(--nav-bg);  
-            backdrop-filter: blur(15px);
-            border-bottom: 4px solid var(--border-color);
-        }
-        .nav-container {
-            display: flex; align-items: center; justify-content: space-between;
-            width: 100%; max-width: 1200px; height: 100%; position: relative;
-        }
-        .nav-logo {
-            position: absolute; left: 50%; top: 50%;
-            transform: translate(-50%, -50%); 
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: inherit; z-index: 1002;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        /* NAV */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; height: 95px; padding: 0 2rem; background: var(--nav-bg); backdrop-filter: blur(15px); border-bottom: 4px solid var(--border-color); }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; height: 100%; position: relative; }
+        .nav-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 1002; transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275); }
         .nav-logo img { height: 85px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); }
-        .nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
-
+        .nav-logo:hover { transform: translate(-50%,-50%) scale(1.08); }
         .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
-        .nav-group.left { justify-content: flex-end; }  
-        .nav-group.right { justify-content: flex-start; } 
-
-        .nav-group a, .dropdown-trigger { 
-            color: var(--text-main); text-decoration: none; 
-            font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
-            text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
-            cursor: pointer;
-        }
+        .nav-group.left { justify-content: flex-end; }
+        .nav-group.right { justify-content: flex-start; }
+        .nav-group a, .dropdown-trigger { color: var(--text-main); text-decoration: none; font-family: var(--font-display); font-size: 1.3rem; font-style: italic; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; cursor: pointer; }
         .nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
+        .nav-group a.active { color: var(--jersey-purple); }
 
-        /* BURGER MOBILE */
-        .menu-toggle {
-            display: none; flex-direction: column; justify-content: space-between;
-            width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
-        }
-        .menu-toggle span { width: 100%; height: 3px; background-color: var(--text-main); transition: all 0.3s ease; }
+        /* Theme toggle */
+        .theme-toggle-btn { background: transparent; border: 2px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; box-shadow: 3px 3px 0px var(--border-color); transition: transform 0.2s, box-shadow 0.2s; }
+        .theme-toggle-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0px var(--jersey-purple); }
+        .theme-toggle-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--text-main); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .sun-icon { display: none; } .moon-icon { display: block; }
+        [data-theme="dark"] .sun-icon { display: block; } [data-theme="dark"] .moon-icon { display: none; }
+
+        /* BURGER */
+        .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { width: 100%; height: 3px; background-color: var(--border-color); transition: all 0.3s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
         /* DROPDOWN */
         .dropdown { position: relative; }
-        .dropdown-content {
-            display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-            background: var(--bg-card); min-width: 180px; border: 3px solid var(--border-color);
-            padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color);
-        }
-        .dropdown-content li a { 
-            padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; 
-            font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main);
-        }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); min-width: 180px; border: 3px solid var(--border-color); padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color); }
+        .dropdown-content li a { padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main); }
         .dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
         .dropdown:hover .dropdown-content { display: block; }
         .dropdown.active .dropdown-content { display: block; }
 
-        /* --- CONTENU & EN-TÊTE --- */
-        .content-wrapper { max-width: 1100px; margin: 180px auto 40px; padding: 0 20px; position: relative; z-index: 2; }
-        
+        /* CONTENU */
+        .content-wrapper { max-width: 1100px; margin: 160px auto 40px; padding: 0 20px; position: relative; z-index: 2; }
         .label-container { text-align: center; }
-        .section-label { 
-            color: var(--text-main); background: var(--bg-card); border: 2px solid var(--border-color);
-            box-shadow: 3px 3px 0px var(--shadow-color); text-transform: uppercase; 
-            font-family: var(--font-display); font-style: italic; font-size: 1.2rem; 
-            letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem;
-            transform: rotate(-1deg);
-        }
+        .section-label { color: var(--text-main); background: var(--bg-card); border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color); text-transform: uppercase; font-family: var(--font-display); font-style: italic; font-size: 1.2rem; letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem; transform: rotate(-1deg); }
+        h1 { font-family: var(--font-display); font-size: clamp(2.8rem,7.5vw,4.8rem); text-align: center; margin-bottom: 2rem; line-height: 1; font-style: italic; letter-spacing: -1px; color: var(--text-main); text-shadow: 4px 4px 0px var(--bg-card), 8px 8px 0px var(--shadow-color); }
 
-        h1 { 
-            font-family: var(--font-display); font-size: clamp(2.8rem, 7.5vw, 4.8rem); 
-            text-align: center; margin-bottom: 2rem; line-height: 1; font-style: italic; letter-spacing: -1px;
-            color: var(--text-main); text-shadow: 4px 4px 0px var(--bg-card), 8px 8px 0px var(--shadow-color);
-        }
-
-        /* --- SURLIGNAGE ET RECHERCHE --- */
-        .highlight { 
-            background: var(--jersey-purple); color: #ffffff; padding: 0.1rem 0.5rem;
-            font-weight: 700; display: inline-block; transform: skewX(-10deg);
-        }
-        .highlight.date { background: var(--border-color); color: var(--bg-card); font-family: var(--font-display); font-style: italic; font-size: 0.9rem; letter-spacing: 1px; transform: none; }
-
-        .search-wrapper { max-width: 500px; margin: 0 auto 4rem; padding: 0 20px; text-align: center;}
-        .search-input {
-            width: 100%; background: var(--bg-card); border: 3px solid var(--border-color);
-            color: var(--text-main); padding: 12px 20px; font-size: 1rem; font-weight: 600;
-            outline: none; transition: 0.3s; text-align: center; font-family: var(--font-body);
-            box-shadow: 6px 6px 0px var(--shadow-color);
-        }
+        /* RECHERCHE */
+        .search-wrapper { max-width: 500px; margin: 0 auto 4rem; padding: 0 20px; text-align: center; }
+        .search-input { width: 100%; background: var(--bg-card); border: 3px solid var(--border-color); color: var(--text-main); padding: 12px 20px; font-size: 1rem; font-weight: 600; outline: none; transition: 0.3s; text-align: center; font-family: var(--font-body); box-shadow: 6px 6px 0px var(--shadow-color); }
         .search-input:focus { box-shadow: 6px 6px 0px var(--jersey-purple); }
 
-        /* --- GRILLE D'ACTUALITÉS --- */
+        /* GRILLE */
         .news-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin-bottom: 4rem; }
-        
-        .news-card {
-            background: var(--bg-card); border: 3px solid var(--border-color); 
-            position: relative; display: flex; flex-direction: column;
-            box-shadow: 10px 10px 0px var(--shadow-color);
-            clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .news-card:hover { transform: translate(-2px, -2px); box-shadow: 12px 12px 0px var(--shadow-color); }
-
+        .news-card { background: var(--bg-card); border: 3px solid var(--border-color); position: relative; display: flex; flex-direction: column; box-shadow: 10px 10px 0px var(--shadow-color); clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%); transition: transform 0.3s, box-shadow 0.3s; }
+        .news-card:hover { transform: translate(-2px,-2px); box-shadow: 12px 12px 0px var(--shadow-color); }
         .news-card.featured { grid-column: 1 / -1; box-shadow: 14px 14px 0px var(--shadow-color); }
-        .news-card.featured::before { 
-            content: ''; position: absolute; top: 0; left: 0; width: 45px; height: 45px; 
-            background: var(--jersey-yellow); clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 3;
-        }
-
+        .news-card.featured::before { content: ''; position: absolute; top: 0; left: 0; width: 45px; height: 45px; background: var(--jersey-yellow); clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 3; }
         .news-img { background: rgba(0,0,0,0.03); border-bottom: 3px solid var(--border-color); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         [data-theme="dark"] .news-img { background: rgba(255,255,255,0.05); }
-        
         .news-card.featured .news-img { height: 380px; }
         .news-style-block .news-img { height: 220px; }
         .news-img img { width: 100%; height: 100%; object-fit: contain; padding: 20px; transition: transform 0.5s; }
         .news-card:hover .news-img img { transform: scale(1.03); }
 
-        .badge { 
-            position: absolute; top: 15px; left: 15px; background: var(--jersey-green); 
-            color: #0b130a; font-family: var(--font-display); font-style: italic;
-            font-size: 1.1rem; padding: 2px 10px; border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color); z-index: 2; 
-        }
-        .featured .badge { background: var(--jersey-purple); color: #ffffff; }
+        /* BADGES */
+        .badge { position: absolute; top: 15px; left: 15px; font-family: var(--font-display); font-style: italic; font-size: 1.1rem; padding: 2px 10px; border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color); z-index: 2; color: #0b130a; }
+        .badge-match   { background: var(--jersey-green); }
+        .badge-result  { background: var(--jersey-purple); color: #ffffff !important; }
+        .badge-prepa   { background: var(--jersey-yellow); }
+        .badge-sponsor { background: var(--jersey-green); }
+        .badge-club    { background: var(--jersey-yellow); }
+        .news-card.featured .badge { background: var(--jersey-purple); color: #ffffff; }
 
         .news-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
-        
-        h2.news-title { 
-            font-family: var(--font-display); font-size: 2rem; font-style: italic; 
-            line-height: 1.2; text-transform: uppercase; margin: 0.8rem 0; color: var(--text-main);
-        }
+        .highlight { background: var(--jersey-purple); color: #ffffff; padding: 0.1rem 0.5rem; font-weight: 700; display: inline-block; transform: skewX(-10deg); }
+        .highlight.date { background: var(--border-color); color: var(--bg-card); font-family: var(--font-display); font-style: italic; font-size: 0.9rem; letter-spacing: 1px; transform: none; }
+        h2.news-title { font-family: var(--font-display); font-size: 2rem; font-style: italic; line-height: 1.2; text-transform: uppercase; margin: 0.8rem 0; color: var(--text-main); }
         .featured h2.news-title { font-size: 2.8rem; }
         h2.news-title a { color: inherit; text-decoration: none; }
         h2.news-title a:hover { color: var(--jersey-purple); }
-
         .news-excerpt { color: var(--text-main); font-size: 1.05rem; font-weight: 500; margin-bottom: 1.5rem; }
-        
         .news-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 2px dashed rgba(11,19,10,0.15); }
         [data-theme="dark"] .news-footer { border-top-color: rgba(245,248,245,0.2); }
-        
         .partner-link { font-family: var(--font-display); font-style: italic; font-size: 1.2rem; color: var(--text-main); text-decoration: none; text-transform: uppercase; }
         .partner-link:hover { color: var(--jersey-green); text-decoration: underline; }
-
-        .share-btn {
-            background: var(--bg-card); border: 2px solid var(--border-color); color: var(--text-main); cursor: pointer;
-            display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; box-shadow: 3px 3px 0px var(--shadow-color); transition: 0.2s;
-        }
-        .share-btn:hover { background: var(--jersey-yellow); color: #0b130a; transform: translate(-1px, -1px); box-shadow: 4px 4px 0px var(--shadow-color); }
+        .share-btn { background: var(--bg-card); border: 2px solid var(--border-color); color: var(--text-main); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; box-shadow: 3px 3px 0px var(--shadow-color); transition: 0.2s; }
+        .share-btn:hover { background: var(--jersey-yellow); color: #0b130a; transform: translate(-1px,-1px); box-shadow: 4px 4px 0px var(--shadow-color); }
         .share-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
-        /* --- ARCHIVES & TOAST --- */
+        /* ARCHIVES */
         .old-news { display: none; }
         .archive-section { text-align: center; padding: 20px 0 60px; }
-        .load-btn {
-            background: var(--bg-card); border: 3px solid var(--border-color); color: var(--text-main);
-            padding: 12px 35px; cursor: pointer; font-family: var(--font-display); font-style: italic;
-            font-size: 1.4rem; box-shadow: 6px 6px 0px var(--shadow-color); transition: 0.2s; text-transform: uppercase;
-        }
-        .load-btn:hover { background: var(--jersey-green); color: #0b130a; transform: translate(-2px, -2px); box-shadow: 8px 8px 0px var(--shadow-color); }
+        .load-btn { background: var(--bg-card); border: 3px solid var(--border-color); color: var(--text-main); padding: 12px 35px; cursor: pointer; font-family: var(--font-display); font-style: italic; font-size: 1.4rem; box-shadow: 6px 6px 0px var(--shadow-color); transition: 0.2s; text-transform: uppercase; }
+        .load-btn:hover { background: var(--jersey-green); color: #0b130a; transform: translate(-2px,-2px); box-shadow: 8px 8px 0px var(--shadow-color); }
 
-        .toast-notification {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: var(--border-color); color: var(--bg-card); padding: 12px 30px;
-            border: 2px solid var(--jersey-yellow); font-family: var(--font-display); font-style: italic; font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 2000; opacity: 0; transition: opacity 0.3s; pointer-events: none;
-        }
+        /* LOADING */
+        .loading { text-align: center; padding: 4rem; font-family: var(--font-display); font-size: 1.5rem; font-style: italic; opacity: 0.5; }
 
-        /* --- RESPONSIVE --- */
+        /* TOAST */
+        .toast-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--border-color); color: var(--bg-card); padding: 12px 30px; border: 2px solid var(--jersey-yellow); font-family: var(--font-display); font-style: italic; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 2000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+
+        footer { text-align: center; padding: 60px; color: var(--text-main); font-weight: 700; border-top: 3px dashed var(--border-color); background: var(--bg-card); position: relative; z-index: 2; }
+
         @media (max-width: 992px) {
             nav { height: 75px; }
             .nav-container { justify-content: space-between; }
@@ -256,21 +150,14 @@
             .nav-logo img { height: 60px; }
             .nav-logo:hover { transform: none; }
             .menu-toggle { display: flex; }
-            
-            .nav-group {
-                position: fixed; top: 0; width: 280px; height: 100vh;
-                background: var(--bg-card); flex-direction: column; align-items: flex-start;
-                padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000;
-            }
+            .nav-group { position: fixed; top: 0; width: 280px; height: 100vh; background: var(--bg-card); flex-direction: column; align-items: flex-start; padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000; }
             .nav-group.left { right: -100%; border-left: 4px solid var(--border-color); transition: right 0.4s ease; }
-            .nav-group.right { display: none; } 
+            .nav-group.right { display: none; }
             .nav-group.left.active { right: 0; }
-            
-            .content-wrapper { margin-top: 140px; }
+            .content-wrapper { margin-top: 120px; }
             body::before { clip-path: polygon(0 0, 100% 0, 100% 200px, 0 120px); }
             .news-card.featured .news-img { height: 240px; }
         }
-
         @media (max-width: 480px) {
             .news-card { clip-path: none; box-shadow: 6px 6px 0px var(--shadow-color); }
             .news-card.featured { box-shadow: 6px 6px 0px var(--shadow-color); }
@@ -278,20 +165,21 @@
             h2.news-title { font-size: 1.6rem; }
             .featured h2.news-title { font-size: 2rem; }
         }
-
-        footer { 
-            text-align: center; padding: 60px; color: var(--text-main); font-weight: 700;
-            border-top: 3px dashed var(--border-color); background: var(--bg-card); position: relative; z-index: 2;
-        }
     </style>
 </head>
 <body>
 
 <nav>
     <div class="nav-container">
-        <ul class="nav-group left">
-            <li><a href="./">Accueil</a></li>
-            <li><a href="actualites.html" style="color: var(--jersey-purple);">Actualités</a></li>
+        <ul class="nav-group left" id="nav-left">
+            <li>
+                <button class="theme-toggle-btn" id="theme-toggle" aria-label="Changer de thème">
+                    <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                </button>
+            </li>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="actualites.html" class="active">Actualités</a></li>
             <li class="dropdown">
                 <a class="dropdown-trigger">Saison ▾</a>
                 <ul class="dropdown-content">
@@ -306,7 +194,7 @@
             <img src="images/logo.png" alt="HBM">
         </a>
 
-        <button class="menu-toggle" aria-label="Ouvrir le menu">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">
             <span></span><span></span><span></span>
         </button>
 
@@ -336,262 +224,137 @@
     </div>
 
     <div class="news-container" id="newsContainer">
-        
-        <!-- ACTU UNE : PROCHAIN MATCH CIRES -->
-        <article class="news-card featured">
-            <div class="news-img">
-                <div class="badge">PROCHAIN MATCH</div>
-                <img src="images/ciresvsmouy.png" alt="Cires-lès-Mello vs Mouy">
-            </div>
-            <div class="news-content">
-                <div>
-                    <span class="highlight date">03 JUIN 2026</span>
-                </div>
-                <h2 class="news-title">
-                    <a href="planning.html">LES LIONS DE RETOUR SUR LE TERRAIN !</a>
-                </h2>
-                <p class="news-excerpt">
-                    <strong>Deuxième rencontre amicale contre l'équipe Loisir de Cires-lès-Mello.</strong><br><br>
-                    Après un premier baptême du feu historique à Méru, nos joueurs poursuivent leur préparation ! Le jeudi 11 juin, le HBM se déplace pour défier la belle équipe de Cires-lès-Mello. Venez nombreux encourager et soutenir nos Lions pour ce nouveau derby amical !
-                </p>
-                <div class="news-footer">
-                    <a href="planning.html" class="partner-link">VOIR LE PLANNING →</a>
-                    <button class="share-btn" onclick="shareActu('Prochain match : Cires-lès-Mello vs HBM', 'Les Lions du HBM affrontent l\'équipe Loisir de Cires-lès-Mello le 11 juin !')">
-                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-
-        <!-- RÉSUMÉ MÉRU -->
-        <article class="news-card news-style-block">
-            <div class="news-img"><div class="badge">RÉSULTAT MATCH</div><img src="images/meruvsmouy.png" alt="Méru vs Mouy"></div>
-            <div class="news-content">
-                <div><span class="highlight date">21 MAI 2026</span></div>
-                <h2 class="news-title"><a href="resume-meru.html">PREMIER MATCH HISTORIQUE POUR LE HBM !</a></h2>
-                <p class="news-excerpt"><strong>Défaite 28-18 contre l'équipe loisir de Méru.</strong> Le score reste anecdotique, un grand merci à l'AAE Méru Handball pour cet accueil mémorable.</p>
-                <div class="news-footer">
-                    <a href="resume-meru.html" class="partner-link">Lire le résumé →</a>
-                    <button class="share-btn" onclick="shareActu('Résultat match : Méru vs HBM', 'Premier match historique pour le HBM contre le loisir de Méru !')">
-                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-
-        <!-- MATCH DE PREPA -->
-        <article class="news-card news-style-block">
-            <div class="news-img"><div class="badge">MATCH DE PREPA</div><img src="images/meruvsmouy.png" alt="Méru vs Mouy"></div>
-            <div class="news-content">
-                <div><span class="highlight date">05 MAI 2026</span></div>
-                <h2 class="news-title"><a href="match-meru.html">MÉRU LOISIR vs HBM</a></h2>
-                <p class="news-excerpt">Nos joueurs se déplacent à Méru pour leur tout premier match amical de préparation.</p>
-                <div class="news-footer">
-                    <a href="match-meru.html" class="partner-link">Détails du match →</a>
-                    <button class="share-btn" onclick="shareActu('MATCH DE PREPA : MÉRU vs HBM', 'Le HBM défie l\'équipe Loisir de Méru pour son premier match !')">
-                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-
-        <!-- SPONSOR CERCLE VERT -->
-        <article class="news-card news-style-block">
-            <div class="news-img"><div class="badge">SPONSOR</div><img src="images/cerclevert.png" alt="Cercle Vert"></div>
-            <div class="news-content">
-                <div><span class="highlight date">04 MAI 2026</span></div>
-                <h2 class="news-title">GROUPE CERCLE VERT</h2>
-                <p class="news-excerpt">Un immense merci au Groupe Cercle Vert, notre 6ème sponsor officiel, qui rejoint l'aventure pour soutenir notre club et nos joueurs !</p>
-                <div class="news-footer">
-                    <a href="partenaires.html" class="partner-link">Sponsors →</a>
-                    <button class="share-btn" onclick="shareActu('Sponsor : Groupe Cercle Vert', 'Le Groupe Cercle Vert devient partenaire officiel du HBM !')">
-                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-
-        <!-- REUNION BUREAU -->
-        <article class="news-card news-style-block">
-            <div class="news-img"><div class="badge">CLUB</div><img src="images/logonb.png" alt="Réunion Bureau"></div>
-            <div class="news-content">
-                <div><span class="highlight date">24 AVRIL 2026</span></div>
-                <h2 class="news-title">RÉUNION DU BUREAU</h2>
-                <p class="news-excerpt">L'équipe s'est réunie pour finaliser et valider le design des futurs maillots officiels ainsi que les packs d'équipements de la saison 2026.</p>
-                <div class="news-footer">
-                    <span></span>
-                    <button class="share-btn" onclick="shareActu('Réunion du Bureau', 'Validation des équipements et maillots de la saison !')">
-                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-
-        <!-- ARCHIVES (KLEIN EXPERTISE) -->
-        <article class="news-card news-style-block old-news">
-            <div class="news-img"><div class="badge">SPONSOR</div><img src="images/klein.png" alt="Klein Expertise"></div>
-            <div class="news-content">
-                <div><span class="highlight date">24 AVRIL 2026</span></div>
-                <h2 class="news-title">KLEIN EXPERTISE</h2>
-                <p class="news-excerpt">Nous sommes fiers d'annoncer notre 5ème partenaire officiel. Un grand merci à Klein Expertise pour sa confiance et son précieux soutien.</p>
-                <div class="news-footer">
-                    <a href="partenaires.html" class="partner-link">Sponsors →</a>
-                    <button class="share-btn" onclick="shareActu('Sponsor : Klein Expertise', 'Merci à Klein Expertise pour son soutien !')">
-                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-
-        <!-- ARCHIVES (TVM) -->
-        <article class="news-card news-style-block old-news">
-            <div class="news-img"><div class="badge">SPONSOR</div><img src="images/tvm.png" alt="TVM Technologie"></div>
-            <div class="news-content">
-                <div><span class="highlight date">22 AVRIL 2026</span></div>
-                <h2 class="news-title">TVM TECHNOLOGIE</h2>
-                <p class="news-excerpt">TVM Technologie s'engage auprès des Lions ! Notre 4ème sponsor officiel nous apporte sa force pour le développement numérique du club.</p>
-                <div class="news-footer">
-                    <a href="partenaires.html" class="partner-link">Sponsors →</a>
-                    <button class="share-btn" onclick="shareActu('Sponsor : TVM Technologie', 'TVM Technologie soutient l\'avenir numérique du HBM.')">
-                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-
-        <!-- ARCHIVES (SIROCCO) -->
-        <article class="news-card news-style-block old-news">
-            <div class="news-img"><div class="badge">SPONSOR</div><img src="images/sirocco.png" alt="Sirocco"></div>
-            <div class="news-content">
-                <div><span class="highlight date">17 AVRIL 2026</span></div>
-                <h2 class="news-title">SIROCCO</h2>
-                <p class="news-excerpt">Sirocco insuffle une nouvelle énergie à l'équipe ! Heureux de vous présenter notre 3ème sponsor officiel pour nous accompagner sur le terrain.</p>
-                <div class="news-footer">
-                    <a href="partenaires.html" class="partner-link">Sponsors →</a>
-                    <button class="share-btn" onclick="shareActu('Sponsor : Sirocco', 'Sirocco souffle une nouvelle dynamique au club !')">
-                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-
-        <!-- ARCHIVES (LV CHAUFF) -->
-        <article class="news-card news-style-block old-news">
-            <div class="news-img"><div class="badge">SPONSOR</div><img src="images/lv-chauff.png" alt="LV Chauff"></div>
-            <div class="news-content">
-                <div><span class="highlight date">16 AVRIL 2026</span></div>
-                <h2 class="news-title">LV CHAUFF</h2>
-                <p class="news-excerpt">L'artisanat local soutient Mouy ! Bienvenue à LV Chauff, notre 2ème sponsor officiel, qui s'engage avec passion à nos côtés.</p>
-                <div class="news-footer">
-                    <a href="partenaires.html" class="partner-link">Sponsors →</a>
-                    <button class="share-btn" onclick="shareActu('Sponsor : LV Chauff', 'LV Chauff, partenaire engagé des Lions de Mouy.')">
-                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-
+        <div class="loading">Chargement des actualités...</div>
     </div>
 
-    <div class="archive-section" id="archiveSection">
+    <div class="archive-section" id="archiveSection" style="display:none;">
         <button class="load-btn" id="loadMoreBtn">VOIR TOUTES LES ACTUALITÉS</button>
-    </div>
-
-    <!-- ZONE COMMENTAIRES DISQUS REVISITÉE POUR LA LISIBILITÉ -->
-    <div style="margin: 40px 0 100px;">
-        <div id="disqus_thread" style="background: var(--text-main); padding: 2.5rem; border: 3px solid var(--border-color); box-shadow: 8px 8px 0px var(--jersey-purple); color: var(--bg-card);"></div>
     </div>
 </main>
 
-<footer>
-    © 2026 HBM — Handball Mouy — L'aventure ne fait que commencement.
-</footer>
-
+<footer>© 2026 HBM — Handball Mouy — L'aventure ne fait que commencer.</footer>
 <div id="toast" class="toast-notification">Lien de l'actu copié ! 🦁</div>
 
 <script>
-// --- MANAGEMENT NAVIGATION SYMÉTRIQUE ---
-const menuToggle = document.querySelector('.menu-toggle');
-const navGroupLeft = document.querySelector('.nav-group.left');
-const navGroupRight = document.querySelector('.nav-group.right');
+// --- THÈME ---
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
+    else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
+});
 
+// --- NAV MOBILE ---
+const menuToggle = document.getElementById('menu-toggle');
+const navLeft = document.getElementById('nav-left');
 if (window.innerWidth <= 992) {
-    const rightLinks = navGroupRight.querySelectorAll('li');
-    rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
+    document.querySelectorAll('.nav-group.right li').forEach(li => navLeft.appendChild(li.cloneNode(true)));
 }
-
-const dropdowns = document.querySelectorAll('.dropdown');
-
 menuToggle.addEventListener('click', () => {
     menuToggle.classList.toggle('active');
-    navGroupLeft.classList.toggle('active');
+    navLeft.classList.toggle('active');
 });
-
-dropdowns.forEach(dropdown => {
-    const trigger = dropdown.querySelector('.dropdown-trigger');
-    trigger.addEventListener('click', (e) => {
-        if (window.innerWidth <= 992) {
-            e.preventDefault();
-            dropdown.classList.toggle('active');
-        }
+document.querySelectorAll('.dropdown').forEach(dd => {
+    dd.querySelector('.dropdown-trigger').addEventListener('click', e => {
+        if (window.innerWidth <= 992) { e.preventDefault(); dd.classList.toggle('active'); }
     });
 });
 
-// --- LOGIQUE BOUTON ARCHIVES ---
-const btn = document.getElementById('loadMoreBtn');
-const oldNews = document.querySelectorAll('.old-news');
-let isExpanded = false;
-
-btn.addEventListener('click', () => {
-    isExpanded = !isExpanded;
-    oldNews.forEach(news => {
-        news.style.display = isExpanded ? 'flex' : 'none';
-    });
-    btn.innerText = isExpanded ? 'MASQUER LES ARCHIVES' : 'VOIR TOUTES LES ACTUALITÉS';
-});
-
-// --- LOGIQUE SYSTEME DE RECHERCHE ---
-const searchInput = document.getElementById('searchInput');
-const allCards = document.querySelectorAll('.news-card');
-const archiveSection = document.getElementById('archiveSection');
-
-searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    
-    allCards.forEach(card => {
-        const textContent = card.innerText.toLowerCase();
-        if (textContent.includes(query)) {
-            card.style.display = 'flex';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-
-    if (query.length > 0) {
-        archiveSection.style.display = 'none';
-    } else {
-        archiveSection.style.display = 'block';
-        oldNews.forEach(news => news.style.display = isExpanded ? 'flex' : 'none');
-    }
-});
-
-// --- BOUTON DE PARTAGE ET DE COPIE ---
+// --- PARTAGE ---
 function shareActu(title, text) {
-    const currentUrl = window.location.href;
-    if (navigator.share) {
-        navigator.share({
-            title: title,
-            text: text,
-            url: currentUrl
-        }).catch(err => console.log(err));
-    } else {
-        navigator.clipboard.writeText(currentUrl).then(() => {
+    if (navigator.share) { navigator.share({ title, text, url: window.location.href }).catch(() => {}); }
+    else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
             const toast = document.getElementById('toast');
             toast.style.opacity = '1';
-            setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+            setTimeout(() => toast.style.opacity = '0', 2000);
         });
     }
 }
+
+// --- SVG PARTAGE ---
+const shareSVG = `<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>`;
+
+// --- GÉNÉRATION DES CARTES ---
+function buildCard(actu, index) {
+    const isFeatured = actu.featured;
+    const isArchive  = actu.archive;
+    const badgeClass = `badge badge-${actu.badgeType}`;
+    const titleHTML  = actu.lien
+        ? `<a href="${actu.lien}">${actu.titre}</a>`
+        : actu.titre;
+    const footerLeft = actu.lien && actu.lienTexte
+        ? `<a href="${actu.lien}" class="partner-link">${actu.lienTexte}</a>`
+        : `<span></span>`;
+
+    return `
+    <article class="news-card ${isFeatured ? 'featured' : 'news-style-block'} ${isArchive ? 'old-news' : ''}" data-text="${actu.titre.toLowerCase()} ${actu.badge.toLowerCase()} ${actu.dateAffichee.toLowerCase()}">
+        <div class="news-img">
+            <div class="${badgeClass}">${actu.badge}</div>
+            <img src="${actu.image}" alt="${actu.imageAlt}" loading="${index < 3 ? 'eager' : 'lazy'}">
+        </div>
+        <div class="news-content">
+            <div><span class="highlight date">${actu.dateAffichee}</span></div>
+            <h2 class="news-title">${titleHTML}</h2>
+            <p class="news-excerpt">${actu.excerpt}</p>
+            <div class="news-footer">
+                ${footerLeft}
+                <button class="share-btn" onclick="shareActu('${actu.partageTitle.replace(/'/g,"\\'")}', '${actu.partageText.replace(/'/g,"\\'")}'">${shareSVG}</button>
+            </div>
+        </div>
+    </article>`;
+}
+
+// --- CHARGEMENT ACTUS ---
+let allActus = [];
+let isExpanded = false;
+
+async function chargerActus() {
+    try {
+        const res  = await fetch('actus.json?v=' + Date.now());
+        allActus   = await res.json();
+        const container = document.getElementById('newsContainer');
+        container.innerHTML = allActus.map((a, i) => buildCard(a, i)).join('');
+
+        const hasArchives = allActus.some(a => a.archive);
+        const archiveSection = document.getElementById('archiveSection');
+        if (hasArchives) archiveSection.style.display = 'block';
+
+        initSearch();
+        initArchiveBtn();
+
+    } catch(e) {
+        document.getElementById('newsContainer').innerHTML = '<p style="text-align:center;opacity:0.5;padding:3rem;font-style:italic;">Impossible de charger les actualités.</p>';
+        console.error('actus.json:', e);
+    }
+}
+
+// --- RECHERCHE ---
+function initSearch() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', e => {
+        const q = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.news-card').forEach(card => {
+            const text = (card.dataset.text || '') + card.innerText.toLowerCase();
+            card.style.display = text.includes(q) ? 'flex' : 'none';
+        });
+        document.getElementById('archiveSection').style.display = q.length > 0 ? 'none' : 'block';
+        if (q.length === 0) {
+            document.querySelectorAll('.old-news').forEach(n => n.style.display = isExpanded ? 'flex' : 'none');
+        }
+    });
+}
+
+// --- ARCHIVES ---
+function initArchiveBtn() {
+    const btn = document.getElementById('loadMoreBtn');
+    btn.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        document.querySelectorAll('.old-news').forEach(n => n.style.display = isExpanded ? 'flex' : 'none');
+        btn.innerText = isExpanded ? 'MASQUER LES ARCHIVES' : 'VOIR TOUTES LES ACTUALITÉS';
+    });
+}
+
+chargerActus();
 </script>
 </body>
 </html>
