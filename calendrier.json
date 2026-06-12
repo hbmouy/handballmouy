@@ -32,8 +32,8 @@
     "logo_adverse": "images/logo-cires.jpg",
     "equipe_adverse": "HCL Cires-lès-Mello",
     "badge": "Match amical",
-    "score_hbm": null,
-    "score_adverse": null
+    "score_hbm": 22,
+    "score_adverse": 18
   },
   {
     "id": "match-meru-mai26",
