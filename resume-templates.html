@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ============================================================ -->
+    <!-- ✏️  1. MODIFIER LE TITRE DE L'ONGLET                         -->
+    <!-- ============================================================ -->
+    <title>Résumé NOM ADVERSAIRE VS HBM - HBM</title>
+
+    <!-- ============================================================ -->
+    <!-- ✏️  2. MODIFIER LES METAS DE PARTAGE (réseaux sociaux)       -->
+    <!-- ============================================================ -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Résumé Match : NOM ADVERSAIRE VS HBM">
+    <meta property="og:description" content="Découvrez le résumé du match HBM contre NOM ADVERSAIRE !">
+    <meta property="og:url" content="https://hbmouy.github.io/handballmouy/resume-NOMADVERSAIRE.html">
+    <meta property="og:image" content="https://hbmouy.github.io/handballmouy/images/VOTRE-IMAGE.png">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');</script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --jersey-yellow: #e2f438; --jersey-green: #2cd646; --jersey-purple: #9d4edd;
+            --font-display: 'Anton', sans-serif; --font-body: 'DM Sans', sans-serif;
+            --bg-body: #f5f8f5; --bg-card: #ffffff; --text-main: #0b130a;
+            --border-color: #0b130a; --shadow-color: #0b130a;
+            --nav-bg: rgba(255,255,255,0.85); --img-fallback: #eef2ee;
+        }
+        [data-theme="dark"] {
+            --bg-body: #0b130a; --bg-card: #142113; --text-main: #f5f8f5;
+            --border-color: #f5f8f5; --shadow-color: var(--jersey-green);
+            --nav-bg: rgba(11,19,10,0.85); --img-fallback: #1a2e18;
+        }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg-body); color: var(--text-main); font-family: var(--font-body); line-height: 1.6; overflow-x: hidden; position: relative; }
+        body::before, body::after { content: ""; position: absolute; width: 100%; height: 1400px; z-index: -1; opacity: 0.85; pointer-events: none; }
+        body::before { top: 0; left: 0; background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%); clip-path: polygon(0 0, 100% 0, 100% 350px, 65% 220px, 35% 500px, 0 280px); }
+        body::after { bottom: 0; right: 0; background: linear-gradient(225deg, rgba(226,244,56,0.4) 0%, rgba(44,214,70,0.4) 100%); clip-path: polygon(100% 500px, 100% 100%, 0% 100%, 0% 800px, 50% 600px); }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; height: 95px; padding: 0 2rem; background: var(--nav-bg); backdrop-filter: blur(15px); border-bottom: 4px solid var(--border-color); }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; height: 100%; position: relative; }
+        .nav-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; align-items: center; justify-content: center; text-decoration: none; color: inherit; z-index: 1002; transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275); }
+        .nav-logo img { height: 85px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); }
+        .nav-logo:hover { transform: translate(-50%,-50%) scale(1.08); }
+        .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
+        .nav-group.left { justify-content: flex-end; } .nav-group.right { justify-content: flex-start; }
+        .nav-group a, .dropdown-trigger { color: var(--text-main); text-decoration: none; font-family: var(--font-display); font-size: 1.3rem; font-style: italic; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; cursor: pointer; }
+        .nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
+        .theme-toggle-btn { background: transparent; border: 2px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; box-shadow: 3px 3px 0px var(--border-color); transition: transform 0.2s, box-shadow 0.2s; }
+        .theme-toggle-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0px var(--jersey-purple); }
+        .theme-toggle-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--text-main); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .sun-icon { display: none; } .moon-icon { display: block; }
+        [data-theme="dark"] .sun-icon { display: block; } [data-theme="dark"] .moon-icon { display: none; }
+        .burger { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1100; }
+        .burger span { width: 100%; height: 3px; background-color: var(--border-color); transition: all 0.3s ease; }
+        .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .burger.toggle span:nth-child(2) { opacity: 0; }
+        .burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); min-width: 180px; border: 3px solid var(--border-color); padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color); }
+        .dropdown-content li a { padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main); }
+        .dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown.active .dropdown-content { display: block; position: static; transform: none; box-shadow: none; border: none; border-left: 2px solid var(--jersey-purple); margin-left: 10px; padding-left: 5px; }
+        @media (max-width: 950px) {
+            nav { height: 70px; }
+            .nav-logo { position: static; transform: none; } .nav-logo:hover { transform: scale(1.05); } .nav-logo img { height: 55px; }
+            .burger { display: flex; }
+            .nav-group.right { display: none; }
+            .nav-group.left { position: fixed; right: -100%; top: 0; height: 100vh; width: 280px; background: var(--bg-card); border-left: 4px solid var(--border-color); flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 100px 2rem 2rem; gap: 1.5rem; transition: right 0.4s ease; overflow-y: auto; z-index: 1000; }
+            .nav-group.left.active { right: 0; }
+            .nav-group.left a { font-size: 1.3rem; width: 100%; display: block; }
+            .dropdown { width: 100%; }
+            .dropdown-content { position: static; transform: none; background: var(--bg-body); border: none; border-left: 3px solid var(--jersey-purple); box-shadow: none; padding: 0 0 0 1rem; margin-top: 0.5rem; }
+            .dropdown-content li a { text-align: left; }
+        }
+        .article-wrapper { max-width: 850px; margin: 150px auto 40px; padding: 0 20px; position: relative; z-index: 2; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-main); background: var(--bg-card); border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color); font-family: var(--font-display); font-style: italic; text-decoration: none; font-size: 1.1rem; padding: 0.4rem 1rem; margin-bottom: 25px; transition: 0.2s; }
+        .back-link:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0px var(--jersey-green); }
+        .article-container { background: var(--bg-card); border: 3px solid var(--border-color); box-shadow: 10px 10px 0px var(--shadow-color); padding: 45px; clip-path: polygon(0% 0%, 97% 0%, 100% 3%, 100% 100%, 3% 100%, 0% 97%); }
+        .article-meta { display: inline-block; background: var(--jersey-purple); color: #ffffff; font-family: var(--font-display); font-style: italic; font-size: 1rem; padding: 3px 10px; margin-bottom: 15px; transform: skewX(-8deg); letter-spacing: 0.5px; }
+        /* ✏️ Pour une victoire : changer background en var(--jersey-green) et color en #0b130a */
+        .article-title { font-family: var(--font-display); font-size: clamp(2.2rem,6vw,3.8rem); font-style: italic; line-height: 1; margin-bottom: 25px; color: var(--text-main); text-shadow: 2px 2px 0px var(--jersey-yellow); }
+        .article-img { width: 100%; max-height: 400px; object-fit: contain; background: var(--img-fallback); padding: 15px; margin-bottom: 30px; border: 3px solid var(--border-color); box-shadow: 5px 5px 0px rgba(0,0,0,0.15); }
+        .scoreboard-box { background: var(--bg-card); border: 3px solid var(--border-color); box-shadow: 6px 6px 0px var(--shadow-color); padding: 25px; margin: 35px 0; display: flex; justify-content: center; align-items: center; gap: 30px; text-align: center; transform: rotate(0.5deg); }
+        .team-score { font-family: var(--font-display); font-style: italic; font-size: 2.3rem; color: var(--text-main); line-height: 1.1; }
+        .team-vs { font-family: var(--font-display); font-style: italic; font-size: 1.8rem; color: #ffffff; background: #0b130a; padding: 2px 10px; transform: skewX(-12deg); border: 1px solid var(--border-color); }
+        .article-body p { margin-bottom: 25px; font-size: 1.15rem; color: var(--text-main); text-align: justify; font-weight: 400; }
+        .article-body strong { color: var(--jersey-purple); font-weight: 700; }
+        .article-footer { margin-top: 45px; padding-top: 25px; border-top: 3px dashed var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .article-footer span { font-family: var(--font-display); font-style: italic; font-size: 1.2rem; }
+        .share-btn { background: var(--bg-card); border: 2px solid var(--border-color); color: var(--text-main); font-family: var(--font-display); font-style: italic; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; padding: 6px 16px; box-shadow: 4px 4px 0px var(--shadow-color); }
+        .share-btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0px var(--jersey-yellow); }
+        .share-btn svg { width: 16px; height: 16px; fill: currentColor; }
+        .toast-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #0b130a; color: #ffffff; padding: 12px 30px; font-family: var(--font-display); font-style: italic; font-size: 1.3rem; letter-spacing: 1px; box-shadow: 6px 6px 0px var(--jersey-green); z-index: 2000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; border: 2px solid #ffffff; }
+        #lightbox { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11,19,10,0.95); align-items: center; justify-content: center; cursor: zoom-out; opacity: 0; transition: opacity 0.3s ease; }
+        .comments-wrapper { max-width: 850px; margin: 40px auto; padding: 0 20px; position: relative; z-index: 2; }
+        #disqus_thread { background: var(--bg-card); padding: 2.5rem; border: 3px solid var(--border-color); box-shadow: 10px 10px 0px var(--shadow-color); }
+        @media (max-width: 700px) {
+            .article-wrapper { margin-top: 90px; }
+            .article-container { padding: 25px; clip-path: none; }
+            .scoreboard-box { flex-direction: column; gap: 15px; }
+        }
+    </style>
+    <script src="nav-component.js"></script>
+</head>
+<body>
+
+<div id="hbm-nav"></div>
+
+<div class="article-wrapper">
+    <a href="actualites.html" class="back-link">← Retour aux actualités</a>
+
+    <article class="article-container">
+
+        <!-- ============================================================ -->
+        <!-- ✏️  3. TYPE + DATE DU MATCH                                  -->
+        <!-- Victoire → background: var(--jersey-green); color: #0b130a   -->
+        <!-- Défaite  → background: var(--jersey-purple); color: #ffffff  -->
+        <!-- ============================================================ -->
+        <span class="article-meta" style="background: var(--jersey-green); color: #0b130a;">Match Amical — JJ Mois AAAA</span>
+
+        <!-- ============================================================ -->
+        <!-- ✏️  4. TITRE DU RÉSUMÉ                                       -->
+        <!-- ============================================================ -->
+        <h1 class="article-title">TITRE DU RÉSUMÉ ICI !</h1>
+
+        <!-- ============================================================ -->
+        <!-- ✏️  5. IMAGE (décommenter quand disponible)                  -->
+        <!-- ============================================================ -->
+        <!-- <img src="images/VOTRE-IMAGE.png" alt="NOM ADVERSAIRE VS HBM" class="article-img"> -->
+
+        <!-- ============================================================ -->
+        <!-- ✏️  6. SCORE                                                  -->
+        <!-- Score gagné : jersey-green sur HBM, jersey-purple sur adverse -->
+        <!-- Score perdu : inverser les couleurs                           -->
+        <!-- ============================================================ -->
+        <div class="scoreboard-box">
+            <div class="team-score">NOM ADVERSAIRE <span style="color: var(--jersey-purple); font-weight: 700;">00</span></div>
+            <div class="team-vs">VS</div>
+            <div class="team-score"><span style="color: var(--jersey-green); font-weight: 700;">00</span> HB MOUY</div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ✏️  7. CORPS DE L'ARTICLE                                    -->
+        <!-- Utiliser <strong>mot</strong> pour mettre en violet          -->
+        <!-- ============================================================ -->
+        <div class="article-body">
+            <p>Texte d'introduction du match...</p>
+
+            <p>Deuxième paragraphe. Utilise <strong>ce format</strong> pour mettre en avant des mots clés.</p>
+
+            <p>Troisième paragraphe...</p>
+
+            <!-- ============================================================ -->
+            <!-- ✏️  8. PHOTO DE GROUPE (décommenter quand disponible)       -->
+            <!-- ============================================================ -->
+            <!--
+            <div style="margin: 35px 0; text-align: center;">
+                <div style="position: relative; cursor: zoom-in; display: inline-block; width: 100%;" onclick="ouvrirZoom()">
+                    <img src="images/NOM-PHOTO-GROUPE.jpg" id="photoGroupe" alt="Photo de groupe" style="width: 100%; max-height: 450px; object-fit: cover; border: 3px solid var(--border-color); box-shadow: 4px 4px 0px rgba(0,0,0,0.1); padding: 5px; background: var(--bg-card); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.005)'" onmouseout="this.style.transform='scale(1)'">
+                    <span style="position: absolute; bottom: 15px; right: 15px; background: #0b130a; color: var(--jersey-yellow); padding: 4px 12px; font-size: 0.8rem; font-family: var(--font-display); font-style: italic; letter-spacing: 0.5px; border: 1px solid var(--border-color);">🔍 Cliquez pour agrandir</span>
+                </div>
+                <p style="font-size: 0.95rem; opacity: 0.8; font-style: italic; margin-top: 8px; font-weight: 500;">Légende de la photo.</p>
+            </div>
+            -->
+
+            <p style="font-family: var(--font-display); font-style: italic; font-size: 1.8rem; color: var(--jersey-purple); text-align: center; margin-top: 30px; text-shadow: 1px 1px 0px var(--border-color);">À très vite sur le terrain !</p>
+        </div>
+
+        <div class="article-footer">
+            <span>Par : Le Bureau HBM</span>
+            <button class="share-btn" onclick="shareCurrentPage()">
+                <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                Partager le résumé
+            </button>
+        </div>
+    </article>
+</div>
+
+<div id="lightbox" onclick="fermerZoom()">
+    <span style="position: absolute; top: 20px; right: 30px; color: #ffffff; font-size: 50px; font-family: var(--font-display); cursor: pointer; user-select: none;">&times;</span>
+    <img id="imgZoom" src="" alt="Photo en grand" style="max-width: 95%; max-height: 90vh; object-fit: contain; border: 4px solid #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+</div>
+
+<div class="comments-wrapper">
+    <div id="disqus_thread"></div>
+</div>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = window.location.href;
+        this.page.identifier = window.location.pathname;
+    };
+    (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://hbmouy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="toast" class="toast-notification">Lien du résumé copié ! 🦁</div>
+
+<script>
+    function ouvrirZoom() {
+        const lightbox = document.getElementById('lightbox');
+        const photo = document.getElementById('photoGroupe');
+        if (!photo) return;
+        document.getElementById('imgZoom').src = photo.src;
+        lightbox.style.display = 'flex';
+        setTimeout(() => lightbox.style.opacity = '1', 10);
+    }
+    function fermerZoom() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.style.opacity = '0';
+        setTimeout(() => lightbox.style.display = 'none', 300);
+    }
+    function shareCurrentPage() {
+        if (navigator.share) {
+            navigator.share({ title: document.title, url: window.location.href }).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.opacity = '1';
+                setTimeout(() => toast.style.opacity = '0', 2500);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
