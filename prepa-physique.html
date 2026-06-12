@@ -231,41 +231,7 @@
     <a href="index.html" class="btn-back">Retour à l'accueil</a>
 </div>
 
-<script>
-    // --- SCRIPT NAVIGATION (DUAL GROUP + MOBILE FUSION) ---
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navGroupLeft = document.querySelector('.nav-group.left');
-    const navGroupRight = document.querySelector('.nav-group.right');
 
-    if (window.innerWidth <= 992) {
-        const rightLinks = navGroupRight.querySelectorAll('li');
-        rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
-    }
-
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        navGroupLeft.classList.toggle('active');
-    });
-
-    dropdowns.forEach(dropdown => {
-        const trigger = dropdown.querySelector('.dropdown-trigger');
-        trigger.addEventListener('click', (e) => {
-            if (window.innerWidth <= 992) {
-                e.preventDefault();
-                dropdown.classList.toggle('active');
-            }
-        });
-    });
-
-    document.querySelectorAll('.nav-group a:not(.dropdown-trigger)').forEach(link => {
-        link.addEventListener('click', () => {
-            navGroupLeft.classList.remove('active');
-            menuToggle.classList.remove('active');
-        });
-    });
-</script>
 
 </body>
 </html>
