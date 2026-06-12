@@ -1,6 +1,6 @@
 {
-  "actif": true,
-  "statut": "a_venir",
+  "actif": false,
+  "statut": "termine",
   "type": "Match amical",
   "domicile": false,
   "equipe_adverse": "Cires-lès-Mello",
