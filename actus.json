@@ -1,4 +1,20 @@
 [
+   {
+    "id": "cires-2026",
+    "featured": false,
+    "archive": false,
+    "badge": "RÉSULTAT MATCH",
+    "badgeType": "match",
+    "date": "2026-06-12",
+    "dateAffichee": "12 JUIN 2026",
+    "titre": "2ème match de prépa pour le HBM !",
+    "excerpt": "<strong>Deuxième rencontre amicale contre l'équipe Loisir de Cires-lès-Mello.</strong><br><br>Après un premier baptême du feu historique à Méru, nos joueurs ont poursuivis leur préparation face à l'équipe loisir de Cires-les-Mello ! Match conclu par une victoire du HBM, et beaucoup de positifs à retenir dans l'esprit d'équipe ! Un immense merci à l'équipe de Cires pour leur accueil exemplaire et leur sympathie !",
+    "image": "images/ciresvsmouy.png",
+    "imageAlt": "Cires-lès-Mello vs Mouy",
+    "lien": "planning.html",
+    "lienTexte": "VOIR LE PLANNING →",
+    "partageTitle": "Victoire du HBM",
+    "partageText": "Une 1ère victoire pour le HBM"
   {
     "id": "cires-2026",
     "featured": false,
