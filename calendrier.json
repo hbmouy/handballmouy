@@ -1,4 +1,22 @@
 [
+   {
+    "id": "match-meru-juin26",
+    "type": "match",
+    "statut": "a_venir",
+    "titre": "AAE Méru Loisir VS HBM",
+    "description": "Revanche contre l'équipe Loisir de Méru",
+    "date": "2026-06-24T20:00:00",
+    "dateAffichee": "Mercredi 24 Juin 2026",
+    "heure": "20h00",
+    "lieu": "Gymnase des Sablons",
+    "ville": "Méru, 60110",
+    "domicile": false,
+    "logo_adverse": "images/meruvsmouy.png",
+    "equipe_adverse": "AAE Méru Loisir",
+    "badge": "Match amical",
+    "score_hbm": null,
+    "score_adverse": null
+  },
   {
     "id": "match-cires-juin26",
     "type": "match",
