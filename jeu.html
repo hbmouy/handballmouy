@@ -279,33 +279,6 @@ footer {
 </footer>
 
 <script>
-/* --- NAVIGATION SCRIPT --- */
-const menuToggle = document.querySelector('.menu-toggle');
-const navGroupLeft = document.querySelector('.nav-group.left');
-const navGroupRight = document.querySelector('.nav-group.right');
-
-if (window.innerWidth <= 992) {
-  const rightLinks = navGroupRight.querySelectorAll('li');
-  rightLinks.forEach(link => navGroupLeft.appendChild(link.cloneNode(true)));
-}
-
-const dropdowns = document.querySelectorAll('.dropdown');
-
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  navGroupLeft.classList.toggle('active');
-});
-
-dropdowns.forEach(dropdown => {
-  const trigger = dropdown.querySelector('.dropdown-trigger');
-  trigger.addEventListener('click', (e) => {
-    if (window.innerWidth <= 992) {
-      e.preventDefault();
-      dropdown.classList.toggle('active');
-    }
-  });
-});
-
 /* --- ENGINE MOTEUR DU JEU --- */
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
