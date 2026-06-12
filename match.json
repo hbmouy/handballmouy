@@ -1,13 +1,13 @@
 {
-  "actif": false,
-  "statut": "termine",
+  "actif": true,
+  "statut": "a_venir",
   "type": "Match amical",
   "domicile": false,
-  "equipe_adverse": "Cires-lès-Mello",
-  "logo_adverse": "images/logo-cires.jpg",
+  "equipe_adverse": "AAE Méru Loisir",
+  "logo_adverse": "images/",
   "date": "2026-06-11T20:00:00",
-  "lieu": "Le Beaucamp",
-  "ville": "Cires-lès-Mello, 60660",
+  "lieu": "Gymnase des Sablons",
+  "ville": "Méru, 60110",
   "score_hbm": null,
   "score_adverse": null
 }
