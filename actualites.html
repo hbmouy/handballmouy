@@ -196,10 +196,11 @@
 
 <script>
 // --- PARTAGE ---
-function shareActu(title, text) {
-    if (navigator.share) { navigator.share({ title, text, url: window.location.href }).catch(() => {}); }
+function shareActu(title, text, url) {
+    const shareUrl = url ? (window.location.origin + '/' + 'handballmouy/' + url) : window.location.href;
+    if (navigator.share) { navigator.share({ title, text, url: shareUrl }).catch(() => {}); }
     else {
-        navigator.clipboard.writeText(window.location.href).then(() => {
+        navigator.clipboard.writeText(shareUrl).then(() => {
             const toast = document.getElementById('toast');
             toast.style.opacity = '1';
             setTimeout(() => toast.style.opacity = '0', 2000);
@@ -234,7 +235,7 @@ function buildCard(actu, index) {
             <p class="news-excerpt">${actu.excerpt}</p>
             <div class="news-footer">
                 ${footerLeft}
-                <button class="share-btn" onclick="shareActu('${actu.partageTitle.replace(/'/g,"\\'")}', '${actu.partageText.replace(/'/g,"\\'")}'">${shareSVG}</button>
+                <button class="share-btn" onclick="shareActu('${actu.partageTitle.replace(/'/g,"\\'")}', '${actu.partageText.replace(/'/g,"\\'")}', '${actu.lien||""}')">${shareSVG}</button>
             </div>
         </div>
     </article>`;
