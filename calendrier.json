@@ -1,5 +1,18 @@
 [
    {
+  "id": "AG",
+  "type": "interne",
+  "statut": "a_venir",
+  "titre": "Assemblée Générale",
+  "description": "Assemblée Générale du club avec les membres du bureau",
+  "date": "2026-06-16T19:00:00",
+  "dateAffichee": "Mardi 16 Juin 2026",
+  "heure": "19h00",
+  "lieu": "Bureau",
+  "ville": "Mouy, 60250",
+  "badge": "CLUB"
+}
+   {
     "id": "match-meru-juin26",
     "type": "match",
     "statut": "a_venir",
