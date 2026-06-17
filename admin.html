@@ -82,6 +82,7 @@ pre{background:var(--bg);border:2px solid var(--bd);padding:.9rem;font-size:.78r
     <button class="tab" onclick="sw('cal')">calendrier.json</button>
     <button class="tab" onclick="sw('resume')">Résumé match</button>
     <button class="tab" onclick="sw('actu-page')">Page actu</button>
+    <button class="tab" onclick="sw('classement')">Classement</button>
   </div>
 
   <!-- ======= MATCH ======= -->
@@ -338,6 +339,45 @@ pre{background:var(--bg);border:2px solid var(--bd);padding:.9rem;font-size:.78r
         </div>
       </div>
     </div>
+  <!-- ======= CLASSEMENT ======= -->
+  <div id="panel-classement" class="panel">
+    <div class="card">
+      <div class="sl">Infos compétition</div>
+      <div class="r2">
+        <div class="f"><label>Compétition</label><input id="k-comp" placeholder="Championnat Départemental Senior M" oninput="gk()"></div>
+        <div class="f"><label>Poule</label><input id="k-poule" placeholder="Poule A" oninput="gk()"></div>
+      </div>
+      <div class="f"><label>Nom exact du HBM dans le classement (pour la surbrillance)</label><input id="k-hbm-name" placeholder="HB MOUY" value="HB MOUY" oninput="gk()"></div>
+
+      <div class="sl">Coller le tableau</div>
+      <div class="hint" style="margin-bottom:.8rem">
+        Va sur la page FFHB de ta poule, <strong>sélectionne le tableau de classement</strong> (du nom de la 1ère équipe jusqu'au dernier chiffre), copie (Ctrl+C) et colle ci-dessous (Ctrl+V). Ça fonctionne aussi en tapant une équipe par ligne au format : <code>Nom équipe, Pts, J, G, N, P, BP, BC</code>
+      </div>
+      <div class="f">
+        <textarea id="k-raw" rows="10" style="min-height:220px;font-family:monospace;font-size:.82rem" placeholder="HB MOUY 10 5 5 0 0 142 98
+ES CREIL 8 5 4 0 1 130 105
+AC SENLIS 6 5 3 0 2 120 115
+..." oninput="parseAndGenK()"></textarea>
+      </div>
+      <div id="k-preview-wrap" style="display:none">
+        <div class="sl">Aperçu détecté (vérifie avant de copier)</div>
+        <div class="out-section" style="padding:0;overflow-x:auto">
+          <table id="k-preview-table" style="width:100%;border-collapse:collapse;font-size:.85rem">
+            <thead><tr style="background:var(--bg);text-align:left">
+              <th style="padding:8px">#</th><th style="padding:8px">Club</th><th style="padding:8px">Pts</th><th style="padding:8px">J</th><th style="padding:8px">G</th><th style="padding:8px">N</th><th style="padding:8px">P</th><th style="padding:8px">BP</th><th style="padding:8px">BC</th><th style="padding:8px">Diff</th>
+            </tr></thead>
+            <tbody id="k-preview-body"></tbody>
+          </table>
+        </div>
+        <div class="hint" id="k-warning" style="display:none;border-left-color:#e03030"></div>
+      </div>
+    </div>
+    <div class="out-section">
+      <div class="out-hdr"><span class="out-title">classement.json généré</span><button class="cbtn" id="cp-k" onclick="cp('out-k','cp-k')">📋 Copier</button></div>
+      <pre id="out-k"></pre>
+      <div class="hint">Remplace <strong>tout le contenu</strong> de <code>classement.json</code> sur GitHub par ce JSON.</div>
+      <a class="ghl" href="https://github.com/hbmouy/handballmouy/edit/main/classement.json" target="_blank">Ouvrir classement.json sur GitHub →</a>
+    </div>
   </div>
 
 </div>
@@ -351,7 +391,7 @@ document.getElementById('tbtn').addEventListener('click',()=>{
 });
 
 function sw(n){
-  const names=['match','actu','cal','resume','actu-page'];
+  const names=['match','actu','cal','resume','actu-page','classement'];
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===n));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+n).classList.add('active');
@@ -619,6 +659,92 @@ function cp(pid,bid){
     btn.textContent='✅ Copié !';btn.classList.add('ok');
     setTimeout(()=>{btn.textContent='📋 Copier';btn.classList.remove('ok');},2000);
   });
+}
+
+// CLASSEMENT
+function parseClassementRaw(raw) {
+  const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  const rows = [];
+  for (const line of lines) {
+    let tokens = line.split(/\t|,|\s{2,}/).map(p => p.trim()).filter(p => p !== '');
+    if (tokens.length < 7) {
+      tokens = line.split(/\s+/).map(p => p.trim()).filter(p => p !== '');
+    }
+    const nums = [];
+    let i = tokens.length - 1;
+    while (i >= 0 && /^-?\d+$/.test(tokens[i].replace(/[^\d-]/g,'')) && nums.length < 7) {
+      nums.unshift(parseInt(tokens[i].replace(/[^\d-]/g,'')));
+      i--;
+    }
+    const club = tokens.slice(0, i+1).join(' ').replace(/^\d+\s*/, '').trim();
+    if (!club || nums.length < 5) continue;
+
+    let [pts, j, g, n, p, bp, bc] = [null,null,null,null,null,null,null];
+    if (nums.length === 7) { [pts,j,g,n,p,bp,bc] = nums; }
+    else if (nums.length === 6) { [pts,j,g,n,p,bp] = nums; bc = null; }
+    else if (nums.length === 5) { [pts,j,g,n,p] = nums; }
+
+    rows.push({ club, pts: pts??0, joues: j??0, gagnes: g??0, nuls: n??0, perdus: p??0, bp: bp??0, bc: bc??0 });
+  }
+  return rows;
+}
+
+function gk() { parseAndGenK(); }
+
+function parseAndGenK() {
+  const raw = v('k-raw');
+  const hbmName = (v('k-hbm-name') || 'HB MOUY').toUpperCase().trim();
+  const rows = parseClassementRaw(raw);
+
+  const previewWrap = document.getElementById('k-preview-wrap');
+  const warnBox = document.getElementById('k-warning');
+
+  if (rows.length === 0) {
+    previewWrap.style.display = 'none';
+    document.getElementById('out-k').textContent = '';
+    return;
+  }
+
+  rows.forEach(r => { r.diff = r.bp - r.bc; });
+  rows.sort((a,b) => b.pts - a.pts || b.diff - a.diff);
+  rows.forEach((r,i) => { r.position = i+1; r.hbm = r.club.toUpperCase().trim() === hbmName; });
+
+  const tbody = document.getElementById('k-preview-body');
+  tbody.innerHTML = rows.map(r => `
+    <tr style="${r.hbm ? 'background:rgba(157,78,221,0.12);font-weight:700' : ''};border-bottom:1px solid var(--bd);opacity:${r.hbm?1:0.85}">
+      <td style="padding:6px 8px">${r.position}</td>
+      <td style="padding:6px 8px">${r.club}${r.hbm?' 🦁':''}</td>
+      <td style="padding:6px 8px">${r.pts}</td>
+      <td style="padding:6px 8px">${r.joues}</td>
+      <td style="padding:6px 8px">${r.gagnes}</td>
+      <td style="padding:6px 8px">${r.nuls}</td>
+      <td style="padding:6px 8px">${r.perdus}</td>
+      <td style="padding:6px 8px">${r.bp}</td>
+      <td style="padding:6px 8px">${r.bc}</td>
+      <td style="padding:6px 8px">${r.diff>0?'+':''}${r.diff}</td>
+    </tr>`).join('');
+  previewWrap.style.display = 'block';
+
+  const hbmFound = rows.some(r => r.hbm);
+  if (!hbmFound) {
+    warnBox.style.display = 'block';
+    warnBox.innerHTML = `⚠️ Aucune équipe ne correspond exactement à "<strong>${hbmName}</strong>". Vérifie l'orthographe ci-dessus — le HBM ne sera pas mis en surbrillance sur le site.`;
+  } else {
+    warnBox.style.display = 'none';
+  }
+
+  const obj = {
+    saison: "2026-2027",
+    competition: v('k-comp') || "Championnat",
+    poule: v('k-poule') || "",
+    derniere_maj: new Date().toISOString().slice(0,10),
+    classement: rows.map(r => ({
+      position: r.position, club: r.club, logo: null, hbm: r.hbm,
+      pts: r.pts, joues: r.joues, gagnes: r.gagnes, nuls: r.nuls, perdus: r.perdus,
+      bp: r.bp, bc: r.bc, diff: r.diff
+    }))
+  };
+  document.getElementById('out-k').textContent = JSON.stringify(obj, null, 2);
 }
 
 gm();ga();gc();gr();gp();tcf();sb();
