@@ -662,7 +662,54 @@ function cp(pid,bid){
 
 // CLASSEMENT
 function parseClassementRaw(raw) {
-  const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  // Sépare en lignes brutes, garde les vides pour détecter la structure FFHB (rang / nom / pts)
+  const rawLines = raw.split('\n').map(l => l.trim());
+  const lines = rawLines.filter(l => l.length > 0);
+
+  // --- Détection du format FFHB collé (rang seul / [CODE] Nom / points seuls) ---
+  // Une ligne "rang" = uniquement un nombre 1-2 chiffres, suivie d'une ligne nom, puis une ligne points
+  const isJustNumber = s => /^\d{1,3}$/.test(s);
+  const looksLikeRankSequence = lines.length >= 6 && isJustNumber(lines[0]);
+
+  if (looksLikeRankSequence) {
+    const rows = [];
+    let i = 0;
+    while (i < lines.length) {
+      if (!isJustNumber(lines[i])) { i++; continue; }
+      // lines[i] = rang
+      let j = i + 1;
+      // ligne(s) suivante(s) = nom du club, jusqu'à tomber sur une ligne qui n'est qu'un nombre (points)
+      let nameParts = [];
+      while (j < lines.length && !isJustNumber(lines[j])) {
+        nameParts.push(lines[j]);
+        j++;
+      }
+      if (j >= lines.length) break; // pas de points trouvés, on arrête
+      const pts = parseInt(lines[j]);
+      let club = nameParts.join(' ').trim();
+      // Le nom est souvent dupliqué "[CODE] Nom Nom" -> on déduplique si le nom complet se répète
+      const bracketMatch = club.match(/^\[([^\]]+)\]\s*(.*)$/);
+      if (bracketMatch) {
+        const short = bracketMatch[1].trim();
+        const full = bracketMatch[2].trim();
+        club = full || short;
+      }
+      // Si le nom est répété deux fois consécutives (ex: "GRANDVILLIERS HANDBALL GRANDVILLIERS HANDBALL")
+      const half = club.length / 2;
+      if (club.length % 1 === 0) {
+        const a = club.slice(0, Math.floor(club.length/2)).trim();
+        const b = club.slice(Math.ceil(club.length/2)).trim();
+        if (a && a === b) club = a;
+      }
+      if (club) {
+        rows.push({ club, pts, joues: 0, gagnes: 0, nuls: 0, perdus: 0, bp: 0, bc: 0, _noDetail: true });
+      }
+      i = j + 1;
+    }
+    return rows;
+  }
+
+  // --- Format "une ligne par équipe" classique (Pts J G N P BP BC en fin de ligne) ---
   const rows = [];
   for (const line of lines) {
     let tokens = line.split(/\t|,|\s{2,}/).map(p => p.trim()).filter(p => p !== '');
@@ -670,20 +717,21 @@ function parseClassementRaw(raw) {
       tokens = line.split(/\s+/).map(p => p.trim()).filter(p => p !== '');
     }
     const nums = [];
-    let i = tokens.length - 1;
-    while (i >= 0 && /^-?\d+$/.test(tokens[i].replace(/[^\d-]/g,'')) && nums.length < 7) {
-      nums.unshift(parseInt(tokens[i].replace(/[^\d-]/g,'')));
-      i--;
+    let k = tokens.length - 1;
+    while (k >= 0 && /^-?\d+$/.test(tokens[k].replace(/[^\d-]/g,'')) && nums.length < 7) {
+      nums.unshift(parseInt(tokens[k].replace(/[^\d-]/g,'')));
+      k--;
     }
-    const club = tokens.slice(0, i+1).join(' ').replace(/^\d+\s*/, '').trim();
-    if (!club || nums.length < 5) continue;
+    const club = tokens.slice(0, k+1).join(' ').replace(/^\d+\s*/, '').trim();
+    if (!club || nums.length < 1) continue;
 
-    let [pts, j, g, n, p, bp, bc] = [null,null,null,null,null,null,null];
-    if (nums.length === 7) { [pts,j,g,n,p,bp,bc] = nums; }
-    else if (nums.length === 6) { [pts,j,g,n,p,bp] = nums; bc = null; }
-    else if (nums.length === 5) { [pts,j,g,n,p] = nums; }
+    let [pts, j2, g, n, p, bp, bc] = [null,null,null,null,null,null,null];
+    if (nums.length === 7) { [pts,j2,g,n,p,bp,bc] = nums; }
+    else if (nums.length === 6) { [pts,j2,g,n,p,bp] = nums; }
+    else if (nums.length === 5) { [pts,j2,g,n,p] = nums; }
+    else if (nums.length === 1) { [pts] = nums; }
 
-    rows.push({ club, pts: pts??0, joues: j??0, gagnes: g??0, nuls: n??0, perdus: p??0, bp: bp??0, bc: bc??0 });
+    rows.push({ club, pts: pts??0, joues: j2??0, gagnes: g??0, nuls: n??0, perdus: p??0, bp: bp??0, bc: bc??0, _noDetail: nums.length===1 });
   }
   return rows;
 }
@@ -725,9 +773,17 @@ function parseAndGenK() {
   previewWrap.style.display = 'block';
 
   const hbmFound = rows.some(r => r.hbm);
+  const noDetailCount = rows.filter(r => r._noDetail).length;
+  let warnings = [];
   if (!hbmFound) {
+    warnings.push(`⚠️ Aucune équipe ne correspond exactement à "<strong>${hbmName}</strong>". Vérifie l'orthographe ci-dessus — le HBM ne sera pas mis en surbrillance sur le site.`);
+  }
+  if (noDetailCount > 0) {
+    warnings.push(`ℹ️ Le copier-coller FFHB ne fournit que les <strong>points</strong> (pas J/G/N/P/BP/BC). Les autres colonnes sont mises à 0 — tu peux les compléter manuellement dans le JSON si tu as ces infos, sinon elles resteront à 0 sur le site.`);
+  }
+  if (warnings.length) {
     warnBox.style.display = 'block';
-    warnBox.innerHTML = `⚠️ Aucune équipe ne correspond exactement à "<strong>${hbmName}</strong>". Vérifie l'orthographe ci-dessus — le HBM ne sera pas mis en surbrillance sur le site.`;
+    warnBox.innerHTML = warnings.join('<br><br>');
   } else {
     warnBox.style.display = 'none';
   }
