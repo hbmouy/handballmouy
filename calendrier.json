@@ -1,4 +1,22 @@
 [
+  {
+  "id": "match-mesnil-juil02",
+  "type": "match",
+  "statut": "a_venir",
+  "titre": "Mesnil VS HBM",
+  "description": "3ème match de prépa ",
+  "date": "2026-07-02T20:00:00",
+  "dateAffichee": "Jeudi 02 juillet 2026",
+  "heure": "20h00",
+  "lieu": "Gymnase Omer Bee",
+  "ville": "Mesnil-en-Thelle",
+  "badge": "Match amical",
+  "equipe_adverse": "Mesnil en Thelle",
+  "logo_adverse": "images/logo-mesnil.png",
+  "domicile": false,
+  "score_hbm": null,
+  "score_adverse": null
+}
 {
   "id": "AG",
   "type": "interne",
