@@ -3,11 +3,11 @@
   "statut": "a_venir",
   "type": "Match amical",
   "domicile": false,
-  "equipe_adverse": "AAE Méru Loisir",
-  "logo_adverse": "images/logo-meru.png",
-  "date": "2026-06-24T20:00:00",
-  "lieu": "Gymnase des Sablons",
-  "ville": "Méru, 60110",
+  "equipe_adverse": "Mesnil en Thelle",
+  "logo_adverse": "images/logo-mesnil.png",
+  "date": "2026-07-02T20:00:00",
+  "lieu": "Gymnase Omer Bee",
+  "ville": "Le Mesnil-en-Thelle, 60530",
   "score_hbm": null,
   "score_adverse": null
 }
