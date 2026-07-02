@@ -628,7 +628,7 @@ footer {
 
       <!-- Équipe adverse -->
       <div class="match-team">
-        <img src="" alt="" class="match-logo" id="match-logo-adverse" onerror="this.style.display='none'; document.getElementById('match-logo-adverse-fb').style.display='flex'">
+        <img src="data:," alt="" class="match-logo" id="match-logo-adverse" onerror="if(this.src!=='data:,'){this.style.display='none'; document.getElementById('match-logo-adverse-fb').style.display='flex'}">
         <div class="match-logo-fallback" id="match-logo-adverse-fb" style="display:none;"></div>
         <span class="match-team-name" id="match-equipe-adverse">--</span>
         <!-- Score adverse (caché par défaut) -->
@@ -820,7 +820,10 @@ async function chargerMatch() {
 
         document.getElementById('match-type').textContent         = match.type;
         document.getElementById('match-equipe-adverse').innerHTML = match.equipe_adverse.replace(' ', '<br>');
-        document.getElementById('match-logo-adverse').src         = match.logo_adverse;
+        const imgAdv = document.getElementById('match-logo-adverse');
+        imgAdv.style.display = '';
+        document.getElementById('match-logo-adverse-fb').style.display = 'none';
+        imgAdv.src = match.logo_adverse;
         document.getElementById('match-logo-adverse').alt         = match.equipe_adverse;
         document.getElementById('match-date-str').textContent     = `${j} ${d} ${mo} ${y}`;
         document.getElementById('match-heure').textContent        = `${h}h${min}`;
@@ -919,15 +922,10 @@ async function chargerActusHome() {
 chargerActusHome();
 
 let clicks = 0;
-setTimeout(() => {
-    const logoTrigger = document.getElementById('logo-trigger');
-    if (logoTrigger) {
-        logoTrigger.addEventListener('click', () => {
-            if (++clicks === 5) { easterEgg(); clicks = 0; }
-            setTimeout(() => clicks = 0, 3000);
-        });
-    }
-}, 100);
+document.getElementById('logo-trigger').addEventListener('click', () => {
+    if (++clicks === 5) { easterEgg(); clicks = 0; }
+    setTimeout(() => clicks = 0, 3000);
+});
 function easterEgg() {
     for (let i = 0; i < 30; i++) {
         const el = document.createElement('div');
