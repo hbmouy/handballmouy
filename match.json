@@ -1,6 +1,6 @@
 {
   "actif": true,
-  "statut": "a_venir",
+  "statut": "termine",
   "type": "Match amical",
   "domicile": false,
   "equipe_adverse": "Mesnil en Thelle",
@@ -8,6 +8,6 @@
   "date": "2026-07-02T20:00:00",
   "lieu": "Gymnase Omer Bee",
   "ville": "Le Mesnil-en-Thelle, 60530",
-  "score_hbm": null,
-  "score_adverse": null
+  "score_hbm": 24,
+  "score_adverse": 25
 }
