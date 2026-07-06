@@ -590,10 +590,9 @@ footer {
 
 /* ===================== BANNIÈRE VACANCES ===================== */
 .vacances-banner {
-    position: relative; z-index: 3;
+    position: relative; z-index: 2;
     background: #0b130a; border-bottom: 4px solid var(--jersey-yellow);
-    padding: 16px 20px; text-align: center; display: none;
-    margin-top: 95px;
+    padding: 20px 20px; text-align: center; display: none;
 }
 .vacances-banner.active { display: block; }
 .vacances-inner { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px; }
@@ -638,7 +637,6 @@ footer {
 }
 .social-float-link:hover svg { fill: var(--jersey-yellow); }
 @media (max-width: 700px) { .social-float-bar { display: none; } }
-@media (max-width: 950px) { .vacances-banner { margin-top: 70px; } }
 
 @keyframes float   { 0%,100% { transform: translateY(0); }   50% { transform: translateY(-12px); } }
 @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
@@ -668,10 +666,6 @@ footer {
 
 
 <!-- ===================== BANNIÈRE VACANCES ===================== -->
-<div class="vacances-banner" id="vacances-banner">
-    <button class="vacances-close" onclick="document.getElementById('vacances-banner').style.display='none'" aria-label="Fermer">✕</button>
-    <div class="vacances-inner">
-        <div class="vacances-title">🦁 ON SE RETROUVE À LA RENTRÉE !</div>
         <div class="vacances-sub">La reprise des entraînements approche — rendez-vous le <strong style="color:#fff">Jeudi 3 Septembre 2026</strong></div>
         <div class="vacances-countdown">
             <div class="vcd-block"><div class="vcd-num" id="vcd-j">--</div><div class="vcd-lbl">Jours</div></div>
@@ -695,6 +689,11 @@ footer {
   <p class="hero-sub">Mouy n'avait pas de club de handball. On a décidé de changer ça.</p>
   <a href="#contact" class="btn-primary">REJOINDRE L'AVENTURE</a>
 </section>
+
+<div class="vacances-banner" id="vacances-banner">
+    <button class="vacances-close" onclick="document.getElementById('vacances-banner').style.display='none'" aria-label="Fermer">✕</button>
+    <div class="vacances-inner">
+        <div class="vacances-title">🦁 ON SE RETROUVE À LA RENTRÉE !</div>
 
 <section class="actus-section" id="actus">
   <div class="actus-container">
