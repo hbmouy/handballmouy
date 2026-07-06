@@ -66,9 +66,8 @@ h1{font-family:var(--font-display);font-size:clamp(2.8rem,7.5vw,4.8rem);text-ali
 .player-card.coach{border-left:8px solid var(--jersey-purple)}
 
 /* Numéro */
-.player-num{position:absolute;top:10px;left:12px;font-family:var(--font-display);font-style:italic;font-size:2rem;color:var(--jersey-yellow);line-height:1;text-shadow:2px 2px 0 var(--border-color);z-index:2}
-.player-num.unknown{color:rgba(11,19,10,.2);font-size:1.4rem}
-[data-theme="dark"] .player-num.unknown{color:rgba(245,248,245,.15)}
+.player-num{position:absolute;top:0;left:0;font-family:var(--font-display);font-style:italic;font-size:1.6rem;color:#0b130a;line-height:1;z-index:2;background:var(--jersey-yellow);padding:4px 10px 4px 8px;clip-path:polygon(0 0,100% 0,85% 100%,0 100%)}
+.player-num.unknown{background:rgba(11,19,10,.3);color:rgba(255,255,255,.6);font-size:1.2rem}
 
 /* Photo placeholder */
 .player-photo{width:100%;height:200px;background:linear-gradient(135deg,#0b130a 0%,#142113 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-bottom:1rem}
