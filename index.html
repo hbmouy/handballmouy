@@ -1002,11 +1002,9 @@ chargerActusHome();
 
 let clicks = 0;
 setTimeout(() => {
-    const logoTrigger = document.getElementById('logo-trigger');
-    if (logoTrigger) {
-        logoTrigger.addEventListener('click', () => {
-            if (++clicks === 5) { easterEgg(); clicks = 0; }
-            setTimeout(() => clicks = 0, 3000);
+    const lt = document.getElementById('logo-trigger');
+    if (lt) { lt.addEventListener('click', () => { if (++clicks === 5) { easterEgg(); clicks = 0; } setTimeout(() => clicks = 0, 3000); }); }
+}, 300);
         });
     }
 }, 300);
