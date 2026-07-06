@@ -591,6 +591,53 @@ footer {
 @keyframes float   { 0%,100% { transform: translateY(0); }   50% { transform: translateY(-12px); } }
 @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideIn { from { transform: translateX(-30px) rotate(-1deg); opacity: 0; } to { transform: translateX(0) rotate(-1deg); opacity: 1; } }
+
+/* ===================== BANNIÈRE VACANCES ===================== */
+.vacances-banner {
+    position: relative; z-index: 3;
+    background: #0b130a; border-bottom: 4px solid var(--jersey-yellow);
+    padding: 16px 20px; text-align: center;
+    display: none; /* caché par défaut, activé via JS */
+}
+.vacances-banner.active { display: block; }
+.vacances-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.vacances-title {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1.4rem; color: var(--jersey-yellow); letter-spacing: 2px;
+}
+.vacances-sub {
+    font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.7);
+}
+.vacances-countdown {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center;
+}
+.vcd-block {
+    background: var(--jersey-yellow); color: #0b130a;
+    padding: 6px 14px; text-align: center; min-width: 60px;
+    border: 2px solid rgba(255,255,255,0.15);
+}
+.vcd-num {
+    font-family: var(--font-display); font-size: 1.8rem;
+    font-style: italic; line-height: 1; color: #0b130a;
+}
+.vcd-lbl {
+    font-size: 0.5rem; text-transform: uppercase;
+    letter-spacing: 1px; font-weight: 700; color: #0b130a;
+}
+.vcd-sep {
+    font-family: var(--font-display); font-size: 1.5rem;
+    font-style: italic; color: var(--jersey-green);
+}
+.vacances-close {
+    position: absolute; top: 10px; right: 16px;
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.4); font-size: 1.2rem;
+    transition: color 0.2s;
+}
+.vacances-close:hover { color: var(--jersey-yellow); }
 </style>
 <script src="nav-component.js"></script> 
 </head>
@@ -598,6 +645,25 @@ footer {
 
 
 <div id="hbm-nav"></div>
+
+<!-- ===================== BANNIÈRE VACANCES ===================== -->
+<div class="vacances-banner" id="vacances-banner">
+    <button class="vacances-close" onclick="document.getElementById('vacances-banner').style.display='none'" aria-label="Fermer">✕</button>
+    <div class="vacances-inner">
+        <div class="vacances-title">🦁 ON SE RETROUVE À LA RENTRÉE !</div>
+        <div class="vacances-sub">La reprise des entraînements approche — rendez-vous le <strong style="color:#fff">Jeudi 3 Septembre 2026</strong></div>
+        <div class="vacances-countdown">
+            <div class="vcd-block"><div class="vcd-num" id="vcd-j">--</div><div class="vcd-lbl">Jours</div></div>
+            <div class="vcd-sep">:</div>
+            <div class="vcd-block"><div class="vcd-num" id="vcd-h">--</div><div class="vcd-lbl">Heures</div></div>
+            <div class="vcd-sep">:</div>
+            <div class="vcd-block"><div class="vcd-num" id="vcd-m">--</div><div class="vcd-lbl">Min</div></div>
+            <div class="vcd-sep">:</div>
+            <div class="vcd-block"><div class="vcd-num" id="vcd-s">--</div><div class="vcd-lbl">Sec</div></div>
+        </div>
+    </div>
+</div>
+
 
 <section class="hero" id="accueil">
   <video class="hero-video" autoplay muted loop playsinline>
@@ -628,8 +694,8 @@ footer {
 
       <!-- Équipe adverse -->
       <div class="match-team">
-        <img src="data:," alt="" class="match-logo big" id="match-logo-adverse" onerror="if(this.src!=='data:,'){this.style.display='none'; document.getElementById('match-logo-adverse-fb').style.display='flex'}">
-        <div class="match-logo-fallback" id="match-logo-adverse-fb" style="display:none;width:130px;height:130px;font-size:1.6rem;"></div>
+        <img src="" alt="" class="match-logo" id="match-logo-adverse" onerror="this.style.display='none'; document.getElementById('match-logo-adverse-fb').style.display='flex'">
+        <div class="match-logo-fallback" id="match-logo-adverse-fb" style="display:none;"></div>
         <span class="match-team-name" id="match-equipe-adverse">--</span>
         <!-- Score adverse (caché par défaut) -->
         <div class="match-score" id="score-adverse" style="display:none;">--</div>
@@ -820,10 +886,7 @@ async function chargerMatch() {
 
         document.getElementById('match-type').textContent         = match.type;
         document.getElementById('match-equipe-adverse').innerHTML = match.equipe_adverse.replace(' ', '<br>');
-        const imgAdv = document.getElementById('match-logo-adverse');
-        imgAdv.style.display = '';
-        document.getElementById('match-logo-adverse-fb').style.display = 'none';
-        imgAdv.src = match.logo_adverse;
+        document.getElementById('match-logo-adverse').src         = match.logo_adverse;
         document.getElementById('match-logo-adverse').alt         = match.equipe_adverse;
         document.getElementById('match-date-str').textContent     = `${j} ${d} ${mo} ${y}`;
         document.getElementById('match-heure').textContent        = `${h}h${min}`;
@@ -936,6 +999,27 @@ function easterEgg() {
         setTimeout(() => el.remove(), 3000);
     }
 }
+
+// ---- BANNIÈRE VACANCES ----
+function initVacances() {
+    const reprise = new Date('2026-09-03T20:00:00');
+    const banner = document.getElementById('vacances-banner');
+    const now = new Date();
+    // N'affiche que si la date de reprise est dans le futur
+    if (now >= reprise) return;
+    banner.classList.add('active');
+    function tickVacances() {
+        const diff = reprise - new Date();
+        if (diff <= 0) { banner.style.display='none'; return; }
+        document.getElementById('vcd-j').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+        document.getElementById('vcd-h').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+        document.getElementById('vcd-m').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+        document.getElementById('vcd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    }
+    tickVacances();
+    setInterval(tickVacances, 1000);
+}
+initVacances();
 </script>
 </body>
 </html>
