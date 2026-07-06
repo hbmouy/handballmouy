@@ -588,23 +588,7 @@ footer {
 }
 
 
-/* ===================== BANNIÈRE VACANCES ===================== */
-.vacances-banner {
-    position: relative; z-index: 2;
-    background: #0b130a; border-bottom: 4px solid var(--jersey-yellow);
-    padding: 20px 20px; text-align: center; display: none;
-}
-.vacances-banner.active { display: block; }
-.vacances-inner { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.vacances-title { font-family: 'Anton', sans-serif; font-style: italic; font-size: 1.4rem; color: #e2f438; letter-spacing: 2px; display: block; width: 100%; text-align: center; }
-.vacances-sub { font-size: 0.95rem; font-weight: 600; color: #ffffff; display: block; width: 100%; text-align: center; }
-.vacances-countdown { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center; }
-.vcd-block { background: var(--jersey-yellow); color: #0b130a; padding: 6px 14px; text-align: center; min-width: 60px; border: 2px solid rgba(255,255,255,0.15); }
-.vcd-num { font-family: var(--font-display); font-size: 1.8rem; font-style: italic; line-height: 1; color: #0b130a; }
-.vcd-lbl { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #0b130a; }
-.vcd-sep { font-family: var(--font-display); font-size: 1.5rem; font-style: italic; color: var(--jersey-green); }
-.vacances-close { position: absolute; top: 10px; right: 16px; background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.4); font-size: 1.2rem; transition: color 0.2s; }
-.vacances-close:hover { color: var(--jersey-yellow); }
+
 
 /* ===================== KEYFRAMES ===================== */
 
@@ -638,6 +622,20 @@ footer {
 .social-float-link:hover svg { fill: var(--jersey-yellow); }
 @media (max-width: 700px) { .social-float-bar { display: none; } }
 
+/* ===================== BANNIÈRE VACANCES ===================== */
+.vacances-banner { position:relative; z-index:2; background:#0b130a; border-top:4px solid var(--jersey-yellow); border-bottom:4px solid var(--jersey-yellow); padding:20px; text-align:center; display:none; }
+.vacances-banner.active { display:block; }
+.vacances-inner { max-width:900px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.vacances-title { font-family:'Anton',sans-serif; font-style:italic; font-size:1.5rem; color:#e2f438; letter-spacing:2px; }
+.vacances-sub { font-size:0.95rem; font-weight:600; color:#ffffff; }
+.vacances-countdown { display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:center; }
+.vcd-block { background:#e2f438; color:#0b130a; padding:8px 16px; text-align:center; min-width:65px; }
+.vcd-num { font-family:'Anton',sans-serif; font-size:2rem; font-style:italic; line-height:1; color:#0b130a; }
+.vcd-lbl { font-size:0.5rem; text-transform:uppercase; letter-spacing:1px; font-weight:700; color:#0b130a; }
+.vcd-sep { font-family:'Anton',sans-serif; font-size:1.5rem; font-style:italic; color:#2cd646; }
+.vacances-close { position:absolute; top:10px; right:16px; background:none; border:none; cursor:pointer; color:rgba(255,255,255,0.4); font-size:1.2rem; }
+.vacances-close:hover { color:#e2f438; }
+
 @keyframes float   { 0%,100% { transform: translateY(0); }   50% { transform: translateY(-12px); } }
 @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideIn { from { transform: translateX(-30px) rotate(-1deg); opacity: 0; } to { transform: translateX(0) rotate(-1deg); opacity: 1; } }
@@ -662,21 +660,7 @@ footer {
     <a href="mailto:Handball.mouy@gmail.com" class="social-float-link" aria-label="Email">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
     </a>
-</div>
-
-
-<!-- ===================== BANNIÈRE VACANCES ===================== -->
-        <div class="vacances-sub">La reprise des entraînements approche — rendez-vous le <strong style="color:#fff">Jeudi 3 Septembre 2026</strong></div>
-        <div class="vacances-countdown">
-            <div class="vcd-block"><div class="vcd-num" id="vcd-j">--</div><div class="vcd-lbl">Jours</div></div>
-            <div class="vcd-sep">:</div>
-            <div class="vcd-block"><div class="vcd-num" id="vcd-h">--</div><div class="vcd-lbl">Heures</div></div>
-            <div class="vcd-sep">:</div>
-            <div class="vcd-block"><div class="vcd-num" id="vcd-m">--</div><div class="vcd-lbl">Min</div></div>
-            <div class="vcd-sep">:</div>
-            <div class="vcd-block"><div class="vcd-num" id="vcd-s">--</div><div class="vcd-lbl">Sec</div></div>
-        </div>
-    </div>
+</div>    </div>
 </div>
 
 <section class="hero" id="accueil">
@@ -690,11 +674,24 @@ footer {
   <a href="#contact" class="btn-primary">REJOINDRE L'AVENTURE</a>
 </section>
 
-<div class="vacances-banner" id="vacances-banner">
-    <button class="vacances-close" onclick="document.getElementById('vacances-banner').style.display='none'" aria-label="Fermer">✕</button>
-    <div class="vacances-inner">
-        <div class="vacances-title">🦁 ON SE RETROUVE À LA RENTRÉE !</div>
 
+<!-- BANNIÈRE VACANCES -->
+<div class="vacances-banner" id="vacances-banner">
+    <button class="vacances-close" onclick="document.getElementById('vacances-banner').style.display='none'">✕</button>
+    <div class="vacances-inner">
+        <div class="vacances-title">ON SE RETROUVE À LA RENTRÉE !</div>
+        <div class="vacances-sub">Reprise des entraînements — rendez-vous le <strong style="color:#e2f438">Jeudi 3 Septembre 2026</strong></div>
+        <div class="vacances-countdown">
+            <div class="vcd-block"><div class="vcd-num" id="vcd-j">--</div><div class="vcd-lbl">Jours</div></div>
+            <div class="vcd-sep">:</div>
+            <div class="vcd-block"><div class="vcd-num" id="vcd-h">--</div><div class="vcd-lbl">Heures</div></div>
+            <div class="vcd-sep">:</div>
+            <div class="vcd-block"><div class="vcd-num" id="vcd-m">--</div><div class="vcd-lbl">Min</div></div>
+            <div class="vcd-sep">:</div>
+            <div class="vcd-block"><div class="vcd-num" id="vcd-s">--</div><div class="vcd-lbl">Sec</div></div>
+        </div>
+    </div>
+</div>
 <section class="actus-section" id="actus">
   <div class="actus-container">
     <h2 class="section-heading">Les actualités</h2>
@@ -1019,12 +1016,13 @@ function easterEgg() {
     }
 }
 
+
+
 // ---- BANNIÈRE VACANCES ----
-function initVacances() {
+(function() {
     const reprise = new Date('2026-09-03T20:00:00');
     const banner = document.getElementById('vacances-banner');
-    if (!banner) return;
-    if (new Date() >= reprise) return;
+    if (!banner || new Date() >= reprise) return;
     banner.classList.add('active');
     function tick() {
         const diff = reprise - new Date();
@@ -1035,8 +1033,7 @@ function initVacances() {
         document.getElementById('vcd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
     }
     tick(); setInterval(tick, 1000);
-}
-initVacances();
+})();
 </script>
 </body>
 </html>
