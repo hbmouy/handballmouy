@@ -1,153 +1,221 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Espace Membre - HB Mouy</title>
-<style>
-  :root {
-    --bg: #0d0d0f;
-    --card: #17171a;
-    --accent: #ff5a1f;
-    --accent-hover: #e6491a;
-    --text: #f2f2f2;
-    --text-muted: #a0a0a5;
-    --border: #2a2a2e;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 30px;
-    border-bottom: 1px solid var(--border);
-  }
-  header .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 700;
-    font-size: 18px;
-  }
-  header img { width: 36px; }
-  button.logout {
-    padding: 10px 16px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: #1f1f22;
-    color: var(--text);
-    cursor: pointer;
-    font-size: 14px;
-  }
-  button.logout:hover { background: #29292d; }
-  main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 50px 30px;
-  }
-  h1 { font-size: 26px; margin-bottom: 6px; }
-  p.welcome { color: var(--text-muted); margin-bottom: 40px; }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-  }
-  .tile {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 24px;
-  }
-  .tile h3 { margin-top: 0; font-size: 16px; }
-  .tile p { color: var(--text-muted); font-size: 14px; margin-bottom: 0; }
-  #loading {
-    text-align: center;
-    padding: 80px 20px;
-    color: var(--text-muted);
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Membre - HBM</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --jersey-yellow: #e2f438;
+            --jersey-green: #2cd646;
+            --jersey-purple: #9d4edd;
+            --font-display: 'Anton', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --bg-body: #f5f8f5;
+            --bg-card: #ffffff;
+            --text-main: #0b130a;
+            --border-color: #0b130a;
+            --shadow-color: #0b130a;
+            --nav-bg: rgba(255,255,255,0.85);
+        }
+        [data-theme="dark"] {
+            --bg-body: #0b130a;
+            --bg-card: #142113;
+            --text-main: #dcdcdc;
+            --border-color: #f5f8f5;
+            --shadow-color: #2cd646;
+            --nav-bg: rgba(11,19,10,0.85);
+        }
+        body {
+            background: var(--bg-body); color: var(--text-main);
+            font-family: var(--font-body); line-height: 1.8;
+            overflow-x: hidden; position: relative;
+            transition: background 0.3s, color 0.3s;
+        }
+        body::before, body::after { content: ""; position: absolute; width: 100%; height: 1200px; z-index: -1; opacity: 0.85; pointer-events: none; }
+        body::before { top: 0; left: 0; background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%); clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px); }
+        body::after { top: 1200px; right: 0; width: 80%; background: linear-gradient(225deg, rgba(226,244,56,0.6) 0%, rgba(44,214,70,0.6) 100%); clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px); }
+
+        /* NAV (identique au reste du site) */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; height: 95px; padding: 0 2rem; background: var(--nav-bg); backdrop-filter: blur(15px); border-bottom: 4px solid var(--border-color); }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; height: 100%; position: relative; }
+        .nav-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 1002; transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275); }
+        .nav-logo img { height: 85px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); }
+        .nav-logo:hover { transform: translate(-50%,-50%) scale(1.08); }
+        .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
+        .nav-group.left { justify-content: flex-end; }
+        .nav-group.right { justify-content: flex-start; }
+        .nav-group a, .dropdown-trigger { color: var(--text-main); text-decoration: none; font-family: var(--font-display); font-size: 1.3rem; font-style: italic; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; cursor: pointer; }
+        .nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
+        .nav-group a.active { color: var(--jersey-purple); }
+        .theme-toggle-btn { background: transparent; border: 2px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; box-shadow: 3px 3px 0px var(--border-color); transition: transform 0.2s, box-shadow 0.2s; }
+        .theme-toggle-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0px var(--jersey-purple); }
+        .theme-toggle-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--text-main); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .sun-icon { display: none; } .moon-icon { display: block; }
+        [data-theme="dark"] .sun-icon { display: block; } [data-theme="dark"] .moon-icon { display: none; }
+        .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { width: 100%; height: 3px; background-color: var(--border-color); transition: all 0.3s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); min-width: 180px; border: 3px solid var(--border-color); padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color); }
+        .dropdown-content li a { padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main); }
+        .dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown.active .dropdown-content { display: block; }
+
+        /* CONTENU */
+        .content-wrapper { max-width: 1100px; margin: 160px auto 40px; padding: 0 20px; position: relative; z-index: 2; }
+        .label-container { text-align: center; }
+        .section-label { color: var(--text-main); background: var(--bg-card); border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color); text-transform: uppercase; font-family: var(--font-display); font-style: italic; font-size: 1.2rem; letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem; transform: rotate(-1deg); }
+        h1 { font-family: var(--font-display); font-size: clamp(2.4rem,6vw,3.8rem); text-align: center; margin-bottom: 0.8rem; line-height: 1; font-style: italic; letter-spacing: -1px; color: var(--text-main); text-shadow: 4px 4px 0px var(--bg-card), 8px 8px 0px var(--shadow-color); }
+        .welcome-sub { text-align: center; font-size: 1.1rem; font-weight: 500; margin-bottom: 3.5rem; opacity: 0.85; }
+
+        /* GRILLE DE TUILES (style stat-card / news-card) */
+        .tiles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.2rem; margin-bottom: 3rem; }
+        .tile {
+            background: var(--bg-card); border: 3px solid var(--border-color); padding: 2.2rem 1.8rem;
+            box-shadow: 8px 8px 0px var(--shadow-color); transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+            position: relative;
+        }
+        .tile:hover { transform: translateY(-6px) rotate(-1deg); box-shadow: 11px 11px 0px var(--shadow-color); border-color: var(--jersey-purple); }
+        .tile-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+        .tile h3 { font-family: var(--font-display); font-style: italic; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 0.6rem; color: var(--text-main); }
+        .tile p { font-size: 0.95rem; opacity: 0.85; margin: 0; }
+
+        /* BARRE UTILISATEUR */
+        .user-bar {
+            max-width: 1100px; margin: 0 auto 3rem; display: flex; align-items: center; justify-content: space-between;
+            background: var(--bg-card); border: 3px solid var(--border-color); padding: 1.2rem 1.8rem;
+            box-shadow: 6px 6px 0px var(--shadow-color); flex-wrap: wrap; gap: 1rem;
+        }
+        .user-info { display: flex; align-items: center; gap: 1rem; }
+        .user-avatar {
+            width: 46px; height: 46px; border-radius: 50%; background: var(--jersey-purple); color: #fff;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-display);
+            font-style: italic; font-size: 1.2rem; border: 2px solid var(--border-color); flex-shrink: 0;
+        }
+        .user-name-text { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; text-transform: uppercase; }
+        .btn-logout {
+            background: var(--bg-card); border: 2px solid var(--border-color); color: var(--text-main);
+            padding: 0.6rem 1.4rem; font-family: var(--font-display); font-style: italic; text-transform: uppercase;
+            letter-spacing: 0.05em; font-size: 1rem; cursor: pointer; box-shadow: 4px 4px 0px var(--shadow-color); transition: 0.2s;
+        }
+        .btn-logout:hover { background: var(--border-color); color: var(--jersey-yellow); transform: translate(-2px,-2px); box-shadow: 6px 6px 0px var(--jersey-purple); }
+
+        #loading { text-align: center; padding: 220px 20px 100px; font-family: var(--font-display); font-size: 1.5rem; font-style: italic; opacity: 0.5; }
+
+        footer { text-align: center; padding: 60px; color: var(--text-main); font-weight: 700; border-top: 3px dashed var(--border-color); background: var(--bg-card); position: relative; z-index: 2; }
+
+        @media (max-width: 992px) {
+            nav { height: 75px; }
+            .nav-container { justify-content: space-between; }
+            .nav-logo { position: static; transform: none; }
+            .nav-logo img { height: 60px; }
+            .nav-logo:hover { transform: none; }
+            .menu-toggle { display: flex; }
+            .nav-group { position: fixed; top: 0; width: 280px; height: 100vh; background: var(--bg-card); flex-direction: column; align-items: flex-start; padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000; }
+            .nav-group.left { right: -100%; border-left: 4px solid var(--border-color); transition: right 0.4s ease; }
+            .nav-group.right { display: none; }
+            .nav-group.left.active { right: 0; }
+            .content-wrapper { margin-top: 120px; }
+            body::before { clip-path: polygon(0 0, 100% 0, 100% 200px, 0 120px); }
+        }
+    </style>
+    <script src="nav-component.js"></script>
 </head>
 <body>
+
+<div id="hbm-nav"></div>
 
 <div id="loading">Vérification de la connexion...</div>
 
 <div id="content" style="display:none;">
-  <header>
-    <div class="brand">
-      <img src="images/logo.png" alt="Logo HBM" onerror="this.style.display='none'">
-      HB Mouy
-    </div>
-    <button class="logout" id="btn-logout">Se déconnecter</button>
-  </header>
+    <main class="content-wrapper">
+        <div class="label-container">
+            <span class="section-label">Zone privée</span>
+        </div>
+        <h1>ESPACE MEMBRE</h1>
+        <p class="welcome-sub">Bienvenue, <strong id="user-name">membre</strong> 🦁</p>
 
-  <main>
-    <h1>Bienvenue, <span id="user-name">membre</span> 👋</h1>
-    <p class="welcome">Voici votre espace membre. De nouvelles fonctionnalités seront ajoutées prochainement.</p>
+        <div class="user-bar">
+            <div class="user-info">
+                <div class="user-avatar" id="user-avatar">M</div>
+                <div class="user-name-text" id="user-name-2">Membre HBM</div>
+            </div>
+            <button class="btn-logout" id="btn-logout">Se déconnecter</button>
+        </div>
 
-    <div class="grid">
-      <div class="tile">
-        <h3>📅 Planning</h3>
-        <p>Retrouvez les horaires d'entraînement à venir.</p>
-      </div>
-      <div class="tile">
-        <h3>📄 Documents</h3>
-        <p>Certificats médicaux, fiches d'inscription, règlement intérieur.</p>
-      </div>
-      <div class="tile">
-        <h3>🏐 Résultats</h3>
-        <p>Suivez les résultats des matchs de la saison.</p>
-      </div>
-      <div class="tile">
-        <h3>📣 Annonces</h3>
-        <p>Les informations importantes du club.</p>
-      </div>
-    </div>
-  </main>
+        <div class="tiles-grid">
+            <div class="tile">
+                <span class="tile-icon">📅</span>
+                <h3>Planning</h3>
+                <p>Retrouvez les horaires d'entraînement et les prochains rendez-vous du club.</p>
+            </div>
+            <div class="tile">
+                <span class="tile-icon">📄</span>
+                <h3>Documents</h3>
+                <p>Certificats médicaux, fiches d'inscription et règlement intérieur.</p>
+            </div>
+            <div class="tile">
+                <span class="tile-icon">🏐</span>
+                <h3>Résultats</h3>
+                <p>Suivez les scores et classements de l'équipe tout au long de la saison.</p>
+            </div>
+            <div class="tile">
+                <span class="tile-icon">📣</span>
+                <h3>Annonces</h3>
+                <p>Les informations importantes communiquées par le bureau du club.</p>
+            </div>
+        </div>
+    </main>
 </div>
 
+<footer>© 2026 HBM — Handball Mouy — L'aventure ne fait que commencer.</footer>
+
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-  import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDw6sQBFUrCqtTgqusZq82NtJPFNJuTWwg",
-    authDomain: "handball-mouy.firebaseapp.com",
-    projectId: "handball-mouy",
-    storageBucket: "handball-mouy.firebasestorage.app",
-    messagingSenderId: "120527717567",
-    appId: "1:120527717567:web:aef840a24d24113db1720a"
-  };
+    const firebaseConfig = {
+        apiKey: "AIzaSyDw6sQBFUrCqtTgqusZq82NtJPFNJuTWwg",
+        authDomain: "handball-mouy.firebaseapp.com",
+        projectId: "handball-mouy",
+        storageBucket: "handball-mouy.firebasestorage.app",
+        messagingSenderId: "120527717567",
+        appId: "1:120527717567:web:aef840a24d24113db1720a"
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      document.getElementById("loading").style.display = "none";
-      document.getElementById("content").style.display = "block";
-      document.getElementById("user-name").textContent = user.displayName || user.email;
-    } else {
-      // Non connecté -> retour à la page de connexion
-      window.location.href = "connexion.html";
-    }
-  });
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("content").style.display = "block";
+            const displayName = user.displayName || user.email;
+            document.getElementById("user-name").textContent = displayName;
+            document.getElementById("user-name-2").textContent = displayName;
+            document.getElementById("user-avatar").textContent = displayName.charAt(0).toUpperCase();
+        } else {
+            window.location.href = "connexion.html";
+        }
+    });
 
-  document.getElementById("btn-logout").addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = "connexion.html";
-  });
+    document.getElementById("btn-logout").addEventListener("click", async () => {
+        await signOut(auth);
+        window.location.href = "connexion.html";
+    });
 </script>
-
 </body>
 </html>
