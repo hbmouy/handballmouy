@@ -1,5 +1,22 @@
 [
- {
+  {
+    "id": "presse-courrierpicard-2026",
+    "featured": true,
+    "archive": false,
+    "badge": "PRESSE",
+    "badgeType": "presse",
+    "date": "2026-07-13",
+    "dateAffichee": "13 JUILLET 2026",
+    "titre": "Mouy : le jeune club de handball cherche une salle pour jouer ses matchs",
+    "excerpt": "<strong>Le Courrier Picard s'intéresse au HBM !</strong><br><br>Notre président a été interviewé sur les difficultés rencontrées par le club pour trouver une salle où disputer ses matchs. On y évoque le manque de soutien parfois rencontré lors de la création d'une nouvelle association... mais surtout une chose est sûre : on ne lâche rien !",
+    "image": "images/logonb.png",
+    "imageAlt": "Le Courrier Picard",
+    "lien": "https://www.courrier-picard.fr/id732472/article/2026-07-13/mouy-le-jeune-club-de-handball-cherche-une-salle-pour-jouer-ses-matchs",
+    "lienTexte": "Lire l'article →",
+    "partageTitle": "Le HBM dans le Courrier Picard",
+    "partageText": "Le jeune club de handball de Mouy cherche une salle pour jouer ses matchs"
+  },
+  {
     "id": "cires-2026",
     "featured": false,
     "archive": false,
