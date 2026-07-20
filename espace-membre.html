@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace Membre - HB Mouy</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --card: #17171a;
+    --accent: #ff5a1f;
+    --accent-hover: #e6491a;
+    --text: #f2f2f2;
+    --text-muted: #a0a0a5;
+    --border: #2a2a2e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--border);
+  }
+  header .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  header img { width: 36px; }
+  button.logout {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #1f1f22;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 14px;
+  }
+  button.logout:hover { background: #29292d; }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 30px;
+  }
+  h1 { font-size: 26px; margin-bottom: 6px; }
+  p.welcome { color: var(--text-muted); margin-bottom: 40px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .tile {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .tile h3 { margin-top: 0; font-size: 16px; }
+  .tile p { color: var(--text-muted); font-size: 14px; margin-bottom: 0; }
+  #loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<div id="loading">Vérification de la connexion...</div>
+
+<div id="content" style="display:none;">
+  <header>
+    <div class="brand">
+      <img src="images/logo.png" alt="Logo HBM" onerror="this.style.display='none'">
+      HB Mouy
+    </div>
+    <button class="logout" id="btn-logout">Se déconnecter</button>
+  </header>
+
+  <main>
+    <h1>Bienvenue, <span id="user-name">membre</span> 👋</h1>
+    <p class="welcome">Voici votre espace membre. De nouvelles fonctionnalités seront ajoutées prochainement.</p>
+
+    <div class="grid">
+      <div class="tile">
+        <h3>📅 Planning</h3>
+        <p>Retrouvez les horaires d'entraînement à venir.</p>
+      </div>
+      <div class="tile">
+        <h3>📄 Documents</h3>
+        <p>Certificats médicaux, fiches d'inscription, règlement intérieur.</p>
+      </div>
+      <div class="tile">
+        <h3>🏐 Résultats</h3>
+        <p>Suivez les résultats des matchs de la saison.</p>
+      </div>
+      <div class="tile">
+        <h3>📣 Annonces</h3>
+        <p>Les informations importantes du club.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDw6sQBFUrCqtTgqusZq82NtJPFNJuTWwg",
+    authDomain: "handball-mouy.firebaseapp.com",
+    projectId: "handball-mouy",
+    storageBucket: "handball-mouy.firebasestorage.app",
+    messagingSenderId: "120527717567",
+    appId: "1:120527717567:web:aef840a24d24113db1720a"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("content").style.display = "block";
+      document.getElementById("user-name").textContent = user.displayName || user.email;
+    } else {
+      // Non connecté -> retour à la page de connexion
+      window.location.href = "connexion.html";
+    }
+  });
+
+  document.getElementById("btn-logout").addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "connexion.html";
+  });
+</script>
+
+</body>
+</html>
