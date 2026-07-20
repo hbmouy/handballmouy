@@ -1,315 +1,304 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Connexion - Espace Membre HB Mouy</title>
-<style>
-  :root {
-    --bg: #0d0d0f;
-    --card: #17171a;
-    --accent: #ff5a1f;
-    --accent-hover: #e6491a;
-    --text: #f2f2f2;
-    --text-muted: #a0a0a5;
-    --border: #2a2a2e;
-    --error: #ff4d4d;
-    --success: #3ddc84;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-  }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 40px;
-    width: 100%;
-    max-width: 400px;
-  }
-  .logo {
-    display: block;
-    margin: 0 auto 20px auto;
-    width: 70px;
-  }
-  h1 {
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 4px;
-  }
-  p.subtitle {
-    text-align: center;
-    color: var(--text-muted);
-    margin-top: 0;
-    margin-bottom: 28px;
-    font-size: 14px;
-  }
-  .tabs {
-    display: flex;
-    margin-bottom: 24px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .tab {
-    flex: 1;
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-    background: var(--card);
-    color: var(--text-muted);
-    font-size: 14px;
-    font-weight: 600;
-    transition: 0.2s;
-  }
-  .tab.active {
-    background: var(--accent);
-    color: white;
-  }
-  label {
-    display: block;
-    font-size: 13px;
-    margin-bottom: 6px;
-    color: var(--text-muted);
-  }
-  input {
-    width: 100%;
-    padding: 12px 14px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: #0d0d0f;
-    color: var(--text);
-    font-size: 14px;
-  }
-  input:focus { outline: 2px solid var(--accent); }
-  button.primary {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background: var(--accent);
-    color: white;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-  button.primary:hover { background: var(--accent-hover); }
-  button.primary:disabled { opacity: 0.6; cursor: not-allowed; }
-  .divider {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 12px;
-    margin: 20px 0;
-  }
-  .divider::before, .divider::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid var(--border);
-  }
-  .divider:not(:empty)::before { margin-right: .75em; }
-  .divider:not(:empty)::after { margin-left: .75em; }
-  button.google {
-    width: 100%;
-    padding: 11px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: #1f1f22;
-    color: var(--text);
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-  button.google:hover { background: #29292d; }
-  .message {
-    margin-top: 16px;
-    font-size: 13px;
-    text-align: center;
-    min-height: 18px;
-  }
-  .message.error { color: var(--error); }
-  .message.success { color: var(--success); }
-  a.back {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: var(--text-muted);
-    font-size: 13px;
-    text-decoration: none;
-  }
-  a.back:hover { color: var(--text); }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Espace Membre - HBM</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --jersey-yellow: #e2f438;
+            --jersey-green: #2cd646;
+            --jersey-purple: #9d4edd;
+            --font-display: 'Anton', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --bg-body: #f5f8f5;
+            --bg-card: #ffffff;
+            --text-main: #0b130a;
+            --border-color: #0b130a;
+            --shadow-color: #0b130a;
+            --nav-bg: rgba(255,255,255,0.85);
+        }
+        [data-theme="dark"] {
+            --bg-body: #0b130a;
+            --bg-card: #142113;
+            --text-main: #dcdcdc;
+            --border-color: #f5f8f5;
+            --shadow-color: #2cd646;
+            --nav-bg: rgba(11,19,10,0.85);
+        }
+        body {
+            background: var(--bg-body); color: var(--text-main);
+            font-family: var(--font-body); line-height: 1.8;
+            overflow-x: hidden; position: relative;
+            transition: background 0.3s, color 0.3s;
+        }
+        body::before, body::after { content: ""; position: absolute; width: 100%; height: 1200px; z-index: -1; opacity: 0.85; pointer-events: none; }
+        body::before { top: 0; left: 0; background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%); clip-path: polygon(0 0, 100% 0, 100% 350px, 70% 220px, 30% 480px, 0 280px); }
+        body::after { top: 1200px; right: 0; width: 80%; background: linear-gradient(225deg, rgba(226,244,56,0.6) 0%, rgba(44,214,70,0.6) 100%); clip-path: polygon(100% 200px, 100% 800px, 20% 900px, 0% 600px, 40% 400px); }
+
+        /* NAV (identique au reste du site) */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; height: 95px; padding: 0 2rem; background: var(--nav-bg); backdrop-filter: blur(15px); border-bottom: 4px solid var(--border-color); }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; height: 100%; position: relative; }
+        .nav-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 1002; transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275); }
+        .nav-logo img { height: 85px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); }
+        .nav-logo:hover { transform: translate(-50%,-50%) scale(1.08); }
+        .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
+        .nav-group.left { justify-content: flex-end; }
+        .nav-group.right { justify-content: flex-start; }
+        .nav-group a, .dropdown-trigger { color: var(--text-main); text-decoration: none; font-family: var(--font-display); font-size: 1.3rem; font-style: italic; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; cursor: pointer; }
+        .nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
+        .nav-group a.active { color: var(--jersey-purple); }
+        .theme-toggle-btn { background: transparent; border: 2px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; box-shadow: 3px 3px 0px var(--border-color); transition: transform 0.2s, box-shadow 0.2s; }
+        .theme-toggle-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0px var(--jersey-purple); }
+        .theme-toggle-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--text-main); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .sun-icon { display: none; } .moon-icon { display: block; }
+        [data-theme="dark"] .sun-icon { display: block; } [data-theme="dark"] .moon-icon { display: none; }
+        .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { width: 100%; height: 3px; background-color: var(--border-color); transition: all 0.3s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); min-width: 180px; border: 3px solid var(--border-color); padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color); }
+        .dropdown-content li a { padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main); }
+        .dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown.active .dropdown-content { display: block; }
+
+        /* CONTENU */
+        .content-wrapper { max-width: 650px; margin: 160px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
+        .label-container { text-align: center; }
+        .section-label { color: var(--text-main); background: var(--bg-card); border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color); text-transform: uppercase; font-family: var(--font-display); font-style: italic; font-size: 1.2rem; letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem; transform: rotate(-1deg); }
+        h1 { font-family: var(--font-display); font-size: clamp(2.4rem,6vw,3.6rem); text-align: center; margin-bottom: 2.5rem; line-height: 1; font-style: italic; letter-spacing: -1px; color: var(--text-main); text-shadow: 4px 4px 0px var(--bg-card), 8px 8px 0px var(--shadow-color); }
+
+        /* CARTE FORMULAIRE */
+        .form-container {
+            max-width: 500px; margin: 0 auto; background: var(--bg-card);
+            padding: 3rem 2.5rem; border: 3px solid var(--border-color);
+            box-shadow: 14px 14px 0px var(--border-color);
+            clip-path: polygon(0% 0%, 98% 0%, 100% 4%, 100% 100%, 2% 100%, 0% 96%);
+            position: relative;
+        }
+        .form-container::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 35px; height: 35px;
+            background: var(--jersey-purple); clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 3;
+        }
+
+        /* ONGLETS */
+        .tabs { display: flex; gap: 0; margin-bottom: 2rem; border: 3px solid var(--border-color); }
+        .tab {
+            flex: 1; text-align: center; padding: 0.8rem; cursor: pointer;
+            font-family: var(--font-display); font-style: italic; text-transform: uppercase;
+            letter-spacing: 0.05em; font-size: 1.1rem; background: var(--bg-card); color: var(--text-main);
+            transition: 0.2s; border: none;
+        }
+        .tab + .tab { border-left: 3px solid var(--border-color); }
+        .tab.active { background: var(--border-color); color: var(--jersey-yellow); }
+
+        label { display: block; margin-bottom: 7px; font-size: 0.9rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; }
+        input {
+            width: 100%; padding: 14px; background: var(--bg-body);
+            border: 2px solid var(--border-color); color: var(--text-main); font-weight: 500;
+            border-radius: 0px; font-family: var(--font-body); margin-bottom: 1.2rem; transition: 0.2s;
+        }
+        input:focus { outline: none; border-color: var(--jersey-purple); background: var(--bg-card); box-shadow: 4px 4px 0px var(--border-color); }
+
+        .btn-primary {
+            background: var(--border-color); color: var(--jersey-yellow); width: 100%;
+            padding: 1rem 2rem; text-decoration: none; font-family: var(--font-display);
+            font-size: 1.3rem; font-style: italic; letter-spacing: 0.1em;
+            transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275); border: 3px solid var(--border-color);
+            box-shadow: 6px 6px 0px var(--jersey-purple); cursor: pointer; text-transform: uppercase;
+        }
+        .btn-primary:hover { background: var(--jersey-purple); color: #ffffff; transform: translateY(-4px); box-shadow: 8px 8px 0px var(--border-color); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .divider { display: flex; align-items: center; text-align: center; margin: 1.8rem 0; font-family: var(--font-display); font-style: italic; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.9rem; opacity: 0.6; }
+        .divider::before, .divider::after { content: ""; flex: 1; border-bottom: 2px dashed var(--border-color); }
+        .divider:not(:empty)::before { margin-right: .75em; }
+        .divider:not(:empty)::after { margin-left: .75em; }
+
+        .btn-google {
+            width: 100%; padding: 0.9rem; border: 3px solid var(--border-color); background: var(--bg-card);
+            color: var(--text-main); font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 6px 6px 0px var(--shadow-color); transition: 0.2s;
+        }
+        .btn-google:hover { background: var(--jersey-yellow); color: #0b130a; transform: translate(-2px,-2px); box-shadow: 8px 8px 0px var(--shadow-color); }
+
+        .message { margin-top: 1.2rem; text-align: center; font-weight: 700; font-size: 0.9rem; min-height: 20px; }
+        .message.error { color: #d63447; }
+        .message.success { color: var(--jersey-green); }
+
+        .back-link { display: block; text-align: center; margin-top: 2rem; font-family: var(--font-display); font-style: italic; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main); text-decoration: none; }
+        .back-link:hover { color: var(--jersey-purple); }
+
+        footer { text-align: center; padding: 60px; color: var(--text-main); font-weight: 700; border-top: 3px dashed var(--border-color); background: var(--bg-card); position: relative; z-index: 2; }
+
+        @media (max-width: 992px) {
+            nav { height: 75px; }
+            .nav-container { justify-content: space-between; }
+            .nav-logo { position: static; transform: none; }
+            .nav-logo img { height: 60px; }
+            .nav-logo:hover { transform: none; }
+            .menu-toggle { display: flex; }
+            .nav-group { position: fixed; top: 0; width: 280px; height: 100vh; background: var(--bg-card); flex-direction: column; align-items: flex-start; padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000; }
+            .nav-group.left { right: -100%; border-left: 4px solid var(--border-color); transition: right 0.4s ease; }
+            .nav-group.right { display: none; }
+            .nav-group.left.active { right: 0; }
+            .content-wrapper { margin-top: 120px; }
+            body::before { clip-path: polygon(0 0, 100% 0, 100% 200px, 0 120px); }
+        }
+        @media (max-width: 480px) {
+            .form-container { padding: 2.2rem 1.5rem; clip-path: none; box-shadow: 8px 8px 0px var(--border-color); }
+        }
+    </style>
+    <script src="nav-component.js"></script>
 </head>
 <body>
 
-<div class="card">
-  <img src="images/logo.png" alt="Logo HBM" class="logo" onerror="this.style.display='none'">
-  <h1>Espace Membre HBM</h1>
-  <p class="subtitle">Connectez-vous ou créez votre compte</p>
+<div id="hbm-nav"></div>
 
-  <div class="tabs">
-    <div class="tab active" id="tab-login" onclick="switchTab('login')">Connexion</div>
-    <div class="tab" id="tab-signup" onclick="switchTab('signup')">Inscription</div>
-  </div>
+<main class="content-wrapper">
+    <div class="label-container">
+        <span class="section-label">Adhérents HBM</span>
+    </div>
+    <h1>ESPACE MEMBRE</h1>
 
-  <!-- Formulaire connexion -->
-  <div id="form-login">
-    <label for="login-email">Email</label>
-    <input type="email" id="login-email" placeholder="vous@exemple.com">
-    <label for="login-password">Mot de passe</label>
-    <input type="password" id="login-password" placeholder="••••••••">
-    <button class="primary" id="btn-login">Se connecter</button>
-  </div>
+    <div class="form-container">
+        <div class="tabs">
+            <button class="tab active" id="tab-login" onclick="switchTab('login')">Connexion</button>
+            <button class="tab" id="tab-signup" onclick="switchTab('signup')">Inscription</button>
+        </div>
 
-  <!-- Formulaire inscription -->
-  <div id="form-signup" style="display:none;">
-    <label for="signup-name">Prénom et nom</label>
-    <input type="text" id="signup-name" placeholder="Jean Dupont">
-    <label for="signup-email">Email</label>
-    <input type="email" id="signup-email" placeholder="vous@exemple.com">
-    <label for="signup-password">Mot de passe (6 caractères min.)</label>
-    <input type="password" id="signup-password" placeholder="••••••••">
-    <button class="primary" id="btn-signup">Créer mon compte</button>
-  </div>
+        <div id="form-login">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="vous@exemple.com">
+            <label for="login-password">Mot de passe</label>
+            <input type="password" id="login-password" placeholder="••••••••">
+            <button class="btn-primary" id="btn-login">Se connecter</button>
+        </div>
 
-  <div class="divider">ou</div>
+        <div id="form-signup" style="display:none;">
+            <label for="signup-name">Prénom et nom</label>
+            <input type="text" id="signup-name" placeholder="Jean Dupont">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" placeholder="vous@exemple.com">
+            <label for="signup-password">Mot de passe (6 caractères min.)</label>
+            <input type="password" id="signup-password" placeholder="••••••••">
+            <button class="btn-primary" id="btn-signup">Créer mon compte</button>
+        </div>
 
-  <button class="google" id="btn-google">
-    <svg width="18" height="18" viewBox="0 0 48 48">
-      <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.5 29.3 35.5 24 35.5c-6.9 0-12.5-5.6-12.5-12.5S17.1 10.5 24 10.5c3.2 0 6.1 1.2 8.3 3.2l5.7-5.7C34.6 4.8 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.4-.1-2.7-.4-3.5z"/>
-      <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.5 18.9 12.5 24 12.5c3.2 0 6.1 1.2 8.3 3.2l5.7-5.7C34.6 6.8 29.6 5 24 5c-7.7 0-14.3 4.3-17.7 10.7z"/>
-      <path fill="#4CAF50" d="M24 43c5.4 0 10.3-1.9 14.1-5.2l-6.5-5.3c-2 1.4-4.6 2.2-7.6 2.2-5.3 0-9.7-3.4-11.3-8.1l-6.6 5.1C9.6 38.5 16.2 43 24 43z"/>
-      <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.5 5.3C41.9 35.1 45 30.2 45 24c0-1.4-.1-2.7-.4-3.5z"/>
-    </svg>
-    Continuer avec Google
-  </button>
+        <div class="divider">ou</div>
 
-  <p class="message" id="message"></p>
-  <a href="index.html" class="back">← Retour au site</a>
-</div>
+        <button class="btn-google" id="btn-google">
+            <svg width="18" height="18" viewBox="0 0 48 48">
+                <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.5 29.3 35.5 24 35.5c-6.9 0-12.5-5.6-12.5-12.5S17.1 10.5 24 10.5c3.2 0 6.1 1.2 8.3 3.2l5.7-5.7C34.6 4.8 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.4-.1-2.7-.4-3.5z"/>
+                <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.5 18.9 12.5 24 12.5c3.2 0 6.1 1.2 8.3 3.2l5.7-5.7C34.6 6.8 29.6 5 24 5c-7.7 0-14.3 4.3-17.7 10.7z"/>
+                <path fill="#4CAF50" d="M24 43c5.4 0 10.3-1.9 14.1-5.2l-6.5-5.3c-2 1.4-4.6 2.2-7.6 2.2-5.3 0-9.7-3.4-11.3-8.1l-6.6 5.1C9.6 38.5 16.2 43 24 43z"/>
+                <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.5 5.3C41.9 35.1 45 30.2 45 24c0-1.4-.1-2.7-.4-3.5z"/>
+            </svg>
+            Continuer avec Google
+        </button>
+
+        <p class="message" id="message"></p>
+    </div>
+
+    <a href="index.html" class="back-link">← Retour au site</a>
+</main>
+
+<footer>© 2026 HBM — Handball Mouy — L'aventure ne fait que commencer.</footer>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-  import {
-    getAuth,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    signInWithPopup,
-    GoogleAuthProvider,
-    updateProfile,
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+    import {
+        getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+        signInWithPopup, GoogleAuthProvider, updateProfile, onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDw6sQBFUrCqtTgqusZq82NtJPFNJuTWwg",
-    authDomain: "handball-mouy.firebaseapp.com",
-    projectId: "handball-mouy",
-    storageBucket: "handball-mouy.firebasestorage.app",
-    messagingSenderId: "120527717567",
-    appId: "1:120527717567:web:aef840a24d24113db1720a"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
-  const messageEl = document.getElementById("message");
-
-  function showMessage(text, type) {
-    messageEl.textContent = text;
-    messageEl.className = "message " + (type || "");
-  }
-
-  function translateError(code) {
-    const map = {
-      "auth/invalid-email": "Adresse email invalide.",
-      "auth/user-not-found": "Aucun compte associé à cet email.",
-      "auth/wrong-password": "Mot de passe incorrect.",
-      "auth/invalid-credential": "Email ou mot de passe incorrect.",
-      "auth/email-already-in-use": "Un compte existe déjà avec cet email.",
-      "auth/weak-password": "Le mot de passe doit contenir au moins 6 caractères.",
-      "auth/missing-password": "Veuillez saisir un mot de passe.",
-      "auth/popup-closed-by-user": "Connexion Google annulée."
+    const firebaseConfig = {
+        apiKey: "AIzaSyDw6sQBFUrCqtTgqusZq82NtJPFNJuTWwg",
+        authDomain: "handball-mouy.firebaseapp.com",
+        projectId: "handball-mouy",
+        storageBucket: "handball-mouy.firebasestorage.app",
+        messagingSenderId: "120527717567",
+        appId: "1:120527717567:web:aef840a24d24113db1720a"
     };
-    return map[code] || "Une erreur est survenue. Réessayez.";
-  }
 
-  // Si déjà connecté, redirection directe
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      window.location.href = "espace-membre.html";
-    }
-  });
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+    const messageEl = document.getElementById("message");
 
-  // Connexion email/mdp
-  document.getElementById("btn-login").addEventListener("click", async () => {
-    const email = document.getElementById("login-email").value.trim();
-    const password = document.getElementById("login-password").value;
-    if (!email || !password) {
-      showMessage("Veuillez remplir tous les champs.", "error");
-      return;
+    function showMessage(text, type) {
+        messageEl.textContent = text;
+        messageEl.className = "message " + (type || "");
     }
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      showMessage("Connexion réussie, redirection...", "success");
-    } catch (err) {
-      showMessage(translateError(err.code), "error");
-    }
-  });
 
-  // Inscription email/mdp
-  document.getElementById("btn-signup").addEventListener("click", async () => {
-    const name = document.getElementById("signup-name").value.trim();
-    const email = document.getElementById("signup-email").value.trim();
-    const password = document.getElementById("signup-password").value;
-    if (!name || !email || !password) {
-      showMessage("Veuillez remplir tous les champs.", "error");
-      return;
+    function translateError(code) {
+        const map = {
+            "auth/invalid-email": "Adresse email invalide.",
+            "auth/user-not-found": "Aucun compte associé à cet email.",
+            "auth/wrong-password": "Mot de passe incorrect.",
+            "auth/invalid-credential": "Email ou mot de passe incorrect.",
+            "auth/email-already-in-use": "Un compte existe déjà avec cet email.",
+            "auth/weak-password": "Le mot de passe doit contenir au moins 6 caractères.",
+            "auth/missing-password": "Veuillez saisir un mot de passe.",
+            "auth/popup-closed-by-user": "Connexion Google annulée."
+        };
+        return map[code] || "Une erreur est survenue. Réessayez.";
     }
-    try {
-      const cred = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(cred.user, { displayName: name });
-      showMessage("Compte créé, redirection...", "success");
-    } catch (err) {
-      showMessage(translateError(err.code), "error");
-    }
-  });
 
-  // Connexion Google
-  document.getElementById("btn-google").addEventListener("click", async () => {
-    try {
-      await signInWithPopup(auth, provider);
-      showMessage("Connexion réussie, redirection...", "success");
-    } catch (err) {
-      showMessage(translateError(err.code), "error");
-    }
-  });
+    onAuthStateChanged(auth, (user) => {
+        if (user) window.location.href = "espace-membre.html";
+    });
 
-  // Gestion des onglets
-  window.switchTab = function(tab) {
-    const isLogin = tab === "login";
-    document.getElementById("tab-login").classList.toggle("active", isLogin);
-    document.getElementById("tab-signup").classList.toggle("active", !isLogin);
-    document.getElementById("form-login").style.display = isLogin ? "block" : "none";
-    document.getElementById("form-signup").style.display = isLogin ? "none" : "block";
-    showMessage("", "");
-  };
+    document.getElementById("btn-login").addEventListener("click", async () => {
+        const email = document.getElementById("login-email").value.trim();
+        const password = document.getElementById("login-password").value;
+        if (!email || !password) return showMessage("Veuillez remplir tous les champs.", "error");
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            showMessage("Connexion réussie, redirection...", "success");
+        } catch (err) { showMessage(translateError(err.code), "error"); }
+    });
+
+    document.getElementById("btn-signup").addEventListener("click", async () => {
+        const name = document.getElementById("signup-name").value.trim();
+        const email = document.getElementById("signup-email").value.trim();
+        const password = document.getElementById("signup-password").value;
+        if (!name || !email || !password) return showMessage("Veuillez remplir tous les champs.", "error");
+        try {
+            const cred = await createUserWithEmailAndPassword(auth, email, password);
+            await updateProfile(cred.user, { displayName: name });
+            showMessage("Compte créé, redirection...", "success");
+        } catch (err) { showMessage(translateError(err.code), "error"); }
+    });
+
+    document.getElementById("btn-google").addEventListener("click", async () => {
+        try {
+            await signInWithPopup(auth, provider);
+            showMessage("Connexion réussie, redirection...", "success");
+        } catch (err) { showMessage(translateError(err.code), "error"); }
+    });
+
+    window.switchTab = function(tab) {
+        const isLogin = tab === "login";
+        document.getElementById("tab-login").classList.toggle("active", isLogin);
+        document.getElementById("tab-signup").classList.toggle("active", !isLogin);
+        document.getElementById("form-login").style.display = isLogin ? "block" : "none";
+        document.getElementById("form-signup").style.display = isLogin ? "none" : "block";
+        showMessage("", "");
+    };
 </script>
-
 </body>
 </html>
