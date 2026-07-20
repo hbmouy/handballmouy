@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion - Espace Membre HB Mouy</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --card: #17171a;
+    --accent: #ff5a1f;
+    --accent-hover: #e6491a;
+    --text: #f2f2f2;
+    --text-muted: #a0a0a5;
+    --border: #2a2a2e;
+    --error: #ff4d4d;
+    --success: #3ddc84;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .logo {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 70px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  p.subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 0;
+    margin-bottom: 28px;
+    font-size: 14px;
+  }
+  .tabs {
+    display: flex;
+    margin-bottom: 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    background: var(--card);
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s;
+  }
+  .tab.active {
+    background: var(--accent);
+    color: white;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--text-muted);
+  }
+  input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #0d0d0f;
+    color: var(--text);
+    font-size: 14px;
+  }
+  input:focus { outline: 2px solid var(--accent); }
+  button.primary {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  button.primary:hover { background: var(--accent-hover); }
+  button.primary:disabled { opacity: 0.6; cursor: not-allowed; }
+  .divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    margin: 20px 0;
+  }
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid var(--border);
+  }
+  .divider:not(:empty)::before { margin-right: .75em; }
+  .divider:not(:empty)::after { margin-left: .75em; }
+  button.google {
+    width: 100%;
+    padding: 11px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #1f1f22;
+    color: var(--text);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  button.google:hover { background: #29292d; }
+  .message {
+    margin-top: 16px;
+    font-size: 13px;
+    text-align: center;
+    min-height: 18px;
+  }
+  .message.error { color: var(--error); }
+  .message.success { color: var(--success); }
+  a.back {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+    text-decoration: none;
+  }
+  a.back:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <img src="images/logo.png" alt="Logo HBM" class="logo" onerror="this.style.display='none'">
+  <h1>Espace Membre HBM</h1>
+  <p class="subtitle">Connectez-vous ou créez votre compte</p>
+
+  <div class="tabs">
+    <div class="tab active" id="tab-login" onclick="switchTab('login')">Connexion</div>
+    <div class="tab" id="tab-signup" onclick="switchTab('signup')">Inscription</div>
+  </div>
+
+  <!-- Formulaire connexion -->
+  <div id="form-login">
+    <label for="login-email">Email</label>
+    <input type="email" id="login-email" placeholder="vous@exemple.com">
+    <label for="login-password">Mot de passe</label>
+    <input type="password" id="login-password" placeholder="••••••••">
+    <button class="primary" id="btn-login">Se connecter</button>
+  </div>
+
+  <!-- Formulaire inscription -->
+  <div id="form-signup" style="display:none;">
+    <label for="signup-name">Prénom et nom</label>
+    <input type="text" id="signup-name" placeholder="Jean Dupont">
+    <label for="signup-email">Email</label>
+    <input type="email" id="signup-email" placeholder="vous@exemple.com">
+    <label for="signup-password">Mot de passe (6 caractères min.)</label>
+    <input type="password" id="signup-password" placeholder="••••••••">
+    <button class="primary" id="btn-signup">Créer mon compte</button>
+  </div>
+
+  <div class="divider">ou</div>
+
+  <button class="google" id="btn-google">
+    <svg width="18" height="18" viewBox="0 0 48 48">
+      <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.5 29.3 35.5 24 35.5c-6.9 0-12.5-5.6-12.5-12.5S17.1 10.5 24 10.5c3.2 0 6.1 1.2 8.3 3.2l5.7-5.7C34.6 4.8 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.4-.1-2.7-.4-3.5z"/>
+      <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.5 18.9 12.5 24 12.5c3.2 0 6.1 1.2 8.3 3.2l5.7-5.7C34.6 6.8 29.6 5 24 5c-7.7 0-14.3 4.3-17.7 10.7z"/>
+      <path fill="#4CAF50" d="M24 43c5.4 0 10.3-1.9 14.1-5.2l-6.5-5.3c-2 1.4-4.6 2.2-7.6 2.2-5.3 0-9.7-3.4-11.3-8.1l-6.6 5.1C9.6 38.5 16.2 43 24 43z"/>
+      <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.5 5.3C41.9 35.1 45 30.2 45 24c0-1.4-.1-2.7-.4-3.5z"/>
+    </svg>
+    Continuer avec Google
+  </button>
+
+  <p class="message" id="message"></p>
+  <a href="index.html" class="back">← Retour au site</a>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider,
+    updateProfile,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDw6sQBFUrCqtTgqusZq82NtJPFNJuTWwg",
+    authDomain: "handball-mouy.firebaseapp.com",
+    projectId: "handball-mouy",
+    storageBucket: "handball-mouy.firebasestorage.app",
+    messagingSenderId: "120527717567",
+    appId: "1:120527717567:web:aef840a24d24113db1720a"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const messageEl = document.getElementById("message");
+
+  function showMessage(text, type) {
+    messageEl.textContent = text;
+    messageEl.className = "message " + (type || "");
+  }
+
+  function translateError(code) {
+    const map = {
+      "auth/invalid-email": "Adresse email invalide.",
+      "auth/user-not-found": "Aucun compte associé à cet email.",
+      "auth/wrong-password": "Mot de passe incorrect.",
+      "auth/invalid-credential": "Email ou mot de passe incorrect.",
+      "auth/email-already-in-use": "Un compte existe déjà avec cet email.",
+      "auth/weak-password": "Le mot de passe doit contenir au moins 6 caractères.",
+      "auth/missing-password": "Veuillez saisir un mot de passe.",
+      "auth/popup-closed-by-user": "Connexion Google annulée."
+    };
+    return map[code] || "Une erreur est survenue. Réessayez.";
+  }
+
+  // Si déjà connecté, redirection directe
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      window.location.href = "espace-membre.html";
+    }
+  });
+
+  // Connexion email/mdp
+  document.getElementById("btn-login").addEventListener("click", async () => {
+    const email = document.getElementById("login-email").value.trim();
+    const password = document.getElementById("login-password").value;
+    if (!email || !password) {
+      showMessage("Veuillez remplir tous les champs.", "error");
+      return;
+    }
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      showMessage("Connexion réussie, redirection...", "success");
+    } catch (err) {
+      showMessage(translateError(err.code), "error");
+    }
+  });
+
+  // Inscription email/mdp
+  document.getElementById("btn-signup").addEventListener("click", async () => {
+    const name = document.getElementById("signup-name").value.trim();
+    const email = document.getElementById("signup-email").value.trim();
+    const password = document.getElementById("signup-password").value;
+    if (!name || !email || !password) {
+      showMessage("Veuillez remplir tous les champs.", "error");
+      return;
+    }
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(cred.user, { displayName: name });
+      showMessage("Compte créé, redirection...", "success");
+    } catch (err) {
+      showMessage(translateError(err.code), "error");
+    }
+  });
+
+  // Connexion Google
+  document.getElementById("btn-google").addEventListener("click", async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      showMessage("Connexion réussie, redirection...", "success");
+    } catch (err) {
+      showMessage(translateError(err.code), "error");
+    }
+  });
+
+  // Gestion des onglets
+  window.switchTab = function(tab) {
+    const isLogin = tab === "login";
+    document.getElementById("tab-login").classList.toggle("active", isLogin);
+    document.getElementById("tab-signup").classList.toggle("active", !isLogin);
+    document.getElementById("form-login").style.display = isLogin ? "block" : "none";
+    document.getElementById("form-signup").style.display = isLogin ? "none" : "block";
+    showMessage("", "");
+  };
+</script>
+
+</body>
+</html>
