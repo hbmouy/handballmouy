@@ -224,6 +224,9 @@
         getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
         signInWithPopup, GoogleAuthProvider, updateProfile, onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+    import {
+        getFirestore, doc, setDoc, getDoc
+    } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDw6sQBFUrCqtTgqusZq82NtJPFNJuTWwg",
@@ -236,8 +239,22 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
     const messageEl = document.getElementById("message");
+
+    // Crée la fiche membre dans Firestore si elle n'existe pas encore
+    async function creerFicheMembreSiBesoin(user) {
+        const ref = doc(db, "membres", user.uid);
+        const snap = await getDoc(ref);
+        if (!snap.exists()) {
+            await setDoc(ref, {
+                nom: user.displayName || "",
+                email: user.email || "",
+                dateInscription: new Date().toISOString()
+            });
+        }
+    }
 
     function showMessage(text, type) {
         messageEl.textContent = text;
@@ -280,13 +297,15 @@
         try {
             const cred = await createUserWithEmailAndPassword(auth, email, password);
             await updateProfile(cred.user, { displayName: name });
+            await creerFicheMembreSiBesoin({ ...cred.user, displayName: name });
             showMessage("Compte créé, redirection...", "success");
         } catch (err) { showMessage(translateError(err.code), "error"); }
     });
 
     document.getElementById("btn-google").addEventListener("click", async () => {
         try {
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+            await creerFicheMembreSiBesoin(result.user);
             showMessage("Connexion réussie, redirection...", "success");
         } catch (err) { showMessage(translateError(err.code), "error"); }
     });
