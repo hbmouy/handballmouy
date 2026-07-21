@@ -93,24 +93,23 @@
         .nav-logo img { height: 85px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); }
         .nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 
-        .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
+        .nav-group { display: flex; gap: 1.4rem; list-style: none; align-items: center; width: 46%; }
         .nav-group.left { justify-content: flex-end; }  
         .nav-group.right { justify-content: flex-start; } 
 
         .nav-group a, .dropdown-trigger { 
             color: var(--text-main); text-decoration: none; 
-            font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
-            text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s;
-            cursor: pointer;
-        }
+            font-family: var(--font-display); font-size: 1.05rem; font-style: italic;
+            text-transform: uppercase; letter-spacing: 0.03em; transition: 0.2s;
+            cursor: pointer;; white-space: nowrap; }
         .nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
 
         /* BURGER */
-        .menu-toggle {
+        .burger {
             display: none; flex-direction: column; justify-content: space-between;
             width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001;
         }
-        .menu-toggle span { width: 100%; height: 3px; background-color: var(--text-main); transition: all 0.3s ease; }
+        .burger span { width: 100%; height: 3px; background-color: var(--text-main); transition: all 0.3s ease; }
 
         /* DROPDOWNS */
         .dropdown { position: relative; }
@@ -199,11 +198,11 @@
             .nav-logo { position: static; transform: none; }
             .nav-logo img { height: 60px; }
             .nav-logo:hover { transform: none; }
-            .menu-toggle { display: flex; }
+            .burger { display: flex; }
             
-            .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-            .menu-toggle.active span:nth-child(2) { opacity: 0; }
-            .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+            .burger.toggle span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .burger.toggle span:nth-child(2) { opacity: 0; }
+            .burger.toggle span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
             .nav-group {
                 position: fixed; top: 0; width: 280px; height: 100vh;
@@ -218,7 +217,9 @@
             .container { margin-top: 110px; padding: 30px 20px; clip-path: none; }
             body::before { clip-path: polygon(0 0, 100% 0, 100% 35vh, 0 50vh); }
         }
-    </style>
+    
+footer { text-align: center; padding: 40px; color: var(--text-main); font-weight: 700; border-top: 3px dashed var(--border-color); background: var(--bg-card); position: relative; z-index: 2; }
+</style>
     <script src="nav-component.js"></script>
 </head>
 <body>
@@ -233,5 +234,7 @@
 
 
 
+
+<footer>© 2026 HBM — Handball Mouy — Tous droits réservés<br><a href="politique-confidentialite.html" style="color:inherit; opacity:0.7; font-size:0.85rem; font-weight:400; text-decoration:underline;">Politique de confidentialité</a></footer>
 </body>
 </html>
