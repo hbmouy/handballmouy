@@ -275,8 +275,11 @@
         return map[code] || "Une erreur est survenue. Réessayez.";
     }
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) window.location.href = "espace-membre.html";
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            await creerFicheMembreSiBesoin(user);
+            window.location.href = "espace-membre.html";
+        }
     });
 
     document.getElementById("btn-login").addEventListener("click", async () => {
