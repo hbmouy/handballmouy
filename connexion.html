@@ -117,6 +117,8 @@
             border-radius: 0px; font-family: var(--font-body); margin-bottom: 1.2rem;
         }
         select:focus { outline: none; border-color: var(--jersey-purple); background: var(--bg-card); box-shadow: 4px 4px 0px var(--border-color); }
+        .rgpd-check { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 1.4rem; }
+        .rgpd-check input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; }
 
         .btn-primary {
             background: var(--border-color); color: var(--jersey-yellow); width: 100%;
@@ -214,6 +216,13 @@
             </select>
             <label for="signup-licence">Numéro de licence FFHB (si déjà licencié)</label>
             <input type="text" id="signup-licence" placeholder="Facultatif">
+            <div class="rgpd-check">
+                <input type="checkbox" id="signup-rgpd" style="width:auto; margin-bottom:0;">
+                <label for="signup-rgpd" style="display:inline; text-transform:none; font-weight:400; font-size:0.85rem;">
+                    J'accepte que mes données soient utilisées pour la gestion de mon compte membre, conformément à la
+                    <a href="politique-confidentialite.html" target="_blank" style="color:var(--jersey-purple);">politique de confidentialité</a>.
+                </label>
+            </div>
             <button class="btn-primary" id="btn-signup">Créer mon compte</button>
         </div>
 
@@ -324,7 +333,9 @@
         const password = document.getElementById("signup-password").value;
         const categorie = document.getElementById("signup-categorie").value;
         const licence = document.getElementById("signup-licence").value.trim();
+        const rgpdAccepte = document.getElementById("signup-rgpd").checked;
         if (!name || !email || !password) return showMessage("Veuillez remplir tous les champs.", "error");
+        if (!rgpdAccepte) return showMessage("Veuillez accepter la politique de confidentialité.", "error");
         try {
             const cred = await createUserWithEmailAndPassword(auth, email, password);
             await updateProfile(cred.user, { displayName: name });
