@@ -35,7 +35,7 @@ const HBM_NAV = {
     { label: "Inscriptions", url: "inscriptions.html" },
     { label: "Partenaires", url: "partenaires.html" },
     {
-      label: "Espace Membre",
+      label: "Membres",
       dropdown: [
         { label: "Connexion", url: "connexion.html" },
         { label: "Mon Profil", url: "espace-membre.html" }
