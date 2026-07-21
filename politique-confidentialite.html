@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de confidentialité - HBM</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --jersey-yellow: #e2f438; --jersey-green: #2cd646; --jersey-purple: #9d4edd;
+            --font-display: 'Anton', sans-serif; --font-body: 'DM Sans', sans-serif;
+            --bg-body: #f5f8f5; --bg-card: #ffffff; --text-main: #0b130a;
+            --border-color: #0b130a; --shadow-color: #0b130a; --nav-bg: rgba(255,255,255,0.85);
+        }
+        [data-theme="dark"] {
+            --bg-body: #0b130a; --bg-card: #142113; --text-main: #dcdcdc;
+            --border-color: #f5f8f5; --shadow-color: #2cd646; --nav-bg: rgba(11,19,10,0.85);
+        }
+        body {
+            background: var(--bg-body); color: var(--text-main); font-family: var(--font-body);
+            line-height: 1.8; overflow-x: hidden; position: relative; transition: background 0.3s, color 0.3s;
+        }
+        body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 350px; z-index: -1; opacity: 0.85; pointer-events: none; background: linear-gradient(135deg, var(--jersey-yellow) 30%, var(--jersey-green) 100%); clip-path: polygon(0 0, 100% 0, 100% 250px, 60% 180px, 30% 320px, 0 200px); }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; height: 95px; padding: 0 2rem; background: var(--nav-bg); backdrop-filter: blur(15px); border-bottom: 4px solid var(--border-color); }
+        .nav-container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; height: 100%; position: relative; }
+        .nav-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 1002; transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275); }
+        .nav-logo img { height: 85px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); }
+        .nav-logo:hover { transform: translate(-50%,-50%) scale(1.08); }
+        .nav-group { display: flex; gap: 2.5rem; list-style: none; align-items: center; width: 42%; }
+        .nav-group.left { justify-content: flex-end; }
+        .nav-group.right { justify-content: flex-start; }
+        .nav-group a, .dropdown-trigger { color: var(--text-main); text-decoration: none; font-family: var(--font-display); font-size: 1.3rem; font-style: italic; text-transform: uppercase; letter-spacing: 0.05em; transition: 0.2s; cursor: pointer; }
+        .nav-group a:hover, .dropdown-trigger:hover { color: var(--jersey-purple); }
+        .nav-group a.active { color: var(--jersey-purple); }
+        .theme-toggle-btn { background: transparent; border: 2px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; box-shadow: 3px 3px 0px var(--border-color); transition: transform 0.2s, box-shadow 0.2s; }
+        .theme-toggle-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0px var(--jersey-purple); }
+        .theme-toggle-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--text-main); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .sun-icon { display: none; } .moon-icon { display: block; }
+        [data-theme="dark"] .sun-icon { display: block; } [data-theme="dark"] .moon-icon { display: none; }
+        .menu-toggle { display: none; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { width: 100%; height: 3px; background-color: var(--border-color); transition: all 0.3s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+        .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); min-width: 180px; border: 3px solid var(--border-color); padding: 0.5rem 0; list-style: none; box-shadow: 6px 6px 0px var(--shadow-color); }
+        .dropdown-content li a { padding: 0.6rem 1.2rem; font-family: var(--font-body); font-size: 0.9rem; font-style: normal; display: block; text-transform: none; text-align: center; color: var(--text-main); }
+        .dropdown-content li a:hover { background: var(--bg-body); color: var(--jersey-purple); }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown.active .dropdown-content { display: block; }
+
+        .content-wrapper { max-width: 800px; margin: 160px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
+        .label-container { text-align: center; }
+        .section-label { color: var(--text-main); background: var(--bg-card); border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--shadow-color); text-transform: uppercase; font-family: var(--font-display); font-style: italic; font-size: 1.2rem; letter-spacing: 2px; display: inline-block; margin: 0 auto 1rem auto; padding: 0.2rem 1rem; transform: rotate(-1deg); }
+        h1 { font-family: var(--font-display); font-size: clamp(2.2rem,6vw,3.2rem); text-align: center; margin-bottom: 3rem; line-height: 1; font-style: italic; letter-spacing: -1px; color: var(--text-main); text-shadow: 4px 4px 0px var(--bg-card), 8px 8px 0px var(--shadow-color); }
+
+        .doc-card { background: var(--bg-card); border: 3px solid var(--border-color); padding: 2.5rem 2.5rem; box-shadow: 10px 10px 0px var(--border-color); }
+        .doc-card h2 { font-family: var(--font-display); font-style: italic; text-transform: uppercase; font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--jersey-purple); }
+        .doc-card h2:first-child { margin-top: 0; }
+        .doc-card p, .doc-card li { font-size: 0.98rem; opacity: 0.9; margin-bottom: 0.6rem; }
+        .doc-card ul { padding-left: 1.3rem; margin-bottom: 1rem; }
+        .doc-card strong { color: var(--text-main); }
+        .maj { text-align: center; font-size: 0.85rem; opacity: 0.6; margin-bottom: 2.5rem; }
+        .back-link { display: block; text-align: center; margin-top: 2.5rem; font-family: var(--font-display); font-style: italic; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main); text-decoration: none; }
+        .back-link:hover { color: var(--jersey-purple); }
+
+        footer { text-align: center; padding: 60px; color: var(--text-main); font-weight: 700; border-top: 3px dashed var(--border-color); background: var(--bg-card); position: relative; z-index: 2; }
+
+        @media (max-width: 992px) {
+            nav { height: 75px; } .nav-container { justify-content: space-between; }
+            .nav-logo { position: static; transform: none; } .nav-logo img { height: 60px; } .nav-logo:hover { transform: none; }
+            .menu-toggle { display: flex; }
+            .nav-group { position: fixed; top: 0; width: 280px; height: 100vh; background: var(--bg-card); flex-direction: column; align-items: flex-start; padding: 100px 2rem 2rem 2rem; gap: 1.5rem; overflow-y: auto; z-index: 1000; }
+            .nav-group.left { right: -100%; border-left: 4px solid var(--border-color); transition: right 0.4s ease; }
+            .nav-group.right { display: none; }
+            .nav-group.left.active { right: 0; }
+            .content-wrapper { margin-top: 120px; }
+        }
+        @media (max-width: 480px) { .doc-card { padding: 1.8rem 1.4rem; box-shadow: 6px 6px 0px var(--border-color); } }
+    </style>
+    <script src="nav-component.js"></script>
+</head>
+<body>
+
+<div id="hbm-nav"></div>
+
+<main class="content-wrapper">
+    <div class="label-container"><span class="section-label">Vos données</span></div>
+    <h1>POLITIQUE DE CONFIDENTIALITÉ</h1>
+
+    <div class="doc-card">
+        <p class="maj">Dernière mise à jour : juillet 2026</p>
+
+        <h2>1. Qui sommes-nous ?</h2>
+        <p>Le club Handball Mouy (HBM) gère ce site et l'espace membre accessible dessus. Pour toute question concernant vos données personnelles, vous pouvez nous contacter à l'adresse : <strong>[à compléter : votre email de contact]</strong>.</p>
+
+        <h2>2. Quelles données collectons-nous ?</h2>
+        <p>Lors de la création d'un compte sur l'espace membre, nous collectons :</p>
+        <ul>
+            <li>Votre nom et prénom</li>
+            <li>Votre adresse email</li>
+            <li>Votre catégorie d'âge (si renseignée)</li>
+            <li>Votre numéro de licence FFHB (si renseigné)</li>
+            <li>Votre mot de passe, qui n'est jamais stocké en clair ni consultable par le club (il est géré de façon sécurisée par notre prestataire d'authentification, Google Firebase)</li>
+        </ul>
+        <p>Si vous choisissez de vous connecter via Google, nous recevons uniquement votre nom et votre email associés à votre compte Google.</p>
+
+        <h2>3. Pourquoi collectons-nous ces données ?</h2>
+        <p>Ces informations servent uniquement à la gestion de l'espace membre du club : identification, suivi des adhérents, communication d'informations liées à la pratique du handball (plannings, résultats, documents).</p>
+        <p>Nous ne vendons ni ne partageons vos données avec des tiers à des fins commerciales.</p>
+
+        <h2>4. Où sont hébergées vos données ?</h2>
+        <p>Vos données sont hébergées par <strong>Google Firebase</strong>, dans des centres de données situés en Union Européenne. Google agit en tant que sous-traitant et applique les garanties requises par le RGPD.</p>
+
+        <h2>5. Combien de temps conservons-nous vos données ?</h2>
+        <p>Vos données sont conservées tant que votre compte reste actif. Les comptes inactifs depuis plus de <strong>3 ans</strong> pourront être supprimés. Vous pouvez également demander la suppression de votre compte à tout moment.</p>
+
+        <h2>6. Quels sont vos droits ?</h2>
+        <p>Conformément au RGPD, vous disposez des droits suivants concernant vos données :</p>
+        <ul>
+            <li><strong>Droit d'accès</strong> : obtenir une copie des données que nous détenons sur vous</li>
+            <li><strong>Droit de rectification</strong> : corriger des informations inexactes (possible directement depuis votre espace membre)</li>
+            <li><strong>Droit à l'effacement</strong> : demander la suppression de votre compte et de vos données</li>
+            <li><strong>Droit à la portabilité</strong> : recevoir vos données dans un format exploitable</li>
+            <li><strong>Droit d'opposition</strong> : vous opposer au traitement de vos données</li>
+        </ul>
+        <p>Pour exercer l'un de ces droits, contactez-nous à l'adresse indiquée en haut de cette page. Nous répondrons dans un délai maximum d'un mois.</p>
+
+        <h2>7. Sécurité</h2>
+        <p>L'accès à vos données est protégé par un système d'authentification sécurisé. Les règles de sécurité mises en place garantissent que chaque membre ne peut consulter ou modifier que sa propre fiche, jamais celle des autres.</p>
+
+        <h2>8. Réclamation</h2>
+        <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez introduire une réclamation auprès de la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) : <a href="https://www.cnil.fr" style="color:var(--jersey-purple);">www.cnil.fr</a>.</p>
+    </div>
+
+    <a href="index.html" class="back-link">← Retour au site</a>
+</main>
+
+<footer>© 2026 HBM — Handball Mouy — L'aventure ne fait que commencer.</footer>
+
+</body>
+</html>
