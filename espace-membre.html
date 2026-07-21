@@ -114,6 +114,30 @@
         }
         .btn-logout:hover { background: var(--border-color); color: var(--jersey-yellow); transform: translate(-2px,-2px); box-shadow: 6px 6px 0px var(--jersey-purple); }
 
+        /* PANNEAU DE MODIFICATION */
+        .form-container {
+            background: var(--bg-card); padding: 2.5rem; border: 3px solid var(--border-color);
+            box-shadow: 10px 10px 0px var(--border-color);
+        }
+        label { display: block; margin-bottom: 7px; font-size: 0.9rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; }
+        input, select {
+            width: 100%; padding: 14px; background: var(--bg-body);
+            border: 2px solid var(--border-color); color: var(--text-main); font-weight: 500;
+            border-radius: 0px; font-family: var(--font-body); margin-bottom: 1.2rem;
+        }
+        input:focus, select:focus { outline: none; border-color: var(--jersey-purple); background: var(--bg-card); box-shadow: 4px 4px 0px var(--border-color); }
+        .btn-primary {
+            background: var(--border-color); color: var(--jersey-yellow); width: 100%;
+            padding: 1rem 2rem; text-decoration: none; font-family: var(--font-display);
+            font-size: 1.2rem; font-style: italic; letter-spacing: 0.1em;
+            transition: 0.3s cubic-bezier(0.175,0.885,0.32,1.275); border: 3px solid var(--border-color);
+            box-shadow: 6px 6px 0px var(--jersey-purple); cursor: pointer; text-transform: uppercase;
+        }
+        .btn-primary:hover { background: var(--jersey-purple); color: #ffffff; transform: translateY(-4px); box-shadow: 8px 8px 0px var(--border-color); }
+        .message { margin-top: 1rem; text-align: center; font-weight: 700; font-size: 0.9rem; min-height: 20px; }
+        .message.error { color: #d63447; }
+        .message.success { color: var(--jersey-green); }
+
         #loading { text-align: center; padding: 220px 20px 100px; font-family: var(--font-display); font-size: 1.5rem; font-style: italic; opacity: 0.5; }
 
         footer { text-align: center; padding: 60px; color: var(--text-main); font-weight: 700; border-top: 3px dashed var(--border-color); background: var(--bg-card); position: relative; z-index: 2; }
@@ -157,7 +181,28 @@
                     <div class="user-meta">Catégorie : <span id="user-categorie">—</span> · Licence : <span id="user-licence">—</span></div>
                 </div>
             </div>
-            <button class="btn-logout" id="btn-logout">Se déconnecter</button>
+            <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+                <button class="btn-logout" id="btn-edit">Modifier mes infos</button>
+                <button class="btn-logout" id="btn-logout">Se déconnecter</button>
+            </div>
+        </div>
+
+        <div class="form-container" id="edit-panel" style="display:none; max-width:500px; margin:0 auto 3rem;">
+            <label for="edit-categorie">Catégorie d'âge</label>
+            <select id="edit-categorie">
+                <option value="">-- Sélectionnez --</option>
+                <option value="-9 ans">-9 ans</option>
+                <option value="-11 ans">-11 ans</option>
+                <option value="-13 ans">-13 ans</option>
+                <option value="-15 ans">-15 ans</option>
+                <option value="-18 ans">-18 ans</option>
+                <option value="Senior">Senior</option>
+                <option value="Loisir">Loisir</option>
+            </select>
+            <label for="edit-licence">Numéro de licence FFHB</label>
+            <input type="text" id="edit-licence" placeholder="Facultatif">
+            <button class="btn-primary" id="btn-save-profil">Enregistrer</button>
+            <p class="message" id="edit-message"></p>
         </div>
 
         <div class="tiles-grid">
@@ -190,7 +235,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDw6sQBFUrCqtTgqusZq82NtJPFNJuTWwg",
@@ -223,6 +268,8 @@
                     const licence = data.licence || "Non renseigné";
                     document.getElementById("user-categorie").textContent = categorie;
                     document.getElementById("user-licence").textContent = licence;
+                    document.getElementById("edit-categorie").value = data.categorie || "";
+                    document.getElementById("edit-licence").value = data.licence || "";
                 }
             } catch (e) {
                 console.error("Impossible de récupérer la fiche membre :", e);
@@ -235,6 +282,29 @@
     document.getElementById("btn-logout").addEventListener("click", async () => {
         await signOut(auth);
         window.location.href = "connexion.html";
+    });
+
+    document.getElementById("btn-edit").addEventListener("click", () => {
+        const panel = document.getElementById("edit-panel");
+        panel.style.display = panel.style.display === "none" ? "block" : "none";
+    });
+
+    document.getElementById("btn-save-profil").addEventListener("click", async () => {
+        const user = auth.currentUser;
+        if (!user) return;
+        const categorie = document.getElementById("edit-categorie").value;
+        const licence = document.getElementById("edit-licence").value.trim();
+        const msgEl = document.getElementById("edit-message");
+        try {
+            await setDoc(doc(db, "membres", user.uid), { categorie, licence }, { merge: true });
+            document.getElementById("user-categorie").textContent = categorie || "Non renseignée";
+            document.getElementById("user-licence").textContent = licence || "Non renseigné";
+            msgEl.textContent = "Informations enregistrées !";
+            msgEl.className = "message success";
+        } catch (e) {
+            msgEl.textContent = "Erreur lors de l'enregistrement.";
+            msgEl.className = "message error";
+        }
     });
 </script>
 </body>
