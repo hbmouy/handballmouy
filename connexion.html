@@ -111,6 +111,12 @@
             border-radius: 0px; font-family: var(--font-body); margin-bottom: 1.2rem; transition: 0.2s;
         }
         input:focus { outline: none; border-color: var(--jersey-purple); background: var(--bg-card); box-shadow: 4px 4px 0px var(--border-color); }
+        select {
+            width: 100%; padding: 14px; background: var(--bg-body);
+            border: 2px solid var(--border-color); color: var(--text-main); font-weight: 500;
+            border-radius: 0px; font-family: var(--font-body); margin-bottom: 1.2rem;
+        }
+        select:focus { outline: none; border-color: var(--jersey-purple); background: var(--bg-card); box-shadow: 4px 4px 0px var(--border-color); }
 
         .btn-primary {
             background: var(--border-color); color: var(--jersey-yellow); width: 100%;
@@ -195,6 +201,19 @@
             <input type="email" id="signup-email" placeholder="vous@exemple.com">
             <label for="signup-password">Mot de passe (6 caractères min.)</label>
             <input type="password" id="signup-password" placeholder="••••••••">
+            <label for="signup-categorie">Catégorie d'âge</label>
+            <select id="signup-categorie">
+                <option value="">-- Sélectionnez --</option>
+                <option value="-9 ans">-9 ans</option>
+                <option value="-11 ans">-11 ans</option>
+                <option value="-13 ans">-13 ans</option>
+                <option value="-15 ans">-15 ans</option>
+                <option value="-18 ans">-18 ans</option>
+                <option value="Senior">Senior</option>
+                <option value="Loisir">Loisir</option>
+            </select>
+            <label for="signup-licence">Numéro de licence FFHB (si déjà licencié)</label>
+            <input type="text" id="signup-licence" placeholder="Facultatif">
             <button class="btn-primary" id="btn-signup">Créer mon compte</button>
         </div>
 
@@ -243,16 +262,22 @@
     const provider = new GoogleAuthProvider();
     const messageEl = document.getElementById("message");
 
-    // Crée la fiche membre dans Firestore si elle n'existe pas encore
-    async function creerFicheMembreSiBesoin(user) {
+    // Crée la fiche membre dans Firestore si elle n'existe pas encore.
+    // extraInfos permet d'ajouter/mettre à jour catégorie et licence (à l'inscription).
+    async function creerFicheMembreSiBesoin(user, extraInfos) {
         const ref = doc(db, "membres", user.uid);
         const snap = await getDoc(ref);
         if (!snap.exists()) {
             await setDoc(ref, {
                 nom: user.displayName || "",
                 email: user.email || "",
+                categorie: (extraInfos && extraInfos.categorie) || "",
+                licence: (extraInfos && extraInfos.licence) || "",
                 dateInscription: new Date().toISOString()
             });
+        } else if (extraInfos) {
+            // La fiche existe déjà mais on a de nouvelles infos (ex: complétées après coup) -> on met à jour
+            await setDoc(ref, extraInfos, { merge: true });
         }
     }
 
@@ -297,11 +322,13 @@
         const name = document.getElementById("signup-name").value.trim();
         const email = document.getElementById("signup-email").value.trim();
         const password = document.getElementById("signup-password").value;
+        const categorie = document.getElementById("signup-categorie").value;
+        const licence = document.getElementById("signup-licence").value.trim();
         if (!name || !email || !password) return showMessage("Veuillez remplir tous les champs.", "error");
         try {
             const cred = await createUserWithEmailAndPassword(auth, email, password);
             await updateProfile(cred.user, { displayName: name });
-            await creerFicheMembreSiBesoin({ ...cred.user, displayName: name });
+            await creerFicheMembreSiBesoin({ ...cred.user, displayName: name }, { categorie, licence });
             showMessage("Compte créé, redirection...", "success");
         } catch (err) { showMessage(translateError(err.code), "error"); }
     });
