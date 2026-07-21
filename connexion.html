@@ -284,7 +284,8 @@
         const password = document.getElementById("login-password").value;
         if (!email || !password) return showMessage("Veuillez remplir tous les champs.", "error");
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const cred = await signInWithEmailAndPassword(auth, email, password);
+            await creerFicheMembreSiBesoin(cred.user);
             showMessage("Connexion réussie, redirection...", "success");
         } catch (err) { showMessage(translateError(err.code), "error"); }
     });
