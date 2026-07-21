@@ -106,6 +106,7 @@
             font-style: italic; font-size: 1.2rem; border: 2px solid var(--border-color); flex-shrink: 0;
         }
         .user-name-text { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; text-transform: uppercase; }
+        .user-meta { font-size: 0.85rem; opacity: 0.75; margin-top: 2px; }
         .btn-logout {
             background: var(--bg-card); border: 2px solid var(--border-color); color: var(--text-main);
             padding: 0.6rem 1.4rem; font-family: var(--font-display); font-style: italic; text-transform: uppercase;
@@ -151,7 +152,10 @@
         <div class="user-bar">
             <div class="user-info">
                 <div class="user-avatar" id="user-avatar">M</div>
-                <div class="user-name-text" id="user-name-2">Membre HBM</div>
+                <div>
+                    <div class="user-name-text" id="user-name-2">Membre HBM</div>
+                    <div class="user-meta">Catégorie : <span id="user-categorie">—</span> · Licence : <span id="user-licence">—</span></div>
+                </div>
             </div>
             <button class="btn-logout" id="btn-logout">Se déconnecter</button>
         </div>
@@ -186,6 +190,7 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyDw6sQBFUrCqtTgqusZq82NtJPFNJuTWwg",
@@ -198,8 +203,9 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
         if (user) {
             document.getElementById("loading").style.display = "none";
             document.getElementById("content").style.display = "block";
@@ -207,6 +213,20 @@
             document.getElementById("user-name").textContent = displayName;
             document.getElementById("user-name-2").textContent = displayName;
             document.getElementById("user-avatar").textContent = displayName.charAt(0).toUpperCase();
+
+            // Récupère catégorie et licence depuis Firestore
+            try {
+                const snap = await getDoc(doc(db, "membres", user.uid));
+                if (snap.exists()) {
+                    const data = snap.data();
+                    const categorie = data.categorie || "Non renseignée";
+                    const licence = data.licence || "Non renseigné";
+                    document.getElementById("user-categorie").textContent = categorie;
+                    document.getElementById("user-licence").textContent = licence;
+                }
+            } catch (e) {
+                console.error("Impossible de récupérer la fiche membre :", e);
+            }
         } else {
             window.location.href = "connexion.html";
         }
