@@ -94,6 +94,11 @@ nav {
 .nav-logo img { height: 85px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2)); }
 .nav-logo:hover { transform: translate(-50%, -50%) scale(1.08); }
 
+.theme-toggle-btn { background: transparent; border: 2px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; box-shadow: 3px 3px 0px var(--border-color); transition: transform 0.2s, box-shadow 0.2s; }
+.theme-toggle-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0px var(--jersey-purple); }
+.theme-toggle-btn svg { width: 22px; height: 22px; fill: none; stroke: var(--text-main); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.sun-icon { display: none; } .moon-icon { display: block; }
+[data-theme="dark"] .sun-icon { display: block; } [data-theme="dark"] .moon-icon { display: none; }
 .nav-group { display: flex; gap: 1.4rem; list-style: none; align-items: center; width: 46%; }
 .nav-group.left { justify-content: flex-end; }  
 .nav-group.right { justify-content: flex-start; } 
