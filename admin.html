@@ -78,10 +78,7 @@ pre{background:var(--bg);border:2px solid var(--bd);padding:.9rem;font-size:.78r
 <div class="wrap">
   <div class="tabs">
     <button class="tab active" onclick="sw('match')">match.json</button>
-    <button class="tab" onclick="sw('actu')">actus.json</button>
     <button class="tab" onclick="sw('cal')">calendrier.json</button>
-    <button class="tab" onclick="sw('resume')">Résumé match</button>
-    <button class="tab" onclick="sw('actu-page')">Page actu</button>
     <button class="tab" onclick="sw('classement')">Classement</button>
   </div>
 
@@ -134,54 +131,6 @@ pre{background:var(--bg);border:2px solid var(--bd);padding:.9rem;font-size:.78r
       <pre id="out-m"></pre>
       <div class="hint">Remplace <strong>tout le contenu</strong> de <code>match.json</code> sur GitHub.</div>
       <a class="ghl" href="https://github.com/hbmouy/handballmouy/edit/main/match.json" target="_blank">Ouvrir match.json sur GitHub →</a>
-    </div>
-  </div>
-
-  <!-- ======= ACTUS ======= -->
-  <div id="panel-actu" class="panel">
-    <div class="card">
-      <div class="sl">Identification</div>
-      <div class="r2">
-        <div class="f"><label>ID unique (sans espaces)</label><input id="a-id" placeholder="victoire-meru-juin26" oninput="ga()"></div>
-        <div class="f"><label>Type de badge</label>
-          <select id="a-bt" oninput="sb();ga()">
-            <option value="result">Résultat match</option>
-            <option value="match">Prochain match</option>
-            <option value="prepa">Match de prépa</option>
-            <option value="sponsor">Sponsor</option>
-            <option value="club">Club / Info</option>
-          </select>
-        </div>
-      </div>
-      <div class="r2">
-        <div class="f"><label>Texte du badge</label><input id="a-badge" placeholder="VICTOIRE !" oninput="ga()"></div>
-        <div class="f"><label>Date affichée</label><input id="a-da" placeholder="24 JUIN 2026" oninput="ga()"></div>
-      </div>
-      <div class="f"><label>Date (tri interne)</label><input type="date" id="a-date" oninput="ga()"></div>
-      <div class="sl">Contenu</div>
-      <div class="f"><label>Titre</label><input id="a-titre" placeholder="VICTOIRE CONTRE MÉRU !" oninput="ga()"></div>
-      <div class="f"><label>Résumé (HTML basique accepté)</label><textarea id="a-ex" placeholder="&lt;strong&gt;HBM 26 — 21 Méru.&lt;/strong&gt; Les Lions s'imposent..." oninput="ga()"></textarea></div>
-      <div class="f"><label>Image (chemin)</label><input id="a-img" placeholder="images/victoire-meru.png" oninput="ga()"></div>
-      <div class="sl">Bouton & partage</div>
-      <div class="r2">
-        <div class="f"><label>Lien (vide = pas de bouton)</label><input id="a-lien" placeholder="resume-meru.html" oninput="ga()"></div>
-        <div class="f"><label>Texte du bouton</label><input id="a-lt" placeholder="Lire le résumé →" oninput="ga()"></div>
-      </div>
-      <div class="r2">
-        <div class="f"><label>Titre de partage</label><input id="a-pt" placeholder="Victoire du HBM !" oninput="ga()"></div>
-        <div class="f"><label>Texte de partage</label><input id="a-px" placeholder="Les Lions s'imposent 26-21 !" oninput="ga()"></div>
-      </div>
-      <div class="sl">Options</div>
-      <div class="r2">
-        <label class="cb"><input type="checkbox" id="a-feat" oninput="ga()"> Grande carte (featured)</label>
-        <label class="cb"><input type="checkbox" id="a-arch" oninput="ga()"> Archiver</label>
-      </div>
-    </div>
-    <div class="out-section">
-      <div class="out-hdr"><span class="out-title">Objet à coller dans actus.json</span><button class="cbtn" id="cp-a" onclick="cp('out-a','cp-a')">📋 Copier</button></div>
-      <pre id="out-a"></pre>
-      <div class="hint">Colle cet objet <strong>en haut du tableau</strong> dans <code>actus.json</code>, juste après <code>[</code>, suivi d'une virgule.</div>
-      <a class="ghl" href="https://github.com/hbmouy/handballmouy/edit/main/actus.json" target="_blank">Ouvrir actus.json sur GitHub →</a>
     </div>
   </div>
 
@@ -244,103 +193,6 @@ pre{background:var(--bg);border:2px solid var(--bd);padding:.9rem;font-size:.78r
     </div>
   </div>
 
-  <!-- ======= RESUME MATCH ======= -->
-  <div id="panel-resume" class="panel">
-    <div class="card">
-      <div class="sl">Infos du match</div>
-      <div class="r2">
-        <div class="f"><label>Nom du fichier (sans .html)</label><input id="r-slug" placeholder="resume-meru-juin26" oninput="gr()"></div>
-        <div class="f"><label>Résultat</label>
-          <select id="r-result" oninput="gr()">
-            <option value="victoire">Victoire</option>
-            <option value="defaite">Défaite</option>
-            <option value="nul">Match nul</option>
-          </select>
-        </div>
-      </div>
-      <div class="r2">
-        <div class="f"><label>Type de match</label>
-          <select id="r-type" oninput="gr()">
-            <option>Match amical</option><option>Championnat</option><option>Coupe</option>
-          </select>
-        </div>
-        <div class="f"><label>Date (ex: Jeudi 24 Juin 2026)</label><input id="r-date" placeholder="Jeudi 24 Juin 2026" oninput="gr()"></div>
-      </div>
-      <div class="f"><label>Titre de l'article</label><input id="r-titre" placeholder="VICTOIRE POUR LES LIONS !" oninput="gr()"></div>
-      <div class="r2">
-        <div class="f"><label>Nom équipe adverse</label><input id="r-adv" placeholder="AAE Méru Loisir" oninput="gr()"></div>
-        <div class="f"><label>Image bandeau (chemin, optionnel)</label><input id="r-img" placeholder="images/victoire-meru.png" oninput="gr()"></div>
-      </div>
-      <div class="sl">Score</div>
-      <div class="r2">
-        <div class="f"><label>Score HBM</label><input type="number" id="r-sh" min="0" placeholder="26" oninput="gr()"></div>
-        <div class="f"><label>Score adverse</label><input type="number" id="r-sa" min="0" placeholder="21" oninput="gr()"></div>
-      </div>
-      <div class="sl">Contenu de l'article</div>
-      <div class="f"><label>Paragraphe 1</label><textarea id="r-p1" placeholder="Texte d'introduction du match..." oninput="gr()"></textarea></div>
-      <div class="f"><label>Paragraphe 2</label><textarea id="r-p2" placeholder="Deuxième paragraphe..." oninput="gr()"></textarea></div>
-      <div class="f"><label>Paragraphe 3</label><textarea id="r-p3" placeholder="Troisième paragraphe..." oninput="gr()"></textarea></div>
-      <div class="f"><label>Paragraphe 4 (optionnel)</label><textarea id="r-p4" placeholder="Quatrième paragraphe..." oninput="gr()"></textarea></div>
-      <div class="hint" style="margin-top:0">Utilise <code>&lt;strong&gt;mot&lt;/strong&gt;</code> pour mettre un mot en violet dans les paragraphes.</div>
-    </div>
-    <div class="out-section">
-      <div class="out-hdr"><span class="out-title">Page HTML générée</span><button class="cbtn" id="cp-r" onclick="cp('out-r','cp-r')">📋 Copier</button></div>
-      <pre id="out-r" style="max-height:300px"></pre>
-      <div class="hint">
-        <strong>Procédure :</strong>
-        <div class="steps">
-          <div class="step"><span class="step-num">1</span> Copie le code ci-dessus</div>
-          <div class="step"><span class="step-num">2</span> Va sur GitHub → "Add file" → "Create new file"</div>
-          <div class="step"><span class="step-num">3</span> Nomme le fichier <strong id="r-filename-hint">resume-xxx.html</strong></div>
-          <div class="step"><span class="step-num">4</span> Colle le code et clique "Commit changes"</div>
-          <div class="step"><span class="step-num">5</span> Ajoute l'actu correspondante dans actus.json avec le lien vers cette page</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======= PAGE ACTU SIMPLE ======= -->
-  <div id="panel-actu-page" class="panel">
-    <div class="card">
-      <div class="hint" style="margin-bottom:1.2rem">Pour les actus <strong>sans page dédiée</strong> (sponsor, info club...) le contenu s'affiche directement sur la carte dans actus.json. Cet outil génère une <strong>page article complète</strong> pour les actus longues qui nécessitent plus d'espace.</div>
-      <div class="sl">Identification</div>
-      <div class="r2">
-        <div class="f"><label>Nom du fichier (sans .html)</label><input id="p-slug" placeholder="annonce-inscriptions-2026" oninput="gp()"></div>
-        <div class="f"><label>Type de badge</label>
-          <select id="p-bt" oninput="gp()">
-            <option value="club">Club / Info</option>
-            <option value="sponsor">Sponsor</option>
-            <option value="match">Match</option>
-          </select>
-        </div>
-      </div>
-      <div class="r2">
-        <div class="f"><label>Texte du badge</label><input id="p-badge" placeholder="CLUB" oninput="gp()"></div>
-        <div class="f"><label>Date affichée</label><input id="p-date" placeholder="24 Juin 2026" oninput="gp()"></div>
-      </div>
-      <div class="sl">Contenu</div>
-      <div class="f"><label>Titre de l'article</label><input id="p-titre" placeholder="LES INSCRIPTIONS SONT OUVERTES !" oninput="gp()"></div>
-      <div class="f"><label>Paragraphe 1</label><textarea id="p-p1" placeholder="Contenu de l'article..." oninput="gp()"></textarea></div>
-      <div class="f"><label>Paragraphe 2 (optionnel)</label><textarea id="p-p2" oninput="gp()"></textarea></div>
-      <div class="f"><label>Paragraphe 3 (optionnel)</label><textarea id="p-p3" oninput="gp()"></textarea></div>
-      <div class="f"><label>Image (chemin, optionnel)</label><input id="p-img" placeholder="images/mon-image.png" oninput="gp()"></div>
-    </div>
-    <div class="out-section">
-      <div class="out-hdr"><span class="out-title">Page HTML générée</span><button class="cbtn" id="cp-p" onclick="cp('out-p','cp-p')">📋 Copier</button></div>
-      <pre id="out-p" style="max-height:300px"></pre>
-      <div class="hint">
-        <strong>Procédure :</strong>
-        <div class="steps">
-          <div class="step"><span class="step-num">1</span> Copie le code</div>
-          <div class="step"><span class="step-num">2</span> GitHub → "Add file" → "Create new file"</div>
-          <div class="step"><span class="step-num">3</span> Nomme le fichier <strong id="p-filename-hint">article-xxx.html</strong></div>
-          <div class="step"><span class="step-num">4</span> Colle et commite</div>
-          <div class="step"><span class="step-num">5</span> Ajoute l'actu dans actus.json avec le lien vers cette page</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- ======= CLASSEMENT ======= -->
   <div id="panel-classement" class="panel">
     <div class="card">
@@ -390,7 +242,7 @@ document.getElementById('tbtn').addEventListener('click',()=>{
 });
 
 function sw(n){
-  const names=['match','actu','cal','resume','actu-page','classement'];
+  const names=['match','cal','classement'];
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===n));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+n).classList.add('active');
@@ -409,16 +261,6 @@ function gm(){
   document.getElementById('out-m').textContent=JSON.stringify(o,null,2);
 }
 
-// ACTU
-const BD={result:'RÉSULTAT',match:'PROCHAIN MATCH',prepa:'MATCH DE PRÉPA',sponsor:'SPONSOR',club:'CLUB'};
-function sb(){const i=document.getElementById('a-badge');if(!i.dataset.t)i.value=BD[v('a-bt')]||'';}
-document.getElementById('a-badge').addEventListener('input',function(){this.dataset.t='1';});
-function ga(){
-  const lien=v('a-lien');
-  const o={id:v('a-id'),featured:b('a-feat'),archive:b('a-arch'),badge:v('a-badge'),badgeType:v('a-bt'),date:v('a-date'),dateAffichee:v('a-da'),titre:v('a-titre'),excerpt:v('a-ex'),image:v('a-img'),imageAlt:v('a-titre'),lien:lien||null,lienTexte:v('a-lt')||null,partageTitle:v('a-pt')||v('a-titre'),partageText:v('a-px')||v('a-ex').replace(/<[^>]*>/g,'').slice(0,100)};
-  document.getElementById('out-a').textContent=JSON.stringify(o,null,2);
-}
-
 // CALENDRIER
 function tcf(){document.getElementById('c-match-extra').style.display=v('c-type')==='match'?'block':'none';}
 function gc(){
@@ -426,230 +268,6 @@ function gc(){
   const o={id:v('c-id'),type,statut:v('c-statut'),titre:v('c-titre'),description:v('c-desc'),date:dt('c-date'),dateAffichee:v('c-da'),heure:v('c-heure'),lieu:v('c-lieu'),ville:v('c-ville'),badge:v('c-badge')};
   if(type==='match'){o.equipe_adverse=v('c-adv');o.logo_adverse=v('c-logo');o.domicile=v('c-dom')==='true';o.score_hbm=sh!==''?parseInt(sh):null;o.score_adverse=sa!==''?parseInt(sa):null;}
   document.getElementById('out-c').textContent=JSON.stringify(o,null,2);
-}
-
-// RESUME MATCH
-function gr(){
-  const slug=v('r-slug')||'resume-xxx';
-  document.getElementById('r-filename-hint').textContent=slug+'.html';
-  const result=v('r-result');
-  const badgeBg=result==='victoire'?'var(--jersey-green)':(result==='defaite'?'var(--jersey-purple)':'rgba(255,255,255,0.2)');
-  const badgeColor=result==='victoire'?'#0b130a':'#ffffff';
-  const titre=v('r-titre')||'TITRE DU RÉSUMÉ';
-  const adv=v('r-adv')||'NOM ADVERSAIRE';
-  const sh=v('r-sh')||'00';
-  const sa=v('r-sa')||'00';
-  const img=v('r-img');
-  const imgLine=img?`\n        <img src="${img}" alt="${adv} VS HBM" class="article-img">`:'';
-  const paras=[v('r-p1'),v('r-p2'),v('r-p3'),v('r-p4')].filter(p=>p.trim()).map(p=>`            <p>${p}</p>`).join('\n');
-  const html=`<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Résumé ${adv} VS HBM - HBM</title>
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Résumé Match : ${adv} VS HBM">
-    <meta property="og:description" content="${titre}">
-    <meta property="og:url" content="https://handballmouy.fr/${slug}.html">
-    <meta property="og:image" content="https://handballmouy.fr/${img||'images/logo.png'}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');<\/script>
-    <style>
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        :root{--jersey-yellow:#e2f438;--jersey-green:#2cd646;--jersey-purple:#9d4edd;--font-display:'Anton',sans-serif;--font-body:'DM Sans',sans-serif;--bg-body:#f5f8f5;--bg-card:#ffffff;--text-main:#0b130a;--border-color:#0b130a;--shadow-color:#0b130a;--nav-bg:rgba(255,255,255,0.85);--img-fallback:#eef2ee}
-        [data-theme="dark"]{--bg-body:#0b130a;--bg-card:#142113;--text-main:#f5f8f5;--border-color:#f5f8f5;--shadow-color:var(--jersey-green);--nav-bg:rgba(11,19,10,0.85);--img-fallback:#1a2e18}
-        html{scroll-behavior:smooth}
-        body{background:var(--bg-body);color:var(--text-main);font-family:var(--font-body);line-height:1.6;overflow-x:hidden;position:relative}
-        body::before,body::after{content:"";position:absolute;width:100%;height:1400px;z-index:-1;opacity:.85;pointer-events:none}
-        body::before{top:0;left:0;background:linear-gradient(135deg,var(--jersey-yellow) 30%,var(--jersey-green) 100%);clip-path:polygon(0 0,100% 0,100% 350px,65% 220px,35% 500px,0 280px)}
-        body::after{bottom:0;right:0;background:linear-gradient(225deg,rgba(226,244,56,.4) 0%,rgba(44,214,70,.4) 100%);clip-path:polygon(100% 500px,100% 100%,0% 100%,0% 800px,50% 600px)}
-        nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:center;height:95px;padding:0 2rem;background:var(--nav-bg);backdrop-filter:blur(15px);border-bottom:4px solid var(--border-color)}
-        .nav-container{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1200px;height:100%;position:relative}
-        .nav-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;text-decoration:none;color:inherit;z-index:1002;transition:.3s cubic-bezier(.175,.885,.32,1.275)}
-        .nav-logo img{height:85px;filter:drop-shadow(0px 4px 8px rgba(0,0,0,.2))}
-        .nav-logo:hover{transform:translate(-50%,-50%) scale(1.08)}
-        .nav-group{display:flex;gap:2.5rem;list-style:none;align-items:center;width:42%}
-        .nav-group.left{justify-content:flex-end}.nav-group.right{justify-content:flex-start}
-        .nav-group a,.dropdown-trigger{color:var(--text-main);text-decoration:none;font-family:var(--font-display);font-size:1.3rem;font-style:italic;text-transform:uppercase;letter-spacing:.05em;transition:.2s;cursor:pointer}
-        .nav-group a:hover,.dropdown-trigger:hover{color:var(--jersey-purple)}
-        .theme-toggle-btn{background:transparent;border:2px solid var(--border-color);cursor:pointer;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;box-shadow:3px 3px 0px var(--border-color);transition:transform .2s,box-shadow .2s}
-        .theme-toggle-btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0px var(--jersey-purple)}
-        .theme-toggle-btn svg{width:22px;height:22px;fill:none;stroke:var(--text-main);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-        .sun{display:none}.moon{display:block}[data-theme="dark"] .sun{display:block}[data-theme="dark"] .moon{display:none}
-        .burger{display:none;flex-direction:column;justify-content:space-between;width:30px;height:21px;background:transparent;border:none;cursor:pointer;z-index:1100}
-        .burger span{width:100%;height:3px;background-color:var(--border-color);transition:all .3s ease}
-        .burger.toggle span:nth-child(1){transform:translateY(9px) rotate(45deg)}.burger.toggle span:nth-child(2){opacity:0}.burger.toggle span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
-        .dropdown{position:relative}
-        .dropdown-content{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:var(--bg-card);min-width:180px;border:3px solid var(--border-color);padding:.5rem 0;list-style:none;box-shadow:6px 6px 0px var(--shadow-color)}
-        .dropdown-content li a{padding:.6rem 1.2rem;font-family:var(--font-body);font-size:.9rem;font-style:normal;display:block;text-transform:none;text-align:center;color:var(--text-main)}
-        .dropdown-content li a:hover{background:var(--bg-body);color:var(--jersey-purple)}
-        .dropdown:hover .dropdown-content{display:block}
-        .dropdown.active .dropdown-content{display:block;position:static;transform:none;box-shadow:none;border:none;border-left:2px solid var(--jersey-purple);margin-left:10px;padding-left:5px}
-        @media(max-width:950px){nav{height:70px}.nav-logo{position:static;transform:none}.nav-logo:hover{transform:scale(1.05)}.nav-logo img{height:55px}.burger{display:flex}.nav-group.right{display:none}.nav-group.left{position:fixed;right:-100%;top:0;height:100vh;width:280px;background:var(--bg-card);border-left:4px solid var(--border-color);flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:100px 2rem 2rem;gap:1.5rem;transition:right .4s ease;overflow-y:auto;z-index:1000}.nav-group.left.active{right:0}.nav-group.left a{font-size:1.3rem;width:100%;display:block}.dropdown{width:100%}.dropdown-content{position:static;transform:none;background:var(--bg-body);border:none;border-left:3px solid var(--jersey-purple);box-shadow:none;padding:0 0 0 1rem;margin-top:.5rem}.dropdown-content li a{text-align:left}}
-        .article-wrapper{max-width:850px;margin:150px auto 40px;padding:0 20px;position:relative;z-index:2}
-        .back-link{display:inline-flex;align-items:center;gap:8px;color:var(--text-main);background:var(--bg-card);border:2px solid var(--border-color);box-shadow:3px 3px 0px var(--shadow-color);font-family:var(--font-display);font-style:italic;text-decoration:none;font-size:1.1rem;padding:.4rem 1rem;margin-bottom:25px;transition:.2s}
-        .back-link:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0px var(--jersey-green)}
-        .article-container{background:var(--bg-card);border:3px solid var(--border-color);box-shadow:10px 10px 0px var(--shadow-color);padding:45px;clip-path:polygon(0% 0%,97% 0%,100% 3%,100% 100%,3% 100%,0% 97%)}
-        .article-meta{display:inline-block;font-family:var(--font-display);font-style:italic;font-size:1rem;padding:3px 10px;margin-bottom:15px;transform:skewX(-8deg);letter-spacing:.5px}
-        .article-title{font-family:var(--font-display);font-size:clamp(2.2rem,6vw,3.8rem);font-style:italic;line-height:1;margin-bottom:25px;color:var(--text-main);text-shadow:2px 2px 0px var(--jersey-yellow)}
-        .article-img{width:100%;max-height:400px;object-fit:contain;background:var(--img-fallback);padding:15px;margin-bottom:30px;border:3px solid var(--border-color);box-shadow:5px 5px 0px rgba(0,0,0,.15)}
-        .scoreboard-box{background:var(--bg-card);border:3px solid var(--border-color);box-shadow:6px 6px 0px var(--shadow-color);padding:25px;margin:35px 0;display:flex;justify-content:center;align-items:center;gap:30px;text-align:center;transform:rotate(.5deg)}
-        .team-score{font-family:var(--font-display);font-style:italic;font-size:2.3rem;color:var(--text-main);line-height:1.1}
-        .team-vs{font-family:var(--font-display);font-style:italic;font-size:1.8rem;color:#ffffff;background:#0b130a;padding:2px 10px;transform:skewX(-12deg);border:1px solid var(--border-color)}
-        .article-body p{margin-bottom:25px;font-size:1.15rem;color:var(--text-main);text-align:justify;font-weight:400}
-        .article-body strong{color:var(--jersey-purple);font-weight:700}
-        .article-footer{margin-top:45px;padding-top:25px;border-top:3px dashed var(--border-color);display:flex;justify-content:space-between;align-items:center}
-        .article-footer span{font-family:var(--font-display);font-style:italic;font-size:1.2rem}
-        .share-btn{background:var(--bg-card);border:2px solid var(--border-color);color:var(--text-main);font-family:var(--font-display);font-style:italic;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.2s;padding:6px 16px;box-shadow:4px 4px 0px var(--shadow-color)}
-        .share-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0px var(--jersey-yellow)}
-        .share-btn svg{width:16px;height:16px;fill:currentColor}
-        .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#0b130a;color:#fff;padding:12px 30px;font-family:var(--font-display);font-style:italic;font-size:1.3rem;box-shadow:6px 6px 0px var(--jersey-green);z-index:2000;opacity:0;transition:opacity .3s;pointer-events:none;border:2px solid #fff}
-        .comments-wrapper{max-width:850px;margin:40px auto;padding:0 20px;position:relative;z-index:2}
-        #disqus_thread{background:var(--bg-card);padding:2.5rem;border:3px solid var(--border-color);box-shadow:10px 10px 0px var(--shadow-color)}
-        @media(max-width:700px){.article-wrapper{margin-top:90px}.article-container{padding:25px;clip-path:none}.scoreboard-box{flex-direction:column;gap:15px}}
-    </style>
-    <script src="nav-component.js"><\/script>
-</head>
-<body>
-<div id="hbm-nav"></div>
-<div class="article-wrapper">
-    <a href="actualites.html" class="back-link">← Retour aux actualités</a>
-    <article class="article-container">
-        <span class="article-meta" style="background:${badgeBg};color:${badgeColor}">${v('r-type')} — ${v('r-date')}</span>
-        <h1 class="article-title">${titre}</h1>${imgLine}
-        <div class="scoreboard-box">
-            <div class="team-score">${adv} <span style="color:var(--jersey-purple);font-weight:700">${sa}</span></div>
-            <div class="team-vs">VS</div>
-            <div class="team-score"><span style="color:var(--jersey-green);font-weight:700">${sh}</span> HB MOUY</div>
-        </div>
-        <div class="article-body">
-${paras}
-            <p style="font-family:var(--font-display);font-style:italic;font-size:1.8rem;color:var(--jersey-purple);text-align:center;margin-top:30px;text-shadow:1px 1px 0px var(--border-color)">À très vite sur le terrain !</p>
-        </div>
-        <div class="article-footer">
-            <span>Par : Le Bureau HBM</span>
-            <button class="share-btn" onclick="shareCurrentPage()">
-                <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                Partager
-            </button>
-        </div>
-    </article>
-</div>
-<div class="comments-wrapper"><div id="disqus_thread"></div></div>
-<script>
-    var disqus_config=function(){this.page.url=window.location.href;this.page.identifier=window.location.pathname;};
-    (function(){var d=document,s=d.createElement('script');s.src='https://hbmouy.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();
-<\/script>
-<div id="toast" class="toast">Lien copié ! 🦁</div>
-<script>
-    function shareCurrentPage(){if(navigator.share){navigator.share({title:document.title,url:window.location.href}).catch(()=>{});}else{navigator.clipboard.writeText(window.location.href).then(()=>{const t=document.getElementById('toast');t.style.opacity='1';setTimeout(()=>t.style.opacity='0',2500);});}}
-<\/script>
-</body>
-</html>`;
-  document.getElementById('out-r').textContent=html;
-}
-
-// PAGE ACTU SIMPLE
-function gp(){
-  const slug=v('p-slug')||'article-xxx';
-  document.getElementById('p-filename-hint').textContent=slug+'.html';
-  const titre=v('p-titre')||'TITRE DE L\'ARTICLE';
-  const paras=[v('p-p1'),v('p-p2'),v('p-p3')].filter(p=>p.trim()).map(p=>`            <p>${p}</p>`).join('\n');
-  const img=v('p-img');
-  const imgLine=img?`\n        <img src="${img}" alt="${titre}" class="article-img">`:'';
-  const badgeColors={club:'background:var(--jersey-yellow);color:#0b130a',sponsor:'background:var(--jersey-green);color:#0b130a',match:'background:var(--jersey-purple);color:#ffffff'};
-  const bc=badgeColors[v('p-bt')]||badgeColors.club;
-  const html=`<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${titre} - HBM</title>
-    <meta property="og:title" content="${titre}">
-    <meta property="og:url" content="https://handballmouy.fr/${slug}.html">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');<\/script>
-    <style>
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        :root{--jersey-yellow:#e2f438;--jersey-green:#2cd646;--jersey-purple:#9d4edd;--font-display:'Anton',sans-serif;--font-body:'DM Sans',sans-serif;--bg-body:#f5f8f5;--bg-card:#ffffff;--text-main:#0b130a;--border-color:#0b130a;--shadow-color:#0b130a;--nav-bg:rgba(255,255,255,0.85);--img-fallback:#eef2ee}
-        [data-theme="dark"]{--bg-body:#0b130a;--bg-card:#142113;--text-main:#f5f8f5;--border-color:#f5f8f5;--shadow-color:var(--jersey-green);--nav-bg:rgba(11,19,10,0.85);--img-fallback:#1a2e18}
-        html{scroll-behavior:smooth}body{background:var(--bg-body);color:var(--text-main);font-family:var(--font-body);line-height:1.6;overflow-x:hidden;position:relative}
-        body::before,body::after{content:"";position:absolute;width:100%;height:1400px;z-index:-1;opacity:.85;pointer-events:none}
-        body::before{top:0;left:0;background:linear-gradient(135deg,var(--jersey-yellow) 30%,var(--jersey-green) 100%);clip-path:polygon(0 0,100% 0,100% 350px,65% 220px,35% 500px,0 280px)}
-        body::after{bottom:0;right:0;background:linear-gradient(225deg,rgba(226,244,56,.4) 0%,rgba(44,214,70,.4) 100%);clip-path:polygon(100% 500px,100% 100%,0% 100%,0% 800px,50% 600px)}
-        nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:center;height:95px;padding:0 2rem;background:var(--nav-bg);backdrop-filter:blur(15px);border-bottom:4px solid var(--border-color)}
-        .nav-container{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1200px;height:100%;position:relative}
-        .nav-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;text-decoration:none;color:inherit;z-index:1002;transition:.3s cubic-bezier(.175,.885,.32,1.275)}
-        .nav-logo img{height:85px;filter:drop-shadow(0px 4px 8px rgba(0,0,0,.2))}.nav-logo:hover{transform:translate(-50%,-50%) scale(1.08)}
-        .nav-group{display:flex;gap:2.5rem;list-style:none;align-items:center;width:42%}.nav-group.left{justify-content:flex-end}.nav-group.right{justify-content:flex-start}
-        .nav-group a,.dropdown-trigger{color:var(--text-main);text-decoration:none;font-family:var(--font-display);font-size:1.3rem;font-style:italic;text-transform:uppercase;letter-spacing:.05em;transition:.2s;cursor:pointer}
-        .nav-group a:hover,.dropdown-trigger:hover{color:var(--jersey-purple)}
-        .theme-toggle-btn{background:transparent;border:2px solid var(--border-color);cursor:pointer;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;box-shadow:3px 3px 0px var(--border-color);transition:transform .2s,box-shadow .2s}
-        .theme-toggle-btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0px var(--jersey-purple)}
-        .theme-toggle-btn svg{width:22px;height:22px;fill:none;stroke:var(--text-main);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-        .sun{display:none}.moon{display:block}[data-theme="dark"] .sun{display:block}[data-theme="dark"] .moon{display:none}
-        .burger{display:none;flex-direction:column;justify-content:space-between;width:30px;height:21px;background:transparent;border:none;cursor:pointer;z-index:1100}
-        .burger span{width:100%;height:3px;background-color:var(--border-color);transition:all .3s ease}
-        .burger.toggle span:nth-child(1){transform:translateY(9px) rotate(45deg)}.burger.toggle span:nth-child(2){opacity:0}.burger.toggle span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
-        .dropdown{position:relative}.dropdown-content{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:var(--bg-card);min-width:180px;border:3px solid var(--border-color);padding:.5rem 0;list-style:none;box-shadow:6px 6px 0px var(--shadow-color)}
-        .dropdown-content li a{padding:.6rem 1.2rem;font-family:var(--font-body);font-size:.9rem;font-style:normal;display:block;text-transform:none;text-align:center;color:var(--text-main)}.dropdown-content li a:hover{background:var(--bg-body);color:var(--jersey-purple)}
-        .dropdown:hover .dropdown-content{display:block}.dropdown.active .dropdown-content{display:block;position:static;transform:none;box-shadow:none;border:none;border-left:2px solid var(--jersey-purple);margin-left:10px;padding-left:5px}
-        @media(max-width:950px){nav{height:70px}.nav-logo{position:static;transform:none}.nav-logo:hover{transform:scale(1.05)}.nav-logo img{height:55px}.burger{display:flex}.nav-group.right{display:none}.nav-group.left{position:fixed;right:-100%;top:0;height:100vh;width:280px;background:var(--bg-card);border-left:4px solid var(--border-color);flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:100px 2rem 2rem;gap:1.5rem;transition:right .4s ease;overflow-y:auto;z-index:1000}.nav-group.left.active{right:0}.nav-group.left a{font-size:1.3rem;width:100%;display:block}.dropdown{width:100%}.dropdown-content{position:static;transform:none;background:var(--bg-body);border:none;border-left:3px solid var(--jersey-purple);box-shadow:none;padding:0 0 0 1rem;margin-top:.5rem}.dropdown-content li a{text-align:left}}
-        .article-wrapper{max-width:850px;margin:150px auto 40px;padding:0 20px;position:relative;z-index:2}
-        .back-link{display:inline-flex;align-items:center;gap:8px;color:var(--text-main);background:var(--bg-card);border:2px solid var(--border-color);box-shadow:3px 3px 0px var(--shadow-color);font-family:var(--font-display);font-style:italic;text-decoration:none;font-size:1.1rem;padding:.4rem 1rem;margin-bottom:25px;transition:.2s}
-        .back-link:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0px var(--jersey-green)}
-        .article-container{background:var(--bg-card);border:3px solid var(--border-color);box-shadow:10px 10px 0px var(--shadow-color);padding:45px;clip-path:polygon(0% 0%,97% 0%,100% 3%,100% 100%,3% 100%,0% 97%)}
-        .article-meta{display:inline-block;font-family:var(--font-display);font-style:italic;font-size:1rem;padding:3px 10px;margin-bottom:15px;transform:skewX(-8deg);letter-spacing:.5px}
-        .article-title{font-family:var(--font-display);font-size:clamp(2.2rem,6vw,3.8rem);font-style:italic;line-height:1;margin-bottom:25px;color:var(--text-main);text-shadow:2px 2px 0px var(--jersey-yellow)}
-        .article-img{width:100%;max-height:400px;object-fit:contain;background:var(--img-fallback);padding:15px;margin-bottom:30px;border:3px solid var(--border-color);box-shadow:5px 5px 0px rgba(0,0,0,.15)}
-        .article-body p{margin-bottom:25px;font-size:1.15rem;color:var(--text-main);text-align:justify;font-weight:400}
-        .article-body strong{color:var(--jersey-purple);font-weight:700}
-        .article-footer{margin-top:45px;padding-top:25px;border-top:3px dashed var(--border-color);display:flex;justify-content:space-between;align-items:center}
-        .article-footer span{font-family:var(--font-display);font-style:italic;font-size:1.2rem}
-        .share-btn{background:var(--bg-card);border:2px solid var(--border-color);color:var(--text-main);font-family:var(--font-display);font-style:italic;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.2s;padding:6px 16px;box-shadow:4px 4px 0px var(--shadow-color)}
-        .share-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0px var(--jersey-yellow)}
-        .share-btn svg{width:16px;height:16px;fill:currentColor}
-        .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#0b130a;color:#fff;padding:12px 30px;font-family:var(--font-display);font-style:italic;font-size:1.3rem;box-shadow:6px 6px 0px var(--jersey-green);z-index:2000;opacity:0;transition:opacity .3s;pointer-events:none;border:2px solid #fff}
-        .comments-wrapper{max-width:850px;margin:40px auto;padding:0 20px;position:relative;z-index:2}
-        #disqus_thread{background:var(--bg-card);padding:2.5rem;border:3px solid var(--border-color);box-shadow:10px 10px 0px var(--shadow-color)}
-        @media(max-width:700px){.article-wrapper{margin-top:90px}.article-container{padding:25px;clip-path:none}}
-    </style>
-    <script src="nav-component.js"><\/script>
-</head>
-<body>
-<div id="hbm-nav"></div>
-<div class="article-wrapper">
-    <a href="actualites.html" class="back-link">← Retour aux actualités</a>
-    <article class="article-container">
-        <span class="article-meta" style="${bc}">${v('p-badge')||'CLUB'} — ${v('p-date')}</span>
-        <h1 class="article-title">${titre}</h1>${imgLine}
-        <div class="article-body">
-${paras}
-        </div>
-        <div class="article-footer">
-            <span>Par : Le Bureau HBM</span>
-            <button class="share-btn" onclick="shareCurrentPage()">
-                <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                Partager
-            </button>
-        </div>
-    </article>
-</div>
-<div class="comments-wrapper"><div id="disqus_thread"></div></div>
-<script>
-    var disqus_config=function(){this.page.url=window.location.href;this.page.identifier=window.location.pathname;};
-    (function(){var d=document,s=d.createElement('script');s.src='https://hbmouy.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();
-<\/script>
-<div id="toast" class="toast">Lien copié ! 🦁</div>
-<script>function shareCurrentPage(){if(navigator.share){navigator.share({title:document.title,url:window.location.href}).catch(()=>{});}else{navigator.clipboard.writeText(window.location.href).then(()=>{const t=document.getElementById('toast');t.style.opacity='1';setTimeout(()=>t.style.opacity='0',2500);});}}<\/script>
-</body>
-</html>`;
-  document.getElementById('out-p').textContent=html;
 }
 
 function cp(pid,bid){
@@ -802,7 +420,7 @@ function parseAndGenK() {
   document.getElementById('out-k').textContent = JSON.stringify(obj, null, 2);
 }
 
-gm();ga();gc();gr();gp();tcf();sb();
+gm();gc();tcf();
 </script>
 </body>
 </html>
