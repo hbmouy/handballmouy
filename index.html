@@ -552,10 +552,22 @@ input:focus, select:focus, textarea:focus {
 /* FIX : logo image à la place du texte HBM */
 .big-hbm-logo {
     display: flex; justify-content: center; margin-bottom: 24px;
+    position: relative;
 }
 .big-hbm-logo img {
     width: min(380px, 75vw); height: auto;
-    filter: drop-shadow(5px 5px 0 var(--jersey-yellow));
+}
+.big-hbm-logo-shadow {
+    position: absolute;
+    top: 5px;
+    left: calc(50% + 5px);
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+}
+.big-hbm-logo-main {
+    position: relative;
+    z-index: 1;
 }
 .contact-bar-label {
     font-family: var(--font-display); font-style: italic;
@@ -834,7 +846,8 @@ footer {
 
 <div class="contact-bar">
   <div class="big-hbm-logo">
-    <img src="images/logo.png" alt="HBM Logo">
+    <img src="images/logo-shadow.png" alt="" class="big-hbm-logo-shadow">
+    <img src="images/logo.png" alt="HBM Logo" class="big-hbm-logo-main">
   </div>
   <p class="contact-bar-label">Suivez la création du club en direct</p>
   <p class="contact-address">
