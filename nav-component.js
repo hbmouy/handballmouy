@@ -12,7 +12,6 @@ const HBM_NAV = {
   },
   left: [
     { label: "Accueil", url: "index.html" },
-    { label: "Actualités", url: "actualites.html" },
     {
       label: "Saison",
       dropdown: [
