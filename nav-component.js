@@ -20,9 +20,7 @@ const HBM_NAV = {
         { label: "Prépa Physique", url: "prepa-physique.html" },
         { label: "Le Jeu 🎮", url: "jeu.html" }
       ]
-    }
-  ],
-  right: [
+    },
     {
       label: "Le Club",
       dropdown: [
@@ -30,7 +28,9 @@ const HBM_NAV = {
         { label: "Le Bureau", url: "organigramme.html" },
         { label: "Documents utiles", url: "docs.html" }
       ]
-    },
+    }
+  ],
+  right: [
     { label: "Inscriptions", url: "inscriptions.html" },
     { label: "Partenaires", url: "partenaires.html" },
     {
