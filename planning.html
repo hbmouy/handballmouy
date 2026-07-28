@@ -4,7 +4,7 @@
 <link rel="icon" type="image/png" href="images/logo.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Planning & Rencontres - HBM</title>
+<title>Planning - HBM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <script>if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');</script>
@@ -12,15 +12,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
     --jersey-yellow: #e2f438; --jersey-green: #2cd646; --jersey-purple: #9d4edd;
-    --font-display: 'Anton', sans-serif; --font-body: 'DM Sans', sans-serif; --gold: #d4af37;
+    --font-display: 'Anton', sans-serif; --font-body: 'DM Sans', sans-serif;
     --bg-body: #f5f8f5; --bg-card: #ffffff; --text-main: #0b130a;
     --border-color: #0b130a; --shadow-color: #0b130a; --nav-bg: rgba(255,255,255,0.85);
-    --dashed-color: rgba(11,19,10,0.15);
 }
 [data-theme="dark"] {
     --bg-body: #0b130a; --bg-card: #142113; --text-main: #f5f8f5;
     --border-color: #f5f8f5; --shadow-color: var(--jersey-green);
-    --nav-bg: rgba(11,19,10,0.85); --dashed-color: rgba(245,248,245,0.25);
+    --nav-bg: rgba(11,19,10,0.85);
 }
 body { background: var(--bg-body); color: var(--text-main); font-family: var(--font-body); line-height: 1.8; overflow-x: hidden; position: relative; transition: background 0.3s, color 0.3s; }
 body::before, body::after { content: ""; position: absolute; width: 100%; height: 1200px; z-index: -1; opacity: 0.85; pointer-events: none; }
@@ -78,45 +77,11 @@ h1 { font-family: var(--font-display); font-size: clamp(2.8rem,7.5vw,4.8rem); te
 .training-title { font-family: var(--font-display); font-size: 1.5rem; font-style: italic; color: var(--text-main); margin-bottom: 4px; }
 .training-subtitle { font-size: 0.85rem; font-weight: 500; opacity: 0.7; }
 .training-badge { background: var(--jersey-green); color: #0b130a; font-family: var(--font-display); font-style: italic; font-size: 1rem; padding: 8px 20px; border: 2px solid var(--border-color); box-shadow: 4px 4px 0 var(--border-color); white-space: nowrap; }
-
-.section-title { font-family: var(--font-display); font-size: 1.8rem; font-style: italic; color: var(--text-main); letter-spacing: 1px; margin: 40px 0 20px; display: flex; align-items: center; gap: 12px; }
-.section-title::before { content: ''; display: inline-block; width: 36px; height: 4px; background: var(--jersey-purple); flex-shrink: 0; }
-
-.match-card-featured { background: #0b130a; border: 3px solid #0b130a; box-shadow: 10px 10px 0 var(--jersey-purple); padding: 32px; margin-bottom: 40px; position: relative; }
-.match-card-featured::before { content: 'PROCHAIN MATCH'; position: absolute; top: -2px; left: 50%; transform: translateX(-50%); background: var(--jersey-yellow); color: #0b130a; padding: 3px 18px; font-family: var(--font-display); font-style: italic; font-size: 0.9rem; border: 2px solid #0b130a; white-space: nowrap; }
-.match-vs { display: flex; align-items: center; justify-content: space-around; margin: 30px 0 20px; }
-.team { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-.team-logo { width: 90px; height: 90px; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.2); padding: 6px; }
-.team-name { font-family: var(--font-display); font-size: 1.5rem; font-style: italic; color: #ffffff; }
-.vs-circle { width: 50px; height: 50px; background: rgba(255,255,255,0.15); color: #ffffff; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-family: var(--font-display); font-size: 1.2rem; font-style: italic; }
-.match-details { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; }
-.match-info-item { display: inline-block; margin: 4px 14px; font-size: 0.95rem; color: rgba(255,255,255,0.7); }
-.match-info-item strong { color: #ffffff; }
-
-.schedule-list { background: var(--bg-card); border: 3px solid var(--border-color); box-shadow: 8px 8px 0 var(--border-color); overflow: hidden; }
-.schedule-item { display: grid; grid-template-columns: 140px 1fr auto; padding: 1.2rem 2rem; border-bottom: 2px dashed var(--dashed-color); align-items: center; gap: 16px; }
-.schedule-item:last-child { border-bottom: none; }
-.date-box { font-family: var(--font-display); font-style: italic; color: var(--jersey-purple); font-size: 1.3rem; }
-.event-name { font-weight: 600; color: var(--text-main); font-size: 1rem; }
-.event-desc { font-size: 0.82rem; color: var(--text-main); opacity: 0.6; margin-top: 3px; }
-.event-badge { font-family: var(--font-display); font-style: italic; font-size: 1rem; text-transform: uppercase; white-space: nowrap; }
-.event-badge.match   { color: var(--jersey-green); }
-.event-badge.interne { color: var(--jersey-purple); }
-.event-badge.club    { color: var(--gold); }
-.event-badge.termine { color: var(--text-main); opacity: 0.4; }
-.event-score { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; }
-.event-score .win  { color: var(--jersey-green); }
-.event-score .lose { color: #e03030; }
-
-.loading { text-align: center; padding: 3rem; font-family: var(--font-display); font-style: italic; font-size: 1.3rem; opacity: 0.5; }
 footer { text-align: center; padding: 60px; color: var(--text-main); font-weight: 700; border-top: 3px dashed var(--border-color); background: var(--bg-card); position: relative; z-index: 2; }
 
 @media (max-width: 700px) {
     .training-card { flex-direction: column; text-align: center; }
     .training-card-left { flex-direction: column; }
-    .match-vs { flex-direction: column; gap: 20px; }
-    .match-card-featured { padding: 40px 16px 20px; }
-    .schedule-item { grid-template-columns: 1fr; text-align: center; gap: 8px; padding: 1.2rem; }
     .content-wrapper { margin-top: 110px; }
 }
 </style>
@@ -130,7 +95,7 @@ footer { text-align: center; padding: 60px; color: var(--text-main); font-weight
     <div class="label-container">
         <span class="section-label">Planning du HBM</span>
     </div>
-    <h1>CALENDRIER</h1>
+    <h1>PLANNING</h1>
 
     <div class="training-card">
         <div class="training-card-left">
@@ -142,93 +107,9 @@ footer { text-align: center; padding: 60px; color: var(--text-main); font-weight
         </div>
         <div class="training-badge">TOUS LES JEUDIS — 20H À 22H</div>
     </div>
-
-    <div id="next-match-wrap"></div>
-
-    <div class="section-title">Tous les événements</div>
-    <div class="schedule-list" id="schedule-list">
-        <div class="loading">Chargement...</div>
-    </div>
 </main>
 
 <footer>© 2026 HBM — Handball Club Mouy<br><a href="politique-confidentialite.html" style="color:inherit; opacity:0.7; font-size:0.85rem; font-weight:400; text-decoration:underline;">Politique de confidentialité</a></footer>
 
-<script>
-const BADGE_CLASS = { match: 'match', interne: 'interne', club: 'club' };
-const MOIS  = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-
-function scoreHTML(ev) {
-    if (ev.type !== 'match' || ev.score_hbm === null || ev.score_hbm === undefined) return '';
-    const win  = ev.score_hbm > ev.score_adverse;
-    const lose = ev.score_hbm < ev.score_adverse;
-    return `<div class="event-score">
-        <span class="${win ? 'win' : lose ? 'lose' : ''}">${ev.score_hbm}</span>
-        &nbsp;—&nbsp;
-        <span class="${lose ? 'lose' : win ? 'win' : ''}">${ev.score_adverse}</span>
-    </div>`;
-}
-
-async function chargerCalendrier() {
-    try {
-        const res    = await fetch('calendrier.json?v=' + Date.now());
-        const events = await res.json();
-
-        // Prochain match : statut a_venir uniquement
-        const nextMatch = events.find(e => e.type === 'match' && e.statut === 'a_venir');
-        const nextWrap  = document.getElementById('next-match-wrap');
-
-        if (nextMatch) {
-            nextWrap.innerHTML = `
-            <div class="match-card-featured">
-                <div class="match-vs">
-                    <div class="team">
-                        <img src="${nextMatch.logo_adverse || ''}" class="team-logo" alt="${nextMatch.equipe_adverse}" onerror="this.style.display='none'">
-                        <span class="team-name">${nextMatch.equipe_adverse}</span>
-                    </div>
-                    <div class="vs-circle">VS</div>
-                    <div class="team">
-                        <img src="images/logo.png" class="team-logo" alt="HBM">
-                        <span class="team-name" style="color:var(--jersey-yellow)">HB Mouy</span>
-                    </div>
-                </div>
-                <div class="match-details">
-                    <div class="match-info-item">📅 <strong>${nextMatch.dateAffichee}</strong></div>
-                    <div class="match-info-item">⏰ <strong>${nextMatch.heure}</strong></div>
-                    ${nextMatch.lieu ? `<div class="match-info-item">📍 <strong>${nextMatch.lieu}${nextMatch.ville ? ', ' + nextMatch.ville : ''}</strong></div>` : ''}
-                </div>
-            </div>`;
-        }
-
-        // Liste complète
-        const list = document.getElementById('schedule-list');
-        if (!events.length) {
-            list.innerHTML = '<div class="loading">Aucun événement pour le moment.</div>';
-            return;
-        }
-
-        list.innerHTML = events.map(ev => {
-            const badgeClass = `event-badge ${BADGE_CLASS[ev.type] || 'club'} ${ev.statut === 'termine' ? 'termine' : ''}`;
-            const score = scoreHTML(ev);
-            const desc  = ev.description ? `<div class="event-desc">${ev.description}</div>` : '';
-            return `
-            <div class="schedule-item">
-                <div class="date-box">${ev.dateAffichee}</div>
-                <div>
-                    <div class="event-name">${ev.titre}</div>
-                    ${desc}
-                </div>
-                <div>${score || `<span class="${badgeClass}">${ev.badge}</span>`}</div>
-            </div>`;
-        }).join('');
-
-    } catch(e) {
-        document.getElementById('schedule-list').innerHTML = '<div class="loading">Impossible de charger le calendrier.</div>';
-        console.error('calendrier.json:', e);
-    }
-}
-
-chargerCalendrier();
-</script>
 </body>
 </html>
