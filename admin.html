@@ -57,6 +57,15 @@ pre{background:var(--bg);border:2px solid var(--bd);padding:.9rem;font-size:.78r
 .badge-prepa{background:var(--y);color:#0b130a}
 .badge-sponsor{background:var(--g);color:#0b130a}
 .badge-club{background:var(--y);color:#0b130a}
+.badge-matchs{background:var(--g);color:#0b130a}
+.badge-vie-du-club{background:var(--y);color:#0b130a}
+.badge-evenements{background:var(--p);color:#fff}
+.upload-zone{border:3px dashed var(--bd);padding:2rem;text-align:center;cursor:pointer;transition:.2s;background:var(--bg)}
+.upload-zone:hover{border-color:var(--p);background:rgba(157,78,221,.06)}
+.upload-zone.has-img{border-style:solid;padding:1rem}
+.upload-zone img{max-width:100%;max-height:220px;display:block;margin:0 auto .6rem;border:2px solid var(--bd)}
+.upload-btn-txt{font-family:var(--fd);font-style:italic;font-size:1.05rem;color:var(--mu)}
+.upload-zone.has-img .upload-btn-txt{color:var(--tx);font-size:.85rem}
 .step-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:var(--p);color:#fff;border-radius:50%;font-size:.75rem;font-weight:700;flex-shrink:0;margin-right:4px}
 .steps{display:flex;flex-direction:column;gap:10px;margin-top:.5rem}
 .step{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;padding:8px 12px;background:var(--bg);border-left:3px solid var(--g)}
@@ -80,6 +89,7 @@ pre{background:var(--bg);border:2px solid var(--bd);padding:.9rem;font-size:.78r
     <button class="tab active" onclick="sw('match')">match.json</button>
     <button class="tab" onclick="sw('cal')">calendrier.json</button>
     <button class="tab" onclick="sw('classement')">Classement</button>
+    <button class="tab" onclick="sw('galerie')">Galerie</button>
   </div>
 
   <!-- ======= MATCH ======= -->
@@ -231,8 +241,38 @@ pre{background:var(--bg);border:2px solid var(--bd);padding:.9rem;font-size:.78r
     </div>
   </div>
 
+  <!-- ======= GALERIE ======= -->
+  <div id="panel-galerie" class="panel">
+    <div class="card">
+      <div class="sl">Photo</div>
+      <div class="upload-zone" id="g-zone" onclick="openCloudinary()">
+        <img id="g-preview" style="display:none">
+        <div class="upload-btn-txt" id="g-zone-txt">📤 Cliquer pour choisir une photo</div>
+      </div>
+      <div class="sl">Détails</div>
+      <div class="r2">
+        <div class="f"><label>Catégorie</label>
+          <select id="g-cat" oninput="gg()">
+            <option value="matchs">Matchs</option>
+            <option value="vie-du-club">Vie du club</option>
+            <option value="evenements">Événements</option>
+          </select>
+        </div>
+        <div class="f"><label>Date</label><input type="date" id="g-date" oninput="gg()"></div>
+      </div>
+      <div class="f"><label>Légende</label><input id="g-legende" placeholder="HBM vs Beauvais - victoire 28-24" oninput="gg()"></div>
+    </div>
+    <div class="out-section">
+      <div class="out-hdr"><span class="out-title">Objet à coller dans galerie.json</span><button class="cbtn" id="cp-g" onclick="cp('out-g','cp-g')">📋 Copier</button></div>
+      <pre id="out-g"></pre>
+      <div class="hint">Colle cet objet <strong>en haut du tableau</strong> dans <code>galerie.json</code>, juste après <code>[</code>, suivi d'une virgule. Si le fichier n'existe pas encore sur GitHub, crée-le d'abord avec <code>[]</code> comme contenu.</div>
+      <a class="ghl" href="https://github.com/hbmouy/handballmouy/edit/main/galerie.json" target="_blank">Ouvrir galerie.json sur GitHub →</a>
+    </div>
+  </div>
+
 </div>
 
+<script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script>
 <script>
 if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');
 document.getElementById('tbtn').addEventListener('click',()=>{
@@ -242,7 +282,7 @@ document.getElementById('tbtn').addEventListener('click',()=>{
 });
 
 function sw(n){
-  const names=['match','cal','classement'];
+  const names=['match','cal','classement','galerie'];
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===n));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+n).classList.add('active');
@@ -418,6 +458,54 @@ function parseAndGenK() {
     }))
   };
   document.getElementById('out-k').textContent = JSON.stringify(obj, null, 2);
+}
+
+// GALERIE
+let gUploadedUrl = '';
+
+const cloudinaryWidget = cloudinary.createUploadWidget({
+  cloudName: 'nbz0fnds',
+  uploadPreset: 'hbm_galerie',
+  sources: ['local', 'camera'],
+  multiple: false,
+  maxFiles: 1,
+  language: 'fr',
+  text: {
+    fr: {
+      or: 'ou', menu: { files: 'Mes fichiers', camera: 'Caméra' },
+      local: { browse: 'Parcourir', dd_title_single: 'Glisse une photo ici' }
+    }
+  }
+}, (error, result) => {
+  if (!error && result && result.event === 'success') {
+    gUploadedUrl = result.info.secure_url;
+    const prev = document.getElementById('g-preview');
+    const zone = document.getElementById('g-zone');
+    const txt  = document.getElementById('g-zone-txt');
+    prev.src = gUploadedUrl;
+    prev.style.display = 'block';
+    zone.classList.add('has-img');
+    txt.textContent = '✅ Photo envoyée — cliquer pour la remplacer';
+    gg();
+  }
+});
+
+function openCloudinary(){ cloudinaryWidget.open(); }
+
+function gg(){
+  if (!gUploadedUrl) {
+    document.getElementById('out-g').textContent = '// Choisis d\'abord une photo ci-dessus';
+    return;
+  }
+  const cat = v('g-cat');
+  const o = {
+    id: 'photo-' + Date.now(),
+    categorie: cat,
+    src: gUploadedUrl,
+    legende: v('g-legende'),
+    date: v('g-date') || new Date().toISOString().slice(0,10)
+  };
+  document.getElementById('out-g').textContent = JSON.stringify(o, null, 2);
 }
 
 gm();gc();tcf();
