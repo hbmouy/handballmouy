@@ -26,6 +26,7 @@ const HBM_NAV = {
       dropdown: [
         { label: "Qui sommes-nous ?", url: "qui.html" },
         { label: "Le Bureau", url: "organigramme.html" },
+        { label: "Galerie", url: "galerie.html" },
         { label: "Documents utiles", url: "docs.html" }
       ]
     }
