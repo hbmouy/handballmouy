@@ -631,7 +631,7 @@ footer {
     <button class="vacances-close" onclick="document.getElementById('vacances-banner').style.display='none'">✕</button>
     <div class="vacances-inner">
         <div class="vacances-title">ON SE RETROUVE À LA RENTRÉE !</div>
-        <div class="vacances-sub">Reprise des entraînements — rendez-vous le <strong style="color:#e2f438">Jeudi 3 Septembre 2026</strong></div>
+        <div class="vacances-sub">Reprise des entraînements — rendez-vous le <strong style="color:#e2f438">Jeudi 27 Août 2026</strong></div>
         <div class="vacances-countdown">
             <div class="vcd-block"><div class="vcd-num" id="vcd-j">--</div><div class="vcd-lbl">Jours</div></div>
             <div class="vcd-sep">:</div>
@@ -943,7 +943,7 @@ function easterEgg() {
 
 // ---- BANNIÈRE VACANCES ----
 (function() {
-    const reprise = new Date('2026-09-03T20:00:00');
+    const reprise = new Date('2026-08-27T20:00:00');
     const banner = document.getElementById('vacances-banner');
     if (!banner || new Date() >= reprise) return;
     banner.classList.add('active');
