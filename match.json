@@ -1,13 +1,13 @@
 {
-  "actif": false,
-  "statut": "termine",
+  "actif": true,
+  "statut": "a_venir",
   "type": "Match amical",
   "domicile": false,
-  "equipe_adverse": "Mesnil en Thelle",
-  "logo_adverse": "images/logo-mesnil.png",
-  "date": "2026-07-02T20:00:00",
-  "lieu": "Gymnase Omer Bee",
-  "ville": "Le Mesnil-en-Thelle, 60530",
-  "score_hbm": 24,
-  "score_adverse": 25
+  "equipe_adverse": "Villers Saint Paul",
+  "logo_adverse": "images/logo-villers-saint-paul.png",
+  "date": "2026-09-09T20:00:00",
+  "lieu": "Gymnase de Villers-Saint-Paul",
+  "ville": "Villers-Saint-Paul, 60870",
+  "score_hbm": null,
+  "score_adverse": null
 }
