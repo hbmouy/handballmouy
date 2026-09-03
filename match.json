@@ -3,11 +3,11 @@
   "statut": "a_venir",
   "type": "Match amical",
   "domicile": false,
-  "equipe_adverse": "Bresles",
-  "logo_adverse": "images/logo-bresles.png",
-  "date": "2026-09-01T20:00:00",
-  "lieu": "Salle Condorcet",
-  "ville": "Bresles, 60510",
+  "equipe_adverse": "Villers Saint Paul",
+  "logo_adverse": "",
+  "date": "2026-09-09T20:00:00",
+  "lieu": "Gymnase Henri Salvador",
+  "ville": "Villers Saint Paul",
   "score_hbm": null,
   "score_adverse": null
 }
