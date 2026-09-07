@@ -93,6 +93,11 @@ footer { text-align: center; padding: 60px; color: var(--text-main); font-weight
 .champ-badge.dom { background: var(--jersey-green); }
 .champ-badge.ext { background: var(--jersey-purple); color: #fff; }
 
+.ffhb-btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-style: italic; text-transform: uppercase; letter-spacing: 0.03em; font-size: 1.1rem; text-decoration: none; color: #0b130a; background: var(--jersey-yellow); border: 3px solid var(--border-color); box-shadow: 6px 6px 0 var(--border-color); padding: 14px 28px; margin-bottom: 24px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.ffhb-btn:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--jersey-purple); }
+.ffhb-btn:active { transform: translate(0,0); box-shadow: 3px 3px 0 var(--border-color); }
+.ffhb-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
 @media (max-width: 700px) {
     .training-card { flex-direction: column; text-align: center; }
     .training-card-left { flex-direction: column; }
@@ -159,6 +164,13 @@ footer { text-align: center; padding: 60px; color: var(--text-main); font-weight
         </table>
     </div>
     <p class="champ-sub" style="margin-top:12px;">Le jour exact (samedi ou dimanche), l'heure et le gymnase sont précisés ultérieurement par le Comité.</p>
+
+    <p style="text-align:center; margin-top:40px;">
+        <a class="ffhb-btn" href="https://www.ffhandball.fr/competitions/saison-2026-2027-22/departemental/honneur-masculin-departementale-32289/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg>
+            Voir le classement sur FFHandball
+        </a>
+    </p>
 </main>
 
 <footer>© 2026 HBM — Handball Mouy<br><a href="politique-confidentialite.html" style="color:inherit; opacity:0.7; font-size:0.85rem; font-weight:400; text-decoration:underline;">Politique de confidentialité</a></footer>
