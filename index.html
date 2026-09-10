@@ -671,7 +671,7 @@ footer {
 
       <!-- Équipe adverse -->
       <div class="match-team">
-        <img src="" alt="" class="match-logo" id="match-logo-adverse" onerror="this.style.display='none'; document.getElementById('match-logo-adverse-fb').style.display='flex'">
+        <img alt="" class="match-logo" id="match-logo-adverse" onerror="this.style.display='none'; document.getElementById('match-logo-adverse-fb').style.display='flex'">
         <div class="match-logo-fallback" id="match-logo-adverse-fb" style="display:none;"></div>
         <span class="match-team-name" id="match-equipe-adverse">--</span>
         <!-- Score adverse (caché par défaut) -->
@@ -858,12 +858,14 @@ async function chargerMatch() {
 
         // Infos communes
         // Initiales pour fallback si logo absent
-        window._matchInitiales = match.equipe_adverse.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,3);
+        window._matchInitiales = match.equipe_adverse.split(/[ -]/).map(w => w[0]).join('').toUpperCase().slice(0,3);
         document.getElementById('match-logo-adverse-fb').textContent = window._matchInitiales;
 
         document.getElementById('match-card').classList.toggle('domicile', match.domicile === true);
         document.getElementById('match-type').textContent         = match.type;
-        document.getElementById('match-equipe-adverse').innerHTML = match.equipe_adverse.replace(' ', '<br>');
+        document.getElementById('match-equipe-adverse').innerHTML = match.equipe_adverse.replace(/[ -]/, '<br>');
+        document.getElementById('match-logo-adverse-fb').style.display = 'none';
+        document.getElementById('match-logo-adverse').style.display    = '';
         document.getElementById('match-logo-adverse').src         = match.logo_adverse;
         document.getElementById('match-logo-adverse').alt         = match.equipe_adverse;
         document.getElementById('match-date-str').textContent     = `${j} ${d} ${mo} ${y}`;
