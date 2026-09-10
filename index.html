@@ -340,6 +340,10 @@ nav {
     width: 130px; height: 130px; padding: 8px;
     background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.3);
 }
+.match-logo-fallback.big {
+    width: 130px; height: 130px; font-size: 1.8rem;
+    background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.3);
+}
 .match-team-name {
     font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
     color: #ffffff; letter-spacing: 1px; text-align: center; word-break: break-word;
@@ -402,6 +406,7 @@ nav {
     .match-card { grid-template-columns: 1fr; padding: 20px; gap: 16px; }
     .match-center { order: -1; }
     .match-logo.big { width: 90px; height: 90px; }
+    .match-logo-fallback.big { width: 90px; height: 90px; }
 }
 
 /* ===================== FORMULAIRE ===================== */
@@ -671,8 +676,8 @@ footer {
 
       <!-- Équipe adverse -->
       <div class="match-team">
-        <img alt="" class="match-logo" id="match-logo-adverse" onerror="this.style.display='none'; document.getElementById('match-logo-adverse-fb').style.display='flex'">
-        <div class="match-logo-fallback" id="match-logo-adverse-fb" style="display:none;"></div>
+        <img alt="" class="match-logo big" id="match-logo-adverse" onerror="this.style.display='none'; document.getElementById('match-logo-adverse-fb').style.display='flex'">
+        <div class="match-logo-fallback big" id="match-logo-adverse-fb" style="display:none;"></div>
         <span class="match-team-name" id="match-equipe-adverse">--</span>
         <!-- Score adverse (caché par défaut) -->
         <div class="match-score" id="score-adverse" style="display:none;">--</div>
