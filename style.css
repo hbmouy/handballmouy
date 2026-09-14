@@ -164,6 +164,24 @@ nav {
 }
 .nav-links a:hover { color: var(--jersey-purple); }
 
+/* --- BOUTON CTA ADHÉSION (HelloAsso) --- */
+.nav-cta {
+  background: var(--jersey-yellow) !important;
+  color: #0b130a !important;
+  font-size: 1.05rem !important;
+  padding: 0.55rem 1.2rem;
+  border: 2px solid var(--border-color);
+  box-shadow: 3px 3px 0px var(--border-color);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  display: inline-block;
+}
+.nav-cta:hover {
+  color: #0b130a !important;
+  background: var(--jersey-green) !important;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px var(--jersey-purple);
+}
+
 /* --- BOUTON UNIQUE SWITCH THEME --- */
 .theme-toggle-btn {
   background: transparent;
@@ -253,6 +271,8 @@ nav {
   }
   .dropdown-content li a { text-align: left; font-size: 1rem !important; }
   .dropdown.active .dropdown-content { display: block; }
+
+  .nav-cta { text-align: center; margin-top: 0.5rem; }
 }
 
 /* ==========================================================================
