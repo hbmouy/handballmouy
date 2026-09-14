@@ -46,7 +46,13 @@ const HBM_NAV = {
   right: [
     { label: "Inscriptions", url: "inscriptions.html" },
     { label: "Partenaires", url: "partenaires.html" },
-    { label: "Contact", url: "index.html#contact" }
+    { label: "Contact", url: "index.html#contact" },
+    {
+      label: "Adhésion",
+      url: "https://www.helloasso.com/beta/associations/handball-mouy/adhesions/inscription-senior-masculin",
+      cta: true,
+      external: true
+    }
   ]
 };
 
@@ -64,6 +70,10 @@ function isActive(url) {
  * Génère un lien <li>
  */
 function buildLink(item) {
+  if (item.cta) {
+    const target = item.external ? ' target="_blank" rel="noopener"' : '';
+    return `<li><a href="${item.url}" class="nav-cta"${target}>${item.label}</a></li>`;
+  }
   const active = isActive(item.url) ? ' class="active" style="color:var(--jersey-purple)"' : '';
   return `<li><a href="${item.url}"${active}>${item.label}</a></li>`;
 }
