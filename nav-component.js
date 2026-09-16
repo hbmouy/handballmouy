@@ -44,7 +44,6 @@ const HBM_NAV = {
     }
   ],
   right: [
-    { label: "Inscriptions", url: "inscriptions.html" },
     { label: "Partenaires", url: "partenaires.html" },
     { label: "Contact", url: "index.html#contact" },
     {
