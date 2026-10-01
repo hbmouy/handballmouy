@@ -212,6 +212,8 @@ h1 {
   filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.05));
   transition: transform 0.3s ease;
 }
+/* Logo monochrome sombre : inversé en mode sombre pour rester lisible */
+[data-theme="dark"] .sponsor-logo.logo-mono { filter: invert(1); }
 .sponsor-card:hover .sponsor-logo {
   transform: scale(1.05);
 }
@@ -328,7 +330,7 @@ footer {
       </div>
 
       <div class="sponsor-card">
-        <img src="images/fournival-altesse.png" alt="Logo Fournival Altesse" class="sponsor-logo">
+        <img src="images/fournival-altesse.png" alt="Logo Fournival Altesse" class="sponsor-logo logo-mono">
         <span class="sponsor-name">FOURNIVAL ALTESSE</span>
       </div>
     </div>
