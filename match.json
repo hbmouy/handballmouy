@@ -2,12 +2,12 @@
   "actif": true,
   "statut": "a_venir",
   "type": "Championnat",
-  "domicile": true,
-  "equipe_adverse": "Chevrières",
-  "logo_adverse": "images/logo-chevrieres.png",
-  "date": "2026-10-04T16:00:00",
-  "lieu": "Complexe Léon Bohard",
-  "ville": "Mouy",
+  "domicile": false,
+  "equipe_adverse": "Bresles",
+  "logo_adverse": "images/logo-bresles.png",
+  "date": "2026-10-10T18:00:00",
+  "lieu": "Halle des Sports",
+  "ville": "Bresles",
   "score_hbm": null,
   "score_adverse": null
 }
