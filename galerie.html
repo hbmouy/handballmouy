@@ -381,6 +381,18 @@ async function chargerGalerie() {
         console.warn('galerie.json introuvable ou invalide', e);
         ALL_PHOTOS = [];
     }
+    const PHOTOS_LOCALES = [
+        {
+            id: 'photo-1791803981000',
+            categorie: 'matchs',
+            src: 'https://res.cloudinary.com/nbz0fnds/image/upload/v1791803981/bresleshbm10102026_nylefg.jpg',
+            legende: 'HBM VS Bresles',
+            date: '2026-10-10'
+        }
+    ];
+    PHOTOS_LOCALES.forEach(p => {
+        if (!ALL_PHOTOS.some(x => x.src === p.src)) ALL_PHOTOS.push(p);
+    });
     ALL_PHOTOS.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
     updateCounts();
     renderGrid();
