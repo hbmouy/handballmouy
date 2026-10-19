@@ -1,13 +1,13 @@
 {
   "actif": true,
   "statut": "a_venir",
-  "type": "Coupe de France",
-  "domicile": true,
-  "equipe_adverse": "HBC Gasny",
-  "logo_adverse": "images/logo-gasny.jpg",
-  "date": "2026-10-18T16:00:00",
-  "lieu": "Gymnase Leon BOHARD",
-  "ville": "Mouy",
+  "type": "Championnat",
+  "domicile": false,
+  "equipe_adverse": "Saint-Maximin",
+  "logo_adverse": "images/logo-saint-maximin.png",
+  "date": "2026-10-24T21:00:00",
+  "lieu": "Salle Henri Bruyère",
+  "ville": "Saint-Maximin",
   "score_hbm": null,
   "score_adverse": null
 }
