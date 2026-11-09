@@ -1,13 +1,13 @@
 {
   "actif": true,
   "statut": "a_venir",
-  "type": "Championnat",
+  "type": "Coupe de l'Oise",
   "domicile": false,
-  "equipe_adverse": "Saint-Maximin",
-  "logo_adverse": "images/logo-saint-maximin.png",
-  "date": "2026-10-24T21:00:00",
-  "lieu": "Salle Henri Bruyère",
-  "ville": "Saint-Maximin",
+  "equipe_adverse": "B.O.U.C Handball",
+  "logo_adverse": "images/logo-bouc.png",
+  "date": "2026-11-11T19:30:00",
+  "lieu": "Gymnase communautaire, rue du Bois d'Aumont",
+  "ville": "Allonne",
   "score_hbm": null,
   "score_adverse": null
 }
