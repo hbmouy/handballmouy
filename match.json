@@ -1,13 +1,13 @@
 {
   "actif": true,
   "statut": "a_venir",
-  "type": "Coupe de l'Oise",
+  "type": "Coupe de France",
   "domicile": false,
-  "equipe_adverse": "B.O.U.C Handball",
-  "logo_adverse": "images/logo-bouc.png",
-  "date": "2026-11-11T19:30:00",
-  "lieu": "Gymnase communautaire, rue du Bois d'Aumont",
-  "ville": "Allonne",
+  "equipe_adverse": "ECLA Handball",
+  "logo_adverse": "images/logo-ecla.png",
+  "date": "2026-11-21T21:00:00",
+  "lieu": "Salle Albert Camus, allée Lafayette",
+  "ville": "Creil",
   "score_hbm": null,
   "score_adverse": null
 }
