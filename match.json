@@ -1,13 +1,13 @@
 {
   "actif": true,
   "statut": "a_venir",
-  "type": "Coupe de France",
+  "type": "Championnat",
   "domicile": false,
-  "equipe_adverse": "ECLA Handball",
-  "logo_adverse": "images/logo-ecla.png",
-  "date": "2026-11-21T21:00:00",
-  "lieu": "Salle Albert Camus, allée Lafayette",
-  "ville": "Creil",
+  "equipe_adverse": "Clermont (Pays du Clermontois Handball)",
+  "logo_adverse": "images/logo-clermontois.png",
+  "date": "2026-11-28T19:00:00",
+  "lieu": "Salle Michel Monard, rue Guy Boulet",
+  "ville": "Breuil-le-Sec",
   "score_hbm": null,
   "score_adverse": null
 }
