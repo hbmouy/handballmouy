@@ -409,6 +409,67 @@ nav {
     .match-logo-fallback.big { width: 90px; height: 90px; }
 }
 
+
+
+/* ===================== MINI-CALENDRIER LATÉRAL ===================== */
+.hbmc-mini {
+    position: fixed; right: 16px; bottom: 16px; width: 236px; z-index: 900;
+    background: var(--bg-card); color: var(--text-main);
+    border: 3px solid var(--border-color); box-shadow: 6px 6px 0 var(--border-color);
+    padding: 10px 12px 12px; cursor: pointer; user-select: none;
+}
+.hbmc-mini:hover { box-shadow: 8px 8px 0 var(--jersey-purple); }
+.hbmc-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 6px; }
+.hbmc-title { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; text-transform: capitalize; background: none; border: 0; color: inherit; padding: 0; }
+.hbmc-nav { background: var(--jersey-yellow); color: #0b130a; border: 2px solid var(--border-color); width: 26px; height: 26px; font-weight: 800; line-height: 1; cursor: pointer; }
+.hbmc-nav:hover { background: var(--jersey-green); }
+.hbmc-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+.hbmc-dow { font-size: .62rem; font-weight: 800; opacity: .6; }
+.hbmc-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 600; border: 2px solid transparent; }
+.hbmc-day.today { border-color: var(--border-color); }
+.hbmc-day.ev { color: #0b130a; font-weight: 800; }
+.hbmc-day.k-match { background: var(--jersey-purple); color: #fff; }
+.hbmc-day.k-interne { background: var(--jersey-green); }
+.hbmc-day.k-autre { background: var(--jersey-yellow); }
+.hbmc-day.sel { outline: 3px solid var(--border-color); outline-offset: -3px; }
+.hbmc-fab {
+    display: none; position: fixed; right: 16px; bottom: 16px; z-index: 900; width: 54px; height: 54px;
+    font-size: 1.5rem; background: var(--jersey-yellow); color: #0b130a;
+    border: 3px solid var(--border-color); box-shadow: 4px 4px 0 var(--border-color); cursor: pointer;
+}
+@media (max-width: 1250px) { .hbmc-mini { display: none; } .hbmc-fab { display: block; } }
+.hbmc-modal { position: fixed; inset: 0; z-index: 2000; background: rgba(11,19,10,.65); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.hbmc-modal[hidden] { display: none; }
+.hbmc-panel {
+    position: relative; width: min(820px, 100%); max-height: 92vh; overflow: auto;
+    background: var(--bg-card); color: var(--text-main); border: 3px solid var(--border-color);
+    box-shadow: 10px 10px 0 var(--jersey-purple); padding: 26px;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px;
+}
+.hbmc-close { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; background: var(--jersey-yellow); color: #0b130a; border: 2px solid var(--border-color); font-weight: 800; cursor: pointer; }
+.hbmc-panel .hbmc-title { font-size: 1.5rem; cursor: pointer; }
+.hbmc-panel .hbmc-nav { width: 34px; height: 34px; font-size: 1.1rem; }
+.hbmc-panel .hbmc-dow { font-size: .75rem; padding-bottom: 4px; }
+.hbmc-panel .hbmc-day { font-size: 1rem; cursor: pointer; }
+.hbmc-panel .hbmc-day:hover { border-color: var(--border-color); }
+.hbmc-months { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.hbmc-mon { padding: 18px 0; font-weight: 700; text-align: center; border: 2px solid transparent; background: none; color: inherit; cursor: pointer; text-transform: capitalize; }
+.hbmc-mon:hover { border-color: var(--border-color); }
+.hbmc-mon.cur { background: var(--jersey-yellow); color: #0b130a; border-color: var(--border-color); }
+.hbmc-right h3 { font-family: var(--font-display); font-style: italic; font-size: 1.3rem; margin: 0 0 12px; }
+.hbmc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.hbmc-item { display: flex; gap: 12px; border: 2px solid var(--border-color); border-left: 8px solid var(--jersey-yellow); padding: 8px 12px; }
+.hbmc-item.k-match { border-left-color: var(--jersey-purple); }
+.hbmc-item.k-interne { border-left-color: var(--jersey-green); }
+.hbmc-idate { min-width: 46px; text-align: center; font-family: var(--font-display); font-style: italic; }
+.hbmc-idate b { display: block; font-size: 1.5rem; line-height: 1; }
+.hbmc-idate span { font-size: .7rem; text-transform: uppercase; }
+.hbmc-itit { font-weight: 800; }
+.hbmc-imeta { font-size: .82rem; opacity: .75; }
+.hbmc-empty { opacity: .6; font-weight: 600; }
+.hbmc-sub { display: inline-block; margin-top: 14px; font-weight: 800; font-size: .85rem; color: inherit; }
+@media (max-width: 760px) { .hbmc-panel { grid-template-columns: 1fr; padding: 20px 16px; } }
+
 /* ===================== FORMULAIRE ===================== */
 .form-section { padding: 60px 20px; position: relative; z-index: 2; }
 .form-container {
@@ -985,6 +1046,189 @@ function easterEgg() {
         document.getElementById('vcd-s').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
     }
     tick(); setInterval(tick, 1000);
+})();
+</script>
+
+
+<!-- ===== MINI-CALENDRIER LATÉRAL (agenda du club) ===== -->
+<div class="hbmc-mini" id="hbmc-mini" role="button" tabindex="0" aria-label="Ouvrir l'agenda du club">
+  <div class="hbmc-head">
+    <button class="hbmc-nav" data-nav="-1" aria-label="Mois précédent">&lsaquo;</button>
+    <div class="hbmc-title" id="hbmc-mini-title">--</div>
+    <button class="hbmc-nav" data-nav="1" aria-label="Mois suivant">&rsaquo;</button>
+  </div>
+  <div class="hbmc-grid" id="hbmc-mini-grid"></div>
+</div>
+<button class="hbmc-fab" id="hbmc-fab" aria-label="Ouvrir l'agenda du club">&#128197;</button>
+<div class="hbmc-modal" id="hbmc-modal" hidden>
+  <div class="hbmc-panel" role="dialog" aria-modal="true" aria-label="Agenda du club">
+    <button class="hbmc-close" id="hbmc-close" aria-label="Fermer">&#10005;</button>
+    <div class="hbmc-left">
+      <div class="hbmc-head">
+        <button class="hbmc-nav" id="hbmc-prev" aria-label="Précédent">&lsaquo;</button>
+        <button class="hbmc-title" id="hbmc-big-title">--</button>
+        <button class="hbmc-nav" id="hbmc-next" aria-label="Suivant">&rsaquo;</button>
+      </div>
+      <div id="hbmc-big-body"></div>
+    </div>
+    <div class="hbmc-right">
+      <h3 id="hbmc-list-title">À venir</h3>
+      <ul class="hbmc-list" id="hbmc-list"></ul>
+      <a class="hbmc-sub" id="hbmc-sub" href="#" target="_blank" rel="noopener" style="display:none;">&#10133; Ajouter à mon Google Agenda</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== AGENDA DU CLUB =====
+// Pour brancher Google Agenda : renseigner les 2 constantes ci-dessous (voir procédure).
+// Tant qu'elles sont vides, le widget lit calendrier.json (fallback).
+const HBMC_GCAL_ID  = '014dfba1dc4e2475f4db2b5e08889c1a59bb428179a4c5bdd8a93386aac44234@group.calendar.google.com';   // ex. 'xxxxxxxx@group.calendar.google.com' (ID de l'agenda public)
+const HBMC_GCAL_KEY = 'AIzaSyAltfU_wzrl-SnpLV8I-5euyUZJqhn8DwY';   // clé API Google (restreinte à handballmouy.fr + API Calendar)
+(async function () {
+  const $ = id => document.getElementById(id);
+  const MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  const MOIS_C = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const key = d => d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+  const hhmm = d => d.getHours() + 'h' + String(d.getMinutes()).padStart(2, '0');
+  const now = new Date(); const today0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  // ---------- chargement des évènements ----------
+  function kindOf(title) {
+    if (/\bvs\b|\bmatch\b|journ[ée]e|\bj\d+\b/i.test(title)) return 'match';
+    if (/entra[iî]n|r[ée]union|assembl[ée]e|\bAG\b/i.test(title)) return 'interne';
+    return 'autre';
+  }
+  async function loadGoogle() {
+    const min = new Date(today0.getFullYear(), today0.getMonth() - 1, 1);
+    const max = new Date(today0.getFullYear(), today0.getMonth() + 18, 1);
+    const url = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(HBMC_GCAL_ID) +
+      '/events?singleEvents=true&orderBy=startTime&maxResults=250&key=' + encodeURIComponent(HBMC_GCAL_KEY) +
+      '&timeMin=' + encodeURIComponent(min.toISOString()) + '&timeMax=' + encodeURIComponent(max.toISOString());
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('Google Calendar HTTP ' + r.status);
+    const out = [];
+    (await r.json()).items.forEach(it => {
+      if (it.status === 'cancelled' || !it.start) return;
+      const titre = it.summary || '(sans titre)';
+      const k = kindOf(titre);
+      if (it.start.dateTime) {
+        const d = new Date(it.start.dateTime);
+        out.push({ titre, _d: d, heure: hhmm(d), lieu: it.location || '', k });
+      } else {
+        const [y, m, dd] = it.start.date.split('-').map(Number);
+        const [y2, m2, d2] = (it.end && it.end.date ? it.end.date : it.start.date).split('-').map(Number);
+        const end = new Date(y2, m2 - 1, d2);
+        for (let d = new Date(y, m - 1, dd), n = 0; d < end && n < 14; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1), n++)
+          out.push({ titre, _d: d, heure: '', lieu: it.location || '', k });
+      }
+    });
+    return out;
+  }
+  async function loadJson() {
+    const r = await fetch('calendrier.json?v=' + Date.now());
+    return (await r.json()).filter(e => e && e.date).map(e => ({
+      titre: e.titre, _d: new Date(e.date), heure: e.heure || '',
+      lieu: [e.lieu, e.ville].filter(Boolean).join(', '),
+      k: e.type === 'match' ? 'match' : e.type === 'interne' ? 'interne' : 'autre'
+    }));
+  }
+  let events = [];
+  try { events = (HBMC_GCAL_ID && HBMC_GCAL_KEY) ? await loadGoogle() : await loadJson(); }
+  catch (err) {
+    console.warn('Agenda :', err);
+    try { events = await loadJson(); } catch (e2) { console.warn('calendrier.json', e2); }
+  }
+  const byDay = {};
+  events.forEach(e => { (byDay[key(e._d)] = byDay[key(e._d)] || []).push(e); });
+  Object.values(byDay).forEach(a => a.sort((x, y) => x._d - y._d));
+
+  // ---------- état ----------
+  let view = new Date(today0.getFullYear(), today0.getMonth(), 1);
+  let sel = null, mode = 'month';
+
+  function monthGrid(big) {
+    let h = ['L','M','M','J','V','S','D'].map(d => '<div class="hbmc-dow">' + d + '</div>').join('');
+    const offset = (view.getDay() + 6) % 7;
+    const nb = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+    for (let i = 0; i < offset; i++) h += '<div></div>';
+    for (let d = 1; d <= nb; d++) {
+      const dt = new Date(view.getFullYear(), view.getMonth(), d);
+      const evs = byDay[key(dt)];
+      let c = 'hbmc-day';
+      if (dt.getTime() === today0.getTime()) c += ' today';
+      if (evs) c += ' ev k-' + evs[0].k;
+      if (sel && key(sel) === key(dt)) c += ' sel';
+      h += '<div class="' + c + '" data-day="' + d + '"' + (big && evs ? ' title="' + esc(evs.map(e => e.titre).join(' / ')) + '"' : '') + '>' + d + '</div>';
+    }
+    return h;
+  }
+  function renderMini() {
+    $('hbmc-mini-title').textContent = MOIS[view.getMonth()] + ' ' + view.getFullYear();
+    $('hbmc-mini-grid').innerHTML = monthGrid(false);
+  }
+  function renderList() {
+    const ul = $('hbmc-list'); let list;
+    if (sel) {
+      $('hbmc-list-title').textContent = sel.getDate() + ' ' + MOIS[sel.getMonth()] + ' ' + sel.getFullYear();
+      list = byDay[key(sel)] || [];
+    } else {
+      $('hbmc-list-title').textContent = 'À venir';
+      list = events.filter(e => e._d >= today0).sort((a, b) => a._d - b._d).slice(0, 6);
+    }
+    if (!list.length) { ul.innerHTML = '<li class="hbmc-empty">' + (sel ? 'Rien ce jour-là.' : 'Rien de prévu pour le moment — suivez-nous sur les réseaux !') + '</li>'; return; }
+    ul.innerHTML = list.map(e => '<li class="hbmc-item k-' + e.k + '"><div class="hbmc-idate"><b>' + e._d.getDate() + '</b><span>' + MOIS_C[e._d.getMonth()] + '</span></div>' +
+      '<div><div class="hbmc-itit">' + esc(e.titre) + '</div><div class="hbmc-imeta">' + esc([e.heure, e.lieu].filter(Boolean).join(' · ')) + '</div></div></li>').join('');
+  }
+  function renderBig() {
+    if (mode === 'month') {
+      $('hbmc-big-title').textContent = MOIS[view.getMonth()] + ' ' + view.getFullYear();
+      $('hbmc-big-body').innerHTML = '<div class="hbmc-grid">' + monthGrid(true) + '</div>';
+    } else {
+      $('hbmc-big-title').textContent = view.getFullYear();
+      $('hbmc-big-body').innerHTML = '<div class="hbmc-months">' + MOIS_C.map((m, i) =>
+        '<button class="hbmc-mon' + (i === view.getMonth() ? ' cur' : '') + '" data-mon="' + i + '">' + m + '</button>').join('') + '</div>';
+    }
+    renderList();
+  }
+  const renderAll = () => { renderMini(); renderBig(); };
+  function shift(n) {
+    if (mode === 'year') view = new Date(view.getFullYear() + n, view.getMonth(), 1);
+    else view = new Date(view.getFullYear(), view.getMonth() + n, 1);
+    sel = null; renderAll();
+  }
+
+  // ---------- interactions ----------
+  const modal = $('hbmc-modal');
+  const open = () => { modal.hidden = false; document.body.style.overflow = 'hidden'; mode = 'month'; renderBig(); };
+  const close = () => { modal.hidden = true; document.body.style.overflow = ''; };
+  $('hbmc-mini').addEventListener('click', e => {
+    const nav = e.target.closest('[data-nav]');
+    if (nav) { e.stopPropagation(); shift(+nav.dataset.nav); return; }
+    open();
+  });
+  $('hbmc-mini').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  $('hbmc-fab').addEventListener('click', open);
+  $('hbmc-close').addEventListener('click', close);
+  modal.addEventListener('click', e => { if (e.target === modal) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+  $('hbmc-prev').addEventListener('click', () => shift(-1));
+  $('hbmc-next').addEventListener('click', () => shift(1));
+  $('hbmc-big-title').addEventListener('click', () => { mode = mode === 'month' ? 'year' : 'month'; renderBig(); });
+  $('hbmc-big-body').addEventListener('click', e => {
+    const m = e.target.closest('[data-mon]');
+    if (m) { view = new Date(view.getFullYear(), +m.dataset.mon, 1); mode = 'month'; sel = null; renderAll(); return; }
+    const d = e.target.closest('[data-day]');
+    if (d) {
+      const dt = new Date(view.getFullYear(), view.getMonth(), +d.dataset.day);
+      sel = (sel && key(sel) === key(dt)) ? null : dt; renderBig(); renderMini();
+    }
+  });
+  if (HBMC_GCAL_ID) {
+    const a = $('hbmc-sub'); a.href = 'https://calendar.google.com/calendar/r?cid=' + encodeURIComponent(HBMC_GCAL_ID); a.style.display = 'inline-block';
+  }
+  renderAll();
 })();
 </script>
 </body>
